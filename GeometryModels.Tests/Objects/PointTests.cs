@@ -3,31 +3,36 @@
     [Fact]
     public void CreatePoint_Success()
     {
-        //Arrage.
+        //Arrange.
         public Point point1 = new Point(1, 3);
-        //Act.
-        double y = point1.GetY();
+    //Act.
+        double x = point1.X;
+        double y = point1.Y;
         //Assert.
+        Assert.Equal(x, 1);
         Assert.Equal(y, 3);
     }
 
     [Fact]
     public void AssignPoint_Success()
     {
-        //Arrage.
+        //Arrange.
         public Point point1 = new Point(1, 3);
         public Point point2 = point1;
         //Act.
-        double y = point2.GetY();
+        double x = point2.X;
+        double y = point2.Y;
         //Assert.
+        Assert.Equal(x, 1);
         Assert.Equal(y, 3);
     }
     
 
+    // Что делает тест?
     [Fact]
     public void PointsDimensions_Succes()
     {
-        //Arrage.
+        //Arrange.
         public Point point1 = new Point(1, 3);
         //Act.
         double dimension = point1.GetDimension();

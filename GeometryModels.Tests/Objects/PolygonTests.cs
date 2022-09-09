@@ -3,7 +3,7 @@
     [Fact]
     public void CreatePolygon_Success()
     {
-        //Arrage.
+        //Arrange.
         public Point point1 = new Point(1, 3);
         public Point point2 = new Point(2, 5);
         public Point point3 = new Point(3, 6);
@@ -17,7 +17,7 @@
     [Fact]
     public void AssignPoint_Success()
     {
-        //Arrage.
+        //Arrange.
         public Point point1 = new Point(1, 3);
         public Point point2 = new Point(2, 5);
         public Point point3 = new Point(3, 6);
@@ -33,7 +33,7 @@
     [Fact]
     public void PointsDimensions_Succes()
     {
-        //Arrage.
+        //Arrange.
         public Polygon polygon = new Polygon();
         //Act.
         double dimension = polygon.GetDimension();
