@@ -18,7 +18,8 @@
     {
         //Arrange.
         public Point point1 = new Point(1, 3);
-        public Point point2 = point1;
+        public Point point2;
+        point2.Equal(point1);
         //Act.
         double x = point2.X;
         double y = point2.Y;
