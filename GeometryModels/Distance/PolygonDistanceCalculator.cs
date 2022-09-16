@@ -1,11 +1,8 @@
-﻿using GeometryModels;
-using System;
+﻿using System;
 
-
-
-public class PointDistanceCalculator
+public class PolygonDistanceCalculator
 {
-    public Point PointField { get; private set; }
+    public Point PolygonField { get; private set; }
 
     public void Visit(Point B)
     {

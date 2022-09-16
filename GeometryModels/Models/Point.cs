@@ -1,6 +1,6 @@
 ﻿namespace GeometryModels
 {
-    public class Point : IMeasurable
+    public class Point : IGeometryPrimitive
     {
         public double X { get; private set; }
         public double Y { get; private set; }
@@ -21,7 +21,7 @@
             this.Y = point.Y;
             this.Z = point.Z;
         }
-        public double GetDistance(IMeasurable B)
+        public double GetDistance(IGeometryPrimitive B)
         {
             double distance = 0;
             // PointDistanceCalculator(this, B);

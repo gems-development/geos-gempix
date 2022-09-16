@@ -1,7 +1,7 @@
 ﻿using GeometryModels;
 using System;
 
-public class LineString : IMeasurable
+public class LineString : IGeometryPrimitive
 {
 	public Point A { get; private set; }
     public Point B { get; private set; }
@@ -16,7 +16,7 @@ public class LineString : IMeasurable
     { 
         return Math.sqrt((B.X-A.X)* (B.X - A.X)- (B.Y - A.Y)* (B.Y - A.Y)); 
     }
-    public double GetDistance(IMeasurable B)
+    public double GetDistance(IGeometryPrimitive B)
     {
         double distance = 0;
         return distance;

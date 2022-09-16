@@ -2,7 +2,7 @@
 
 
 
-ublic class Polygon : IMeasurable
+ublic class Polygon : IGeometryPrimitive
 {
 	public List<Point> list;
 	public Polygon(params Point points)

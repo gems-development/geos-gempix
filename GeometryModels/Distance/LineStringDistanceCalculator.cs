@@ -4,10 +4,21 @@
 public class LineStringDistanceCalculator
 {
 	
-    public static double GetDistance(Point A, LineString B)
+    public Point LineStringField { get; private set; }
+
+    public void Visit(Point B)
     {
-        double distance = 0;
-        return distance;
+        B.accept(this);
+    }
+
+    public void Visit(LineString B)
+    {
+        B.accept(this);
+    }
+
+    public void Visit(Polygon B)
+    {
+        B.accept(this);
     }
     
 }
