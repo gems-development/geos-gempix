@@ -1,9 +1,12 @@
-﻿using System;
+﻿using GeometryModels;
+using System;
 
 
 public interface IGeometryPrimitiveVisitor
 {
-	public void Visit(Point B);
-    public void Visit(LineString B);
-    public void Visit(Polygon B);
+	public void Visit(Point point);
+    public void Visit(LineString lineString);
+    public void Visit(Polygon polygon);
+
+    public double GetResult();
 }

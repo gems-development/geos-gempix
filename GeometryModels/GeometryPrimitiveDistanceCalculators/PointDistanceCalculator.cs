@@ -3,22 +3,37 @@ using System;
 
 
 
-public class PointDistanceCalculator
+public class PointDistanceCalculator : IGeometryPrimitiveVisitor
 {
-    public Point PointField { get; private set; }
-
-    public void Visit(Point B)
-    {
-        B.accept(this);
+    private Point _point;
+    private double _result;
+    public PointDistanceCalculator(Point point)
+    { 
+        _point = point;
     }
 
-    public void Visit(LineString B)
+    public void Visit(Point point)
     {
-        B.accept(this);
+        _result = GetDistance(_point, point);
     }
 
-    public void Visit(Polygon B)
+    public void Visit(LineString lineString)
     {
-        B.accept(this);
+        LineStringDistanceCalculator.GetDistance(_point, lineString);
+    }
+
+    public void Visit(Polygon polygon)
+    {
+        PolygonDistanceCalculator.GetDistance(_point, polygon);
+    }
+
+    internal static double GetDistance(Point point1, Point point2)
+    {
+        return Math.Sqrt((point2.X - point1.X) * (point2.X - point1.X) - (point2.Y - point1.Y) * (point2.Y - point1.Y));
+    }
+
+    public double GetResult()
+    {
+        return _result;
     }
 }

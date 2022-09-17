@@ -3,22 +3,23 @@ using System;
 
 public class LineString : IGeometryPrimitive
 {
-	public Point A { get; private set; }
-    public Point B { get; private set; }
+	public Point Point1 { get; private set; }
+    public Point Point2 { get; private set; }
 
 	public LineString(Point point1, Point point2)
     {
-        A = point1;
-        B = point2;
+        Point1 = point1;
+        Point2 = point2;
     }
 
+    // ДУБЛИРОВАНИЕ КОДА (PointDistanceCalculator)
     public double GetLength()
-    { 
-        return Math.sqrt((B.X-A.X)* (B.X - A.X)- (B.Y - A.Y)* (B.Y - A.Y)); 
-    }
-    public double GetDistance(IGeometryPrimitive B)
     {
-        double distance = 0;
-        return distance;
+        return PointDistanceCalculator.GetDistance(Point1, Point2);
+    } 
+
+    public void Accept(IGeometryPrimitiveVisitor v)
+    {
+        v.Visit(this);
     }
 }

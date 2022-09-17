@@ -1,21 +1,53 @@
-﻿using System;
+﻿using GeometryModels;
+using System;
 
-public class PolygonDistanceCalculator
+public class PolygonDistanceCalculator : IGeometryPrimitiveVisitor
 {
-    public Point PolygonField { get; private set; }
+    private Polygon _polygon;
+    private double _result;
 
-    public void Visit(Point B)
+    public PolygonDistanceCalculator(Polygon polygon)
     {
-        B.accept(this);
+        _polygon = polygon;
+        _result = 0;
     }
 
-    public void Visit(LineString B)
+    public void Visit(Point point)
     {
-        B.accept(this);
+        GetDistance(point, _polygon);
     }
 
-    public void Visit(Polygon B)
+    public void Visit(LineString lineString)
     {
-        B.accept(this);
+        GetDistance(lineString, _polygon);
+    }
+
+    public void Visit(Polygon polygon)
+    {
+        GetDistance(_polygon, polygon);
+    }
+
+    //TODO: Расстояние между точкой и полигоном
+    internal static double GetDistance(Point point1, Polygon point2)
+    {
+        return 0;
+    }
+
+
+    //TODO: Расстояние между отрезком и полигоном
+    internal static double GetDistance(LineString lineString, Polygon polygon)
+    {
+        return 0;
+    }
+
+    //TODO: Расстояние между двумя полигонами
+    internal static double GetDistance(Polygon polygon1, Polygon polygon2)
+    {
+        return 0;
+    }
+
+    public double GetResult()
+    {
+        return _result;
     }
 }

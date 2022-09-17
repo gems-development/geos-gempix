@@ -3,12 +3,10 @@
 
 public class GeometryPrimitiveDistanceExtencion
 {
-	private IGeometryPrimitiveVisitor calculator;
-	public double GetDistance(IGeometryPrimitive A, IGeometryPrimitive B)
+	private IGeometryPrimitiveVisitor _calculator;
+	public double GetDistance(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
 	{
-		calculator = new PrimitiveDistanceCalculator();
-		calculator.Visit(A);
-		calculator.Visit(B);
-		return calculator.Result;
+		_calculator = new PrimitiveDistanceCalculator(primitive1, primitive2);
+		return _calculator.GetResult();
 	}
 }

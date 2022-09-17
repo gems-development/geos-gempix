@@ -15,7 +15,7 @@
         {
             return X == point.X && Y == point.Y && Z == point.Z;
         }
-        public void Equate(Point point)
+        public void Equal(Point point)
         {
             this.X = point.X;
             this.Y = point.Y;
