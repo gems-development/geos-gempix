@@ -1,11 +1,12 @@
-﻿using System;
+﻿using GeometryModels;
+using System;
 
 
 
-ublic class Polygon : IGeometryPrimitive
+public class Polygon : IGeometryPrimitive
 {
-	public List<Point> list;
-	public Polygon(params Point points)
+	private List<Point> list;
+	public Polygon(List<Point> points)
 	{
 		list = points;
 	}
@@ -17,22 +18,31 @@ ublic class Polygon : IGeometryPrimitive
     {
 		return list;
     }
-	public List<Point> GetPoint(int i)
+	public Point GetPoint(int i)
     {
-		return list[i];
+		return list.ElementAt(i);
     }
-	public bool RemovePoint(int i)
+	public void RemovePoint(int i)
     {
-		return list.Remove(i);
+        list.RemoveAt(i);
     }
+	// TODO: реализовать 
+	// Метод 3
+	// https://ru.wikihow.com/%D0%BD%D0%B0%D0%B9%D1%82%D0%B8-%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C-%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%83%D0%B3%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%D0%B0
 	public double GetSquare()
     {
 		double square = 0;
-		return 0;
+		return square;
     }
+	// TODO: реализовать с помощью функции вычисления расстояния между двумя точками
 	public double GetPerimeter()
     {
 		double perimeter = 0;
 		return perimeter;
+    }
+
+    public void Accept(IGeometryPrimitiveVisitor v)
+    {
+		v.Visit(this);
     }
 }

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeometryModels.Tests", "GeometryModels.Tests\GeometryModels.Tests.csproj", "{E203A726-3E55-48A1-B38F-2DB20D192DC9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryModels", "GeometryModels\GeometryModels\GeometryModels.csproj", "{6F2B98DB-6D35-4D7B-9368-51717ED2D4DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeometryModels", "GeometryModels\GeometryModels.csproj", "{6F2B98DB-6D35-4D7B-9368-51717ED2D4DB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
