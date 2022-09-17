@@ -15,17 +15,16 @@
         {
             return X == point.X && Y == point.Y && Z == point.Z;
         }
-        public void Equal(Point point)
+        public void Equate(Point point)
         {
             this.X = point.X;
             this.Y = point.Y;
             this.Z = point.Z;
         }
-        public double GetDistance(IGeometryPrimitive B)
+
+        public void Accept(IGeometryPrimitiveVisitor v)
         {
-            double distance = 0;
-            // PointDistanceCalculator(this, B);
-            return distance;
+            v.Visit(this);
         }
     }
 }
