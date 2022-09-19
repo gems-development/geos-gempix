@@ -38,7 +38,7 @@ public class LineStringDistanceCalculator : IGeometryPrimitiveVisitor
     }
 
     //Расстояние между точкой и отрезком
-    internal static double GetDistance(Point point, LineString lineString)
+    public static double GetDistance(Point point, LineString lineString)
     { 
         double res;
         double a = PointDistanceCalculator.GetDistance(point, lineString.Point1);

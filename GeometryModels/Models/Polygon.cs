@@ -22,6 +22,10 @@ public class Polygon : IGeometryPrimitive
     {
 		return list.ElementAt(i);
     }
+	public int GetCountOfPoints()
+    {
+		return list.Count;
+    }
 	public void RemovePoint(int i)
     {
         list.RemoveAt(i);
@@ -38,6 +42,11 @@ public class Polygon : IGeometryPrimitive
 	public double GetPerimeter()
     {
 		double perimeter = 0;
+		for(int i = 0; i <= list.Count-2; i++)
+        {
+			perimeter += PointDistanceCalculator.GetDistance(list[i], list[i+1]);
+        }
+		perimeter = perimeter + PointDistanceCalculator.GetDistance(list[list.Count-1], list[0]);
 		return perimeter;
     }
 
