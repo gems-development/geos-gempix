@@ -1,7 +1,6 @@
 ﻿using GeometryModels;
 using System;
-
-
+using System.Runtime.CompilerServices;
 
 public class Polygon : IGeometryPrimitive
 {
@@ -36,6 +35,16 @@ public class Polygon : IGeometryPrimitive
 	public double GetSquare()
     {
 		double square = 0;
+		double sum1 = 0;
+		double sum2 = 0;
+		for(int i = 0; i < list.Count-1; i++)
+		{
+			sum1 = sum1 + list[i].X * list[i+1].Y;
+		    sum2 = sum2 + list[i].Y * list[i+1].X;
+		}
+		sum1 = sum1 + list[list.Count-1].X * list[0].Y;
+		sum2 = sum2 + list[list.Count-1].Y * list[0].X;
+		square = (sum2 - sum1) / 2;
 		return square;
     }
 	// TODO: реализовать с помощью функции вычисления расстояния между двумя точками
