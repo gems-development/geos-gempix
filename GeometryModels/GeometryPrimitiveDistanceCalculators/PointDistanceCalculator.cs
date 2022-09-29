@@ -17,14 +17,14 @@ public class PointDistanceCalculator : IGeometryPrimitiveVisitor
         _result = GetDistance(_point, point);
     }
 
-    public void Visit(LineString lineString)
+    public void Visit(Line line)
     {
-        LineStringDistanceCalculator.GetDistance(_point, lineString);
+        _result = LineDistanceCalculator.GetDistance(_point, line);
     }
 
     public void Visit(Polygon polygon)
     {
-        PolygonDistanceCalculator.GetDistance(_point, polygon);
+        _result = PolygonDistanceCalculator.GetDistance(polygon, _point);
     }
 
     public static double GetDistance(Point point1, Point point2)
@@ -35,5 +35,20 @@ public class PointDistanceCalculator : IGeometryPrimitiveVisitor
     public double GetResult()
     {
         return _result;
+    }
+
+    public void Visit(MultiPoint multiPoint)
+    {
+        _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _point);
+    }
+
+    public void Visit(MultiLine multiLine)
+    {
+        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _point);
+    }
+
+    public void Visit(MultiPolygon multiPolygon)
+    {
+        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _point);
     }
 }

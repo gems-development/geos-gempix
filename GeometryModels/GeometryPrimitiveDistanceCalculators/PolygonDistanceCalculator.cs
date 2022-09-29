@@ -14,28 +14,28 @@ public class PolygonDistanceCalculator : IGeometryPrimitiveVisitor
 
     public void Visit(Point point)
     {
-        GetDistance(point, _polygon);
+        _result = GetDistance(_polygon, point);
     }
 
-    public void Visit(LineString lineString)
+    public void Visit(Line line)
     {
-        GetDistance(lineString, _polygon);
+        _result = GetDistance(_polygon, line);
     }
 
     public void Visit(Polygon polygon)
     {
-        GetDistance(_polygon, polygon);
+        _result = GetDistance(_polygon, polygon);
     }
 
     //TODO: Расстояние между точкой и полигоном
-    internal static double GetDistance(Point point1, Polygon point2)
+    internal static double GetDistance(Polygon polygon, Point point)
     {
         return 0;
     }
 
 
     //TODO: Расстояние между отрезком и полигоном
-    internal static double GetDistance(LineString lineString, Polygon polygon)
+    internal static double GetDistance(Polygon polygon, Line line)
     {
         return 0;
     }
@@ -49,5 +49,20 @@ public class PolygonDistanceCalculator : IGeometryPrimitiveVisitor
     public double GetResult()
     {
         return _result;
+    }
+
+    public void Visit(MultiPoint multiPoint)
+    {
+        _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
+    }
+
+    public void Visit(MultiLine multiLine)
+    {
+        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _polygon);
+    }
+
+    public void Visit(MultiPolygon multiPolygon)
+    {
+        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
     }
 }
