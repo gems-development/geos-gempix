@@ -612,7 +612,7 @@
 											"font": "Arial;13;1",
 											"left": 709,
 											"top": 135,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "Polygon"
 										},
@@ -647,7 +647,7 @@
 									"font": "Arial;13;0",
 									"left": 704,
 									"top": 128,
-									"width": 253.57861328125,
+									"width": 260.3896484375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGDL871HGpviiQ="
@@ -684,7 +684,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 158,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "-Points: IList <Point>",
 											"horizontalAlignment": 0
@@ -693,7 +693,7 @@
 									"font": "Arial;13;0",
 									"left": 704,
 									"top": 153,
-									"width": 253.57861328125,
+									"width": 260.3896484375,
 									"height": 23
 								},
 								{
@@ -718,7 +718,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 181,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+GetPoints(): IList",
 											"horizontalAlignment": 0
@@ -735,7 +735,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 196,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+GetPoint(int i): Point",
 											"horizontalAlignment": 0
@@ -752,7 +752,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 211,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+RemovePoint(int i): bool",
 											"horizontalAlignment": 0
@@ -769,7 +769,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 226,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+AddPoint(Point point, int i): bool",
 											"horizontalAlignment": 0
@@ -786,7 +786,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 241,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+GetSquare(): double",
 											"horizontalAlignment": 0
@@ -803,7 +803,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 256,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+GetPerimeter(): double",
 											"horizontalAlignment": 0
@@ -820,7 +820,7 @@
 											"font": "Arial;13;0",
 											"left": 709,
 											"top": 271,
-											"width": 243.57861328125,
+											"width": 250.3896484375,
 											"height": 13,
 											"text": "+Accept(IGeometryPrimitiveVisitor v): void",
 											"horizontalAlignment": 0
@@ -829,7 +829,7 @@
 									"font": "Arial;13;0",
 									"left": 704,
 									"top": 176,
-									"width": 253.57861328125,
+									"width": 260.3896484375,
 									"height": 113
 								},
 								{
@@ -869,8 +869,8 @@
 							"containerChangeable": true,
 							"left": 704,
 							"top": 128,
-							"width": 253.57861328125,
-							"height": 161,
+							"width": 260.3896484375,
+							"height": 206,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDL871HGpuMnQ="
 							},
@@ -915,8 +915,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -320,
-											"top": 32,
+											"left": -64,
+											"top": -48,
 											"height": 13
 										},
 										{
@@ -926,9 +926,9 @@
 												"$ref": "AAAAAAGDL/ST2XUHqm8="
 											},
 											"font": "Arial;13;1",
-											"left": 357,
-											"top": 463,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 423,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "PointDistanceCalculator"
 										},
@@ -940,8 +940,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -320,
-											"top": 32,
+											"left": -64,
+											"top": -48,
 											"width": 73.67724609375,
 											"height": 13,
 											"text": "(from Model)"
@@ -954,16 +954,16 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": -320,
-											"top": 32,
+											"left": -64,
+											"top": -48,
 											"height": 13,
 											"horizontalAlignment": 1
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 352,
-									"top": 456,
-									"width": 291.4677734375,
+									"left": 480,
+									"top": 416,
+									"width": 322.5458984375,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGDL/ST2XUIHXc="
@@ -998,11 +998,11 @@
 												"$ref": "AAAAAAGDO1BGC9V/Y1o="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 486,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 446,
+											"width": 312.5458984375,
 											"height": 13,
-											"text": "+Point PointField публ get прив set",
+											"text": "-_point: Point",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1015,18 +1015,18 @@
 												"$ref": "AAAAAAGDRIz17qH9y5k="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 501,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 461,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "-result: double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 352,
-									"top": 481,
-									"width": 291.4677734375,
+									"left": 480,
+									"top": 441,
+									"width": 322.5458984375,
 									"height": 38
 								},
 								{
@@ -1049,9 +1049,9 @@
 												"$ref": "AAAAAAGDL/VdEHWCb4A="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 524,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 484,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "+Visit(Point B): void",
 											"horizontalAlignment": 0
@@ -1066,9 +1066,9 @@
 												"$ref": "AAAAAAGDL/YGAHX1Of0="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 539,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 499,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "+Visit(LineString B): void",
 											"horizontalAlignment": 0
@@ -1083,9 +1083,9 @@
 												"$ref": "AAAAAAGDL/aZwHaAPUY="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 554,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 514,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "+Visit(Polygon B): void",
 											"horizontalAlignment": 0
@@ -1101,8 +1101,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 569,
+											"left": 613,
+											"top": 489,
 											"width": 281.4677734375,
 											"height": 13,
 											"text": "+GetResult(): double",
@@ -1119,8 +1119,8 @@
 											},
 											"visible": false,
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 554,
+											"left": 613,
+											"top": 474,
 											"width": 281.4677734375,
 											"height": 13,
 											"text": "+GetDistance(Point B)",
@@ -1136,19 +1136,36 @@
 												"$ref": "AAAAAAGDRIwiN57mToY="
 											},
 											"font": "Arial;13;0",
-											"left": 357,
-											"top": 569,
-											"width": 281.4677734375,
+											"left": 485,
+											"top": 529,
+											"width": 312.5458984375,
 											"height": 13,
 											"text": "+GetResult(): double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDiivBCOipfj4=",
+											"_parent": {
+												"$ref": "AAAAAAGDL/ST2XUNQKo="
+											},
+											"model": {
+												"$ref": "AAAAAAGDiivA+uim9ds="
+											},
+											"font": "Arial;13;0",
+											"left": 485,
+											"top": 544,
+											"width": 312.5458984375,
+											"height": 13,
+											"text": "+GetDistance(Point point1, Point point2): static double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
-									"left": 352,
-									"top": 519,
-									"width": 291.4677734375,
-									"height": 68
+									"left": 480,
+									"top": 479,
+									"width": 322.5458984375,
+									"height": 83
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -1161,8 +1178,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -160,
-									"top": 16,
+									"left": -32,
+									"top": -24,
 									"width": 10,
 									"height": 10
 								},
@@ -1177,18 +1194,18 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": -160,
-									"top": 16,
+									"left": -32,
+									"top": -24,
 									"width": 10,
 									"height": 10
 								}
 							],
 							"font": "Arial;13;0",
 							"containerChangeable": true,
-							"left": 352,
-							"top": 456,
-							"width": 291.4677734375,
-							"height": 133,
+							"left": 480,
+							"top": 416,
+							"width": 322.5458984375,
+							"height": 146,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDL/ST2XUHqm8="
 							},
@@ -1776,7 +1793,7 @@
 											"font": "Arial;13;1",
 											"left": 45,
 											"top": 463,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "LineStringDistanceCalculator"
 										},
@@ -1809,7 +1826,7 @@
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 456,
-									"width": 295.06689453125,
+									"width": 432.373046875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGDMB9N2ISCCbs="
@@ -1846,9 +1863,9 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 486,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
-											"text": "+LineString LineStringField публ get прив set",
+											"text": "-_lineString: LineString",
 											"horizontalAlignment": 0
 										},
 										{
@@ -1863,7 +1880,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 501,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "-result: double",
 											"horizontalAlignment": 0
@@ -1872,7 +1889,7 @@
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 481,
-									"width": 295.06689453125,
+									"width": 432.373046875,
 									"height": 38
 								},
 								{
@@ -1897,7 +1914,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 524,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "+Visit(Point B): void",
 											"horizontalAlignment": 0
@@ -1914,7 +1931,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 539,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "+Visit(LineString B): void",
 											"horizontalAlignment": 0
@@ -1931,7 +1948,7 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 554,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "+Visit(Polygon B): void",
 											"horizontalAlignment": 0
@@ -2002,17 +2019,51 @@
 											"font": "Arial;13;0",
 											"left": 45,
 											"top": 569,
-											"width": 285.06689453125,
+											"width": 422.373046875,
 											"height": 13,
 											"text": "+GetResult(): double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDiipCz+Q3r0Q=",
+											"_parent": {
+												"$ref": "AAAAAAGDMB9N2YSHoq0="
+											},
+											"model": {
+												"$ref": "AAAAAAGDiipCwuQ0zE0="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 584,
+											"width": 422.373046875,
+											"height": 13,
+											"text": "+GetDistance(LineString lineString, Point point): static double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDiiphd+VQi6Y=",
+											"_parent": {
+												"$ref": "AAAAAAGDMB9N2YSHoq0="
+											},
+											"model": {
+												"$ref": "AAAAAAGDiiphcuVNmm4="
+											},
+											"font": "Arial;13;0",
+											"left": 45,
+											"top": 599,
+											"width": 422.373046875,
+											"height": 13,
+											"text": "+GetDistance(LineString lineString1, LineString lineString2): static double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 40,
 									"top": 519,
-									"width": 295.06689453125,
-									"height": 68
+									"width": 432.373046875,
+									"height": 98
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2049,8 +2100,8 @@
 							"containerChangeable": true,
 							"left": 40,
 							"top": 456,
-							"width": 295.06689453125,
-							"height": 131,
+							"width": 432.373046875,
+							"height": 161,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDMB9N2ISBfHw="
 							},
@@ -2108,7 +2159,7 @@
 											"font": "Arial;13;1",
 											"left": 1021,
 											"top": 447,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "PolygonDistanceCalculator"
 										},
@@ -2143,7 +2194,7 @@
 									"font": "Arial;13;0",
 									"left": 1016,
 									"top": 440,
-									"width": 283.5078125,
+									"width": 397.69580078125,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGDMCCWj4gzZto="
@@ -2180,9 +2231,9 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 470,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
-											"text": "+Polygon PolygonField публ get прив set",
+											"text": "-_polygon: Polygon",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2197,7 +2248,7 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 485,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "-result: double",
 											"horizontalAlignment": 0
@@ -2206,7 +2257,7 @@
 									"font": "Arial;13;0",
 									"left": 1016,
 									"top": 465,
-									"width": 283.5078125,
+									"width": 397.69580078125,
 									"height": 38
 								},
 								{
@@ -2231,7 +2282,7 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 508,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "+Visit(Point B): void",
 											"horizontalAlignment": 0
@@ -2248,7 +2299,7 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 523,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "+Visit(LineString B): void",
 											"horizontalAlignment": 0
@@ -2265,7 +2316,7 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 538,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "+Visit(Polygon B): void",
 											"horizontalAlignment": 0
@@ -2300,17 +2351,68 @@
 											"font": "Arial;13;0",
 											"left": 1021,
 											"top": 553,
-											"width": 273.5078125,
+											"width": 387.69580078125,
 											"height": 13,
 											"text": "+GetResult(): double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDiiwoDeoUyIg=",
+											"_parent": {
+												"$ref": "AAAAAAGDMCCWj4g4K+c="
+											},
+											"model": {
+												"$ref": "AAAAAAGDiiwoA+oRwmI="
+											},
+											"font": "Arial;13;0",
+											"left": 1021,
+											"top": 568,
+											"width": 387.69580078125,
+											"height": 13,
+											"text": "+GetDistance(Polygon polygon, Point point): static double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDiixub+rkvCE=",
+											"_parent": {
+												"$ref": "AAAAAAGDMCCWj4g4K+c="
+											},
+											"model": {
+												"$ref": "AAAAAAGDiixuYurhQTw="
+											},
+											"font": "Arial;13;0",
+											"left": 1021,
+											"top": 583,
+											"width": 387.69580078125,
+											"height": 13,
+											"text": "+GetDistance(Polygon polygon, LineString lineString): static double",
+											"horizontalAlignment": 0
+										},
+										{
+											"_type": "UMLOperationView",
+											"_id": "AAAAAAGDii0DtOvhB8o=",
+											"_parent": {
+												"$ref": "AAAAAAGDMCCWj4g4K+c="
+											},
+											"model": {
+												"$ref": "AAAAAAGDii0DquveknU="
+											},
+											"font": "Arial;13;0",
+											"left": 1021,
+											"top": 598,
+											"width": 387.69580078125,
+											"height": 13,
+											"text": "+GetDistance(Polygon polygon1, Polygon polygon2): static double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 1016,
 									"top": 503,
-									"width": 283.5078125,
-									"height": 68
+									"width": 397.69580078125,
+									"height": 113
 								},
 								{
 									"_type": "UMLReceptionCompartmentView",
@@ -2349,8 +2451,8 @@
 							"containerChangeable": true,
 							"left": 1016,
 							"top": 440,
-							"width": 283.5078125,
-							"height": 146,
+							"width": 397.69580078125,
+							"height": 176,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDMCCWj4gy+yI="
 							},
@@ -2508,7 +2610,7 @@
 											"top": 590,
 											"width": 296.8671875,
 											"height": 13,
-											"text": "+Result: свойство Double публ get прив set",
+											"text": "-result: double",
 											"horizontalAlignment": 0
 										},
 										{
@@ -2676,7 +2778,7 @@
 							"left": 680,
 							"top": 560,
 							"width": 306.8671875,
-							"height": 131,
+							"height": 146,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDMF/WK6A4+Qw="
 							},
@@ -2714,7 +2816,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 334,
+									"left": 575,
 									"top": 579,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -2735,7 +2837,7 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 334,
+									"left": 575,
 									"top": 564,
 									"height": 13,
 									"alpha": 1.5707963267948966,
@@ -2756,7 +2858,7 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 334,
+									"left": 575,
 									"top": 609,
 									"height": 13,
 									"alpha": -1.5707963267948966,
@@ -2774,7 +2876,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDMB9N2ISAKeg="
 							},
-							"points": "334:586;334:600;680:600",
+							"points": "471:600;680:600",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDMGYyDaZ5CDw="
@@ -2807,8 +2909,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 661,
-									"top": 567,
+									"left": 680,
+									"top": 540,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -2828,8 +2930,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 661,
-									"top": 552,
+									"left": 680,
+									"top": 525,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -2849,8 +2951,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 661,
-									"top": 597,
+									"left": 680,
+									"top": 570,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -2867,7 +2969,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDL/ST2XUGxqk="
 							},
-							"points": "642:588;680:588",
+							"points": "680:561;680:561",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDMGZWr6b4kOU="
@@ -3320,7 +3422,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDMCCWj4gxhhM="
 							},
-							"points": "1157:585;1157:844;664:844",
+							"points": "1157:615;1157:844;664:844",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDO1zYx+d7/jk="
@@ -3354,7 +3456,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 512,
-									"top": 683,
+									"top": 669,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -3375,7 +3477,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 527,
-									"top": 683,
+									"top": 669,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -3396,7 +3498,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 482,
-									"top": 684,
+									"top": 670,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -3413,7 +3515,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDL/ST2XUGxqk="
 							},
-							"points": "497:588;497:792",
+							"points": "497:561;497:792",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDO1zzvOfCuX4="
@@ -3506,7 +3608,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDMB9N2ISAKeg="
 							},
-							"points": "187:586;187:844;448:844",
+							"points": "187:616;187:844;448:844",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDO10KaugJAR4="
@@ -3652,7 +3754,7 @@
 											"font": "Arial;13;1",
 											"left": 93,
 											"top": 951,
-											"width": 414.45751953125,
+											"width": 420.82421875,
 											"height": 13,
 											"text": "GeometryPrimitiveDistanceExtension"
 										},
@@ -3687,7 +3789,7 @@
 									"font": "Arial;13;0",
 									"left": 88,
 									"top": 944,
-									"width": 424.45751953125,
+									"width": 430.82421875,
 									"height": 25,
 									"stereotypeLabel": {
 										"$ref": "AAAAAAGDO2nj1/H4hzw="
@@ -3711,30 +3813,11 @@
 									"model": {
 										"$ref": "AAAAAAGDO2nj1fH0uPw="
 									},
-									"subViews": [
-										{
-											"_type": "UMLAttributeView",
-											"_id": "AAAAAAGDO4OJSvpXixQ=",
-											"_parent": {
-												"$ref": "AAAAAAGDO2nj1/H8eXw="
-											},
-											"model": {
-												"$ref": "AAAAAAGDO4OJMfpOIKA="
-											},
-											"font": "Arial;13;0",
-											"left": 93,
-											"top": 974,
-											"width": 414.45751953125,
-											"height": 13,
-											"text": "+IGeometryPrimitiveVisitor calculator",
-											"horizontalAlignment": 0
-										}
-									],
 									"font": "Arial;13;0",
 									"left": 88,
 									"top": 969,
-									"width": 424.45751953125,
-									"height": 23
+									"width": 430.82421875,
+									"height": 10
 								},
 								{
 									"_type": "UMLOperationCompartmentView",
@@ -3757,17 +3840,17 @@
 											},
 											"font": "Arial;13;0",
 											"left": 93,
-											"top": 997,
-											"width": 414.45751953125,
+											"top": 984,
+											"width": 420.82421875,
 											"height": 13,
-											"text": "+GetDistance(IGeometryPrimitive A, IGeometryPrimitive B): double",
+											"text": "+GetDistance(IGeometryPrimitive A, IGeometryPrimitive B): static double",
 											"horizontalAlignment": 0
 										}
 									],
 									"font": "Arial;13;0",
 									"left": 88,
-									"top": 992,
-									"width": 424.45751953125,
+									"top": 979,
+									"width": 430.82421875,
 									"height": 23
 								},
 								{
@@ -3807,7 +3890,7 @@
 							"containerChangeable": true,
 							"left": 88,
 							"top": 944,
-							"width": 424.45751953125,
+							"width": 430.82421875,
 							"height": 86,
 							"nameCompartment": {
 								"$ref": "AAAAAAGDO2nj1/H3OxY="
@@ -3844,11 +3927,11 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 520,
-							"top": 960,
+							"left": 544,
+							"top": 944,
 							"width": 329,
 							"height": 83,
-							"text": "{\n    calculator = new PrimitiveDistanceCalculator(A, B)\n    return calculator.GetResult()\n}"
+							"text": "{\n    return new PrimitiveDistanceCalculator(A, B).GetResult()\n}"
 						},
 						{
 							"_type": "UMLNoteLinkView",
@@ -3863,7 +3946,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDO25XIvOku8o="
 							},
-							"points": "520:986;511:986"
+							"points": "544:986;518:986"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -3875,8 +3958,8 @@
 							"left": 688,
 							"top": 704,
 							"width": 293.787109375,
-							"height": 121,
-							"text": "public PrimitiveDistanceCalculator(IGeometryPrimitive A, IGeometryPrimitive B)\n{\n    A.Accept(this)\n    B.Accept(calculator)\n}"
+							"height": 126,
+							"text": "public PrimitiveDistanceCalculator(IGeometryPrimitive A, IGeometryPrimitive B)\n{\n    A.Accept(this);\n    B.Accept(calculator);\n    result = calculator.GetResult();\n}"
 						},
 						{
 							"_type": "UMLNoteView",
@@ -3886,10 +3969,10 @@
 							},
 							"font": "Arial;13;0",
 							"left": 48,
-							"top": 600,
+							"top": 632,
 							"width": 209,
-							"height": 137,
-							"text": "public void Visit(Point B)\n{\n    реализация функции расчета расстояния от линии(поле) до точки(пришедший аргумент)\nсохранение результата в поле result\n}"
+							"height": 150,
+							"text": "public static double GetDistance(LineString lineString, Point point)\n{\n    реализация функции расчета расстояния от линии до точки +\nвозвращение результата\n}"
 						},
 						{
 							"_type": "UMLDependencyView",
@@ -4273,8 +4356,8 @@
 									},
 									"visible": false,
 									"font": "Arial;13;0",
-									"left": 537,
-									"top": 346,
+									"left": 536,
+									"top": 326,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -4294,8 +4377,8 @@
 									},
 									"visible": null,
 									"font": "Arial;13;0",
-									"left": 552,
-									"top": 346,
+									"left": 551,
+									"top": 326,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -4316,7 +4399,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 507,
-									"top": 347,
+									"top": 327,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -4400,7 +4483,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 537,
-									"top": 424,
+									"top": 384,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 30,
@@ -4420,7 +4503,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 550,
-									"top": 421,
+									"top": 381,
 									"height": 13,
 									"alpha": -0.7853981633974483,
 									"distance": 40,
@@ -4440,7 +4523,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 509,
-									"top": 428,
+									"top": 388,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 25,
@@ -4484,7 +4567,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDL8VoHWntT0w="
 							},
-							"points": "522:251;522:456",
+							"points": "522:251;522:416",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDP8Ved6uhR5c="
@@ -4542,7 +4625,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 845,
-									"top": 417,
+									"top": 439,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 15,
@@ -4563,7 +4646,7 @@
 									"visible": null,
 									"font": "Arial;13;0",
 									"left": 860,
-									"top": 417,
+									"top": 439,
 									"height": 13,
 									"alpha": 1.5707963267948966,
 									"distance": 30,
@@ -4584,7 +4667,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 815,
-									"top": 418,
+									"top": 440,
 									"height": 13,
 									"alpha": -1.5707963267948966,
 									"distance": 15,
@@ -4605,7 +4688,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 845,
-									"top": 307,
+									"top": 352,
 									"height": 13,
 									"alpha": 0.5235987755982988,
 									"distance": 30,
@@ -4626,7 +4709,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 858,
-									"top": 310,
+									"top": 355,
 									"height": 13,
 									"alpha": 0.7853981633974483,
 									"distance": 40,
@@ -4647,7 +4730,7 @@
 									"visible": false,
 									"font": "Arial;13;0",
 									"left": 817,
-									"top": 303,
+									"top": 348,
 									"height": 13,
 									"alpha": -0.5235987755982988,
 									"distance": 25,
@@ -4752,7 +4835,7 @@
 							"tail": {
 								"$ref": "AAAAAAGDL871HGptAfA="
 							},
-							"points": "830:288;830:560",
+							"points": "830:333;830:560",
 							"showVisibility": true,
 							"nameLabel": {
 								"$ref": "AAAAAAGDP8Vzy6xBxMM="
@@ -5344,11 +5427,11 @@
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
 							"font": "Arial;13;0",
-							"left": 368,
-							"top": 616,
-							"width": 257,
-							"height": 73,
-							"text": "public void Visit (LineString B)\n{\n   LineStringDistanceCalculator.Visit(this)\n}"
+							"left": 320,
+							"top": 648,
+							"width": 324.205078125,
+							"height": 96,
+							"text": "public void Visit (LineString lineString)\n{\n   _result = LineStringDistanceCalculator.GetDistance(lineString, _point)\n}"
 						},
 						{
 							"_type": "UMLTextView",
@@ -5640,7 +5723,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDMEMcbZCbtds="
 									},
-									"name": "IGeometryPrimitiveVisitor v"
+									"name": "IGeometryPrimitiveVisitor v",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -5884,7 +5968,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDMBNNQXtYZk4="
 									},
-									"name": "IGeometryPrimitiveVisitor v"
+									"name": "IGeometryPrimitiveVisitor v",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6366,8 +6451,11 @@
 							"_parent": {
 								"$ref": "AAAAAAGDL/ST2XUEnY4="
 							},
-							"name": "Point PointField публ get прив set",
-							"type": ""
+							"name": "_point",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAGDL8Ai82mRa2Q="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6498,7 +6586,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDRH+MoXOsI2g="
 									},
-									"name": "Point B"
+									"name": "Point B",
+									"type": ""
 								}
 							]
 						},
@@ -6517,6 +6606,43 @@
 										"$ref": "AAAAAAGDRIwiN57mToY="
 									},
 									"type": "double",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDiivA+uim9ds=",
+							"_parent": {
+								"$ref": "AAAAAAGDL/ST2XUEnY4="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiivz4ej4vKo=",
+									"_parent": {
+										"$ref": "AAAAAAGDiivA+uim9ds="
+									},
+									"name": "Point point1",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiivz4ej5vbw=",
+									"_parent": {
+										"$ref": "AAAAAAGDiivA+uim9ds="
+									},
+									"name": "Point point2",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiivz4ej6cWc=",
+									"_parent": {
+										"$ref": "AAAAAAGDiivA+uim9ds="
+									},
+									"type": "static double",
 									"direction": "return"
 								}
 							]
@@ -6710,7 +6836,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDO7d6FAtB+Ms="
 									},
-									"name": "IGeometryPrimitiveVisitor v"
+									"name": "IGeometryPrimitiveVisitor v",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6836,8 +6963,11 @@
 							"_parent": {
 								"$ref": "AAAAAAGDMB9N2IR+V7c="
 							},
-							"name": "LineString LineStringField публ get прив set",
-							"type": ""
+							"name": "_lineString",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAGDL8eoFWon67c="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
@@ -6865,7 +6995,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDMB+kbYVouSw="
 									},
-									"name": "Point B"
+									"name": "Point B",
+									"type": ""
 								},
 								{
 									"_type": "UMLParameter",
@@ -6967,7 +7098,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDRH+wPnTjl0Q="
 									},
-									"name": "Point B"
+									"name": "Point B",
+									"type": ""
 								}
 							]
 						},
@@ -6985,7 +7117,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGDRIAfmXe28fo="
 									},
-									"name": "LineString B"
+									"name": "LineString B",
+									"type": ""
 								}
 							]
 						},
@@ -7005,6 +7138,80 @@
 									},
 									"type": "double",
 									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDiipCwuQ0zE0=",
+							"_parent": {
+								"$ref": "AAAAAAGDMB9N2IR+V7c="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiipMb+SGxfI=",
+									"_parent": {
+										"$ref": "AAAAAAGDiipCwuQ0zE0="
+									},
+									"name": "LineString lineString",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiipMb+SHFQU=",
+									"_parent": {
+										"$ref": "AAAAAAGDiipCwuQ0zE0="
+									},
+									"type": "static double",
+									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiisksubUGrQ=",
+									"_parent": {
+										"$ref": "AAAAAAGDiipCwuQ0zE0="
+									},
+									"name": "Point point",
+									"type": ""
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDiiphcuVNmm4=",
+							"_parent": {
+								"$ref": "AAAAAAGDMB9N2IR+V7c="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiipmaOWf/2E=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiphcuVNmm4="
+									},
+									"name": "LineString lineString1",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiipmaOWguMU=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiphcuVNmm4="
+									},
+									"type": "static double",
+									"direction": "return"
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiitdAecxDgg=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiphcuVNmm4="
+									},
+									"name": "LineString lineString2",
+									"type": ""
 								}
 							]
 						}
@@ -7065,8 +7272,11 @@
 							"_parent": {
 								"$ref": "AAAAAAGDMCCWj4gvPb4="
 							},
-							"name": "Polygon PolygonField публ get прив set",
-							"type": ""
+							"name": "_polygon",
+							"visibility": "private",
+							"type": {
+								"$ref": "AAAAAAGDL871HGprdsQ="
+							}
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7201,6 +7411,117 @@
 									"direction": "return"
 								}
 							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDiiwoA+oRwmI=",
+							"_parent": {
+								"$ref": "AAAAAAGDMCCWj4gvPb4="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiixhbepjTBA=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiwoA+oRwmI="
+									},
+									"name": "Polygon polygon",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiixhbepkOY4=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiwoA+oRwmI="
+									},
+									"name": "Point point",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiixhbeplOcA=",
+									"_parent": {
+										"$ref": "AAAAAAGDiiwoA+oRwmI="
+									},
+									"type": "static double",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDiixuYurhQTw=",
+							"_parent": {
+								"$ref": "AAAAAAGDMCCWj4gvPb4="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiizuyutgD5k=",
+									"_parent": {
+										"$ref": "AAAAAAGDiixuYurhQTw="
+									},
+									"name": "Polygon polygon",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiizuyuthwxo=",
+									"_parent": {
+										"$ref": "AAAAAAGDiixuYurhQTw="
+									},
+									"name": "LineString lineString",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDiizuyutidM0=",
+									"_parent": {
+										"$ref": "AAAAAAGDiixuYurhQTw="
+									},
+									"type": "static double",
+									"direction": "return"
+								}
+							]
+						},
+						{
+							"_type": "UMLOperation",
+							"_id": "AAAAAAGDii0DquveknU=",
+							"_parent": {
+								"$ref": "AAAAAAGDMCCWj4gvPb4="
+							},
+							"name": "GetDistance",
+							"parameters": [
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDii052uwwAoE=",
+									"_parent": {
+										"$ref": "AAAAAAGDii0DquveknU="
+									},
+									"name": "Polygon polygon1",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDii052uwxLpc=",
+									"_parent": {
+										"$ref": "AAAAAAGDii0DquveknU="
+									},
+									"name": "Polygon polygon2",
+									"type": ""
+								},
+								{
+									"_type": "UMLParameter",
+									"_id": "AAAAAAGDii052uwykQU=",
+									"_parent": {
+										"$ref": "AAAAAAGDii0DquveknU="
+									},
+									"type": "static double",
+									"direction": "return"
+								}
+							]
 						}
 					]
 				},
@@ -7233,8 +7554,9 @@
 							"_parent": {
 								"$ref": "AAAAAAGDMF/WKqA1hx4="
 							},
-							"name": "Result",
-							"type": "свойство Double публ get прив set"
+							"name": "result",
+							"visibility": "private",
+							"type": "double"
 						},
 						{
 							"_type": "UMLAttribute",
@@ -7243,7 +7565,8 @@
 								"$ref": "AAAAAAGDMF/WKqA1hx4="
 							},
 							"name": "IGeometryPrimitiveVisitor calculator",
-							"visibility": "private"
+							"visibility": "private",
+							"type": ""
 						}
 					],
 					"operations": [
@@ -7533,17 +7856,6 @@
 							}
 						}
 					],
-					"attributes": [
-						{
-							"_type": "UMLAttribute",
-							"_id": "AAAAAAGDO4OJMfpOIKA=",
-							"_parent": {
-								"$ref": "AAAAAAGDO2nj1fH0uPw="
-							},
-							"name": "IGeometryPrimitiveVisitor calculator",
-							"type": ""
-						}
-					],
 					"operations": [
 						{
 							"_type": "UMLOperation",
@@ -7559,8 +7871,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGDO2sMuPK81kY="
 									},
-									"name": "IGeometryPrimitive A",
-									"type": ""
+									"name": "IGeometryPrimitive A"
 								},
 								{
 									"_type": "UMLParameter",
@@ -7568,8 +7879,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGDO2sMuPK81kY="
 									},
-									"name": "IGeometryPrimitive B",
-									"type": ""
+									"name": "IGeometryPrimitive B"
 								},
 								{
 									"_type": "UMLParameter",
@@ -7577,7 +7887,7 @@
 									"_parent": {
 										"$ref": "AAAAAAGDO2sMuPK81kY="
 									},
-									"type": "double",
+									"type": "static double",
 									"direction": "return"
 								}
 							]
