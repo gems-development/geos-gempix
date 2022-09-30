@@ -1,7 +1,4 @@
-﻿using System;
-
-
-public class GeometryPrimitiveDistanceExtencion
+﻿public class GeometryPrimitiveDistanceExtencion
 {
 	public static double GetDistance(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
 	{

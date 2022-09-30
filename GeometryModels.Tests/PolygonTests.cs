@@ -1,7 +1,4 @@
-﻿using GeometryModels;
-using System;
-using System.Drawing;
-using Point = GeometryModels.Point;
+﻿using Point = GeometryModels.Point;
 
 public class PolygonTests
 {

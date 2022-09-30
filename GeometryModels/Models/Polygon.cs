@@ -1,6 +1,4 @@
 ﻿using GeometryModels;
-using System;
-using System.Runtime.CompilerServices;
 
 public class Polygon : IGeometryPrimitive
 {

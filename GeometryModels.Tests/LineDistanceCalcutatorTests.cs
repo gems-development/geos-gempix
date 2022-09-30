@@ -1,5 +1,4 @@
 ﻿using GeometryModels;
-using System;
 
 public class LineDistanceCalcutatorTests
 {

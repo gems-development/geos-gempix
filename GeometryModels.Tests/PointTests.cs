@@ -1,4 +1,3 @@
-using GeometryModels;
 namespace GeometryModels.Tests
 {
     public class PointTests

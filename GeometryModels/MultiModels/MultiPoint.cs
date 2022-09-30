@@ -1,6 +1,4 @@
-﻿using System;
-
-public class MultiPoint : IGeometryPrimitive
+﻿public class MultiPoint : IGeometryPrimitive
 {
     public void Accept(IGeometryPrimitiveVisitor v)
     {

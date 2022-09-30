@@ -1,5 +1,4 @@
 ﻿using GeometryModels;
-using System;
 
 public class Line : IGeometryPrimitive
 {
@@ -12,7 +11,6 @@ public class Line : IGeometryPrimitive
         Point2 = point2;
     }
 
-    // ДУБЛИРОВАНИЕ КОДА (PointDistanceCalculator)
     public double GetLength()
     {
         return PointDistanceCalculator.GetDistance(Point1, Point2);
