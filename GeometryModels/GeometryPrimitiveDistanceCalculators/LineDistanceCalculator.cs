@@ -39,48 +39,14 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
     //Расстояние между точкой и отрезком
     public static double GetDistance(Point point, Line line)
     { 
-        double res;
-        double a = PointDistanceCalculator.GetDistance(point, line.Point1);
-        double b = PointDistanceCalculator.GetDistance(point, line.Point2);
-        double c = PointDistanceCalculator.GetDistance(line.Point1, line.Point2);
-        if (a * a > b * b + c * c || b * b > a * a + c * c)
-        {
-            res = Math.Min(a, b);
-        }
-        else
-        {
-            double P = line.Point2.Y - line.Point1.Y;
-            double Q = line.Point1.X - line.Point2.X;
-            double R = -line.Point1.X * P + line.Point1.Y * (line.Point2.X - line.Point1.X);
-            res = Math.Abs(P * point.X + Q * point.Y + R) / Math.Sqrt(P * P + Q * Q);
-        }
-        return res;
+        
+        return 0;
     }
 
     //TODO: Расстояние между двумя отрезками
     public double GetDistance(Line line1, Line line2)
     {
-        double min = 0;
-        double distance = 0;
-
-        foreach (Point point2 in new Point[] { line2.Point1, line2.Point2 })
-        {
-            distance = GetDistance(point2, line1);
-            if (distance > min)
-            {
-                min = distance;
-            }
-        }
-
-        foreach (Point point1 in new Point[] { line1.Point1, line1.Point2 })
-        {
-            distance = GetDistance(point1, line2);
-            if (distance > min)
-            {
-                min = distance;
-            }
-        }
-        return min;
+        return 0;
     }
 
     public void Visit(MultiPoint multiPoint)
