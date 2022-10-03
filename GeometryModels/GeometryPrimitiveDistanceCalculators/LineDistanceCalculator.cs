@@ -60,7 +60,27 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
     //TODO: Расстояние между двумя отрезками
     public double GetDistance(Line line1, Line line2)
     {
-        return 0;
+        double min = 0;
+        double distance = 0;
+
+        foreach (Point point2 in new Point[] { line2.Point1, line2.Point2 })
+        {
+            distance = GetDistance(point2, line1);
+            if (distance > min)
+            {
+                min = distance;
+            }
+        }
+
+        foreach (Point point1 in new Point[] { line1.Point1, line1.Point2 })
+        {
+            distance = GetDistance(point1, line2);
+            if (distance > min)
+            {
+                min = distance;
+            }
+        }
+        return min;
     }
 
     public void Visit(MultiPoint multiPoint)
