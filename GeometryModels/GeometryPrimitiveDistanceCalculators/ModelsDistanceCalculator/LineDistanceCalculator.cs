@@ -1,7 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-
-public class LineDistanceCalculator : IGeometryPrimitiveVisitor
+public class LineDistanceCalculator : IModelDistanceCalculator
 {
     private Line _line;
     private double _result;
@@ -23,7 +23,7 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
 
     public void Visit(Point point)
     {
-        _result = GetDistance(point, _line);
+        _result = GetDistance(_line, point);
     }
 
     public void Visit(Line line)
@@ -37,7 +37,7 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
     }
 
     //Расстояние между точкой и отрезком
-    public static double GetDistance(Point point, Line line)
+    public static double GetDistance(Line line, Point point)
     { 
         
         return 0;

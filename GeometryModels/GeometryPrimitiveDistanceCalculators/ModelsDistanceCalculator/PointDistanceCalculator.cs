@@ -1,6 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-public class PointDistanceCalculator : IGeometryPrimitiveVisitor
+public class PointDistanceCalculator : IModelDistanceCalculator
 {
     private Point _point;
     private double _result;
@@ -16,7 +17,7 @@ public class PointDistanceCalculator : IGeometryPrimitiveVisitor
 
     public void Visit(Line line)
     {
-        _result = LineDistanceCalculator.GetDistance(_point, line);
+        _result = LineDistanceCalculator.GetDistance(line, _point);
     }
 
     public void Visit(Polygon polygon)

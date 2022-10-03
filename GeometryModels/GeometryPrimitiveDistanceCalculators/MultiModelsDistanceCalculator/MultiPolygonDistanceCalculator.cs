@@ -1,6 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-internal class MultiPolygonDistanceCalculator : IGeometryPrimitiveVisitor
+internal class MultiPolygonDistanceCalculator : IModelDistanceCalculator
 {
     private MultiPolygon _multiPolygon;
     private double _result;

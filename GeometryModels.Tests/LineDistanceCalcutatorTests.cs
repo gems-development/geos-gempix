@@ -12,7 +12,7 @@ public class LineDistanceCalcutatorTests
         //Act.
         Line line = new Line(point1, point2);
         //Assert.
-        Assert.Equal(3, LineDistanceCalculator.GetDistance(point3, line));
+        Assert.Equal(3, LineDistanceCalculator.GetDistance(line, point3));
     }
 
     [Theory]
