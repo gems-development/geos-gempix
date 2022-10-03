@@ -26,9 +26,16 @@ public class PointDistanceCalculator : IGeometryPrimitiveVisitor
         _result = PolygonDistanceCalculator.GetDistance(polygon, _point);
     }
 
+    //Расстояние между точками
     public static double GetDistance(Point point1, Point point2)
     {
         return Math.Sqrt((point2.X - point1.X) * (point2.X - point1.X) + (point2.Y - point1.Y) * (point2.Y - point1.Y));
+    }
+
+    //Проверка на принадлежность точки отрезку
+    public static bool IsBelong(Point point, Line line)
+    {
+        return GetDistance(point, line.Point1) + GetDistance(point, line.Point2) == line.GetLength();
     }
 
     public double GetResult()
