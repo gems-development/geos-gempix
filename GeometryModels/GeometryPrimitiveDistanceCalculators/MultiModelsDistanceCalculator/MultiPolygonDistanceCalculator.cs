@@ -68,11 +68,33 @@ internal class MultiPolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(MultiPolygon multiPolygon, Line line)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Polygon> polygons = multiPolygon.GetPolygons();
+        foreach (Polygon polygon in polygons)
+        {
+            distance = PolygonDistanceCalculator.GetDistance(polygon, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiPolygon multiPolygon, Point point)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Polygon> polygons = multiPolygon.GetPolygons(); 
+        foreach (Polygon polygon in polygons)
+        {
+            distance = PolygonDistanceCalculator.GetDistance(polygon, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 }

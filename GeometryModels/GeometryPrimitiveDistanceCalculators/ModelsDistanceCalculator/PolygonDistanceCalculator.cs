@@ -76,7 +76,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     internal static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
         double result = 0;
-        double distance = 0;
+        double distance;
         // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
