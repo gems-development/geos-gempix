@@ -9,17 +9,66 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 {
     internal class MultiPointIntersector : IModelsIntersector
     {
-        // поле результат
+        private bool _result;
+        private MultiPoint _multiPoint;
 
-        // точка во множестве точек
+        // TODO
+        internal static bool Intersects(MultiPoint multiPoint, Point point)
+        {
+            return true;
+        }
 
-        // линия включает в себя одну из точек
+        // TODO
+        internal static bool Intersects(MultiPoint multiPoint, Line line)
+        {
+            return true;
+        }
 
-        // полигон содержит одну из точек
+        // TODO
+        internal static bool Intersects(MultiPoint multiPoint, Polygon polygon)
+        {
+            return true;
+        }
+
+        // TODO
+        internal static bool Intersects(MultiPoint multiPoint1, MultiPoint multiPoint2)
+        {
+            return true;
+        }
 
         public bool GetResult()
         {
-            return true; // результат
+            return _result;
+        }
+
+        public void Visit(Point point)
+        {
+            _result = Intersects(_multiPoint, point);
+        }
+
+        public void Visit(Line line)
+        {
+            _result = Intersects(_multiPoint, line);
+        }
+
+        public void Visit(Polygon polygon)
+        {
+            _result = Intersects(_multiPoint, polygon);
+        }
+
+        public void Visit(MultiPoint multiPoint)
+        {
+            _result = Intersects(_multiPoint, multiPoint);
+        }
+
+        public void Visit(MultiLine multiLine)
+        {
+            _result = MultiLineIntersector.Intersects(multiLine, _multiPoint);
+        }
+
+        public void Visit(MultiPolygon multiPolygon)
+        {
+            _result = MultiPolygonIntersector.Intersects(multiPolygon, _multiPoint);
         }
     }
 }

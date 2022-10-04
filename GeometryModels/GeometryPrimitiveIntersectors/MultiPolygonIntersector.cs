@@ -10,22 +10,78 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
     internal class MultiPolygonIntersector : IModelsIntersector
     {
 
-        // поле результат
+        private bool _result;
+        private MultiPolygon _multiPolygon;
 
-        // точка "пересекается" с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon, Point point)
+        {
+            return true;
+        }
 
-        // линия пересекается с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon, Line line)
+        {
+            return true;
+        }
 
-        // полигон пересекается с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon, Polygon polygon)
+        {
+            return true;
+        }
 
-        // мультиточка - одна из точек "пересекается" с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon, MultiPoint multiPoint)
+        {
+            return true;
+        }
 
-        // мультилиния - одна из линий пересекается с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon, MultiLine multiLine)
+        {
+            return true;
+        }
 
-        // мультиполигон - один из полигонов пересекается с одним из полигонов
+        // TODO
+        internal static bool Intersects(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+        {
+            return true;
+        }
+
         public bool GetResult()
         {
-            return true; // результат
+            return _result;
+        }
+
+        public void Visit(Point point)
+        {
+            _result = Intersects(_multiPolygon, point);
+        }
+
+        public void Visit(Line line)
+        {
+            _result = Intersects(_multiPolygon, line);
+        }
+
+        public void Visit(Polygon polygon)
+        {
+            _result = Intersects(_multiPolygon, polygon);
+        }
+
+        public void Visit(MultiPoint multiPoint)
+        {
+            _result = Intersects(_multiPolygon, multiPoint);
+        }
+
+        public void Visit(MultiLine multiLine)
+        {
+            _result = Intersects(_multiPolygon, multiLine);
+        }
+
+        public void Visit(MultiPolygon multiPolygon)
+        {
+            _result = Intersects(_multiPolygon, multiPolygon);
         }
     }
 }
