@@ -9,10 +9,20 @@
             X = x;
             Y = y;
         }
-        public bool Equals(Point point)
+        public override bool Equals(Object obj)
         {
-            return X == point.X && Y == point.Y; 
+            //Check for null and compare run-time types.
+            if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+            {
+                return false;
+            }
+            else
+            {
+                Point p = (Point) obj;
+                return (X == p.X) && (Y == p.Y);
+            }
         }
+
         public void Equal(Point point)
         {
             this.X = point.X;

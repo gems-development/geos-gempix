@@ -1,6 +1,4 @@
-﻿using GeometryModels;
-using System.Drawing;
-using Point = GeometryModels.Point;
+﻿using Point = GeometryModels.Point;
 
 public class Polygon : IGeometryPrimitive
 {
@@ -59,7 +57,7 @@ public class Polygon : IGeometryPrimitive
 		return perimeter;
     }
 
-   /* private List<Line> GetLines()
+    private List<Line> GetLines()
     {
         List<Point> points = GetPoints();
         List<Line> lines = new List<Line>();
@@ -68,16 +66,23 @@ public class Polygon : IGeometryPrimitive
             lines.Add(new Line(points[i], points[i + 1]));
         }
         lines.Add(new Line(points[points.Count - 1], points[0]));
-        foreach (Line line in lines)
+        return lines; 
+    }
+
+    public override bool Equals(Object obj)
+    {
+        //Check for null and compare run-time types.
+        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
         {
-            distance = LineDistanceCalculator.GetDistance(line, point);
-            if (distance < result)
-            {
-                result = distance;
-            }
+            return false;
         }
-        return result; 
-    }*/
+        else
+        {
+            Polygon p = (Polygon)obj;
+            return list.Equals(p.GetPoints());
+        }
+    }
+
 
     public void Accept(IGeometryPrimitiveVisitor v)
     {

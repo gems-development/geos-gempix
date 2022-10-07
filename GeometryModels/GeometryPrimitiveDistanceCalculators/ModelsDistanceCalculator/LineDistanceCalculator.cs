@@ -51,16 +51,29 @@ public class LineDistanceCalculator : IModelDistanceCalculator
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _line);
     }
 
-    //TODO Расстояние между точкой и отрезком
     public static double GetDistance(Line line, Point point)
     {
-
-        return 0;
+        double res;
+        double a = PointDistanceCalculator.GetDistance(point, line.Point1);
+        double b = PointDistanceCalculator.GetDistance(point, line.Point2);
+        double c = PointDistanceCalculator.GetDistance(line.Point1, line.Point2);
+        if (a * a > b * b + c * c || b * b > a * a + c * c)
+        {
+            res = Math.Min(a, b);
+        }
+        else
+        {
+            double P = line.Point2.Y - line.Point1.Y;
+            double Q = line.Point1.X - line.Point2.X;
+            double R = -line.Point1.X * P + line.Point1.Y * (line.Point2.X - line.Point1.X);
+            res = Math.Abs(P * point.X + Q * point.Y + R) / Math.Sqrt(P * P + Q * Q);
+        }
+        return res;
     }
 
     public static double GetDistance(Line line1, Line line2)
     {
-        if (!Line.IsIntersection(line1, line2))
+        if(!Line.IsIntersection(line1, line2))
         {
             double[] distances = new double[6];
             distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
@@ -97,4 +110,22 @@ public class LineDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Line line, MultiPolygon multiPolygon) =>
         MultiPolygonDistanceCalculator.GetDistance(multiPolygon, line);
+
+    //Проверка на пересечение прямых, проходящих через данные отрезки
+    public static bool IsLineInterSection(Line line1, Line line2)
+    {
+        if(line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
+        {
+            return true;
+        }
+        if (line1.Point1.X == line1.Point2.X && line2.Point1.X == line2.Point2.X)
+        {
+            return false;
+        }
+
+        double k1 = (line1.Point2.Y - line1.Point1.Y) / (line1.Point2.X - line1.Point1.X);
+        double k2 = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
+
+        return k2 - k1 > 0;
+    }
 }

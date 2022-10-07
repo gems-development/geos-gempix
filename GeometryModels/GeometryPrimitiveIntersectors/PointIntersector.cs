@@ -1,9 +1,4 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
@@ -12,8 +7,9 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private Point _point;
 
-        public PointIntersector()
+        public PointIntersector(Point point)
         {
+            _point?.Equal(point);
             _result = false;
         }
 

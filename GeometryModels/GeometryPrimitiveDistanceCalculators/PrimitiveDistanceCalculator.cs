@@ -1,13 +1,14 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
 /// <summary>
 /// Summary description for Class1
 /// </summary>
-public class PrimitiveDistanceCalculator : IGeometryPrimitiveVisitor
+public class PrimitiveDistanceCalculator : IModelDistanceCalculator
 {
     private double _result;
 	
-    private IGeometryPrimitiveVisitor _calculator;
+    private IModelDistanceCalculator _calculator;
 
     public PrimitiveDistanceCalculator(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
     {
