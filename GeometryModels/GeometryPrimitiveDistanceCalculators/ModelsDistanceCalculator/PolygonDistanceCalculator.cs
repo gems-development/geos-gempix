@@ -116,4 +116,14 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         }
         return result;
     }
+
+    internal static double GetDistance(Polygon polygon, MultiLine multiLine)=>
+        MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
+
+    internal static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
+        MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
+
+    internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
+        MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
+    
 }

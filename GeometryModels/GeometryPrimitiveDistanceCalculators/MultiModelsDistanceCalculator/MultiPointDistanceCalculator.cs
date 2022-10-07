@@ -1,5 +1,8 @@
 ﻿using GeometryModels;
 using GeometryModels.Interfaces.IModels;
+using System.Drawing;
+using System.Reflection;
+using Point = GeometryModels.Point;
 
 internal class MultiPointDistanceCalculator : IModelDistanceCalculator
 {
@@ -56,58 +59,40 @@ internal class MultiPointDistanceCalculator : IModelDistanceCalculator
         return MultiLineDistanceCalculator.GetDistance(multiLine, multiPoint);
     }
 
-    internal static double GetDistance(MultiPoint multiPoint1, MultiPoint multiPoint2)
-    {
-        double result = 0;
-        double distance;
-        foreach (Point point in multiPoint2.GetPoints())
-        {
-            distance = GetDistance(multiPoint1, point);
-            if (distance < result)
-            {
-                result = distance;
-            }
-        }
-        return result;
-    }
+    internal static double GetDistance(MultiPoint multiPoint1, MultiPoint multiPoint2) =>
+         GetDistance(
+             multiPoint1,
+             multiPoint2,
+             (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as MultiPoint));
 
-    internal static double GetDistance(MultiPoint multiPoint, Polygon polygon)
+    internal static double GetDistance(MultiPoint multiPoint, Polygon polygon) =>
+         GetDistance(
+             multiPoint,
+             polygon,
+             (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Polygon));
+
+    internal static double GetDistance(MultiPoint multiPoint, Line line) =>
+         GetDistance(
+             multiPoint,
+             line,
+             (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Line));
+
+    internal static double GetDistance(MultiPoint multiPoint, Point point1) =>
+         GetDistance(
+             multiPoint,
+             point1,
+             (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Point));
+
+    internal static double GetDistance(
+        MultiPoint multiPoint,
+        IGeometryPrimitive primitive,
+        Func<Point, IGeometryPrimitive, double> getDistance)
     {
         double result = 0;
         double distance;
         foreach (Point point in multiPoint.GetPoints())
         {
-            distance = PolygonDistanceCalculator.GetDistance(polygon, point);
-            if (distance < result)
-            {
-                result = distance;
-            }
-        }
-        return result;
-    }
-
-    internal static double GetDistance(MultiPoint multiPoint, Line line)
-    {
-        double result = 0;
-        double distance;
-        foreach (Point point in multiPoint.GetPoints())
-        {
-            distance = LineDistanceCalculator.GetDistance(line, point);
-            if (distance < result)
-            {
-                result = distance;
-            }
-        }
-        return result;
-    }
-
-    internal static double GetDistance(MultiPoint multiPoint, Point point1)
-    {
-        double result = 0;
-        double distance;
-        foreach (Point point in multiPoint.GetPoints())
-        {
-            distance = PointDistanceCalculator.GetDistance(point, point1);
+            distance = getDistance?.Invoke(point, primitive) ?? 0;
             if (distance < result)
             {
                 result = distance;

@@ -1,4 +1,6 @@
 ﻿using GeometryModels;
+using System.Drawing;
+using Point = GeometryModels.Point;
 
 public class Polygon : IGeometryPrimitive
 {
@@ -45,7 +47,7 @@ public class Polygon : IGeometryPrimitive
 		square = (sum2 - sum1) / 2;
 		return square;
     }
-	// TODO: реализовать с помощью функции вычисления расстояния между двумя точками
+
 	public double GetPerimeter()
     {
 		double perimeter = 0;
@@ -56,6 +58,26 @@ public class Polygon : IGeometryPrimitive
 		perimeter = perimeter + PointDistanceCalculator.GetDistance(list[list.Count-1], list[0]);
 		return perimeter;
     }
+
+   /* private List<Line> GetLines()
+    {
+        List<Point> points = GetPoints();
+        List<Line> lines = new List<Line>();
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            lines.Add(new Line(points[i], points[i + 1]));
+        }
+        lines.Add(new Line(points[points.Count - 1], points[0]));
+        foreach (Line line in lines)
+        {
+            distance = LineDistanceCalculator.GetDistance(line, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result; 
+    }*/
 
     public void Accept(IGeometryPrimitiveVisitor v)
     {

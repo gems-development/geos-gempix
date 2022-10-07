@@ -55,6 +55,19 @@ public class PointDistanceCalculator : IModelDistanceCalculator
     {
         return Math.Sqrt((point2.X - point1.X) * (point2.X - point1.X) + (point2.Y - point1.Y) * (point2.Y - point1.Y));
     }
-    
-    // а нужно ли прописывать другие GetDistance?
+
+    internal static double GetDistance(Point point, Line line) =>
+        LineDistanceCalculator.GetDistance(line, point);
+
+    internal static double GetDistance(Point point, Polygon polygon) =>
+        PolygonDistanceCalculator.GetDistance(polygon, point);
+
+    internal static double GetDistance(Point point, MultiLine multiLine) =>
+        MultiLineDistanceCalculator.GetDistance(multiLine, point);
+
+    internal static double GetDistance(Point point, MultiPoint multiPoint) =>
+        MultiPointDistanceCalculator.GetDistance(multiPoint, point);
+
+    internal static double GetDistance(Point point, MultiPolygon multiPolygon) =>
+        MultiPolygonDistanceCalculator.GetDistance(multiPolygon, point);
 }
