@@ -27,6 +27,26 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         _result = GetDistance(_polygon, polygon);
     }
 
+    public double GetResult()
+    {
+        return _result;
+    }
+
+    public void Visit(MultiPoint multiPoint)
+    {
+        _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
+    }
+
+    public void Visit(MultiLine multiLine)
+    {
+        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _polygon);
+    }
+
+    public void Visit(MultiPolygon multiPolygon)
+    {
+        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
+    }
+
     internal static double GetDistance(Polygon polygon, Point point)
     {
         double result = 0;
@@ -34,12 +54,12 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
-        for(int i = 0; i < points.Count - 1; i++) 
+        for (int i = 0; i < points.Count - 1; i++)
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
         lines.Add(new Line(points[points.Count - 1], points[0]));
-        foreach(Line line in lines)
+        foreach (Line line in lines)
         {
             distance = LineDistanceCalculator.GetDistance(line, point);
             if (distance < result)
@@ -95,25 +115,5 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
             }
         }
         return result;
-    }
-
-    public double GetResult()
-    {
-        return _result;
-    }
-
-    public void Visit(MultiPoint multiPoint)
-    {
-        _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
-    }
-
-    public void Visit(MultiLine multiLine)
-    {
-        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _polygon);
-    }
-
-    public void Visit(MultiPolygon multiPolygon)
-    {
-        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
     }
 }

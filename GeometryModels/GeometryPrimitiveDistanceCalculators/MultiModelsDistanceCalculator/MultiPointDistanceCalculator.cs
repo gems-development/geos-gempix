@@ -38,41 +38,81 @@ internal class MultiPointDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(MultiLine multiLine)
     {
-        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _multiPoint);
+        _result = GetDistance(_multiPoint, multiLine);
     }
 
     public void Visit(MultiPolygon multiPolygon)
     {
-        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _multiPoint);
+        _result = GetDistance(_multiPoint, multiPolygon);
     }
 
     internal static double GetDistance(MultiPoint multiPoint, MultiPolygon multiPolygon)
     {
-        throw new NotImplementedException();
+        return MultiPolygonDistanceCalculator.GetDistance(multiPolygon, multiPoint);
     }
 
     internal static double GetDistance(MultiPoint multiPoint, MultiLine multiLine)
     {
-        throw new NotImplementedException();
+        return MultiLineDistanceCalculator.GetDistance(multiLine, multiPoint);
     }
 
     internal static double GetDistance(MultiPoint multiPoint1, MultiPoint multiPoint2)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        foreach (Point point in multiPoint2.GetPoints())
+        {
+            distance = GetDistance(multiPoint1, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiPoint multiPoint, Polygon polygon)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        foreach (Point point in multiPoint.GetPoints())
+        {
+            distance = PolygonDistanceCalculator.GetDistance(polygon, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiPoint multiPoint, Line line)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        foreach (Point point in multiPoint.GetPoints())
+        {
+            distance = LineDistanceCalculator.GetDistance(line, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
-    internal static double GetDistance(MultiPoint multiPoint, Point point)
+    internal static double GetDistance(MultiPoint multiPoint, Point point1)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        foreach (Point point in multiPoint.GetPoints())
+        {
+            distance = PointDistanceCalculator.GetDistance(point, point1);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 }

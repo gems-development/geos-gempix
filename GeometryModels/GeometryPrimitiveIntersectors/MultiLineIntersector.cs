@@ -12,34 +12,59 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private MultiLine _multiLine;
 
-        // TODO
+        public MultiLineIntersector(MultiLine multiLine)
+        {
+            _multiLine = multiLine;
+        }
+
         internal static bool Intersects(MultiLine multiLine, Point point)
         {
-            return true;
+            foreach (Line line in multiLine.GetLines())
+            {
+                if (LineIntersector.Intersects(line, point))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
-        internal static bool Intersects(MultiLine multiLine, Line line)
+        internal static bool Intersects(MultiLine multiLine, Line line1)
         {
-            return true;
+            foreach (Line line in multiLine.GetLines())
+            {
+                if (LineIntersector.Intersects(line, line1))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiLine multiLine, Polygon polygon)
         {
-            return true;
+            foreach (Line line in multiLine.GetLines())
+            {
+                if (PolygonIntersector.Intersects(polygon, line))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiLine multiLine, MultiPoint multiPoint)
         {
-            return true;
+            foreach (Line line in multiLine.GetLines())
+            {
+                if (MultiPointIntersector.Intersects(multiPoint, line))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiLine multiLine1, MultiLine multiLine2)
         {
-            return true;
+            foreach (Line line in multiLine1.GetLines())
+            {
+                if (Intersects(multiLine2, line))
+                    return true;
+            }
+            return false;
         }
 
         public bool GetResult()
