@@ -62,5 +62,6 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         {
             throw new NotImplementedException();
         }
+
     }
 }

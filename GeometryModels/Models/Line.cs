@@ -29,6 +29,20 @@ public class Line : IGeometryPrimitive
         return ((delta != 0) && (delta1/delta >= 0) && (delta1/delta <= 1) && (delta2/delta >= 0) && (delta2/delta <= 1));
     }
 
+    public override bool Equals(Object obj)
+    {
+        //Check for null and compare run-time types.
+        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else
+        {
+            Line p = (Line)obj;
+            return Point1.Equals(p.Point1) && Point2.Equals(p.Point2);
+        }
+    }
+
     public void Accept(IGeometryPrimitiveVisitor v)
     {
         v.Visit(this);

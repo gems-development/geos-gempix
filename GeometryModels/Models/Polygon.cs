@@ -57,6 +57,21 @@ public class Polygon : IGeometryPrimitive
 		return perimeter;
     }
 
+    public override bool Equals(Object obj)
+    {
+        //Check for null and compare run-time types.
+        if ((obj == null) || !this.GetType().Equals(obj.GetType()))
+        {
+            return false;
+        }
+        else
+        {
+            Polygon p = (Polygon)obj;
+            return list.Equals(p.GetPoints());
+        }
+    }
+
+
     public void Accept(IGeometryPrimitiveVisitor v)
     {
 		v.Visit(this);
