@@ -76,5 +76,10 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         {
             _result = MultiPolygonIntersector.Intersects(multiPolygon, _multiLine);
         }
+
+        double IGeometryPrimitiveVisitor.GetResult()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

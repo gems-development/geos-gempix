@@ -17,7 +17,7 @@ public class LineDistanceCalcutatorTests
 
     [Theory]
     [InlineData(1, 1, 1, 2, 1, 0, 0, 3, 0)]
-    [InlineData(5, 0, 0, 0, 3, 4, 0, 5, 3)]
+    [InlineData(4, 0, 0, 0, 3, 4, 0, 5, 3)]
     public void GetDistanceBetweenTwoLines_Success(double expected, double x11, double y11, double x12, double y12,
                                                     double x21, double y21, double x22, double y22)
     {

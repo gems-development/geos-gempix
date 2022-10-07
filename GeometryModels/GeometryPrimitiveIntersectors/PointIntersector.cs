@@ -12,8 +12,9 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private Point _point;
 
-        public PointIntersector()
+        public PointIntersector(Point point)
         {
+            _point?.Equal(point);
             _result = false;
         }
 
@@ -57,6 +58,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         public void Visit(MultiPolygon multiPolygon)
         {
             _result = MultiPolygonIntersector.Intersects(multiPolygon, _point);
+        }
+
+        double IGeometryPrimitiveVisitor.GetResult()
+        {
+            throw new NotImplementedException();
         }
     }
 }

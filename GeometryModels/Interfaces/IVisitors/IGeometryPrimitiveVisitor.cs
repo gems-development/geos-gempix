@@ -9,4 +9,5 @@ public interface IGeometryPrimitiveVisitor
     public void Visit(MultiPoint multiPoint);
     public void Visit(MultiLine multiLine);
     public void Visit(MultiPolygon multiPolygon);
+    public double GetResult();
 }

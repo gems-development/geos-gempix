@@ -83,5 +83,10 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         {
             _result = Intersects(_multiPolygon, multiPolygon);
         }
+
+        double IGeometryPrimitiveVisitor.GetResult()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
