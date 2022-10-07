@@ -66,10 +66,10 @@ internal class MultiPolygonDistanceCalculator : IModelDistanceCalculator
     {
         double result = 0;
         double distance;
-        List<Line> lines = multiLine.GetLines();
-        foreach (Line line in lines)
+        List<Polygon> polygons = multiPolygon.GetPolygons();
+        foreach (Polygon polygon in polygons)
         {
-            distance = GetDistance(multiPolygon, line);
+            distance = MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
             if (distance < result)
             {
                 result = distance;
@@ -82,10 +82,10 @@ internal class MultiPolygonDistanceCalculator : IModelDistanceCalculator
     {
         double result = 0;
         double distance;
-        List<Point> points = multiPoint.GetPoints();
-        foreach (Point point in points)
+        List<Polygon> polygons = multiPolygon.GetPolygons();
+        foreach (Polygon polygon in polygons)
         {
-            distance = GetDistance(multiPolygon, point);
+            distance = MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
             if (distance < result)
             {
                 result = distance;

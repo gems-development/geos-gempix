@@ -13,40 +13,64 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private MultiPolygon _multiPolygon;
 
-        // TODO
         internal static bool Intersects(MultiPolygon multiPolygon, Point point)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                if (PolygonIntersector.Intersects(polygon, point))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPolygon multiPolygon, Line line)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                if (PolygonIntersector.Intersects(polygon, line))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
-        internal static bool Intersects(MultiPolygon multiPolygon, Polygon polygon)
+        internal static bool Intersects(MultiPolygon multiPolygon, Polygon polygon1)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                if (PolygonIntersector.Intersects(polygon, polygon1))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPolygon multiPolygon, MultiPoint multiPoint)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                if (MultiPointIntersector.Intersects(multiPoint, polygon))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPolygon multiPolygon, MultiLine multiLine)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                if (MultiLineIntersector.Intersects(multiLine, polygon))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
-            return true;
+            foreach (Polygon polygon in multiPolygon2.GetPolygons())
+            {
+                if (Intersects(multiPolygon1, polygon))
+                    return true;
+            }
+            return false; 
         }
 
         public bool GetResult()
