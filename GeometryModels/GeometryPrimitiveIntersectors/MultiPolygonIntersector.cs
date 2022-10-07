@@ -13,6 +13,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private MultiPolygon _multiPolygon;
 
+        public MultiPolygonIntersector(MultiPolygon multiPolygon)
+        {
+            _multiPolygon = multiPolygon;
+        }
+
         internal static bool Intersects(MultiPolygon multiPolygon, Point point)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())

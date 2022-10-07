@@ -12,28 +12,49 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private MultiPoint _multiPoint;
 
-        // TODO
-        internal static bool Intersects(MultiPoint multiPoint, Point point)
+        public MultiPointIntersector(MultiPoint multiPoint)
         {
-            return true;
+            _multiPoint = multiPoint;
         }
 
-        // TODO
+        internal static bool Intersects(MultiPoint multiPoint, Point point1)
+        {
+            foreach (Point point in multiPoint.GetPoints())
+            {
+                if (PointIntersector.Intersects(point, point1))
+                    return true;
+            }
+            return false;
+        }
+
         internal static bool Intersects(MultiPoint multiPoint, Line line)
         {
-            return true;
+            foreach (Point point in multiPoint.GetPoints())
+            {
+                if (LineIntersector.Intersects(line, point))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPoint multiPoint, Polygon polygon)
         {
-            return true;
+            foreach (Point point in multiPoint.GetPoints())
+            {
+                if (PolygonIntersector.Intersects(polygon, point))
+                    return true;
+            }
+            return false;
         }
 
-        // TODO
         internal static bool Intersects(MultiPoint multiPoint1, MultiPoint multiPoint2)
         {
-            return true;
+            foreach (Point point in multiPoint2.GetPoints())
+            {
+                if (Intersects(multiPoint1, point))
+                    return true;
+            }
+            return false;
         }
 
         public bool GetResult()
