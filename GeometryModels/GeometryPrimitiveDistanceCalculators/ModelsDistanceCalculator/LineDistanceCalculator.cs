@@ -1,7 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-
-public class LineDistanceCalculator : IGeometryPrimitiveVisitor
+public class LineDistanceCalculator : IModelDistanceCalculator
 {
     private Line _line;
     private double _result;
@@ -23,7 +23,7 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
 
     public void Visit(Point point)
     {
-        _result = GetDistance(point, _line);
+        _result = GetDistance(_line, point);
     }
 
     public void Visit(Line line)
@@ -37,24 +37,10 @@ public class LineDistanceCalculator : IGeometryPrimitiveVisitor
     }
 
     //Расстояние между точкой и отрезком
-    public static double GetDistance(Point point, Line line)
+    public static double GetDistance(Line line, Point point)
     { 
-        double res;
-        double a = PointDistanceCalculator.GetDistance(point, line.Point1);
-        double b = PointDistanceCalculator.GetDistance(point, line.Point2);
-        double c = PointDistanceCalculator.GetDistance(line.Point1, line.Point2);
-        if (a * a > b * b + c * c || b * b > a * a + c * c)
-        {
-            res = Math.Min(a, b);
-        }
-        else
-        {
-            double P = line.Point2.Y - line.Point1.Y;
-            double Q = line.Point1.X - line.Point2.X;
-            double R = -line.Point1.X * P + line.Point1.Y * (line.Point2.X - line.Point1.X);
-            res = Math.Abs(P * point.X + Q * point.Y + R) / Math.Sqrt(P * P + Q * Q);
-        }
-        return res;
+        
+        return 0;
     }
 
     //TODO: Расстояние между двумя отрезками

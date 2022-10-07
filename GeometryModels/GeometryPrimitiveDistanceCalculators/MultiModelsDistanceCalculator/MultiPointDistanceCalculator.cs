@@ -1,6 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-internal class MultiPointDistanceCalculator : IGeometryPrimitiveVisitor
+internal class MultiPointDistanceCalculator : IModelDistanceCalculator
 {
     private MultiPoint _multiPoint;
     private double _result;

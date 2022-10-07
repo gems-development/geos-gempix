@@ -1,6 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-internal class MultiLineDistanceCalculator : IGeometryPrimitiveVisitor
+internal class MultiLineDistanceCalculator : IModelDistanceCalculator
 {
     private MultiLine _multiLine;
     private double _result;
@@ -47,26 +48,81 @@ internal class MultiLineDistanceCalculator : IGeometryPrimitiveVisitor
 
     internal static double GetDistance(MultiLine multiLine, Polygon polygon)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Line> lines = multiLine.GetLines();
+        foreach (Line line in lines)
+        {
+            distance = PolygonDistanceCalculator.GetDistance(polygon, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiLine multiLine, Line line)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Line> lines = multiLine.GetLines();
+        foreach (Line line1 in lines)
+        {
+            distance = LineDistanceCalculator.GetDistance(line1, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiLine multiLine, Point point)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Line> lines = multiLine.GetLines();
+        foreach (Line line in lines)
+        {
+            distance = LineDistanceCalculator.GetDistance(line, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiLine multiLine1, MultiLine multiLine2)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Line> lines = multiLine1.GetLines();
+        foreach (Line line in lines)
+        {
+            distance = GetDistance(multiLine2, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     internal static double GetDistance(MultiLine multiLine, MultiPoint multiPoint)
     {
-        throw new NotImplementedException();
+        double result = 0;
+        double distance;
+        List<Line> lines = multiLine.GetLines();
+        foreach (Line line in lines)
+        {
+            distance = MultiPointDistanceCalculator.GetDistance(multiPoint, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 }

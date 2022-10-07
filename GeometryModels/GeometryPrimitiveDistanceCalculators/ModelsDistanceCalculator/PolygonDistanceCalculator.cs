@@ -1,6 +1,7 @@
 ﻿using GeometryModels;
+using GeometryModels.Interfaces.IModels;
 
-public class PolygonDistanceCalculator : IGeometryPrimitiveVisitor
+public class PolygonDistanceCalculator : IModelDistanceCalculator
 {
     private Polygon _polygon;
     private double _result;
@@ -26,23 +27,74 @@ public class PolygonDistanceCalculator : IGeometryPrimitiveVisitor
         _result = GetDistance(_polygon, polygon);
     }
 
-    //TODO: Расстояние между точкой и полигоном
     internal static double GetDistance(Polygon polygon, Point point)
     {
-        return 0;
+        double result = 0;
+        double distance = 0;
+        // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
+        List<Point> points = polygon.GetPoints();
+        List<Line> lines = new List<Line>();
+        for(int i = 0; i < points.Count - 1; i++) 
+        {
+            lines.Add(new Line(points[i], points[i + 1]));
+        }
+        lines.Add(new Line(points[points.Count - 1], points[0]));
+        foreach(Line line in lines)
+        {
+            distance = LineDistanceCalculator.GetDistance(line, point);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
-
-    //TODO: Расстояние между отрезком и полигоном
     internal static double GetDistance(Polygon polygon, Line line)
     {
-        return 0;
+        double result = 0;
+        double distance = 0;
+        // проверка если отрезок ВНУТРИ полигона... 
+        List<Point> points = polygon.GetPoints();
+        List<Line> lines = new List<Line>();
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            lines.Add(new Line(points[i], points[i + 1]));
+        }
+        lines.Add(new Line(points[points.Count - 1], points[0]));
+        foreach (Line line1 in lines)
+        {
+            distance = LineDistanceCalculator.GetDistance(line1, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
-    //TODO: Расстояние между двумя полигонами
     internal static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
-        return 0;
+        double result = 0;
+        double distance;
+        // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
+        List<Point> points = polygon2.GetPoints();
+        List<Line> lines = new List<Line>();
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            lines.Add(new Line(points[i], points[i + 1]));
+        }
+        lines.Add(new Line(points[points.Count - 1], points[0]));
+
+        foreach (Line line in lines)
+        {
+            distance = GetDistance(polygon1, line);
+            if (distance < result)
+            {
+                result = distance;
+            }
+        }
+        return result;
     }
 
     public double GetResult()
