@@ -2,19 +2,19 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class LineIntersector : IModelsIntersector
+    public class LineIntersector : IModelsIntersector
     {
         private bool _result;
         private Line _line;
 
         // TODO
-        internal static bool Intersects(Line line, Point point)
+        public static bool Intersects(Line line, Point point)
         {
             return true;
         }
 
         // TODO
-        internal static bool Intersects(Line line1, Line line2)
+        public static bool Intersects(Line line1, Line line2)
         {
             return true;
         }

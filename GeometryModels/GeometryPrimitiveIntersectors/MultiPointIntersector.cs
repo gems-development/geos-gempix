@@ -2,7 +2,7 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class MultiPointIntersector : IModelsIntersector
+    public class MultiPointIntersector : IModelsIntersector
     {
         private bool _result;
         private MultiPoint _multiPoint;
@@ -12,7 +12,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             _multiPoint = multiPoint;
         }
 
-        internal static bool Intersects(MultiPoint multiPoint, Point point1)
+        public static bool Intersects(MultiPoint multiPoint, Point point1)
         {
             foreach (Point point in multiPoint.GetPoints())
             {
@@ -22,7 +22,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPoint multiPoint, Line line)
+        public static bool Intersects(MultiPoint multiPoint, Line line)
         {
             foreach (Point point in multiPoint.GetPoints())
             {
@@ -32,7 +32,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPoint multiPoint, Polygon polygon)
+        public static bool Intersects(MultiPoint multiPoint, Polygon polygon)
         {
             foreach (Point point in multiPoint.GetPoints())
             {
@@ -42,7 +42,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPoint multiPoint1, MultiPoint multiPoint2)
+        public static bool Intersects(MultiPoint multiPoint1, MultiPoint multiPoint2)
         {
             foreach (Point point in multiPoint2.GetPoints())
             {

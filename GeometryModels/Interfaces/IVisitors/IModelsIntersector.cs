@@ -1,6 +1,6 @@
 ﻿namespace GeometryModels.Interfaces.IVisitors
 {
-    internal interface IModelsIntersector : IGeometryPrimitiveVisitor
+    public interface IModelsIntersector : IGeometryPrimitiveVisitor
     {
         public bool GetResult();
     }

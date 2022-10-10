@@ -47,7 +47,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
     }
 
-    internal static double GetDistance(Polygon polygon, Point point)
+    public static double GetDistance(Polygon polygon, Point point)
     {
         double result = 0;
         double distance = 0;
@@ -70,7 +70,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
-    internal static double GetDistance(Polygon polygon, Line line)
+    public static double GetDistance(Polygon polygon, Line line)
     {
         double result = 0;
         double distance = 0;
@@ -93,7 +93,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
-    internal static double GetDistance(Polygon polygon1, Polygon polygon2)
+    public static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
         double result = 0;
         double distance;
@@ -117,13 +117,13 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
-    internal static double GetDistance(Polygon polygon, MultiLine multiLine)=>
+    public static double GetDistance(Polygon polygon, MultiLine multiLine)=>
         MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
 
-    internal static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
+    public static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
         MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
 
-    internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
+    public static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
         MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
     
 }

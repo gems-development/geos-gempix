@@ -2,7 +2,7 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class PointIntersector : IModelsIntersector
+    public class PointIntersector : IModelsIntersector
     {
         private bool _result;
         private Point _point;

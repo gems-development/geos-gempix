@@ -2,7 +2,7 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class MultiPolygonIntersector : IModelsIntersector
+    public class MultiPolygonIntersector : IModelsIntersector
     {
 
         private bool _result;
@@ -13,7 +13,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             _multiPolygon = multiPolygon;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon, Point point)
+        public static bool Intersects(MultiPolygon multiPolygon, Point point)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
@@ -23,7 +23,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon, Line line)
+        public static bool Intersects(MultiPolygon multiPolygon, Line line)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
@@ -33,7 +33,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon, Polygon polygon1)
+        public static bool Intersects(MultiPolygon multiPolygon, Polygon polygon1)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
@@ -43,7 +43,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon, MultiPoint multiPoint)
+        public static bool Intersects(MultiPolygon multiPolygon, MultiPoint multiPoint)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
@@ -53,7 +53,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon, MultiLine multiLine)
+        public static bool Intersects(MultiPolygon multiPolygon, MultiLine multiLine)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
@@ -63,7 +63,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+        public static bool Intersects(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
             foreach (Polygon polygon in multiPolygon2.GetPolygons())
             {

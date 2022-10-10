@@ -3,17 +3,32 @@
 public class Polygon : IGeometryPrimitive
 {
 	private List<Point> list;
+    private List<Polygon> hole;
 	public Polygon(List<Point> points)
 	{
 		list = points;
+        hole = new List<Polygon>();
 	}
+    public Polygon(List<Point> points, List<Polygon> holes)
+    {
+        list = points;
+        hole = holes;
+    }
 	public void AddPoint(Point point)
     {
 		list.Add(point);
     }
+    public void Add(Polygon hole)
+    {
+        hole.Add(hole);
+    }
 	public List<Point> GetPoints()
     {
 		return list;
+    }
+    public List<Polygon> GetHoles()
+    {
+        return hole;
     }
 	public Point GetPoint(int i)
     {

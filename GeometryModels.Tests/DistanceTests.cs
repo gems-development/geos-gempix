@@ -26,11 +26,12 @@ namespace GeometryModels.Tests
             Line line1 = new Line(point1, point2);
             Line line2 = new Line(point3, point4);
             //Act.
-            double distance = GeometryPrimitiveDistanceExtencion.GetDistance(line1, line2);
+            double distance = LineDistanceCalculator.GetDistance(line1, line2);
             //Assert.
-            Assert.Equal(distance, Math.Sqrt(2));
+            Assert.Equal(Math.Sqrt(2), distance);
         }
         */
+
 
         [Fact]
         public void DistanceBetweenPointAndLine_Success()

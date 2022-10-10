@@ -1,7 +1,7 @@
 ﻿using GeometryModels.Interfaces.IModels;
 using Point = GeometryModels.Point;
 
-internal class MultiLineDistanceCalculator : IModelDistanceCalculator
+public class MultiLineDistanceCalculator : IModelDistanceCalculator
 {
     private MultiLine _multiLine;
     private double _result;
@@ -46,36 +46,36 @@ internal class MultiLineDistanceCalculator : IModelDistanceCalculator
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _multiLine);
     }
 
-    internal static double GetDistance(MultiLine multiLine, Polygon polygon) =>
+    public static double GetDistance(MultiLine multiLine, Polygon polygon) =>
          GetDistance(
              multiLine,
              polygon,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Polygon));
 
-    internal static double GetDistance(MultiLine multiLine, Line line1) =>
+    public static double GetDistance(MultiLine multiLine, Line line1) =>
          GetDistance(
              multiLine,
              line1,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Line));
 
-    internal static double GetDistance(MultiLine multiLine, Point point) =>
+    public static double GetDistance(MultiLine multiLine, Point point) =>
          GetDistance(
              multiLine,
              point,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Point));
 
-    internal static double GetDistance(MultiLine multiLine1, MultiLine multiLine2) =>
+    public static double GetDistance(MultiLine multiLine1, MultiLine multiLine2) =>
          GetDistance(
              multiLine1,
              multiLine2,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as MultiLine));
 
-    internal static double GetDistance(MultiLine multiLine, MultiPoint multiPoint) =>
+    public static double GetDistance(MultiLine multiLine, MultiPoint multiPoint) =>
          GetDistance(
              multiLine,
              multiPoint,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as MultiPoint));
-    internal static double GetDistance(
+    public static double GetDistance(
         MultiLine multiLine,
         IGeometryPrimitive primitive,
         Func<Line, IGeometryPrimitive, double> getDistance)

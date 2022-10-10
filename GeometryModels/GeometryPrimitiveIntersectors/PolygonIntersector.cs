@@ -2,25 +2,25 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class PolygonIntersector : IModelsIntersector
+    public class PolygonIntersector : IModelsIntersector
     {
         private bool _result;
         private Polygon _polygon;
 
         // TODO
-        internal static bool Intersects(Polygon polygon, Point point)
+        public static bool Intersects(Polygon polygon, Point point)
         {
             return true;
         }
 
         // TODO
-        internal static bool Intersects(Polygon polygon, Line line)
+        public static bool Intersects(Polygon polygon, Line line)
         {
             return true;
         }
 
         // TODO
-        internal static bool Intersects(Polygon polygon1, Polygon polygon2)
+        public static bool Intersects(Polygon polygon1, Polygon polygon2)
         {
             return true;
         }

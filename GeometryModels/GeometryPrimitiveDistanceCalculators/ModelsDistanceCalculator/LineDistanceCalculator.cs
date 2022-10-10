@@ -99,16 +99,16 @@ public class LineDistanceCalculator : IModelDistanceCalculator
         return 0;
     }
 
-    internal static double GetDistance(Line line, Polygon polygon) =>
+    public static double GetDistance(Line line, Polygon polygon) =>
         PolygonDistanceCalculator.GetDistance(polygon, line);
 
-    internal static double GetDistance(Line line, MultiLine multiLine) =>
+    public static double GetDistance(Line line, MultiLine multiLine) =>
         MultiLineDistanceCalculator.GetDistance(multiLine, line);
 
-    internal static double GetDistance(Line line, MultiPoint multiPoint) =>
+    public static double GetDistance(Line line, MultiPoint multiPoint) =>
         MultiPointDistanceCalculator.GetDistance(multiPoint, line);
 
-    internal static double GetDistance(Line line, MultiPolygon multiPolygon) =>
+    public static double GetDistance(Line line, MultiPolygon multiPolygon) =>
         MultiPolygonDistanceCalculator.GetDistance(multiPolygon, line);
 
     //Проверка на пересечение прямых, проходящих через данные отрезки

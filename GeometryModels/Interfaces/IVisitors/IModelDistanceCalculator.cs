@@ -1,6 +1,6 @@
 ﻿namespace GeometryModels.Interfaces.IModels
 {
-    internal interface IModelDistanceCalculator: IGeometryPrimitiveVisitor
+    public interface IModelDistanceCalculator: IGeometryPrimitiveVisitor
     {
         public double GetResult();
     }

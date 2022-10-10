@@ -2,7 +2,7 @@
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-    internal class MultiLineIntersector : IModelsIntersector
+    public class MultiLineIntersector : IModelsIntersector
     {
         private bool _result;
         private MultiLine _multiLine;
@@ -12,7 +12,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             _multiLine = multiLine;
         }
 
-        internal static bool Intersects(MultiLine multiLine, Point point)
+        public static bool Intersects(MultiLine multiLine, Point point)
         {
             foreach (Line line in multiLine.GetLines())
             {
@@ -22,7 +22,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiLine multiLine, Line line1)
+        public static bool Intersects(MultiLine multiLine, Line line1)
         {
             foreach (Line line in multiLine.GetLines())
             {
@@ -32,7 +32,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiLine multiLine, Polygon polygon)
+        public static bool Intersects(MultiLine multiLine, Polygon polygon)
         {
             foreach (Line line in multiLine.GetLines())
             {
@@ -42,7 +42,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiLine multiLine, MultiPoint multiPoint)
+        public static bool Intersects(MultiLine multiLine, MultiPoint multiPoint)
         {
             foreach (Line line in multiLine.GetLines())
             {
@@ -52,7 +52,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(MultiLine multiLine1, MultiLine multiLine2)
+        public static bool Intersects(MultiLine multiLine1, MultiLine multiLine2)
         {
             foreach (Line line in multiLine1.GetLines())
             {

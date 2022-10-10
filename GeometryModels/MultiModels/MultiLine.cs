@@ -16,7 +16,7 @@ public class MultiLine : IGeometryPrimitive
         v.Visit(this);
     }
 
-    internal List<Line> GetLines()
+    public List<Line> GetLines()
     {
         return lines;
     }
