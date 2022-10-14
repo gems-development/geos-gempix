@@ -1,4 +1,5 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
+using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
@@ -95,6 +96,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         public void Visit(MultiPolygon multiPolygon)
         {
             _result = MultiPolygonIntersector.Intersects(multiPolygon, _multiLine);
+        }
+
+        public void Visit(Contour contour)
+        {
+            throw new NotImplementedException();
         }
     }
 }

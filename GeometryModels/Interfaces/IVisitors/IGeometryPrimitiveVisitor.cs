@@ -1,5 +1,5 @@
 ﻿using GeometryModels;
-
+using GeometryModels.Models;
 
 public interface IGeometryPrimitiveVisitor
 {
@@ -9,4 +9,5 @@ public interface IGeometryPrimitiveVisitor
     public void Visit(MultiPoint multiPoint);
     public void Visit(MultiLine multiLine);
     public void Visit(MultiPolygon multiPolygon);
+    void Visit(Contour contour);
 }

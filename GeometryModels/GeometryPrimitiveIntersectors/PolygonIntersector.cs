@@ -1,4 +1,6 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
+using GeometryModels.Models;
+using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
@@ -6,23 +8,32 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
     {
         private bool _result;
         private Polygon _polygon;
-
-        // TODO
         public static bool Intersects(Polygon polygon, Point point)
         {
-            return true;
+            foreach (Line line in polygon.GetLines())
+            {
+                if (LineIntersector.Intersects(line, point))
+                    return true;
+            }
+            return false;
         }
-
-        // TODO
-        public static bool Intersects(Polygon polygon, Line line)
+        public static bool Intersects(Polygon polygon, Line line1)
         {
-            return true;
+            foreach (Line line in polygon.GetLines())
+            {
+                if (LineIntersector.Intersects(line, line1))
+                    return true;
+            }
+            return false;
         }
-
-        // TODO
         public static bool Intersects(Polygon polygon1, Polygon polygon2)
         {
-            return true;
+            foreach (Line line in polygon1.GetLines())
+            {
+                if (Intersects(polygon2, line))
+                    return true;
+            }
+            return false;
         }
 
         public bool GetResult()
@@ -58,6 +69,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         public void Visit(MultiPolygon multiPolygon)
         {
             _result = MultiPolygonIntersector.Intersects(multiPolygon, _polygon);
+        }
+
+        public void Visit(Contour contour)
+        {
+            throw new NotImplementedException();
         }
     }
 }

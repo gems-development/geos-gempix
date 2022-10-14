@@ -1,4 +1,6 @@
 ﻿using GeometryModels;
+using GeometryModels.GeometryPrimitiveIntersectors;
+
 public class PointDistanceCalculatorTests
 {
 	[Fact]
@@ -10,6 +12,6 @@ public class PointDistanceCalculatorTests
 		Point point3 = new Point(-3, 0);
 		Line line = new Line(point2, point3);
 		//Act. + Assert.
-		Assert.True(PointDistanceCalculator.IsBelong(point1, line));
+		Assert.True(LineIntersector.Intersects(line, point1));
 	}
 }

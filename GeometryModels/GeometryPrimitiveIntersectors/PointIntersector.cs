@@ -13,7 +13,6 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             _result = false;
         }
 
-        // TODO проверить все, что связано с  Equals всех классов моделей
         public static bool Intersects(Point point1, Point point2)
         {
             return point1.Equals(point2);

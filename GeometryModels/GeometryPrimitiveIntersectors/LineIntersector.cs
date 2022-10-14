@@ -1,4 +1,5 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
+using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
@@ -7,13 +8,12 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private Line _line;
 
-        //Проверка на принадлежность точки отрезку
         public static bool Intersects(Line line, Point point)
         {
-            return PointDistanceCalculator.IsBelong(point, line);
+            return PointDistanceCalculator.GetDistance(point, line.Point1) +
+                PointDistanceCalculator.GetDistance(point, line.Point2) == line.GetLength();
         }
 
-        ////Проверка на пересечение прямых, проходящих через данные отрезки
         public static bool Intersects(Line line1, Line line2)
         {
             if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
@@ -63,6 +63,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         public void Visit(MultiPolygon multiPolygon)
         {
             _result = MultiPolygonIntersector.Intersects(multiPolygon, _line);
+        }
+
+        public void Visit(Contour contour)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -1,62 +1,61 @@
-﻿using Point = GeometryModels.Point;
+﻿using GeometryModels.Models;
+using Point = GeometryModels.Point;
 
 public class Polygon : IGeometryPrimitive
 {
-	private List<Point> list;
-    private List<Polygon> hole;
+	private List<Point> _points;
+    private List<Contour> _holes;
 	public Polygon(List<Point> points)
 	{
-		list = points;
-        hole = new List<Polygon>();
+		_points = points;
+        _holes = new List<Contour>();
 	}
-    public Polygon(List<Point> points, List<Polygon> holes)
+    public Polygon(List<Point> points, List<Contour> holes)
     {
-        list = points;
-        hole = holes;
+        _points = points;
+        _holes = holes;
     }
 	public void AddPoint(Point point)
     {
-		list.Add(point);
+		_points.Add(point);
     }
-    public void Add(Polygon hole)
+    public void Add(Contour hole)
     {
-        hole.Add(hole);
+        _holes.Add(hole);
     }
 	public List<Point> GetPoints()
     {
-		return list;
+		return _points;
     }
-    public List<Polygon> GetHoles()
+    public List<Contour> GetHoles()
     {
-        return hole;
+        return _holes;
     }
 	public Point GetPoint(int i)
     {
-		return list.ElementAt(i);
+		return _points.ElementAt(i);
     }
 	public int GetCountOfPoints()
     {
-		return list.Count;
+		return _points.Count;
     }
 	public void RemovePoint(int i)
     {
-        list.RemoveAt(i);
+        _points.RemoveAt(i);
     }
-	// TODO: реализовать 
-	// Метод 3
-	// https://ru.wikihow.com/%D0%BD%D0%B0%D0%B9%D1%82%D0%B8-%D0%BF%D0%BB%D0%BE%D1%89%D0%B0%D0%B4%D1%8C-%D0%BC%D0%BD%D0%BE%D0%B3%D0%BE%D1%83%D0%B3%D0%BE%D0%BB%D1%8C%D0%BD%D0%B8%D0%BA%D0%B0
-	public double GetSquare()
+	
+    public double GetSquare()
     {
 		double square = 0;
 		double sum1 = 0;
 		double sum2 = 0;
-		for(int i = 0; i < list.Count-1; i++)
+		for(int i = 0; i < _points.Count-1; i++)
 		{
-			sum1 = sum1 + list[i].X * list[i+1].Y;
-		    sum2 = sum2 + list[i].Y * list[i+1].X;
+			sum1 = sum1 + _points[i].X * _points[i+1].Y;
+		    sum2 = sum2 + _points[i].Y * _points[i+1].X;
 		}
-		sum1 = sum1 + list[list.Count-1].X * list[0].Y;
-		sum2 = sum2 + list[list.Count-1].Y * list[0].X;
+		sum1 = sum1 + _points[_points.Count-1].X * _points[0].Y;
+		sum2 = sum2 + _points[_points.Count-1].Y * _points[0].X;
 		square = (sum2 - sum1) / 2;
 		return square;
     }
@@ -64,15 +63,15 @@ public class Polygon : IGeometryPrimitive
 	public double GetPerimeter()
     {
 		double perimeter = 0;
-		for(int i = 0; i <= list.Count-2; i++)
+		for(int i = 0; i <= _points.Count-2; i++)
         {
-			perimeter += PointDistanceCalculator.GetDistance(list[i], list[i+1]);
+			perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i+1]);
         }
-		perimeter = perimeter + PointDistanceCalculator.GetDistance(list[list.Count-1], list[0]);
+		perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count-1], _points[0]);
 		return perimeter;
     }
 
-    private List<Line> GetLines()
+    public List<Line> GetLines()
     {
         List<Point> points = GetPoints();
         List<Line> lines = new List<Line>();
@@ -94,7 +93,7 @@ public class Polygon : IGeometryPrimitive
         else
         {
             Polygon p = (Polygon)obj;
-            return list.Equals(p.GetPoints());
+            return _points.Equals(p.GetPoints());
         }
     }
 
