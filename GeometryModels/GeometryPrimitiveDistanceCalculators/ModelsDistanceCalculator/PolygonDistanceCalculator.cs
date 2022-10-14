@@ -47,6 +47,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
     }
 
+    //Расстояние между точкой и полигоном
     public static double GetDistance(Polygon polygon, Point point)
     {
         double result = 0;
@@ -70,6 +71,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
+    //Расстояние между полигоном и отрезком
     public static double GetDistance(Polygon polygon, Line line)
     {
         double result = 0;
@@ -93,6 +95,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
+    //Расстояние между полигонами
     public static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
         double result = 0;

@@ -51,6 +51,7 @@ public class PointDistanceCalculator : IModelDistanceCalculator
         return _result;
     }
 
+    //Расстояние между точками
     public static double GetDistance(Point point1, Point point2)
     {
         return Math.Sqrt((point2.X - point1.X) * (point2.X - point1.X) + (point2.Y - point1.Y) * (point2.Y - point1.Y));

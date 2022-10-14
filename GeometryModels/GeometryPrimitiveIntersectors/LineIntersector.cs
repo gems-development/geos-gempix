@@ -7,16 +7,28 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         private bool _result;
         private Line _line;
 
-        // TODO
+        //Проверка на принадлежность точки отрезку
         public static bool Intersects(Line line, Point point)
         {
-            return true;
+            return PointDistanceCalculator.IsBelong(point, line);
         }
 
-        // TODO
+        ////Проверка на пересечение прямых, проходящих через данные отрезки
         public static bool Intersects(Line line1, Line line2)
         {
-            return true;
+            if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
+            {
+                return true;
+            }
+            if (line1.Point1.X == line1.Point2.X && line2.Point1.X == line2.Point2.X)
+            {
+                return false;
+            }
+
+            double k1 = (line1.Point2.Y - line1.Point1.Y) / (line1.Point2.X - line1.Point1.X);
+            double k2 = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
+
+            return k2 - k1 > 0;
         }
         public bool GetResult()
         {

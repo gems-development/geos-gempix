@@ -11,13 +11,13 @@ public class MultiLine : IGeometryPrimitive
         this.lines = new List<Line>(lines);
     }
 
-    public void Accept(IGeometryPrimitiveVisitor v)
-    {
-        v.Visit(this);
-    }
-
     public List<Line> GetLines()
     {
         return lines;
+    }
+
+    public void Accept(IGeometryPrimitiveVisitor v)
+    {
+        v.Visit(this);
     }
 }
