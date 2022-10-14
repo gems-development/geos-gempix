@@ -1,4 +1,4 @@
-namespace GeometryModels.Tests
+namespace GeometryModels.Tests.ModelsTest
 {
     public class PointTests
     {
@@ -14,8 +14,8 @@ namespace GeometryModels.Tests
         public void EqualsPoints_Success()
         {
             //Arrage.
-            Point point1 = new Point(0,0);
-            Point point2 = new Point(1,1);
+            Point point1 = new Point(0, 0);
+            Point point2 = new Point(1, 1);
             //Act.
             point2.Equal(point1);
             //Assert.

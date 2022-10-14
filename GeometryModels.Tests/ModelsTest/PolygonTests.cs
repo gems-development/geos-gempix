@@ -27,6 +27,7 @@ public class PolygonTests
         //Act. + Assert.
         Assert.Equal(16, polygon.GetPerimeter());
     }
+
     [Fact]
     public void PerimeterOfPolygon_Square_Success()
     {

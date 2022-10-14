@@ -1,4 +1,6 @@
 ﻿using GeometryModels;
+using GeometryModels.GeometryPrimitiveIntersectors;
+
 public class LineDistanceCalcutatorTests
 {
     [Fact]
@@ -24,7 +26,7 @@ public class LineDistanceCalcutatorTests
         Line line1 = new Line(new Point(x11, y11), new Point(x12, y12));
         Line line2 = new Line(new Point(x21, y21), new Point(x22, y22));
         //Act. + Assert.
-        Assert.False(LineDistanceCalculator.IsLineInterSection(line1, line2));
+        Assert.False(LineIntersector.Intersects(line1, line2));
     }
 
     [Fact]
@@ -34,7 +36,7 @@ public class LineDistanceCalcutatorTests
         Line line1 = new Line(new Point(1, 1), new Point(3, -2));
         Line line2 = new Line(new Point(4, 3), new Point(-2, -4));
         //Act. + Assert.
-        Assert.True(LineDistanceCalculator.IsLineInterSection(line1, line2));
+        Assert.True(LineIntersector.Intersects(line1, line2));
     }
 
     /*
