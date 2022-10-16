@@ -8,6 +8,11 @@ namespace GeometryModels.GeometryPrimitiveInsiders
     {
         private bool _result;
         private Line _line;
+        public LineInsider(Line line)
+        {
+            _line = line;
+            _result = false;
+        }
 
         public static bool IsInside(Line line, Point point)
         {
@@ -35,27 +40,37 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         public void Visit(Polygon polygon)
         {
-            _result = PolygonInsider.IsInside(polygon, _line);
+            _result = false;
         }
 
         public void Visit(MultiPoint multiPoint)
         {
-            _result = MultiPointInsider.IsInside(multiPoint, _line);
+            foreach (Point point in multiPoint.GetPoints())
+            {
+                _result = IsInside(_line, point);
+                if (!_result)
+                    break;
+            }
         }
 
         public void Visit(MultiLine multiLine)
         {
-            _result = MultiLineInsider.IsInside(multiLine, _line);
+            foreach (Line line in multiLine.GetLines())
+            {
+                _result = IsInside(_line, line);
+                if (!_result)
+                    break;
+            }
         }
 
         public void Visit(MultiPolygon multiPolygon)
         {
-            _result = MultiPolygonInsider.IsInside(multiPolygon, _line);
+            _result = false;
         }
 
         public void Visit(Contour contour)
         {
-            throw new NotImplementedException();
+            _result = false;
         }
     }
 }
