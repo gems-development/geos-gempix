@@ -10,7 +10,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         public PointInsider(Point point)
         {
-            _point?.Equal(point);
+            _point = point; 
             _result = false;
         }
 
@@ -22,7 +22,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         public bool GetResult()
         {
-            return true;
+            return _result; ;
         }
 
         public void Visit(Point point)
@@ -32,32 +32,35 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         public void Visit(Line line)
         {
-            _result = LineInsider.IsInside(line, _point);
+            _result = false;
         }
 
         public void Visit(Polygon polygon)
         {
-            _result = PolygonInsider.IsInside(polygon, _point);
+            _result = false;
         }
 
         public void Visit(MultiPoint multiPoint)
         {
-            _result = MultiPointInsider.IsInside(multiPoint, _point);
+            if (multiPoint.GetPoints().Count == 1)
+                _result = multiPoint.GetPoints()[0].Equals(_point);
+            else
+                _result = false;
         }
 
         public void Visit(MultiLine multiLine)
         {
-            _result = MultiLineInsider.IsInside(multiLine, _point);
+            _result = false ;
         }
 
         public void Visit(MultiPolygon multiPolygon)
         {
-            _result = MultiPolygonInsider.IsInside(multiPolygon, _point);
+            _result = false;
         }
 
         public void Visit(Contour contour)
         {
-            throw new NotImplementedException();
+            _result = false;
         }
     }
 }
