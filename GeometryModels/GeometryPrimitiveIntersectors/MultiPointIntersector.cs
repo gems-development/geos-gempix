@@ -53,6 +53,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
+        internal static bool Intersects(MultiPoint multiPoint, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool GetResult()
         {
             return _result;

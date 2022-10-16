@@ -74,6 +74,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false; 
         }
 
+        internal static bool Intersects(MultiPolygon multiPolygon, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool GetResult()
         {
             return _result;
