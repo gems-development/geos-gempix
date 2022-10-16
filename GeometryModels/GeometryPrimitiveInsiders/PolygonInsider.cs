@@ -1,4 +1,5 @@
-﻿using GeometryModels.Interfaces.IVisitors;
+﻿using GeometryModels.GeometryPrimitiveIntersectors;
+using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 using System.Drawing;
 
@@ -10,29 +11,26 @@ namespace GeometryModels.GeometryPrimitiveInsiders
         private Polygon _polygon;
         public static bool IsInside(Polygon polygon, Point point)
         {
-            foreach (Line line in polygon.GetLines())
-            {
-                if (LineInsider.IsInside(line, point))
-                    return true;
-            }
-            return false;
+            throw new NotImplementedException();
         }
         public static bool IsInside(Polygon polygon, Line line1)
         {
-            foreach (Line line in polygon.GetLines())
+            foreach (Contour contour in polygon.GetHoles())
             {
-                if (LineInsider.IsInside(line, line1))
-                    return true;
+                if (ContourInsider.IsInside(contour, line1))
+                {
+                    return false;
+                }
             }
+            if (IsInside(polygon, line1.Point1) && !PolygonIntersector.Intersects(polygon, line1))
+                return true;
             return false;
         }
+        // надо еще подумать над Intersects, потому что есть дырки в полигоне
         public static bool IsInside(Polygon polygon1, Polygon polygon2)
         {
-            foreach (Line line in polygon1.GetLines())
-            {
-                if (IsInside(polygon2, line))
-                    return true;
-            }
+            if (IsInside(polygon1, polygon2.GetPoints()[0]) && !PolygonIntersector.Intersects(polygon1, polygon2))
+                return true;
             return false;
         }
 

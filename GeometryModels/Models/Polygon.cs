@@ -35,7 +35,16 @@ public class Polygon : IGeometryPrimitive
     {
 		return _points.ElementAt(i);
     }
-	public int GetCountOfPoints()
+
+    public Point GetNextPoint(Point point)
+    {
+        int index = _points.IndexOf(point);
+        if (index < _points.Count - 1)
+            return _points.ElementAt(index + 1);
+        else
+            return _points.ElementAt(0);
+    }
+    public int GetCountOfPoints()
     {
 		return _points.Count;
     }

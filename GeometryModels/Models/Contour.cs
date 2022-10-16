@@ -29,6 +29,14 @@ namespace GeometryModels.Models
         {
             return _points.ElementAt(i);
         }
+        public Point GetNextPoint(Point point)
+        {
+            int index = _points.IndexOf(point);
+            if (index < _points.Count - 1) 
+                return _points.ElementAt(index + 1);
+            else 
+                return _points.ElementAt(0);
+        }
         public int GetCountOfPoints()
         {
             return _points.Count;
@@ -64,7 +72,7 @@ namespace GeometryModels.Models
             return perimeter;
         }
 
-        private List<Line> GetLines()
+        public List<Line> GetLines()
         {
             List<Point> points = GetPoints();
             List<Line> lines = new List<Line>();
@@ -79,6 +87,16 @@ namespace GeometryModels.Models
         public void Accept(IGeometryPrimitiveVisitor v)
         {
             v.Visit(this);
+        }
+
+        public bool isClockwiseBypass()
+        {
+            double answer = 0;
+            foreach (Line line in GetLines())
+            {
+                answer += (line.Point2.X - line.Point1.X) * (line.Point2.Y + line.Point1.Y);
+            }
+            return answer > 0;
         }
 
         public override bool Equals(object? obj)

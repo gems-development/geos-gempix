@@ -63,6 +63,11 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             return false;
         }
 
+        internal static bool IsInside(MultiLine multiLine, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool GetResult()
         {
             return _result;

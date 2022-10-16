@@ -74,6 +74,11 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             return false; 
         }
 
+        internal static bool IsInside(MultiPolygon multiPolygon, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool GetResult()
         {
             return _result;

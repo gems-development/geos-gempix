@@ -14,6 +14,9 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
                 PointDistanceCalculator.GetDistance(point, line.Point2) == line.GetLength();
         }
 
+        // это для прямых, а не для отрезков, и надо учесть случай совпадения прямых
+        // метод пересечения отрезков будет включать в себя метод GetPointOfIntersection 
+        // его нужно прописать отдельно
         public static bool Intersects(Line line1, Line line2)
         {
             if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
@@ -29,6 +32,11 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             double k2 = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
 
             return k2 - k1 > 0;
+        }
+
+        public static Point GetPointOfIntersection(double[] lineEq1, double[] lineEq2)
+        {
+            throw new NotImplementedException();
         }
         public bool GetResult()
         {
