@@ -1,4 +1,5 @@
 ﻿using GeometryModels.Interfaces.IModels;
+using GeometryModels.Models;
 using Point = GeometryModels.Point;
 
 public class MultiPointDistanceCalculator : IModelDistanceCalculator
@@ -96,5 +97,10 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
             }
         }
         return result;
+    }
+
+    public void Visit(Contour contour)
+    {
+        throw new NotImplementedException();
     }
 }

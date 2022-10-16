@@ -1,5 +1,6 @@
 ﻿using GeometryModels;
 using GeometryModels.Interfaces.IModels;
+using GeometryModels.Models;
 
 public class PolygonDistanceCalculator : IModelDistanceCalculator
 {
@@ -128,5 +129,9 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     public static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
         MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
-    
+
+    public void Visit(Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }

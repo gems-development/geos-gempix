@@ -1,5 +1,6 @@
 ﻿using GeometryModels;
 using GeometryModels.Interfaces.IModels;
+using GeometryModels.Models;
 
 /// <summary>
 /// Summary description for Class1
@@ -47,5 +48,8 @@ public class PrimitiveDistanceCalculator : IModelDistanceCalculator
         _calculator = new MultiPolygonDistanceCalculator(multiPolygon);
     }
 
-
+    public void Visit(Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }

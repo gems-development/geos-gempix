@@ -17,7 +17,7 @@ namespace GeometryModels.Models
         {
             _points.Add(point);
         }
-        public void Add(Polygon hole)
+        public void Add(Contour hole)
         {
             hole.Add(hole);
         }

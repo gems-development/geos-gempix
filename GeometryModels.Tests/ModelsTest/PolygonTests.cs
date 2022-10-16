@@ -1,4 +1,5 @@
-﻿using Point = GeometryModels.Point;
+﻿using GeometryModels.Models;
+using Point = GeometryModels.Point;
 
 public class PolygonTests
 {
@@ -76,8 +77,8 @@ public class PolygonTests
         list2.Add(point5);
         list2.Add(point6);
         list2.Add(point7);
-        Polygon hole = new Polygon(list2);
-        List<Polygon> list3 = new List<Polygon>();
+        Contour hole = new Contour(list2);
+        List<Contour> list3 = new List<Contour>();
         list3.Add(hole);
         Polygon polygon = new Polygon(list1, list3);
         //Act. + Assert.

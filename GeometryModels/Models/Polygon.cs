@@ -97,6 +97,16 @@ public class Polygon : IGeometryPrimitive
         }
     }
 
+    public bool isClockwiseBypass()
+    {
+        double answer = 0;
+        foreach(Line line in GetLines())
+        {
+            answer += (line.Point2.X - line.Point1.X) * (line.Point2.Y + line.Point1.Y);
+        }
+        return answer > 0;
+    }
+
 
     public void Accept(IGeometryPrimitiveVisitor v)
     {

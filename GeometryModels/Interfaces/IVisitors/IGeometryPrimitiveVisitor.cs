@@ -9,5 +9,5 @@ public interface IGeometryPrimitiveVisitor
     public void Visit(MultiPoint multiPoint);
     public void Visit(MultiLine multiLine);
     public void Visit(MultiPolygon multiPolygon);
-    void Visit(Contour contour);
+    public void Visit(Contour contour);
 }
