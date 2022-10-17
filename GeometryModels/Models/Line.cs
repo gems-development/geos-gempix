@@ -59,7 +59,7 @@ public class Line : IGeometryPrimitive
         double[] ABC = new double[3];
         ABC[0] = -lineEq[0];
         ABC[1] = lineEq[1];
-        ABC[2] = lineEq[1]*point.X -point.Y * lineEq[0];
+        ABC[2] = lineEq[1] * point.X - point.Y * lineEq[0];
         return ABC;
     }
 
