@@ -7,49 +7,38 @@ using GeometryModels.Models;
 /// </summary>
 public class PrimitiveDistanceCalculator : IModelDistanceCalculator
 {
-    private double _result;
-	
-    private IModelDistanceCalculator _calculator;
+	private double _result;
 
-    public PrimitiveDistanceCalculator(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
-    {
-        primitive1.Accept(this);
-        primitive2.Accept(_calculator);
-        _result = _calculator.GetResult();
-    }
+	private IModelDistanceCalculator _calculator;
 
-    public double GetResult() { return _result; }
+	public PrimitiveDistanceCalculator(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
+	{
+		primitive1.Accept(this);
+		primitive2.Accept(_calculator);
+		_result = _calculator.GetResult();
+	}
 
-    public void Visit(Point point)
-    {
-        _calculator = new PointDistanceCalculator(point);
-    }
+	public double GetResult() =>
+		_result;
 
-    public void Visit(Line line)
-    {
-        _calculator = new LineDistanceCalculator(line);
-    }
+	public void Visit(Point point) =>
+		_calculator = new PointDistanceCalculator(point);
 
-    public void Visit(Polygon polygon)
-    {
-        _calculator = new PolygonDistanceCalculator(polygon);
-    }
+	public void Visit(Line line) =>
+		_calculator = new LineDistanceCalculator(line);
 
-    public void Visit(MultiPoint multiPoint)
-    {
-        _calculator = new MultiPointDistanceCalculator(multiPoint);
-    }
-    public void Visit(MultiLine multiLine)
-    {
-        _calculator = new MultiLineDistanceCalculator(multiLine);
-    }
-    public void Visit(MultiPolygon multiPolygon)
-    {
-        _calculator = new MultiPolygonDistanceCalculator(multiPolygon);
-    }
+	public void Visit(Polygon polygon) =>
+		_calculator = new PolygonDistanceCalculator(polygon);
 
-    public void Visit(Contour contour)
-    {
-        throw new NotImplementedException();
-    }
+	public void Visit(MultiPoint multiPoint) =>
+		_calculator = new MultiPointDistanceCalculator(multiPoint);
+
+	public void Visit(MultiLine multiLine) =>
+		_calculator = new MultiLineDistanceCalculator(multiLine);
+
+	public void Visit(MultiPolygon multiPolygon) =>
+		_calculator = new MultiPolygonDistanceCalculator(multiPolygon);
+
+	public void Visit(Contour contour) =>
+		throw new NotImplementedException();
 }

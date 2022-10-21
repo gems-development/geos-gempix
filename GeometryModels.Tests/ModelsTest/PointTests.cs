@@ -17,7 +17,7 @@ namespace GeometryModels.Tests.ModelsTest
             Point point1 = new Point(0, 0);
             Point point2 = new Point(1, 1);
             //Act.
-            point2.Equal(point1);
+            point2 = new Point(point1);
             //Assert.
             Assert.Equal(0, point2.X);
         }
