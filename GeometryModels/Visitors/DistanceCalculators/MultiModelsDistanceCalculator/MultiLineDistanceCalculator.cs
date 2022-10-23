@@ -1,5 +1,6 @@
 ﻿using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
+using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using Point = GeometryModels.Point;
 
 public class MultiLineDistanceCalculator : IModelDistanceCalculator

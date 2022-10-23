@@ -1,4 +1,6 @@
 ﻿using GeometryModels;
+using GeometryModels.Extensions;
+using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Models;
 
 public class LineTests
@@ -37,6 +39,6 @@ public class LineTests
         Line line1 = new Line(point1, point2);
         Line line2 = new Line(point3, point4);
         //Act. + Assert.
-        Assert.True(Line.IsIntersection(line1, line2));
+        Assert.True(IntersectorExtencion.Intersects(line1, line2));
     }
 }

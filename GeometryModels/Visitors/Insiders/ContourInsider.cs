@@ -1,6 +1,7 @@
 ﻿using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
+using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
