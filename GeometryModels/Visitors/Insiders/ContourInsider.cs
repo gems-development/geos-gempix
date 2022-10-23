@@ -9,10 +9,8 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 		private bool _result;
 		private Contour _contour;
 
-		public ContourInsider(Contour contour)
-		{
+		public ContourInsider(Contour contour) =>
 			_contour = contour;
-		}
 
 		internal static bool IsInside(Contour contour, Point point)
 		{
@@ -98,7 +96,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return cos < 0;
 		}
 
-		public static double[] GetEquationOfBisector(double[] line1, double[] line2, Point first, Point last)
+		internal static double[] GetEquationOfBisector(double[] line1, double[] line2, Point first, Point last)
 		{
 			double a1 = line1[0];
 			double a2 = line2[0];
@@ -131,7 +129,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 				return true;
 			return false;
 		}
-		// надо еще подумать над Intersects, потому что есть дырки в полигоне
+		
 		internal static bool IsInside(Contour contour, Polygon polygon)
 		{
 			if (IsInside(contour, polygon.GetPoints()[0]) && !PolygonIntersector.Intersects(polygon, contour))
@@ -139,7 +137,39 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public bool GetResult() =>
+		internal static bool IsInside(Contour contour, MultiPoint multiPoint)
+		{
+			foreach (Point point in multiPoint.GetPoints())
+				if (!IsInside(contour, point))
+					return false;
+			return true;
+		}
+
+		internal static bool IsInside(Contour contour, MultiLine multiLine)
+		{
+            foreach (Line line in multiLine.GetLines())
+                if (!IsInside(contour, line))
+                    return false;
+            return true;
+        }
+
+        internal static bool IsInside(Contour contour, MultiPolygon multiPolygon)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (!IsInside(contour, polygon))
+                    return false;
+            return true;
+        }
+
+        internal static bool IsInside(Contour contour1, Contour contour2)
+        {
+            foreach (Line line in contour2.GetLines())
+                if (!IsInside(contour1, line))
+                    return false;
+            return true;
+        }
+
+        public bool GetResult() =>
 			_result;
 
 		public void Visit(Point point) =>
@@ -149,18 +179,18 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			_result = IsInside(_contour, line);
 
 		public void Visit(Polygon polygon) =>
-			_result = false;
+			_result = IsInside(_contour, polygon);
 
 		public void Visit(MultiPoint multiPoint) =>
-			_result = MultiPointInsider.IsInside(multiPoint, _contour);
+			_result = IsInside(_contour, multiPoint);
 
 		public void Visit(MultiLine multiLine) =>
-			_result = MultiLineInsider.IsInside(multiLine, _contour);
+			_result = IsInside(_contour, multiLine);
 
-		public void Visit(MultiPolygon multiPolygon) =>
-			_result = MultiPolygonInsider.IsInside(multiPolygon, _contour);
+        public void Visit(MultiPolygon multiPolygon) =>
+			_result = IsInside(_contour, multiPolygon);
 
 		public void Visit(Contour contour) =>
-			throw new NotImplementedException();
+			_result = IsInside(_contour, contour);
 	}
 }
