@@ -5,10 +5,16 @@ using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class PolygonInsider : IModelsIntersector
-	{
+	public class PolygonInsider : IModelInsider
+    {
 		private bool _result;
 		private Polygon? _polygon;
+
+		public PolygonInsider(Polygon? polygon)
+		{
+			_polygon = polygon;
+		}
+
 		public static bool IsInside(Polygon polygon, Point point)
 		{
 			throw new NotImplementedException();

@@ -1,12 +1,19 @@
 ﻿using GeometryModels.GeometryPrimitiveIntersectors;
+using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class ContourInsider
+	public class ContourInsider : IModelInsider
 	{
 		private bool _result;
 		private Contour _contour;
+
+		public ContourInsider(Contour contour)
+		{
+			_contour = contour;
+		}
+
 		internal static bool IsInside(Contour contour, Point point)
 		{
 			Line closestLine = null;
