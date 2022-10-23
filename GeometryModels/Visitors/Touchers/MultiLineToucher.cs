@@ -13,7 +13,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 			_multiLine = multiLine;
 		}
 
-		public static bool IsTouching(MultiLine multiLine, Point point)
+		internal static bool IsTouching(MultiLine multiLine, Point point)
 		{
 			foreach (Line line in multiLine.GetLines())
 			{
@@ -23,7 +23,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 			return false;
 		}
 
-		public static bool IsTouching(MultiLine multiLine, Line line1)
+		internal static bool IsTouching(MultiLine multiLine, Line line1)
 		{
 			foreach (Line line in multiLine.GetLines())
 			{
@@ -33,7 +33,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 			return false;
 		}
 
-		public static bool IsTouching(MultiLine multiLine, Polygon polygon)
+		internal static bool IsTouching(MultiLine multiLine, Polygon polygon)
 		{
 			foreach (Line line in multiLine.GetLines())
 			{
@@ -43,7 +43,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 			return false;
 		}
 
-		public static bool IsTouching(MultiLine multiLine, MultiPoint multiPoint)
+		internal static bool IsTouching(MultiLine multiLine, MultiPoint multiPoint)
 		{
 			foreach (Line line in multiLine.GetLines())
 			{
@@ -53,7 +53,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 			return false;
 		}
 
-		public static bool IsTouching(MultiLine multiLine1, MultiLine multiLine2)
+		internal static bool IsTouching(MultiLine multiLine1, MultiLine multiLine2)
 		{
 			foreach (Line line in multiLine1.GetLines())
 			{

@@ -3,8 +3,8 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class MultiPolygonInsider : IModelsIntersector
-	{
+	public class MultiPolygonInsider : IModelInsider
+    {
 
 		private bool _result;
 		private MultiPolygon _multiPolygon;
@@ -14,7 +14,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			_multiPolygon = multiPolygon;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon, Point point)
+		internal static bool IsInside(MultiPolygon multiPolygon, Point point)
 		{
 			foreach (Polygon polygon in multiPolygon.GetPolygons())
 			{
@@ -24,7 +24,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon, Line line)
+		internal static bool IsInside(MultiPolygon multiPolygon, Line line)
 		{
 			foreach (Polygon polygon in multiPolygon.GetPolygons())
 			{
@@ -34,7 +34,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon, Polygon polygon1)
+		internal static bool IsInside(MultiPolygon multiPolygon, Polygon polygon1)
 		{
 			foreach (Polygon polygon in multiPolygon.GetPolygons())
 			{
@@ -44,7 +44,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
+		internal static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
 		{
 			foreach (Polygon polygon in multiPolygon.GetPolygons())
 			{
@@ -54,7 +54,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
+		internal static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
 		{
 			foreach (Polygon polygon in multiPolygon.GetPolygons())
 			{
@@ -64,7 +64,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			return false;
 		}
 
-		public static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+		internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
 		{
 			foreach (Polygon polygon in multiPolygon2.GetPolygons())
 			{
