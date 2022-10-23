@@ -9,7 +9,7 @@ namespace GeometryModels.Tests
             Point point1 = new Point(0, 0);
             Point point2 = new Point(4, 3);
             //Act.
-            double distance = GeometryPrimitiveDistanceExtencion.GetDistance(point1, point2);
+            double distance = DistanceExtencion.GetDistance(point1, point2);
             //Assert.
             Assert.Equal(5, distance);
         }
@@ -42,7 +42,7 @@ namespace GeometryModels.Tests
             Point point3 = new Point(5, 1);
             Line line1 = new Line(point1, point2);
             //Act.
-            double distance = GeometryPrimitiveDistanceExtencion.GetDistance(point3, line1);
+            double distance = DistanceExtencion.GetDistance(point3, line1);
             //Assert.
             Assert.Equal(4, distance);
         }
