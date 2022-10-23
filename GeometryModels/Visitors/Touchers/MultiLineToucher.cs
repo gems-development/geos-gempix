@@ -3,8 +3,8 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
 {
-	public class MultiLineToucher : IModelsIntersector
-	{
+	public class MultiLineToucher : IModelToucher
+    {
 		private bool _result;
 		private MultiLine _multiLine;
 

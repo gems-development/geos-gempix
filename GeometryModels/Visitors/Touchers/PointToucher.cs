@@ -3,8 +3,8 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
 {
-	public class PointToucher : IModelsIntersector
-	{
+	public class PointToucher : IModelToucher
+    {
 		private bool _result;
 		private Point _point;
 

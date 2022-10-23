@@ -4,10 +4,16 @@ using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
 {
-	public class PolygonToucher : IModelsIntersector
-	{
+	public class PolygonToucher : IModelToucher
+    {
 		private bool _result;
 		private Polygon _polygon;
+
+		public PolygonToucher(Polygon polygon)
+		{
+			_polygon = polygon;
+		}
+
 		internal static bool IsTouching(Polygon polygon, Point point)
 		{
 			foreach (Line line in polygon.GetLines())

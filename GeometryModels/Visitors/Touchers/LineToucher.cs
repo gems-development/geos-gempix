@@ -4,10 +4,15 @@ using GeometryModels.GeometryPrimitiveIntersectors;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
 {
-	public class LineToucher : IModelsIntersector
-	{
+	public class LineToucher : IModelToucher
+    {
 		private bool _result;
 		private Line? _line;
+
+		public LineToucher(Line line)
+		{
+			_line = line;
+		}
 
 		internal static bool IsTouching(Line line, Point point)
 		{

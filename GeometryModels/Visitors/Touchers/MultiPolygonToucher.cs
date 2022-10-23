@@ -3,8 +3,8 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
 {
-	public class MultiPolygonToucher : IModelsIntersector
-	{
+	public class MultiPolygonToucher : IModelToucher
+    {
 
 		private bool _result;
 		private MultiPolygon _multiPolygon;
