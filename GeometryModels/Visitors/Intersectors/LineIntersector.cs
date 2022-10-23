@@ -4,7 +4,7 @@ using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-	public class LineIntersector : IModelsIntersector
+    public class LineIntersector : IModelsIntersector
 	{
 		private bool _result;
 		private Line _line;

@@ -13,8 +13,8 @@ namespace GeometryModels.Extensions
         public Toucher(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
         {
             primitive1.Accept(this);
-            primitive2.Accept(_toucher);
-            _result = _toucher.GetResult();
+            primitive2.Accept(_toucher!);
+            _result = _toucher!.GetResult();
         }
 
         public bool GetResult() =>

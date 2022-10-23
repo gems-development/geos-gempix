@@ -12,8 +12,8 @@ public class DistanceCalculator : IModelDistanceCalculator
 	public DistanceCalculator(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
 	{
 		primitive1.Accept(this);
-		primitive2.Accept(_calculator);
-		_result = _calculator.GetResult();
+		primitive2.Accept(_calculator!);
+		_result = _calculator!.GetResult();
 	}
 
 	public double GetResult() =>

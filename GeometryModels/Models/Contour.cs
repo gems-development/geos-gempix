@@ -108,5 +108,10 @@ namespace GeometryModels.Models
 			return obj is Contour contour &&
 				   EqualityComparer<List<Point>>.Default.Equals(_points, contour._points);
 		}
+
+		public override int GetHashCode()
+		{
+			return HashCode.Combine(_points);
+		}
 	}
 }

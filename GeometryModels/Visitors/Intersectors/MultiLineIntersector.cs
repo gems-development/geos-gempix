@@ -85,5 +85,4 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 		public void Visit(Contour contour) =>
             _result = Intersects(_multiLine, contour);
     }
-	}
 }

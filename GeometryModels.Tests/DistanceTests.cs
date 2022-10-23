@@ -1,3 +1,6 @@
+using GeometryModels.Extensions;
+using GeometryModels.Models;
+
 namespace GeometryModels.Tests
 {
     public class DistanceTests

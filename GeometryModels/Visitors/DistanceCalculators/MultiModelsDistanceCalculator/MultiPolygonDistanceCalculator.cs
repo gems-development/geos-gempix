@@ -35,38 +35,38 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
 		GetDistance(
 			multiPolygon1,
 			multiPolygon2,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as MultiPolygon));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (MultiPolygon)primitive));
 
 	internal static double GetDistance(MultiPolygon multiPolygon, MultiLine multiLine) =>
 		GetDistance(
 			multiPolygon,
 			multiLine,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as MultiLine));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (MultiLine)primitive));
 
 	internal static double GetDistance(MultiPolygon multiPolygon, MultiPoint multiPoint) =>
 		GetDistance(
 			multiPolygon,
 			multiPoint,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as MultiPoint));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (MultiPoint)primitive));
 
 	internal static double GetDistance(MultiPolygon multiPolygon, Polygon polygon1) =>
 		GetDistance(
 			multiPolygon,
 			polygon1,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as Polygon));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (Polygon)primitive));
 
 	internal static double GetDistance(MultiPolygon multiPolygon, Line line) =>
 		GetDistance(
 			multiPolygon,
 			line,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as Line));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (Line)primitive));
 
 
 	internal static double GetDistance(MultiPolygon multiPolygon, Point point) =>
 		GetDistance(
 			multiPolygon,
 			point,
-			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, primitive as Point));
+			(polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (Point)primitive));
 
 	internal static double GetDistance(
 		MultiPolygon multiPolygon,

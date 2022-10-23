@@ -43,25 +43,25 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
 		 GetDistance(
 			 multiPoint1,
 			 multiPoint2,
-			 (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as MultiPoint));
+			 (point, primitive) => PointDistanceCalculator.GetDistance(point, (MultiPoint)primitive));
 
 	internal static double GetDistance(MultiPoint multiPoint, Polygon polygon) =>
 		 GetDistance(
 			 multiPoint,
 			 polygon,
-			 (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Polygon));
+			 (point, primitive) => PointDistanceCalculator.GetDistance(point, (Polygon)primitive));
 
 	internal static double GetDistance(MultiPoint multiPoint, Line line) =>
 		 GetDistance(
 			 multiPoint,
 			 line,
-			 (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Line));
+			 (point, primitive) => PointDistanceCalculator.GetDistance(point, (Line)primitive));
 
 	internal static double GetDistance(MultiPoint multiPoint, Point point1) =>
 		 GetDistance(
 			 multiPoint,
 			 point1,
-			 (point, primitive) => PointDistanceCalculator.GetDistance(point, primitive as Point));
+			 (point, primitive) => PointDistanceCalculator.GetDistance(point, (Point)primitive));
 
 	internal static double GetDistance(
 		MultiPoint multiPoint,

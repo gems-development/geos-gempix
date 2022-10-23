@@ -30,32 +30,32 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 
 		public void Visit(Point point)
 		{
-			_result = IsTouching(_line, point);
+			_result = IsTouching(_line!, point);
 		}
 
 		public void Visit(Line line)
 		{
-			_result = IsTouching(_line, line);
+			_result = IsTouching(_line!, line);
 		}
 
 		public void Visit(Polygon polygon)
 		{
-			_result = PolygonToucher.IsTouching(polygon, _line);
+			_result = PolygonToucher.IsTouching(polygon, _line!);
 		}
 
 		public void Visit(MultiPoint multiPoint)
 		{
-			_result = MultiPointToucher.IsTouching(multiPoint, _line);
+			_result = MultiPointToucher.IsTouching(multiPoint, _line!);
 		}
 
 		public void Visit(MultiLine multiLine)
 		{
-			_result = MultiLineToucher.IsTouching(multiLine, _line);
+			_result = MultiLineToucher.IsTouching(multiLine, _line!);
 		}
 
 		public void Visit(MultiPolygon multiPolygon)
 		{
-			_result = MultiPolygonToucher.IsTouching(multiPolygon, _line);
+			_result = MultiPolygonToucher.IsTouching(multiPolygon, _line!);
 		}
 
 		public void Visit(Contour contour)

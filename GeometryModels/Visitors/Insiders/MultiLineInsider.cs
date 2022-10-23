@@ -3,7 +3,7 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class MultiLineInsider : IModelInsider
+    public class MultiLineInsider : IModelInsider
     {
         public MultiLineInsider(MultiLine multiLine) { }
 

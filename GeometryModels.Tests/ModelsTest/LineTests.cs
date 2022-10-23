@@ -1,4 +1,6 @@
 ﻿using GeometryModels;
+using GeometryModels.Models;
+
 public class LineTests
 {
     [Fact]

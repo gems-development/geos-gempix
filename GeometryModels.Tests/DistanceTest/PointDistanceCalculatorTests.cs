@@ -1,5 +1,6 @@
 ﻿using GeometryModels;
 using GeometryModels.GeometryPrimitiveIntersectors;
+using GeometryModels.Models;
 
 public class PointDistanceCalculatorTests
 {

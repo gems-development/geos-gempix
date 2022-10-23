@@ -3,7 +3,7 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
-	public class MultiPointIntersector : IModelsIntersector
+    public class MultiPointIntersector : IModelsIntersector
 	{
 		private bool _result;
 		private MultiPoint _multiPoint;

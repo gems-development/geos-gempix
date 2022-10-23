@@ -100,19 +100,7 @@ public class Polygon : IGeometryPrimitive
 		return lines;
 	}
 
-	public override bool Equals(Object obj)
-	{
-		//Check for null and compare run-time types.
-		if ((obj == null) || !this.GetType().Equals(obj.GetType()))
-		{
-			return false;
-		}
-		else
-		{
-			Polygon p = (Polygon)obj;
-			return _points.Equals(p.GetPoints());
-		}
-	}
+	
 
 	public bool isClockwiseBypass()
 	{
@@ -128,5 +116,17 @@ public class Polygon : IGeometryPrimitive
 	public void Accept(IGeometryPrimitiveVisitor v)
 	{
 		v.Visit(this);
+	}
+
+	public override int GetHashCode()
+	{
+		return HashCode.Combine(_points, _holes);
+	}
+
+	public override bool Equals(object? obj)
+	{
+		return obj is Polygon polygon &&
+			   EqualityComparer<List<Point>>.Default.Equals(_points, polygon._points) &&
+			   EqualityComparer<List<Contour>>.Default.Equals(_holes, polygon._holes);
 	}
 }

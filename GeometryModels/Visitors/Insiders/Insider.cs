@@ -18,8 +18,8 @@ namespace GeometryModels.Visitors.Insiders
         public Insider(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
         {
             primitive1.Accept(this);
-            primitive2.Accept(_insider);
-            _result = _insider.GetResult();
+            primitive2.Accept(_insider!);
+            _result = _insider!.GetResult();
         }
 
         public bool GetResult() =>

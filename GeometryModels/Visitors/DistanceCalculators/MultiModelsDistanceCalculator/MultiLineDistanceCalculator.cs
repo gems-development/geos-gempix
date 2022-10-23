@@ -35,31 +35,31 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
 		 GetDistance(
 			 multiLine,
 			 polygon,
-			 (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Polygon));
+			 (line, primitive) => LineDistanceCalculator.GetDistance(line, (Polygon)primitive));
 
 	internal static double GetDistance(MultiLine multiLine, Line line1) =>
 		 GetDistance(
 			 multiLine,
 			 line1,
-			 (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Line));
+			 (line, primitive) => LineDistanceCalculator.GetDistance(line, (Line)primitive));
 
 	internal static double GetDistance(MultiLine multiLine, Point point) =>
 		 GetDistance(
 			 multiLine,
 			 point,
-			 (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as Point));
+			 (line, primitive) => LineDistanceCalculator.GetDistance(line, (Point)primitive));
 
 	internal static double GetDistance(MultiLine multiLine1, MultiLine multiLine2) =>
 		 GetDistance(
 			 multiLine1,
 			 multiLine2,
-			 (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as MultiLine));
+			 (line, primitive) => LineDistanceCalculator.GetDistance(line, (MultiLine)primitive));
 
 	internal static double GetDistance(MultiLine multiLine, MultiPoint multiPoint) =>
 		 GetDistance(
 			 multiLine,
 			 multiPoint,
-			 (line, primitive) => LineDistanceCalculator.GetDistance(line, primitive as MultiPoint));
+			 (line, primitive) => LineDistanceCalculator.GetDistance(line, (MultiPoint)primitive));
 	internal static double GetDistance(
 		MultiLine multiLine,
 		IGeometryPrimitive primitive,

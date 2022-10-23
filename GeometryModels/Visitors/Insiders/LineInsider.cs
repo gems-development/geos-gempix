@@ -4,7 +4,7 @@ using GeometryModels.GeometryPrimitiveIntersectors;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class LineInsider : IModelInsider
+    public class LineInsider : IModelInsider
     {
         public LineInsider(Line line) { }
 

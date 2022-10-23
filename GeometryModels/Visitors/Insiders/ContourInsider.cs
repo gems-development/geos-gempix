@@ -14,7 +14,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
 		internal static bool IsInside(Contour contour, Point point)
 		{
-			Line closestLine = null;
+			Line? closestLine = null;
 			double distance = double.MaxValue;
 			double curDistance;
 			// нашли самую близкую сторону
