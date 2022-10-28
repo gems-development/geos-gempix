@@ -1,4 +1,5 @@
 ﻿using GeometryModels;
+using GeometryModels.Extensions;
 using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Models;
 using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
@@ -15,7 +16,7 @@ public class LineDistanceCalcutatorTests
         //Act.
         Line line = new Line(point1, point2);
         //Assert.
-        Assert.Equal(3, LineDistanceCalculator.GetDistance(line, point3));
+        Assert.Equal(3, DistanceExtencion.GetDistance(line, point3));
     }
 
     [Theory]

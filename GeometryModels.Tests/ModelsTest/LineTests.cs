@@ -28,6 +28,8 @@ public class LineTests
         //Assert.
         Assert.Equal(5, length);
     }
+
+    /*
     [Fact]
     public void ProofIsIntersection_Success()
     {
@@ -41,4 +43,5 @@ public class LineTests
         //Act. + Assert.
         Assert.True(IntersectorExtencion.Intersects(line1, line2));
     }
+    */
 }

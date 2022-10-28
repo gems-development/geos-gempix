@@ -12,14 +12,14 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 		public LineIntersector(Line line)=>
 			_line = line;
 
-		internal static bool Intersects(Line line, Point point)=>
+		public static bool Intersects(Line line, Point point)=>
 			Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
 				PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
 
 		// это для прямых, а не для отрезков, и надо учесть случай совпадения прямых
 		// метод пересечения отрезков будет включать в себя метод GetPointOfIntersection 
 		// его нужно прописать отдельно
-		internal static bool Intersects(Line line1, Line line2)
+		public static bool Intersects(Line line1, Line line2)
 		{
 			if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
 				return true;

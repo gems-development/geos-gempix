@@ -7,7 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Distance\" />
+    <Compile Remove="Distance\**" />
+    <EmbeddedResource Remove="Distance\**" />
+    <None Remove="Distance\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="MultiModels\" />
   </ItemGroup>
 
