@@ -9,7 +9,8 @@ namespace GeometryModels.Tests.DistanceTest
 {
     public class PolygonDistanceCalculatorTests
     {
-        [Fact]
+		// Проверка на растояние между точкой и полигоном
+		[Fact]
         public void GetDistanceBetweenPolygonAndPoint_Success()
         {
             //Arrage.

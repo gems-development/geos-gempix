@@ -5,7 +5,8 @@ using GeometryModels.Models;
 
 public class LineTests
 {
-    [Fact]
+	// Проверка на создание отрезка
+	[Fact]
     public void Createline_Success()
     {
         //Arrage.
@@ -16,7 +17,8 @@ public class LineTests
         Assert.Equal(1, line.Point1.X);
     }
 
-    [Fact]
+	// Проверка на вычисление длины отрезка
+	[Fact]
     public void CalculatelineLength_Success()
     {
         //Arrage.
@@ -29,19 +31,4 @@ public class LineTests
         Assert.Equal(5, length);
     }
 
-    /*
-    [Fact]
-    public void ProofIsIntersection_Success()
-    {
-        //Arrage.
-        Point point1 = new Point(0, 0);
-        Point point2 = new Point(3, 3);
-        Point point3 = new Point(3, 0);
-        Point point4 = new Point(0, 3);
-        Line line1 = new Line(point1, point2);
-        Line line2 = new Line(point3, point4);
-        //Act. + Assert.
-        Assert.True(IntersectorExtencion.Intersects(line1, line2));
-    }
-    */
 }

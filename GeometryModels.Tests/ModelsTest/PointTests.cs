@@ -1,8 +1,9 @@
-namespace GeometryModels.Tests.ModelsTest
+﻿namespace GeometryModels.Tests.ModelsTest
 {
     public class PointTests
     {
-        [Fact]
+		// Проверка на создание точки
+		[Fact]
         public void CreatePoint_Success()
         {
             //Arrage.
@@ -10,7 +11,9 @@ namespace GeometryModels.Tests.ModelsTest
             //Act. + Assert.
             Assert.Equal(1, point.X);
         }
-        [Fact]
+
+		// Проверка на присвоении точки
+		[Fact]
         public void EqualsPoints_Success()
         {
             //Arrage.
@@ -21,7 +24,9 @@ namespace GeometryModels.Tests.ModelsTest
             //Assert.
             Assert.Equal(0, point2.X);
         }
-        [Fact]
+
+		// Проверка на равенство точек 
+		[Fact]
         public void EqualPoints_Success()
         {
             //Arrage.

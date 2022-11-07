@@ -3,7 +3,9 @@ using Point = GeometryModels.Point;
 
 public class PolygonTests
 {
-    [Fact]
+
+	// Проверка на создание полигона
+	[Fact]
     public void CreatePolygon_Success()
     {
         //Arrage.
@@ -16,7 +18,8 @@ public class PolygonTests
         Assert.Equal(3, polygon.GetCountOfPoints());
     }
 
-    [Fact]
+	// Проверка на вычисление периметра полигона
+	[Fact]
     public void PerimeterOfPolygon_Triangle_Success()
     {
         //Arrage.
@@ -29,7 +32,8 @@ public class PolygonTests
         Assert.Equal(16, polygon.GetPerimeter());
     }
 
-    [Fact]
+	// Проверка на вычисление периметра полигона
+	[Fact]
     public void PerimeterOfPolygon_Square_Success()
     {
         //Arrage.
@@ -43,7 +47,8 @@ public class PolygonTests
         Assert.Equal(12, polygon.GetPerimeter());
     }
 
-    [Fact]
+	// Проверка на вычисление площади полигона
+	[Fact]
     public void SquareOfPolygon_Square_Success()
     {
         //Arrage.
@@ -57,8 +62,9 @@ public class PolygonTests
         Assert.Equal(9, polygon.GetSquare());
     }
 
-    [Fact]
-    public void CreatePolygonWithHole_Success()
+	// Проверка на создание полигона с контуром
+	[Fact]
+    public void CreatePolygonWitрContouruccess()
     {
         //Arrage.
         Point point1 = new Point(0, 0);
