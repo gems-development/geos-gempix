@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GeometryModels.Extensions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,8 @@ namespace GeometryModels.Tests.DistanceTest
 {
     public class PolygonDistanceCalculatorTests
     {
-        [Fact]
+		// Проверка на растояние между точкой и полигоном
+		[Fact]
         public void GetDistanceBetweenPolygonAndPoint_Success()
         {
             //Arrage.
@@ -24,7 +26,7 @@ namespace GeometryModels.Tests.DistanceTest
             points.Add(point4);
             Polygon polygon = new Polygon(points);
             //Act. + Assert.
-            Assert.Equal(0, PolygonDistanceCalculator.GetDistance(polygon, point));
+            Assert.Equal(0, DistanceExtencion.GetDistance(polygon, point));
         }
     }
 }

@@ -12,7 +12,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 		public LineIntersector(Line line)=>
 			_line = line;
 
-		internal static bool Intersects(Line line, Point point)=>
+		public static bool Intersects(Line line, Point point)=>
 			Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
 				PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
 

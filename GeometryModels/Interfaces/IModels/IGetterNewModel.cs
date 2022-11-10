@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeometryModels.Tests.InsidersTest
+namespace GeometryModels.Interfaces.IModels
 {
-    public class PolygonInsiderTest
-    {
+	public interface IGetterNewModel
+	{
 
-    }
+	}
 }
