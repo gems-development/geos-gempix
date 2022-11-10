@@ -6,7 +6,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 	public class MultiLineToucher : IModelToucher
     {
 		private bool _result;
-		private MultiLine _multiLine;
+		private readonly MultiLine _multiLine;
 
 		public MultiLineToucher(MultiLine multiLine)
 		{

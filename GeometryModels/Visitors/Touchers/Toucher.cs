@@ -6,7 +6,7 @@ namespace GeometryModels.Extensions
 {
     internal class Toucher : IModelToucher
     {
-        private bool _result;
+        private readonly bool _result;
 
         private IModelToucher _toucher;
 

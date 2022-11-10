@@ -6,7 +6,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 	public class PointToucher : IModelToucher
     {
 		private bool _result;
-		private Point _point;
+		private readonly Point _point;
 
 		public PointToucher(Point point)
 		{
@@ -22,7 +22,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 
 		public bool GetResult()
 		{
-			return true;
+			return _result;
 		}
 
 		public void Visit(Point point)

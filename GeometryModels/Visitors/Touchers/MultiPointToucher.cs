@@ -6,7 +6,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 	public class MultiPointToucher : IModelToucher
     {
 		private bool _result;
-		private MultiPoint _multiPoint;
+		private readonly MultiPoint _multiPoint;
 
 		public MultiPointToucher(MultiPoint multiPoint)
 		{

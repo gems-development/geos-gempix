@@ -7,7 +7,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
     {
 
 		private bool _result;
-		private MultiPolygon _multiPolygon;
+		private readonly MultiPolygon _multiPolygon;
 
 		public MultiPolygonToucher(MultiPolygon multiPolygon)
 		{

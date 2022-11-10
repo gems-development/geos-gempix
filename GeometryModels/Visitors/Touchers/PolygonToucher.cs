@@ -7,7 +7,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 	public class PolygonToucher : IModelToucher
     {
 		private bool _result;
-		private Polygon _polygon;
+		private readonly Polygon _polygon;
 
 		public PolygonToucher(Polygon polygon)
 		{

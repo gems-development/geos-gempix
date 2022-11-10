@@ -7,7 +7,7 @@ namespace GeometryModels.GeometryPrimitiveTouchers
 	public class LineToucher : IModelToucher
     {
 		private bool _result;
-		private Line? _line;
+		private readonly Line? _line;
 
 		public LineToucher(Line line)
 		{

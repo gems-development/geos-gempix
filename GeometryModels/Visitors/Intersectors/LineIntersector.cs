@@ -19,7 +19,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 		// это для прямых, а не для отрезков, и надо учесть случай совпадения прямых
 		// метод пересечения отрезков будет включать в себя метод GetPointOfIntersection 
 		// его нужно прописать отдельно
-		internal static bool Intersects(Line line1, Line line2)
+		internal static bool IntersectsStraightLines(Line line1, Line line2)
 		{
 			if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
 				return true;
@@ -32,10 +32,20 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 			return k2 - k1 > 0;
 		}
 
-		// подразумевается, что прямые не параллельны друг другу
-		internal static Point GetPointOfIntersection(double[] lineEq1, double[] lineEq2)
+        internal static bool Intersects(Line line1, Line line2)
+        {
+			// отлов исключения
+			Point point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
+			if (Intersects(line1, point))
+				return true;
+			return false;
+        }
+
+        // подразумевается, что прямые не параллельны друг другу
+        internal static Point GetPointOfIntersection(double[] lineEq1, double[] lineEq2)
 		{
-			if (lineEq1[0] / lineEq2[0] == lineEq1[1] / lineEq2[1] && lineEq1[1] / lineEq2[1] == lineEq1[2] / lineEq2[2])
+			if (lineEq1[0] / lineEq2[0] == lineEq1[1] / lineEq2[1] && 
+				lineEq1[1] / lineEq2[1] == lineEq1[2] / lineEq2[2])
 				throw new ArithmeticException("Отрезки не должны быть параллельны друг другу");
 			double A1 = lineEq1[0], B1 = lineEq1[1], C1 = lineEq1[2],
 				A2 = lineEq2[0], B2 = lineEq2[1], C2 = lineEq2[2];
