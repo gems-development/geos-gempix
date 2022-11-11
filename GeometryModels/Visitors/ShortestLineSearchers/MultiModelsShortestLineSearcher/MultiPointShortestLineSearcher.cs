@@ -1,6 +1,8 @@
 ﻿using GeometryModels.Interfaces.IModels;
 using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
+using GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
+using GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using Point = GeometryModels.Point;
 
 public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
@@ -67,16 +69,16 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
 	internal static Line GetShortestLine(
 		MultiPoint multiPoint,
 		IGeometryPrimitive primitive,
-		Func<Point, IGeometryPrimitive, double> GetShortestLine)
+		Func<Point, IGeometryPrimitive, Line> GetShortestLine)
 	{
-		double result = 0;
-		double distance;
+		Line result = new Line(new Point(0, 0), new Point(0, 0));
+		Line distance = new Line(new Point(0, 0), new Point(0, 0));
 		foreach (Point point in multiPoint.GetPoints())
 		{
-			distance = GetShortestLine?.Invoke(point, primitive) ?? 0;
-			if (distance < result)
+			distance = GetShortestLine.Invoke(point, primitive);
+			if (distance.GetLength() < result.GetLength())
 			{
-				result = distance;
+				result = new Line(distance);
 			}
 		}
 		return result;

@@ -72,17 +72,17 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
 	internal static Line GetShortestLine(
 		MultiPolygon multiPolygon,
 		IGeometryPrimitive primitive,
-		Func<Polygon, IGeometryPrimitive, double> GetShortestLine)
+		Func<Polygon, IGeometryPrimitive, Line> GetShortestLine)
 	{
-		double result = 0;
-		double distance;
+		Line result = new Line(new Point(0, 0), new Point(0, 0));
+		Line distance = new Line(new Point(0, 0), new Point(0, 0));
 		List<Polygon> polygons = multiPolygon.GetPolygons();
 		foreach (Polygon polygon in polygons)
 		{
-			distance = GetShortestLine?.Invoke(polygon, primitive) ?? 0;
-			if (distance < result)
+			distance = GetShortestLine.Invoke(polygon, primitive);
+			if (distance.GetLength() < result.GetLength())
 			{
-				result = distance;
+				result = new Line(distance);
 			}
 		}
 		return result;

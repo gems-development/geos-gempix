@@ -18,7 +18,7 @@
 		}
 		public double GetLength()
 		{
-			return PointShortestLineSearcher.GetDistance(Point1, Point2);
+			return PointDistanceCalculator.GetDistance(Point1, Point2);
 		}
 
 		//Проверка на пересечение двух отрезков

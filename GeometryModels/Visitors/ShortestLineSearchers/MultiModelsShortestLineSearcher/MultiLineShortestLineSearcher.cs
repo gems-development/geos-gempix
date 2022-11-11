@@ -67,17 +67,17 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineS
 		internal static Line GetShortestLine(
 			MultiLine multiLine,
 			IGeometryPrimitive primitive,
-			Func<Line, IGeometryPrimitive, double> GetShortestLine)
+			Func<Line, IGeometryPrimitive, Line> GetShortestLine)
 		{
-			double result = 0;
-			double distance;
+			Line result = new Line(new Point(0, 0), new Point(0, 0));
+			Line distance = new Line(new Point(0, 0), new Point(0, 0));
 			List<Line> lines = multiLine.GetLines();
 			foreach (Line line in lines)
 			{
-				distance = GetShortestLine?.Invoke(line, primitive) ?? 0;
-				if (distance < result)
+				distance = GetShortestLine.Invoke(line, primitive);
+				if (distance.GetLength() < result.GetLength())
 				{
-					result = distance;
+					result = new Line(distance);
 				}
 			}
 			return result;

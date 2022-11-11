@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GeometryModels.Extensions
 {
-    public class ToucherExtencion
+    public class ToucherExtension
     {
         public static bool IsTouching(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
             new Toucher(primitive1, primitive2).GetResult();
