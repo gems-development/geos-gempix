@@ -1,12 +1,13 @@
 ﻿using GeometryModels;
 using GeometryModels.Interfaces.IModels;
+using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
-using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
+using GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 
-public class PolygonShortestLineSearcher : IModelDistanceCalculator
+public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 {
 	private Polygon _polygon;
-	private double _result;
+	private Line _result;
 
 	public PolygonShortestLineSearcher(Polygon polygon)
 	{
@@ -15,27 +16,27 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 	}
 
 	public void Visit(Point point) =>
-		_result = GetDistance(_polygon, point);
+		_result = GetShortestLine(_polygon, point);
 
 	public void Visit(Line line) =>
-		_result = GetDistance(_polygon, line);
+		_result = GetShortestLine(_polygon, line);
 
 	public void Visit(Polygon polygon) =>
-		_result = GetDistance(_polygon, polygon);
+		_result = GetShortestLine(_polygon, polygon);
 
-	public double GetResult() =>
+	public Line GetResult() =>
 		_result;
 
 	public void Visit(MultiPoint multiPoint) =>
-		_result = MultiPointShortestLineSearcher.GetDistance(multiPoint, _polygon);
+		_result = MultiPointShortestLineSearcher.GetShortestLine(multiPoint, _polygon);
 
 	public void Visit(MultiLine multiLine) =>
-		_result = MultiLineShortestLineSearcher.GetDistance(multiLine, _polygon);
+		_result = MultiLineShortestLineSearcher.GetShortestLine(multiLine, _polygon);
 
 	public void Visit(MultiPolygon multiPolygon) =>
-		_result = MultiPolygonShortestLineSearcher.GetDistance(multiPolygon, _polygon);
+		_result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _polygon);
 
-	internal static double GetDistance(Polygon polygon, Point point)
+	internal static Line GetShortestLine(Polygon polygon, Point point)
 	{
 		double result = 0;
 		double distance = 0;
@@ -49,7 +50,7 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 		lines.Add(new Line(points[points.Count - 1], points[0]));
 		foreach (Line line in lines)
 		{
-			distance = LineShortestLineSearcher.GetDistance(line, point);
+			distance = LineShortestLineSearcher.GetShortestLine(line, point);
 			if (distance < result)
 			{
 				result = distance;
@@ -59,7 +60,7 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 	}
 
 	
-	internal static double GetDistance(Polygon polygon, Line line)
+	internal static Line GetShortestLine(Polygon polygon, Line line)
 	{
 		double result = 0;
 		double distance = 0;
@@ -73,7 +74,7 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 		lines.Add(new Line(points[points.Count - 1], points[0]));
 		foreach (Line line1 in lines)
 		{
-			distance = LineShortestLineSearcher.GetDistance(line1, line);
+			distance = LineShortestLineSearcher.GetShortestLine(line1, line);
 			if (distance < result)
 			{
 				result = distance;
@@ -82,7 +83,7 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 		return result;
 	}
 
-	internal static double GetDistance(Polygon polygon1, Polygon polygon2)
+	internal static Line GetShortestLine(Polygon polygon1, Polygon polygon2)
 	{
 		double result = 0;
 		double distance;
@@ -97,7 +98,7 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 
 		foreach (Line line in lines)
 		{
-			distance = GetDistance(polygon1, line);
+			distance = GetShortestLine(polygon1, line);
 			if (distance < result)
 			{
 				result = distance;
@@ -106,14 +107,14 @@ public class PolygonShortestLineSearcher : IModelDistanceCalculator
 		return result;
 	}
 
-	internal static double GetDistance(Polygon polygon, MultiLine multiLine) =>
-		MultiLineShortestLineSearcher.GetDistance(multiLine, polygon);
+	internal static Line GetShortestLine(Polygon polygon, MultiLine multiLine) =>
+		MultiLineShortestLineSearcher.GetShortestLine(multiLine, polygon);
 
-	internal static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
-		MultiPointShortestLineSearcher.GetDistance(multiPoint, polygon);
+	internal static Line GetShortestLine(Polygon polygon, MultiPoint multiPoint) =>
+		MultiPointShortestLineSearcher.GetShortestLine(multiPoint, polygon);
 
-	internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
-		MultiPolygonShortestLineSearcher.GetDistance(multiPolygon, polygon);
+	internal static Line GetShortestLine(Polygon polygon, MultiPolygon multiPolygon) =>
+		MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, polygon);
 
 	public void Visit(Contour contour) =>
 		throw new NotImplementedException();

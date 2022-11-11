@@ -21,7 +21,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 			// нашли самую близкую сторону
 			foreach (Line line in contour.GetLines())
 			{
-				curDistance = LineDistanceCalculator.GetDistance(line, point);
+				curDistance = LineShortestLineSearcher.GetDistance(line, point);
 				if (distance > curDistance)
 				{
 					distance = curDistance;
