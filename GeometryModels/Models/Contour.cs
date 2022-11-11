@@ -70,9 +70,9 @@ namespace GeometryModels.Models
 			double perimeter = 0;
 			for (int i = 0; i <= _points.Count - 2; i++)
 			{
-				perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
+				perimeter += PointShortestLineSearcher.GetDistance(_points[i], _points[i + 1]);
 			}
-			perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count - 1], _points[0]);
+			perimeter = perimeter + PointShortestLineSearcher.GetDistance(_points[_points.Count - 1], _points[0]);
 			return perimeter;
 		}
 

@@ -18,7 +18,7 @@
 		}
 		public double GetLength()
 		{
-			return PointDistanceCalculator.GetDistance(Point1, Point2);
+			return PointShortestLineSearcher.GetDistance(Point1, Point2);
 		}
 
 		public double[] GetEquationOfLine()
