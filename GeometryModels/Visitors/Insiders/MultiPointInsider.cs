@@ -5,10 +5,10 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 {
     public class MultiPointInsider : IModelInsider
     {
-		public MultiPointInsider(MultiPoint multiPoint) { }
+        public MultiPointInsider(MultiPoint multiPoint) { }
 
         public bool GetResult() =>
-			false;
+            false;
 
         public void Visit(Point point) { }
 

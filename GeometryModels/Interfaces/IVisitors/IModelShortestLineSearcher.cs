@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace GeometryModels.Interfaces.IVisitors
 {
-	public interface IModelShortestLineSearcher: IGeometryPrimitiveVisitor
-	{
-		public Line GetResult();
-	}
+    public interface IModelShortestLineSearcher : IGeometryPrimitiveVisitor
+    {
+        public Line GetResult();
+    }
 }

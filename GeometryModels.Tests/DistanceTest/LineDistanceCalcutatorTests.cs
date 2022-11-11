@@ -17,7 +17,7 @@ public class LineDistanceCalcutatorTests
         //Act.
         Line line = new Line(point1, point2);
         //Assert.
-        Assert.Equal(3, DistanceExtencion.GetDistance(line, point3));
+        Assert.Equal(3, DistanceExtension.GetDistance(line, point3));
     }
 
     /*

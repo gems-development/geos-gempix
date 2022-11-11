@@ -59,7 +59,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 		return result;
 	}
 
-	
+
 	internal static Line GetShortestLine(Polygon polygon, Line line)
 	{
 		double result = 0;

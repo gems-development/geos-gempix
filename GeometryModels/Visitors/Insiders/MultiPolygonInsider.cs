@@ -3,59 +3,59 @@ using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {
-	public class MultiPolygonInsider : IModelInsider
+    public class MultiPolygonInsider : IModelInsider
     {
 
-		private bool _result;
-		private MultiPolygon _multiPolygon;
+        private bool _result;
+        private MultiPolygon _multiPolygon;
 
-		public MultiPolygonInsider(MultiPolygon multiPolygon) =>
-			_multiPolygon = multiPolygon;
+        public MultiPolygonInsider(MultiPolygon multiPolygon) =>
+            _multiPolygon = multiPolygon;
 
-		internal static bool IsInside(MultiPolygon multiPolygon, Point point)
-		{
-			foreach (Polygon polygon in multiPolygon.GetPolygons())
-				if (PolygonInsider.IsInside(polygon, point))
-					return true;
-			return false;
-		}
+        internal static bool IsInside(MultiPolygon multiPolygon, Point point)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsInside(polygon, point))
+                    return true;
+            return false;
+        }
 
-		internal static bool IsInside(MultiPolygon multiPolygon, Line line)
-		{
-			foreach (Polygon polygon in multiPolygon.GetPolygons())
-				if (PolygonInsider.IsInside(polygon, line))
-					return true;
-			return false;
-		}
+        internal static bool IsInside(MultiPolygon multiPolygon, Line line)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsInside(polygon, line))
+                    return true;
+            return false;
+        }
 
-		internal static bool IsInside(MultiPolygon multiPolygon, Polygon polygon1)
-		{
-			foreach (Polygon polygon in multiPolygon.GetPolygons())
-				if (PolygonInsider.IsInside(polygon, polygon1))
-					return true;
-			return false;
-		}
+        internal static bool IsInside(MultiPolygon multiPolygon, Polygon polygon1)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsInside(polygon, polygon1))
+                    return true;
+            return false;
+        }
 
-		internal static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
-		{
-			List<Point> points = multiPoint.GetPoints();
-			List<Point> pointsForRemove = new List<Point>();
-			foreach (Polygon polygon in multiPolygon.GetPolygons())
-			{
-				foreach (Point point in points)
-					if (PolygonInsider.IsInside(polygon, point))
-						pointsForRemove.Add(point);
-				foreach (Point point in pointsForRemove)
-					points.Remove(point);
-				pointsForRemove.Clear();
-				if (points.Count == 0)
-					return true;
-			}
-			return false;
-		}
+        internal static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
+        {
+            List<Point> points = multiPoint.GetPoints();
+            List<Point> pointsForRemove = new List<Point>();
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+            {
+                foreach (Point point in points)
+                    if (PolygonInsider.IsInside(polygon, point))
+                        pointsForRemove.Add(point);
+                foreach (Point point in pointsForRemove)
+                    points.Remove(point);
+                pointsForRemove.Clear();
+                if (points.Count == 0)
+                    return true;
+            }
+            return false;
+        }
 
-		internal static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
-		{
+        internal static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
+        {
             List<Line> lines = multiLine.GetLines();
             List<Line> linesForRemove = new List<Line>();
             foreach (Polygon polygon in multiPolygon.GetPolygons())
@@ -72,15 +72,15 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             return false;
         }
 
-		internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
-		{
-			foreach (Polygon polygon in multiPolygon2.GetPolygons())
-				if (IsInside(multiPolygon1, polygon))
-					return true;
-			return false;
-		}
+        internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+        {
+            foreach (Polygon polygon in multiPolygon2.GetPolygons())
+                if (IsInside(multiPolygon1, polygon))
+                    return true;
+            return false;
+        }
 
-		internal static bool IsInside(MultiPolygon multiPolygon, Contour contour)
+        internal static bool IsInside(MultiPolygon multiPolygon, Contour contour)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
                 if (PolygonInsider.IsInside(polygon, contour))
@@ -89,27 +89,27 @@ namespace GeometryModels.GeometryPrimitiveInsiders
         }
 
         public bool GetResult() =>
-			_result;
+            _result;
 
-		public void Visit(Point point) =>
-			_result = IsInside(_multiPolygon, point);
+        public void Visit(Point point) =>
+            _result = IsInside(_multiPolygon, point);
 
-		public void Visit(Line line) =>
-			_result = IsInside(_multiPolygon, line);
+        public void Visit(Line line) =>
+            _result = IsInside(_multiPolygon, line);
 
-		public void Visit(Polygon polygon) =>
-			_result = IsInside(_multiPolygon, polygon);
+        public void Visit(Polygon polygon) =>
+            _result = IsInside(_multiPolygon, polygon);
 
-		public void Visit(MultiPoint multiPoint) =>
-			_result = IsInside(_multiPolygon, multiPoint);
+        public void Visit(MultiPoint multiPoint) =>
+            _result = IsInside(_multiPolygon, multiPoint);
 
-		public void Visit(MultiLine multiLine) =>
-			_result = IsInside(_multiPolygon, multiLine);
+        public void Visit(MultiLine multiLine) =>
+            _result = IsInside(_multiPolygon, multiLine);
 
-		public void Visit(MultiPolygon multiPolygon) =>
-			_result = IsInside(_multiPolygon, multiPolygon);
+        public void Visit(MultiPolygon multiPolygon) =>
+            _result = IsInside(_multiPolygon, multiPolygon);
 
-		public void Visit(Contour contour) =>
+        public void Visit(Contour contour) =>
             _result = IsInside(_multiPolygon, contour);
     }
 }

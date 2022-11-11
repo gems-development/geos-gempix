@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace GeometryModels.Interfaces.IModels
 {
-	public interface IGetterNewModel
-	{
+    public interface IGetterNewModel
+    {
 
-	}
+    }
 }
