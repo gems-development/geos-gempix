@@ -1,5 +1,4 @@
-﻿using GeometryModels.Interfaces.IModels;
-using GeometryModels.Interfaces.IVisitors;
+﻿using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 using Point = GeometryModels.Point;
 

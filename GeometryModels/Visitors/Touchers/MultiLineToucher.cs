@@ -102,5 +102,10 @@ namespace GeometryModels.GeometryPrimitiveTouchers
         {
             throw new NotImplementedException();
         }
+
+        internal static bool IsTouching(MultiLine multiLine, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

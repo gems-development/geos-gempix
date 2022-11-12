@@ -1,6 +1,4 @@
-﻿using GeometryModels;
-using GeometryModels.GeometryPrimitiveIntersectors;
-using GeometryModels.Interfaces.IModels;
+﻿using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 using GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
@@ -9,7 +7,7 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearch
 {
     public class LineShortestLineSearcher : IModelShortestLineSearcher
     {
-        private Line _line;
+        private readonly Line _line;
         private Line _result;
 
         public LineShortestLineSearcher(Point point1, Point point2) =>

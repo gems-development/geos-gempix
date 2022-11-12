@@ -1,11 +1,10 @@
-﻿using GeometryModels;
-using GeometryModels.GeometryPrimitiveIntersectors;
+﻿using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
 
 namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
-	public class LineDistanceCalculator : IModelDistanceCalculator
+    public class LineDistanceCalculator : IModelDistanceCalculator
     {
         private Line _line;
         private double _result;

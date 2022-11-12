@@ -6,7 +6,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
     public class MultiLineIntersector : IModelsIntersector
     {
         private bool _result;
-        private MultiLine _multiLine;
+        private readonly MultiLine _multiLine;
 
         public MultiLineIntersector(MultiLine multiLine)
         {

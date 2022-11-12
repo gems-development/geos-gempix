@@ -113,5 +113,10 @@ namespace GeometryModels.GeometryPrimitiveTouchers
         {
             throw new NotImplementedException();
         }
+
+        internal static bool IsTouching(MultiPolygon multiPolygon, Contour contour)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

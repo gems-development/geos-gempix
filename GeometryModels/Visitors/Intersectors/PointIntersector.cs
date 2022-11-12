@@ -14,7 +14,6 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
         internal static bool Intersects(Point point1, Point point2) =>
             point1.Equals(point2);
 
-
         public bool GetResult() =>
             _result;
 

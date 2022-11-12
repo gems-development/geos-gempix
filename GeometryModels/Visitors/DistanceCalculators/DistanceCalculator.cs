@@ -1,7 +1,5 @@
-﻿using GeometryModels;
-using GeometryModels.Interfaces.IModels;
+﻿using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
-using GeometryModels.Visitors;
 using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
 namespace GeometryModels.Visitors.DistanceCalculators

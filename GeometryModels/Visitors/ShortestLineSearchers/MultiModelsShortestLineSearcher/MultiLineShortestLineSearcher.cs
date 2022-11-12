@@ -1,8 +1,6 @@
-﻿using GeometryModels.Interfaces.IModels;
-using GeometryModels.Interfaces.IVisitors;
+﻿using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 using GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
-using Point = GeometryModels.Point;
 
 namespace GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher
 {

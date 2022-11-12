@@ -1,4 +1,5 @@
-﻿using GeometryModels.Interfaces.IVisitors;
+﻿using GeometryModels.Extensions;
+using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 
 namespace GeometryModels.GeometryPrimitiveTouchers
@@ -38,6 +39,16 @@ namespace GeometryModels.GeometryPrimitiveTouchers
             foreach (Point point in multiPoint.GetPoints())
             {
                 if (PolygonToucher.IsTouching(polygon, point))
+                    return true;
+            }
+            return false;
+        }
+
+        internal static bool IsTouching(MultiPoint multiPoint, Contour contour)
+        {
+            foreach (Point point in multiPoint.GetPoints())
+            {
+                if (ContourToucher.IsTouching(contour, point))
                     return true;
             }
             return false;

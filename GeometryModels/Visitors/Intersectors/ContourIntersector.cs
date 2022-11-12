@@ -1,13 +1,12 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
-using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
     public class ContourIntersector : IModelsIntersector
     {
         private bool _result;
-        private Contour _contour;
+        private readonly Contour _contour;
 
         public ContourIntersector(Contour contour) =>
             _contour = contour;

@@ -1,7 +1,6 @@
 ﻿using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
-using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveInsiders
 {

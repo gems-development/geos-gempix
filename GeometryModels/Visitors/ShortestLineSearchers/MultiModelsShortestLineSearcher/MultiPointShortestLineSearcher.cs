@@ -1,5 +1,4 @@
-﻿using GeometryModels.Interfaces.IModels;
-using GeometryModels.Interfaces.IVisitors;
+﻿using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
 using GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;

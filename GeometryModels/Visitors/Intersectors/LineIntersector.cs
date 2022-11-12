@@ -1,20 +1,19 @@
 ﻿using GeometryModels.Interfaces.IVisitors;
 using GeometryModels.Models;
-using System.Drawing;
 
 namespace GeometryModels.GeometryPrimitiveIntersectors
 {
     public class LineIntersector : IModelsIntersector
     {
         private bool _result;
-        private Line _line;
+        private readonly Line _line;
 
         public LineIntersector(Line line) =>
             _line = line;
 
         public static bool Intersects(Line line, Point point) =>
-            Math.Abs(PointShortestLineSearcher.GetDistance(point, line.Point1) +
-                PointShortestLineSearcher.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
+            Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
+                PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
 
         // это для прямых, а не для отрезков, и надо учесть случай совпадения прямых
         // метод пересечения отрезков будет включать в себя метод GetPointOfIntersection 
