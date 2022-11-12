@@ -59,6 +59,7 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineS
                  multiLine2,
                  (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiLine)primitive));
 
+<<<<<<< HEAD
         internal static Line GetShortestLine(MultiLine multiLine, MultiPoint multiPoint) =>
              GetShortestLine(
                  multiLine,
@@ -67,21 +68,46 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineS
         internal static Line GetShortestLine(
             MultiLine multiLine,
             IGeometryPrimitive primitive,
-			Func<Line, IGeometryPrimitive, Line> GetShortestLine)
+            Func<Line, IGeometryPrimitive, double> GetShortestLine)
         {
-			Line result = new Line(new Point(0, 0), new Point(0, 0));
-			Line distance = new Line(new Point(0, 0), new Point(0, 0));
+            double result = 0;
+            double distance;
             List<Line> lines = multiLine.GetLines();
             foreach (Line line in lines)
             {
-				distance = GetShortestLine.Invoke(line, primitive);
-				if (distance.GetLength() < result.GetLength())
+                distance = GetShortestLine?.Invoke(line, primitive) ?? 0;
+                if (distance < result)
                 {
-					result = new Line(distance);
+                    result = distance;
                 }
             }
             return result;
         }
+=======
+		internal static Line GetShortestLine(MultiLine multiLine, MultiPoint multiPoint) =>
+			 GetShortestLine(
+				 multiLine,
+				 multiPoint,
+				 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiPoint)primitive));
+		internal static Line GetShortestLine(
+			MultiLine multiLine,
+			IGeometryPrimitive primitive,
+			Func<Line, IGeometryPrimitive, Line> GetShortestLine)
+		{
+			Line result = new Line(new Point(0, 0), new Point(0, 0));
+			Line distance = new Line(new Point(0, 0), new Point(0, 0));
+			List<Line> lines = multiLine.GetLines();
+			foreach (Line line in lines)
+			{
+				distance = GetShortestLine.Invoke(line, primitive);
+				if (distance.GetLength() < result.GetLength())
+				{
+					result = new Line(distance);
+				}
+			}
+			return result;
+		}
+>>>>>>> fda18903521b58f784152ee8bc45250af6231542
 
         public void Visit(Contour contour) =>
             throw new NotImplementedException();

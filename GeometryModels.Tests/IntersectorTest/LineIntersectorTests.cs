@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeometryModels.Tests.InsectorTest
+namespace GeometryModels.Tests.IntersectorTest
 {
-	public class LineInsectorTests
+	public class LineIntersectorTests
 	{
 		// Проверка на пересечение отрезков
 		[Theory]
