@@ -89,4 +89,9 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(Contour contour) =>
         throw new NotImplementedException();
+
+    internal static double GetDistance(MultiPolygon multiPolygon, Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -117,4 +117,9 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(Contour contour) =>
         throw new NotImplementedException();
+
+    internal static double GetDistance(Polygon polygon, Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }

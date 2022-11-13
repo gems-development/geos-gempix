@@ -74,9 +74,19 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
-            foreach (Polygon polygon in multiPolygon2.GetPolygons())
-                if (IsInside(multiPolygon1, polygon))
+            List<Polygon> polygons = multiPolygon2.GetPolygons();
+            List<Polygon> polygonsForRemove = new List<Polygon>();
+            foreach (Polygon polygon1 in multiPolygon1.GetPolygons())
+            {
+                foreach (Polygon polygon in polygons)
+                    if (PolygonInsider.IsInside(polygon, polygon))
+                        polygonsForRemove.Add(polygon);
+                foreach (Polygon polygon in polygonsForRemove)
+                    polygons.Remove(polygon);
+                polygonsForRemove.Clear();
+                if (polygons.Count == 0)
                     return true;
+            }
             return false;
         }
 

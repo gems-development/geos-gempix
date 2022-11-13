@@ -83,4 +83,9 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(Contour contour) =>
         throw new NotImplementedException();
+
+    internal static double GetDistance(MultiPoint multiPoint, Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }

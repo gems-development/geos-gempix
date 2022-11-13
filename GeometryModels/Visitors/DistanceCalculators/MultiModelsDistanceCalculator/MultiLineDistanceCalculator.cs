@@ -82,4 +82,9 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(Contour contour) =>
         throw new NotImplementedException();
+
+    internal static double GetDistance(MultiLine multiLine, Contour contour)
+    {
+        throw new NotImplementedException();
+    }
 }
