@@ -12,39 +12,51 @@ namespace GeometryModels.GeometryPrimitiveInsiders
         public PolygonInsider(Polygon? polygon) =>
             _polygon = polygon;
 
-        public static bool IsInside(Polygon polygon, Point point)
+
+        internal static bool IsInside(Polygon polygon, Point point)
         {
+            if (PolygonIntersector.Intersects(polygon, point))
+                return false;
             foreach (Contour contour1 in polygon.GetHoles())
-            {
+            {   // здесь есть дублирование проверок - как его избежать без дублирования кода?
                 if (ContourInsider.IsInside(contour1, point))
-                    return false;
-                if (ContourIntersector.Intersects(contour1, point))
                     return false;
             }
             Contour contour = new Contour(polygon.GetPoints());
+            // а не хранить ли контур вместо списка точек?
             if (ContourInsider.IsInside(contour, point))
                 return true;
             return false;
         }
-        public static bool IsInside(Polygon polygon, Line line1)
+        internal static bool IsInside(Polygon polygon, Line line1)
         {
+            if (PolygonIntersector.Intersects(polygon, line1))
+                return false;
             foreach (Contour contour in polygon.GetHoles())
                 if (ContourInsider.IsInside(contour, line1))
                     return false;
-            if (IsInside(polygon, line1.Point1) && !PolygonIntersector.Intersects(polygon, line1))
-                return true;
-            return false;
-        }
-        // надо еще подумать над Intersects, потому что есть дырки в полигоне
-        public static bool IsInside(Polygon polygon1, Polygon polygon2)
-        {
-            if (IsInside(polygon1, polygon2.GetPoints()[0]) && !PolygonIntersector.Intersects(polygon1, polygon2))
+            if (IsInside(polygon, line1.Point1))
                 return true;
             return false;
         }
 
+        internal static bool IsInside(Polygon polygon1, Polygon polygon2)
+        {
+            if (PolygonIntersector.Intersects(polygon1, polygon2))
+                return false;
+            foreach (Contour contour in polygon1.GetHoles())
+                if (ContourInsider.IsInside(contour, polygon2))
+                    return false;
+            if (IsInside(polygon1, polygon2.GetPoints()[0]))
+                return true;
+            return false;
+
+        }
+
         internal static bool IsInside(Polygon polygon, Contour contour)
         {
+            if (PolygonIntersector.Intersects(polygon, contour))
+                return false;
             foreach (Contour contour1 in polygon.GetHoles())
                 if (ContourInsider.IsInside(contour1, contour))
                     return false;
@@ -54,19 +66,50 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             return false;
         }
 
-        private bool IsInside(MultiPoint multiPoint, Polygon? polygon)
+        internal static bool IsInside(Polygon polygon, MultiPoint multiPoint)
         {
-            throw new NotImplementedException();
+            if (MultiPointIntersector.Intersects(multiPoint, polygon))
+                return false;
+            // если хоть одна точка попадает хоть в одну "дырку" - всё, значит не внутри полигона
+            foreach (Contour contour in polygon.GetHoles())
+                foreach(Point point in multiPoint.GetPoints())
+                    if (ContourInsider.IsInside(contour, point))
+                        return false;
+            Contour contour1 = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(contour1, multiPoint))
+                return true;
+            return false;
         }
 
-        private bool IsInside(MultiPolygon multiPolygon, Polygon? polygon)
+        internal static bool IsInside(Polygon polygon, MultiPolygon multiPolygon)
         {
-            throw new NotImplementedException();
+            // боже сколько дублирований проверок Intersects когда будем вызывать другие функции
+            if (MultiPolygonIntersector.Intersects(multiPolygon, polygon))
+                return false;
+            // если хоть один полигон попадает хоть в одну "дырку" - всё, значит не внутри полигона
+            foreach (Contour contour in polygon.GetHoles())
+                foreach (Polygon polygon1 in multiPolygon.GetPolygons())
+                    if (ContourInsider.IsInside(contour, polygon1))
+                        return false;
+            Contour contour1 = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(contour1, multiPolygon))
+                return true;
+            return false;
         }
 
-        private bool IsInside(MultiLine multiLine, Polygon? polygon)
+        internal static bool IsInside(Polygon polygon, MultiLine multiLine)
         {
-            throw new NotImplementedException();
+            if (MultiLineIntersector.Intersects(multiLine, polygon))
+                return false;
+            // если хоть одна линия попадает хоть в одну "дырку" - всё, значит не внутри полигона
+            foreach (Contour contour in polygon.GetHoles())
+                foreach (Line line in multiLine.GetLines())
+                    if (ContourInsider.IsInside(contour, line))
+                        return false;
+            Contour contour1 = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(contour1, multiLine))
+                return true;
+            return false;
         }
 
         public bool GetResult() =>
@@ -82,15 +125,15 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             _result = IsInside(_polygon!, polygon);
 
         public void Visit(MultiPoint multiPoint) =>
-            _result = IsInside(multiPoint, _polygon);
+            _result = IsInside(_polygon!, multiPoint);
 
         public void Visit(MultiLine multiLine) =>
-            _result = IsInside(multiLine, _polygon);
+            _result = IsInside(_polygon!, multiLine);
 
         public void Visit(MultiPolygon multiPolygon) =>
-            _result = IsInside(multiPolygon, _polygon);
+            _result = IsInside(_polygon!, multiPolygon);
 
         public void Visit(Contour contour) =>
-            throw new NotImplementedException();
+            _result = IsInside(_polygon!, contour);
     }
 }

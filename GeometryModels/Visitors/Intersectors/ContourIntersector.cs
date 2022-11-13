@@ -33,14 +33,6 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             return false;
         }
 
-        internal static bool Intersects(Contour contour1, Polygon polygon2)
-        {
-            foreach (Line line in contour1.GetLines())
-                if (PolygonIntersector.Intersects(polygon2, line))
-                    return true;
-            return false;
-        }
-
         public bool GetResult() =>
             _result;
 
@@ -51,7 +43,7 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             _result = Intersects(_contour, line);
 
         public void Visit(Polygon polygon) =>
-            _result = Intersects(_contour, polygon);
+            _result = PolygonIntersector.Intersects(polygon, _contour);
 
         public void Visit(MultiPoint multiPoint) =>
             _result = MultiPointIntersector.Intersects(multiPoint, _contour);

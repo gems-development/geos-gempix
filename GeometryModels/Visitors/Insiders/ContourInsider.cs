@@ -164,10 +164,9 @@ namespace GeometryModels.GeometryPrimitiveInsiders
 
         internal static bool IsInside(Contour contour1, Contour contour2)
         {
-            foreach (Line line in contour2.GetLines())
-                if (!IsInside(contour1, line))
-                    return false;
-            return true;
+            if (IsInside(contour1, contour2.GetPoints()[0]) && !ContourIntersector.Intersects(contour1, contour2))
+                return true;
+            return false;
         }
 
         public bool GetResult() =>
