@@ -51,6 +51,7 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
                 if (distance < result)
                     result = distance;
             }
+
             return result;
         }
 
@@ -71,6 +72,7 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
                 if (distance < result)
                     result = distance;
             }
+
             return result;
         }
 
@@ -90,6 +92,7 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
                 if (distance < result)
                     result = distance;
             }
+
             return result;
         }
 
@@ -105,3 +108,4 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         public void Visit(Contour contour) =>
             throw new NotImplementedException();
     }
+}
