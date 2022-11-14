@@ -1,0 +1,34 @@
+﻿using System;
+using System.Security.Cryptography;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Running;
+using GeometryModels;
+using GeometryModels.Models;
+using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
+
+namespace MyBenchmarks
+{
+    public class LineDistanceCalculatorBench
+    {
+        public LineDistanceCalculatorBench()
+        {
+        }
+
+        [Benchmark]
+        public double Sha256()
+        {
+            Line line1 = new Line(new Point(1, 1), new Point(3, -2));
+            Line line2 = new Line(new Point(4, 3), new Point(-2, -4));
+            //Act. + Assert.
+            return LineDistanceCalculator.GetDistance(line1, line2);
+        }
+    }
+
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var summary = BenchmarkRunner.Run<LineDistanceCalculatorBench>();
+        }
+    }
+}
