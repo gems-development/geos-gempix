@@ -15,7 +15,7 @@ namespace MyBenchmarks
         }
 
         [Benchmark]
-        public double Sha256()
+        public double LineDistanceBenchmark()
         {
             Line line1 = new Line(new Point(1, 1), new Point(3, -2));
             Line line2 = new Line(new Point(4, 3), new Point(-2, -4));
