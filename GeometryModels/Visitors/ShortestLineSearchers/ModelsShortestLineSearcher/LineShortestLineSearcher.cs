@@ -39,8 +39,19 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearch
 
         internal static Line GetShortestLine(Line line, Point point)
         {
-			Line shortline = new Line(new Point(0,0), new Point(0,0));
-			
+            double[] ABC = line.GetEquationOfLine();
+
+            double[] perpendicular = Line.GetEquationOfPerpendicularLine(ABC, point);
+
+            double intersectX = (( ABC[2] * perpendicular[0] / ABC[0] ) - perpendicular[2]) /
+                ( perpendicular[1] - (ABC[1] * perpendicular[0]) / ABC[0] );
+
+            double intersectY = -(ABC[1] * intersectX + ABC[2]) / ABC[0];
+
+			Point intersect = new Point(intersectX, intersectY);
+
+			Line shortline = new Line(point, intersect);
+
 			return shortline;
         }
 
