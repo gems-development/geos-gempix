@@ -9,10 +9,10 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         private Line _line;
         private double _result;
 
-		public LineDistanceCalculator(Point point1, Point point2) =>
+        public LineDistanceCalculator(Point point1, Point point2) =>
             _line = new Line(point1, point2);
 
-		public LineDistanceCalculator(Line line) =>
+        public LineDistanceCalculator(Line line) =>
             _line = line;
 
         public double GetResult() =>
@@ -25,77 +25,84 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
             _result = GetDistance(_line, line);
 
         public void Visit(Polygon polygon) =>
-			_result = PolygonDistanceCalculator.GetDistance(polygon, _line);
+            _result = PolygonDistanceCalculator.GetDistance(polygon, _line);
 
         public void Visit(MultiPoint multiPoint) =>
-			_result = MultiPointDistanceCalculator.GetDistance(multiPoint, _line);
+            _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _line);
 
         public void Visit(MultiLine multiLine) =>
-			_result = MultiLineDistanceCalculator.GetDistance(multiLine, _line);
+            _result = MultiLineDistanceCalculator.GetDistance(multiLine, _line);
 
         public void Visit(MultiPolygon multiPolygon) =>
-			_result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _line);
+            _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _line);
+
+        public void Visit(Contour contour) =>
+            ContourDistanceCalculator.GetDistance(contour, _line);
 
         internal static double GetDistance(Line line, Point point)
         {
-            double res;
-			double a = PointDistanceCalculator.GetDistance(point, line.Point1);
-			double b = PointDistanceCalculator.GetDistance(point, line.Point2);
-			double c = PointDistanceCalculator.GetDistance(line.Point1, line.Point2);
-            if (a * a > b * b + c * c || b * b > a * a + c * c)
-            {
-                res = Math.Min(a, b);
-            }
-            else
-            {
-                double P = line.Point2.Y - line.Point1.Y;
-                double Q = line.Point1.X - line.Point2.X;
-                double R = -line.Point1.X * P + line.Point1.Y * (line.Point2.X - line.Point1.X);
-                res = Math.Abs(P * point.X + Q * point.Y + R) / Math.Sqrt(P * P + Q * Q);
-            }
-            return res;
+            double[] distances = new double[3];
+            distances[2] = double.MaxValue;
+            distances[0] = PointDistanceCalculator.GetDistance(line.Point1, point);
+            distances[1] = PointDistanceCalculator.GetDistance(line.Point2, point);
+            double[] eq1 = line.GetEquationOfLine();
+            double[] eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
+            // point1 = null конкретно здесь быть не может
+            Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
+            if (LineIntersector.Intersects(line, point1))
+                distances[2] = PointDistanceCalculator.GetDistance(point1, point);
+            return distances.Min();
         }
 
         internal static double GetDistance(Line line1, Line line2)
         {
-            double[] distances = new double[6];
+            double[] distances = new double[5];
+            distances[4] = double.MaxValue;
             if (!LineIntersector.Intersects(line1, line2))
             {
-				distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
-				distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
-				distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
-				distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
-                double k = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
-                double b = line2.Point1.Y - k * line2.Point1.X;
-                double xz1 = (line1.Point1.X * line2.Point2.X - line1.Point1.X * line2.Point1.X +
-                    line1.Point1.Y * line2.Point2.Y - line1.Point1.Y - line2.Point1.Y +
-                    line2.Point1.Y * b - line2.Point2.Y * b) /
-                    (k * line2.Point2.Y - k * line2.Point1.Y + line2.Point2.X - line2.Point1.X);
-                Point point1 = new Point(xz1, k * xz1 + b);
-				distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point1);
-                double xz2 = (line1.Point2.X * line2.Point2.X - line1.Point2.X * line2.Point1.X +
-                    line1.Point2.Y * line2.Point2.Y - line1.Point2.Y - line2.Point1.Y +
-                    line2.Point1.Y * b - line2.Point2.Y * b) / (k * line2.Point2.Y - k * line2.Point1.Y +
-                    line2.Point2.X - line2.Point1.X);
-                Point point2 = new Point(xz2, k * xz2 + b);
-				distances[5] = PointDistanceCalculator.GetDistance(line1.Point1, point2);
+                distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
+                distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
+                distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
+                distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
+                double[] eq1 = line1.GetEquationOfLine();
+                double[] eq2 = line2.GetEquationOfLine();
+                // если прямые параллельны
+                if (LineIntersector.GetPointOfIntersection(eq1, eq2) == null)
+                {
+                    // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
+                    double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
+                    double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
+                    // точка пересечения перпенд. к 1 отрезку и второго отрезка
+                    Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
+                    // можно этот метод удобно переписать под линию кратчайшего расстояния
+                    // вместо distances будут Line
+                    if (LineIntersector.Intersects(line2, point3))
+                        distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
+                    else
+                    {
+                        Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
+                        if (LineIntersector.Intersects(line2, point4))
+                            distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
+                    }
+                }
             }
+            else return 0;
             return distances.Min();
         }
 
         internal static double GetDistance(Line line, Polygon polygon) =>
-			PolygonDistanceCalculator.GetDistance(polygon, line);
+            PolygonDistanceCalculator.GetDistance(polygon, line);
 
         internal static double GetDistance(Line line, MultiLine multiLine) =>
-			MultiLineDistanceCalculator.GetDistance(multiLine, line);
+            MultiLineDistanceCalculator.GetDistance(multiLine, line);
 
         internal static double GetDistance(Line line, MultiPoint multiPoint) =>
-			MultiPointDistanceCalculator.GetDistance(multiPoint, line);
+            MultiPointDistanceCalculator.GetDistance(multiPoint, line);
 
         internal static double GetDistance(Line line, MultiPolygon multiPolygon) =>
-			MultiPolygonDistanceCalculator.GetDistance(multiPolygon, line);
+            MultiPolygonDistanceCalculator.GetDistance(multiPolygon, line);
 
-        public void Visit(Contour contour) =>
-            throw new NotImplementedException();
+        internal static double GetDistance(Line line, Contour contour) =>
+            ContourDistanceCalculator.GetDistance(contour, line);
     }
 }

@@ -37,6 +37,9 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _contour);
 
+        public void Visit(Contour contour) =>
+            _result = GetDistance(_contour, contour);
+
         internal static double GetDistance(Contour contour, Point point)
         {
             if (ContourInsider.IsInside(contour, point))
@@ -109,7 +112,5 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         internal static double GetDistance(Contour contour, MultiPolygon multiPolygon) =>
             MultiPolygonDistanceCalculator.GetDistance(multiPolygon, contour);
 
-        public void Visit(Contour contour) =>
-            throw new NotImplementedException();
     }
 }
