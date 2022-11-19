@@ -15,7 +15,7 @@ public class MultiPoint : IGeometryPrimitive
         return points;
     }
 
-    public void Accept(IGeometryPrimitiveVisitor v)
+    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
     {
 
         v.Visit(this);

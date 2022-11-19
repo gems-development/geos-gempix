@@ -34,7 +34,7 @@ namespace GeometryModels.Models
             return ABC;
         }
 
-        public static double[] GetEquationOfPerpendicularLine(double[] lineEq, Point point)
+        public static double[] GetEquationOfPerpendicularLine(double[] lineEq, [NotNull] Point point)
         {
             double[] ABC = new double[3];
             ABC[0] = -lineEq[0];
@@ -43,7 +43,7 @@ namespace GeometryModels.Models
             return ABC;
         }
 
-        public void Accept(IGeometryPrimitiveVisitor v)
+        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
         {
             v.Visit(this);
         }

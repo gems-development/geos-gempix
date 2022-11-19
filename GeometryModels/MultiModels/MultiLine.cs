@@ -20,7 +20,7 @@ public class MultiLine : IGeometryPrimitive
         return lines;
     }
 
-    public void Accept(IGeometryPrimitiveVisitor v)
+    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
     {
         v.Visit(this);
     }

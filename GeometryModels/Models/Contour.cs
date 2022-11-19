@@ -15,11 +15,11 @@ namespace GeometryModels.Models
         {
             _points = contour.GetPoints();
         }
-        public void AddPoint(Point point)
+        public void AddPoint([NotNull] Point point)
         {
             _points.Add(point);
         }
-        public void Add(Contour hole)
+        public void Add([NotNull] Contour hole)
         {
             hole.Add(hole);
         }
@@ -31,8 +31,10 @@ namespace GeometryModels.Models
         {
             return _points.ElementAt(i);
         }
-        public Point GetNextPoint(Point point)
+        internal Point GetNextPoint([NotNull] Point point)
         {
+            if (!_points.Contains(point))
+                throw new ArgumentException("point не принадлежит множеству точек контура");
             int index = _points.IndexOf(point);
             if (index < _points.Count - 1)
                 return _points.ElementAt(index + 1);
@@ -86,7 +88,7 @@ namespace GeometryModels.Models
             return lines;
         }
 
-        public void Accept(IGeometryPrimitiveVisitor v)
+        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
         {
             v.Visit(this);
         }

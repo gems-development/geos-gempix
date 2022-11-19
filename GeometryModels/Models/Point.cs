@@ -18,7 +18,7 @@ namespace GeometryModels
             Y = point.Y;
         }
 
-        public void Accept(IGeometryPrimitiveVisitor v)
+        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
         {
             v.Visit(this);
         }

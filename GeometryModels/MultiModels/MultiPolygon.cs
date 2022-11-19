@@ -16,7 +16,7 @@ public class MultiPolygon : IGeometryPrimitive
         return polygons;
     }
 
-    public void Accept(IGeometryPrimitiveVisitor v)
+    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
     {
         v.Visit(this);
     }
