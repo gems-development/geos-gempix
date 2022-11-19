@@ -1,13 +1,17 @@
-﻿namespace GeometryModels.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GeometryModels.Models
 {
     public class Contour : IGeometryPrimitive
     {
         private List<Point> _points;
-        public Contour(List<Point> points)
+        public Contour([NotNull] List<Point> points)
         {
+            if (points.Capacity == 0)
+                throw new ArgumentException("Длина списка points = 0");
             _points = points;
         }
-        public Contour(Contour contour)
+        public Contour([NotNull] Contour contour)
         {
             _points = contour.GetPoints();
         }

@@ -1,10 +1,11 @@
 ﻿using GeometryModels;
+using System.Diagnostics.CodeAnalysis;
 
 public class MultiPoint : IGeometryPrimitive
 {
     List<Point> points;
 
-    public MultiPoint(List<Point> points)
+    public MultiPoint([NotNull] List<Point> points)
     {
         this.points = points;
     }

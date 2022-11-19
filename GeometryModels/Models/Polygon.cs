@@ -1,4 +1,5 @@
 ﻿using GeometryModels.Models;
+using System.Diagnostics.CodeAnalysis;
 using Point = GeometryModels.Point;
 
 public class Polygon : IGeometryPrimitive
@@ -6,19 +7,25 @@ public class Polygon : IGeometryPrimitive
     private List<Point> _points;
     private List<Contour> _holes;
 
-    public Polygon(List<Point> points)
+    public Polygon([NotNull] List<Point> points)
     {
+        if (points.Capacity == 0)
+            throw new ArgumentException("Длина списка points = 0");
         _points = points;
         _holes = new List<Contour>();
     }
 
-    public Polygon(List<Point> points, List<Contour> holes)
+    public Polygon([NotNull] List<Point> points, [NotNull] List<Contour> holes)
     {
+        if (points.Capacity == 0)
+            throw new ArgumentException("Длина списка points = 0");
+        if (holes.Capacity == 0)
+            throw new ArgumentException("Длина списка holes = 0");
         _points = points;
         _holes = holes;
     }
 
-    public Polygon(Polygon polygon)
+    public Polygon([NotNull] Polygon polygon)
     {
         _points = polygon.GetPoints();
         _holes = polygon.GetHoles();

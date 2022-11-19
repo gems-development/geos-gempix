@@ -1,11 +1,12 @@
-﻿/// <summary>
+﻿using System.Diagnostics.CodeAnalysis;
+/// <summary>
 /// Summary description for Class1
 /// </summary>
 public class MultiPolygon : IGeometryPrimitive
 {
     List<Polygon> polygons;
 
-    public MultiPolygon(List<Polygon> polygons)
+    public MultiPolygon([NotNull] List<Polygon> polygons)
     {
         this.polygons = polygons;
     }

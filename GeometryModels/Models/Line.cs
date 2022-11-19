@@ -1,17 +1,19 @@
-﻿namespace GeometryModels.Models
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace GeometryModels.Models
 {
     public class Line : IGeometryPrimitive
     {
         public Point Point1 { get; private set; }
         public Point Point2 { get; private set; }
 
-        public Line(Point point1, Point point2)
+        public Line([NotNull] Point point1, [NotNull] Point point2)
         {
             Point1 = point1;
             Point2 = point2;
         }
 
-        public Line(Line line)
+        public Line([NotNull] Line line)
         {
             Point1 = new Point(line.Point1);
             Point2 = new Point(line.Point2);

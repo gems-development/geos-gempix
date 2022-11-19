@@ -1,4 +1,7 @@
-﻿namespace GeometryModels
+﻿using GeometryModels.Models;
+using System.Diagnostics.CodeAnalysis;
+
+namespace GeometryModels
 {
     public class Point : IGeometryPrimitive
     {
@@ -9,7 +12,7 @@
             X = x;
             Y = y;
         }
-        public Point(Point point)
+        public Point([NotNull] Point point)
         {
             X = point.X;
             Y = point.Y;
