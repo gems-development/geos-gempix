@@ -83,6 +83,42 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
             return distances.Min();
         }
 
+        internal static double GetDistanceWithSquaresOfDistances(Line line1, Line line2)
+        {
+            double[] distances = new double[5];
+            distances[4] = double.MaxValue;
+            if (!LineIntersector.Intersects(line1, line2))
+            {
+                distances[0] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point1);
+                distances[1] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point2);
+                distances[2] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point1);
+                distances[3] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point2);
+                double[] eq1 = line1.GetEquationOfLine();
+                double[] eq2 = line2.GetEquationOfLine();
+                // если прямые параллельны
+                if (LineIntersector.GetPointOfIntersection(eq1, eq2) == null)
+                {
+                    // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
+                    double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
+                    double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
+                    // точка пересечения перпенд. к 1 отрезку и второго отрезка
+                    Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
+                    // можно этот метод удобно переписать под линию кратчайшего расстояния
+                    // вместо distances будут Line
+                    if (LineIntersector.Intersects(line2, point3))
+                        distances[4] = PointDistanceCalculator.GetSquareDistance(line1.Point1, point3);
+                    else
+                    {
+                        Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
+                        if (LineIntersector.Intersects(line2, point4))
+                            distances[4] = PointDistanceCalculator.GetSquareDistance(line1.Point1, point3);
+                    }
+                }
+            }
+            else return 0;
+            return Math.Sqrt(distances.Min());
+        }
+
         internal static double GetDistance(Line line, Polygon polygon) =>
 			PolygonDistanceCalculator.GetDistance(polygon, line);
 
