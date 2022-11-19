@@ -2,9 +2,9 @@
 
 namespace GeometryModels.Extensions
 {
-	public class DistanceExtension
+	public static class DistanceExtension
 	{
-		public static double GetDistance(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+		public static double GetDistance(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
 			new DistanceCalculator(primitive1, primitive2).GetResult();
 	}
 }

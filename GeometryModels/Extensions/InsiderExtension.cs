@@ -2,9 +2,9 @@
 
 namespace GeometryModels.Extensions
 {
-    public class InsiderExtension
+    public static class InsiderExtension
     {
-        public static bool IsInside(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static bool IsInside(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
             new Insider(primitive1, primitive2).GetResult();
     }
 }
