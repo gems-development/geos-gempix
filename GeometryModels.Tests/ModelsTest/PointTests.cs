@@ -1,4 +1,5 @@
-﻿namespace GeometryModels.Tests.ModelsTest
+﻿
+namespace GeometryModels.Tests.ModelsTest
 {
     public class PointTests
     {
