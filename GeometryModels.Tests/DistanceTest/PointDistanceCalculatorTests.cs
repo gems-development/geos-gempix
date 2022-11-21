@@ -1,7 +1,5 @@
-﻿using GeometryModels;
-using GeometryModels.GeometryPrimitiveIntersectors;
+﻿using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Models;
-using GeometryModels.Visitors.Intersectors;
 
 namespace GeometryModels.Tests.DistanceTest
 {

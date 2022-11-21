@@ -1,10 +1,5 @@
 ﻿using GeometryModels.Models;
 using GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeometryModels.Tests.ShortestLineSearcherTest
 {

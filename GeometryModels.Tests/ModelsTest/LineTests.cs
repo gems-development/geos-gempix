@@ -1,7 +1,4 @@
-﻿using GeometryModels;
-using GeometryModels.Extensions;
-using GeometryModels.GeometryPrimitiveIntersectors;
-using GeometryModels.Models;
+﻿using GeometryModels.Models;
 
 namespace GeometryModels.Tests.ModelsTest
 {

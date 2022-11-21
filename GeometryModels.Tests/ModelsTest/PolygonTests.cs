@@ -1,6 +1,4 @@
 ﻿using GeometryModels.Models;
-using Point = GeometryModels.Point;
-
 
 namespace GeometryModels.Tests.ModelsTest
 {

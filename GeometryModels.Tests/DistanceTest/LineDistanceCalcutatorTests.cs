@@ -1,11 +1,7 @@
-﻿using GeometryModels;
-using GeometryModels.Extensions;
-using GeometryModels.GeometryPrimitiveIntersectors;
+﻿using GeometryModels.Extensions;
 using GeometryModels.Models;
-using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
-
-public class PointDistanceCalculatorTests
+namespace GeometryModels.Tests.DistanceTest
 {
 	public class LineDistanceCalcutatorTests
 	{
