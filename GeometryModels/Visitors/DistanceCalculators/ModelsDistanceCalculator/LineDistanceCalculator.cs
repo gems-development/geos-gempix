@@ -87,7 +87,9 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             double[] distances = new double[5];
             distances[4] = double.MaxValue;
-            if (!LineIntersector.Intersects(line1, line2))
+            if (LineIntersector.Intersects(line1, line2))
+                return 0;
+            else
             {
                 distances[0] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point1);
                 distances[1] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point2);
@@ -115,7 +117,6 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
                     }
                 }
             }
-            else return 0;
             return Math.Sqrt(distances.Min());
         }
 
