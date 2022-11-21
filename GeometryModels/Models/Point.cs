@@ -14,12 +14,16 @@ namespace GeometryModels
         }
         public Point([NotNull] Point point)
         {
+            if (point == null)
+                throw new ArgumentNullException("point");
             X = point.X;
             Y = point.Y;
         }
 
         public void Accept([NotNull] IGeometryPrimitiveVisitor v)
         {
+            if (v == null)
+                throw new ArgumentNullException("v");
             v.Visit(this);
         }
 

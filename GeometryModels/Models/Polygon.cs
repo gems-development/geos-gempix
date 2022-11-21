@@ -9,31 +9,58 @@ public class Polygon : IGeometryPrimitive
 
     public Polygon([NotNull] List<Point> points)
     {
+        if (points == null)
+            throw new ArgumentNullException("points");
         if (points.Capacity == 0)
             throw new ArgumentException("Длина списка points = 0");
+        foreach(Point point in points)
+            if (point == null)
+                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
         _points = points;
         _holes = new List<Contour>();
     }
 
     public Polygon([NotNull] List<Point> points, [NotNull] List<Contour> holes)
     {
+        if (points == null)
+            throw new ArgumentNullException("points");
+        if (holes == null)
+            throw new ArgumentNullException("holes");
         if (points.Capacity == 0)
             throw new ArgumentException("Длина списка points = 0");
         if (holes.Capacity == 0)
             throw new ArgumentException("Длина списка holes = 0");
+        foreach (Point point in points)
+            if (point == null)
+                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
+        foreach (Contour hole in holes)
+            if (hole == null)
+                throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
         _points = points;
         _holes = holes;
     }
 
     public Polygon([NotNull] Polygon polygon)
     {
+        if (polygon == null)
+            throw new ArgumentNullException("polygon");
         _points = polygon.GetPoints();
         _holes = polygon.GetHoles();
     }
-    public void AddPoint([NotNull] Point point) =>
+    public void AddPoint([NotNull] Point point)
+    {
+        if (point == null)
+            throw new ArgumentNullException("point");
         _points.Add(point);
-    public void Add([NotNull] Contour hole) =>
+    }
+
+    public void Add([NotNull] Contour hole)
+    {
+        if (hole == null)
+            throw new ArgumentNullException("hole");
         _holes.Add(hole);
+    }
+
     public List<Point> GetPoints() =>
         _points;
     public List<Contour> GetHoles() =>
@@ -97,8 +124,12 @@ public class Polygon : IGeometryPrimitive
     }
 
 
-    public void Accept([NotNull] IGeometryPrimitiveVisitor v) =>
+    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+    {
+        if (v == null)
+            throw new ArgumentNullException("v");
         v.Visit(this);
+    }
 
     public override int GetHashCode() =>
         HashCode.Combine(_points, _holes);

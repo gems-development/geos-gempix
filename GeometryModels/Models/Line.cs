@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
 
 namespace GeometryModels.Models
 {
@@ -9,12 +10,18 @@ namespace GeometryModels.Models
 
         public Line([NotNull] Point point1, [NotNull] Point point2)
         {
+            if (point1 == null)
+                throw new ArgumentNullException("point1");
+            if (point2 == null)
+                throw new ArgumentNullException("point2");
             Point1 = point1;
             Point2 = point2;
         }
 
         public Line([NotNull] Line line)
         {
+            if (line == null)
+                throw new ArgumentNullException("line");
             Point1 = new Point(line.Point1);
             Point2 = new Point(line.Point2);
         }
@@ -36,6 +43,10 @@ namespace GeometryModels.Models
 
         public static double[] GetEquationOfPerpendicularLine(double[] lineEq, [NotNull] Point point)
         {
+            if (point == null)
+                throw new ArgumentNullException("point");
+            if (lineEq.Length != 3)
+                throw new ArgumentException("Уравнение прямой lineEq должно быть задано массивом из 3 элементов");
             double[] ABC = new double[3];
             ABC[0] = -lineEq[0];
             ABC[1] = lineEq[1];
@@ -45,6 +56,8 @@ namespace GeometryModels.Models
 
         public void Accept([NotNull] IGeometryPrimitiveVisitor v)
         {
+            if (v == null)
+                throw new ArgumentNullException("v");
             v.Visit(this);
         }
 
