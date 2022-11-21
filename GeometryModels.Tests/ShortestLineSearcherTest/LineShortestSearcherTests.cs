@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GeometryModels.Tests.ShortestLineSearcher
+namespace GeometryModels.Tests.ShortestLineSearcherTest
 {
 	public class LineShortestSearcherTests
 	{
