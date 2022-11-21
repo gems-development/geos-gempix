@@ -12,7 +12,7 @@ namespace GeometryModels
             X = x;
             Y = y;
         }
-        public Point([NotNull] Point point)
+        public Point(Point point)
         {
             if (point == null)
                 throw new ArgumentNullException("point");
@@ -20,7 +20,7 @@ namespace GeometryModels
             Y = point.Y;
         }
 
-        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+        public void Accept(IGeometryPrimitiveVisitor v)
         {
             if (v == null)
                 throw new ArgumentNullException("v");

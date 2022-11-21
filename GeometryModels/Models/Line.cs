@@ -8,7 +8,7 @@ namespace GeometryModels.Models
         public Point Point1 { get; private set; }
         public Point Point2 { get; private set; }
 
-        public Line([NotNull] Point point1, [NotNull] Point point2)
+        public Line(Point point1, Point point2)
         {
             if (point1 == null)
                 throw new ArgumentNullException("point1");
@@ -18,7 +18,7 @@ namespace GeometryModels.Models
             Point2 = point2;
         }
 
-        public Line([NotNull] Line line)
+        public Line(Line line)
         {
             if (line == null)
                 throw new ArgumentNullException("line");
@@ -41,7 +41,7 @@ namespace GeometryModels.Models
             return ABC;
         }
 
-        public static double[] GetEquationOfPerpendicularLine(double[] lineEq, [NotNull] Point point)
+        public static double[] GetEquationOfPerpendicularLine(double[] lineEq, Point point)
         {
             if (point == null)
                 throw new ArgumentNullException("point");
@@ -54,7 +54,7 @@ namespace GeometryModels.Models
             return ABC;
         }
 
-        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+        public void Accept(IGeometryPrimitiveVisitor v)
         {
             if (v == null)
                 throw new ArgumentNullException("v");

@@ -7,20 +7,20 @@ public class Polygon : IGeometryPrimitive
     private List<Point> _points;
     private List<Contour> _holes;
 
-    public Polygon([NotNull] List<Point> points)
+    public Polygon(List<Point> points)
     {
         if (points == null)
             throw new ArgumentNullException("points");
         if (points.Capacity == 0)
             throw new ArgumentException("Длина списка points = 0");
-        foreach(Point point in points)
+        foreach (Point point in points)
             if (point == null)
                 throw new ArgumentNullException("points", "Один из элементов списка points равен null");
         _points = points;
         _holes = new List<Contour>();
     }
 
-    public Polygon([NotNull] List<Point> points, [NotNull] List<Contour> holes)
+    public Polygon(List<Point> points, List<Contour> holes)
     {
         if (points == null)
             throw new ArgumentNullException("points");
@@ -40,21 +40,21 @@ public class Polygon : IGeometryPrimitive
         _holes = holes;
     }
 
-    public Polygon([NotNull] Polygon polygon)
+    public Polygon(Polygon polygon)
     {
         if (polygon == null)
             throw new ArgumentNullException("polygon");
         _points = polygon.GetPoints();
         _holes = polygon.GetHoles();
     }
-    public void AddPoint([NotNull] Point point)
+    public void AddPoint(Point point)
     {
         if (point == null)
             throw new ArgumentNullException("point");
         _points.Add(point);
     }
 
-    public void Add([NotNull] Contour hole)
+    public void Add(Contour hole)
     {
         if (hole == null)
             throw new ArgumentNullException("hole");
@@ -124,7 +124,7 @@ public class Polygon : IGeometryPrimitive
     }
 
 
-    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+    public void Accept(IGeometryPrimitiveVisitor v)
     {
         if (v == null)
             throw new ArgumentNullException("v");

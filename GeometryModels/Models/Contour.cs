@@ -6,7 +6,7 @@ namespace GeometryModels.Models
     public class Contour : IGeometryPrimitive
     {
         private List<Point> _points;
-        public Contour([NotNull] List<Point> points)
+        public Contour(List<Point> points)
         {
             if (points == null)
                 throw new ArgumentNullException("points");
@@ -14,19 +14,19 @@ namespace GeometryModels.Models
                 throw new ArgumentException("Длина списка points = 0");
             _points = points;
         }
-        public Contour([NotNull] Contour contour)
+        public Contour(Contour contour)
         {
             if (contour == null)
                 throw new ArgumentNullException("contour");
             _points = contour.GetPoints();
         }
-        public void AddPoint([NotNull] Point point)
+        public void AddPoint(Point point)
         {
             if (point == null)
                 throw new ArgumentNullException("point");
             _points.Add(point);
         }
-        public void Add([NotNull] Contour hole)
+        public void Add(Contour hole)
         {
             if (hole == null)
                 throw new ArgumentNullException("hole");
@@ -40,7 +40,7 @@ namespace GeometryModels.Models
         {
             return _points.ElementAt(i);
         }
-        internal Point GetNextPoint([NotNull] Point point)
+        internal Point GetNextPoint(Point point)
         {
             if (point == null)
                 throw new ArgumentNullException("point");
@@ -81,9 +81,9 @@ namespace GeometryModels.Models
             double perimeter = 0;
             for (int i = 0; i <= _points.Count - 2; i++)
             {
-				perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
+                perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
             }
-			perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count - 1], _points[0]);
+            perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count - 1], _points[0]);
             return perimeter;
         }
 
@@ -99,7 +99,7 @@ namespace GeometryModels.Models
             return lines;
         }
 
-        public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+        public void Accept(IGeometryPrimitiveVisitor v)
         {
             if (v == null)
                 throw new ArgumentNullException("v");

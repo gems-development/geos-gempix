@@ -5,7 +5,7 @@ public class MultiPoint : IGeometryPrimitive
 {
     private List<Point> _points;
 
-    public MultiPoint([NotNull] List<Point> points)
+    public MultiPoint(List<Point> points)
     {
         if (points == null)
             throw new ArgumentNullException("points");
@@ -22,7 +22,7 @@ public class MultiPoint : IGeometryPrimitive
         return _points;
     }
 
-    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+    public void Accept(IGeometryPrimitiveVisitor v)
     {
         if (v == null)
             throw new ArgumentNullException("v");

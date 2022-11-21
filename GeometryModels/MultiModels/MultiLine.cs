@@ -8,7 +8,7 @@ public class MultiLine : IGeometryPrimitive
 {
     private List<Line> _lines;
 
-    public MultiLine([NotNull] List<Line> lines)
+    public MultiLine(List<Line> lines)
     {
         if (lines == null)
             throw new ArgumentNullException("lines");
@@ -25,7 +25,7 @@ public class MultiLine : IGeometryPrimitive
         return _lines;
     }
 
-    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+    public void Accept(IGeometryPrimitiveVisitor v)
     {
         if (v == null)
             throw new ArgumentNullException("v");

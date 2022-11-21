@@ -4,7 +4,7 @@ public class MultiPolygon : IGeometryPrimitive
 {
     private List<Polygon> _polygons;
 
-    public MultiPolygon([NotNull] List<Polygon> polygons)
+    public MultiPolygon(List<Polygon> polygons)
     {
         if (polygons == null)
             throw new ArgumentNullException("polygons");
@@ -21,7 +21,7 @@ public class MultiPolygon : IGeometryPrimitive
         return _polygons;
     }
 
-    public void Accept([NotNull] IGeometryPrimitiveVisitor v)
+    public void Accept(IGeometryPrimitiveVisitor v)
     {
         if (v == null)
             throw new ArgumentNullException("v");
