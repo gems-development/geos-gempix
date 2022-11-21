@@ -39,19 +39,19 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearch
 
         internal static Line GetShortestLine(Line line, Point point)
         {
-			Line shortline = new Line(new Point(0,0), new Point(0,0));
-			
-			return shortline;
+            Line shortline = new Line(new Point(0, 0), new Point(0, 0));
+
+            return shortline;
         }
 
         internal static Line GetShortestLine(Line line1, Line line2)
         {
-			Line shortline = new Line(new Point(0, 0), new Point(0, 0));
+            Line shortline = new Line(new Point(0, 0), new Point(0, 0));
             if (!LineIntersector.Intersects(line1, line2))
             {
-				
+
             }
-			return shortline;
+            return shortline;
         }
 
         internal static Line GetShortestLine(Line line, Polygon polygon) =>

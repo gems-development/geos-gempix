@@ -72,7 +72,7 @@ namespace GeometryModels.GeometryPrimitiveInsiders
                 return false;
             // если хоть одна точка попадает хоть в одну "дырку" - всё, значит не внутри полигона
             foreach (Contour contour in polygon.GetHoles())
-                foreach(Point point in multiPoint.GetPoints())
+                foreach (Point point in multiPoint.GetPoints())
                     if (ContourInsider.IsInside(contour, point))
                         return false;
             Contour contour1 = new Contour(polygon.GetPoints());
