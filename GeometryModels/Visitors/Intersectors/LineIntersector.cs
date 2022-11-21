@@ -34,27 +34,27 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 
         internal static Point? GetPointOfIntersection(double[] lineEq1, double[] lineEq2)
         {
-            double A1 = lineEq1[0], B1 = lineEq1[1], C1 = lineEq1[2],
-               A2 = lineEq2[0], B2 = lineEq2[1], C2 = lineEq2[2];
+            double a1 = lineEq1[0], b1 = lineEq1[1], c1 = lineEq1[2],
+               a2 = lineEq2[0], b2 = lineEq2[1], c2 = lineEq2[2];
             double x, y;
-            if (A1 == 0)
+            if (a1 == 0)
             {
-                if (A2 == 0)
+                if (a2 == 0)
                     return null;
-                y = -C1 / B1;
-                x = (-C2 - B2 * y) / A2;
+                y = -c1 / b1;
+                x = (-c2 - b2 * y) / a2;
                 return new Point(x, y);
             }
-            if (A2 == 0)
+            if (a2 == 0)
             {
-                y = -C2 / B2;
-                x = (-C1 - B1 * y) / A1;
+                y = -c2 / b2;
+                x = (-c1 - b1 * y) / a1;
                 return new Point(x, y);
             }
-            if (B1 == 0 && B2 == 0)
+            if (b1 == 0 && b2 == 0)
                 return null;
-            y = (-C2 + C1 * A2 / A1) / (B2 - B1 * A2 / A1);
-            x = (-C1 - B1 * y) / A1;
+            y = (-c2 + c1 * a2 / a1) / (b2 - b1 * a2 / a1);
+            x = (-c1 - b1 * y) / a1;
             return new Point(x, y);
         }
 
