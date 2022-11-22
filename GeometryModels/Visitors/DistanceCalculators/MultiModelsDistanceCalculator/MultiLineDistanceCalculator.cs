@@ -1,4 +1,4 @@
-﻿using GeometryModels.Interfaces.IModels;
+using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
 using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using Point = GeometryModels.Point;
