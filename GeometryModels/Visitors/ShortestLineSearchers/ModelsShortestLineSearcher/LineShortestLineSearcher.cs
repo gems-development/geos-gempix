@@ -37,21 +37,73 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearch
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _line);
 
-        internal static Line GetShortestLine(Line line, Point point)
+        public static Line GetShortestLine(Line line, Point point)
         {
-			Line shortline = new Line(new Point(0,0), new Point(0,0));
-			
-			return shortline;
+            Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
+
+			double[] abc = line.GetEquationOfLine();
+
+            double[] perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
+
+            if (abc[0] != 0)
+            {
+
+                double intersectX = ((abc[2] * perpendicular[0] / abc[0]) - perpendicular[2]) /
+                    (perpendicular[1] - (abc[1] * perpendicular[0]) / abc[0]);
+
+                double intersectY = -(abc[1] * intersectX + abc[2]) / abc[0];
+
+                Point intersect = new Point(intersectX, intersectY);
+
+                shortLine = new Line(point, intersect);
+
+            }
+
+			return shortLine;
         }
 
         internal static Line GetShortestLine(Line line1, Line line2)
         {
-			Line shortline = new Line(new Point(0, 0), new Point(0, 0));
+			double[] distances = new double[6];
+			Line shortLine = new Line(new Point(0, 0), new Point(10000000, 0));
             if (!LineIntersector.Intersects(line1, line2))
             {
-				
-            }
-			return shortline;
+				distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
+                if (PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point1, line2.Point1);
+
+				distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
+				if (PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point1, line2.Point2);
+
+				distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
+				if (PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point2, line2.Point1);
+
+				distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
+				if (PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point2, line2.Point2);
+
+				double k = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
+				double b = line2.Point1.Y - k * line2.Point1.X;
+				double xz1 = (line1.Point1.X * line2.Point2.X - line1.Point1.X * line2.Point1.X +
+					line1.Point1.Y * line2.Point2.Y - line1.Point1.Y - line2.Point1.Y +
+					line2.Point1.Y * b - line2.Point2.Y * b) /
+					(k * line2.Point2.Y - k * line2.Point1.Y + line2.Point2.X - line2.Point1.X);
+				Point point1 = new Point(xz1, k * xz1 + b);
+				distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point1);
+				if (PointDistanceCalculator.GetDistance(line1.Point1, point1) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point1, point1);
+				double xz2 = (line1.Point2.X * line2.Point2.X - line1.Point2.X * line2.Point1.X +
+					line1.Point2.Y * line2.Point2.Y - line1.Point2.Y - line2.Point1.Y +
+					line2.Point1.Y * b - line2.Point2.Y * b) / (k * line2.Point2.Y - k * line2.Point1.Y +
+					line2.Point2.X - line2.Point1.X);
+				Point point2 = new Point(xz2, k * xz2 + b);
+				distances[5] = PointDistanceCalculator.GetDistance(line1.Point1, point2);
+				if (PointDistanceCalculator.GetDistance(line1.Point1, point2) <
+				   shortLine.GetLength()) shortLine = new Line(line1.Point1, point2);
+			}
+			return shortLine;
         }
 
         internal static Line GetShortestLine(Line line, Polygon polygon) =>

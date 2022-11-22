@@ -8,7 +8,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     private Polygon _polygon;
     private double _result;
 
-	public PolygonDistanceCalculator(Polygon polygon)
+    public PolygonDistanceCalculator(Polygon polygon)
     {
         _polygon = polygon;
         _result = 0;
@@ -27,13 +27,13 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         _result;
 
     public void Visit(MultiPoint multiPoint) =>
-		_result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
+        _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
 
     public void Visit(MultiLine multiLine) =>
-		_result = MultiLineDistanceCalculator.GetDistance(multiLine, _polygon);
+        _result = MultiLineDistanceCalculator.GetDistance(multiLine, _polygon);
 
     public void Visit(MultiPolygon multiPolygon) =>
-		_result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
+        _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
 
     internal static double GetDistance(Polygon polygon, Point point)
     {
@@ -49,7 +49,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line in lines)
         {
-			distance = LineDistanceCalculator.GetDistance(line, point);
+            distance = LineDistanceCalculator.GetDistance(line, point);
             if (distance < result)
             {
                 result = distance;
@@ -73,7 +73,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line1 in lines)
         {
-			distance = LineDistanceCalculator.GetDistance(line1, line);
+            distance = LineDistanceCalculator.GetDistance(line1, line);
             if (distance < result)
             {
                 result = distance;
@@ -107,13 +107,13 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     }
 
     internal static double GetDistance(Polygon polygon, MultiLine multiLine) =>
-		MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
+        MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
 
     internal static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
-		MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
+        MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
 
     internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
-		MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
+        MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
 
     public void Visit(Contour contour) =>
         throw new NotImplementedException();
