@@ -1,4 +1,7 @@
-﻿namespace GeometryModels
+﻿using GeometryModels.Models;
+using System.Diagnostics.CodeAnalysis;
+
+namespace GeometryModels
 {
     public class Point : IGeometryPrimitive
     {
@@ -11,12 +14,16 @@
         }
         public Point(Point point)
         {
+            if (point == null)
+                throw new ArgumentNullException("point");
             X = point.X;
             Y = point.Y;
         }
 
         public void Accept(IGeometryPrimitiveVisitor v)
         {
+            if (v == null)
+                throw new ArgumentNullException("v");
             v.Visit(this);
         }
 
