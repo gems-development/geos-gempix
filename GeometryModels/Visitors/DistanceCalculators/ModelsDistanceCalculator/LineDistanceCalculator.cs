@@ -58,31 +58,29 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             double[] distances = new double[5];
             distances[4] = double.MaxValue;
-            if (!LineIntersector.Intersects(line1, line2))
+            if (LineIntersector.Intersects(line1, line2))
+                return 0;
+            distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
+            distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
+            distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
+            distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
+            double[] eq1 = line1.GetEquationOfLine();
+            double[] eq2 = line2.GetEquationOfLine();
+            // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
+            double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
+            double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
+            // точка пересечения перпенд. к 1 отрезку и второго отрезка
+            Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
+            // можно этот метод удобно переписать под линию кратчайшего расстояния
+            // вместо distances будут Line
+            if (LineIntersector.Intersects(line2, point3))
+                distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
+            else
             {
-                distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
-                distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
-                distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
-                distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
-                double[] eq1 = line1.GetEquationOfLine();
-                double[] eq2 = line2.GetEquationOfLine();
-                // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
-                double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
-                double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
-                // точка пересечения перпенд. к 1 отрезку и второго отрезка
-                Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
-                // можно этот метод удобно переписать под линию кратчайшего расстояния
-                // вместо distances будут Line
-                if (LineIntersector.Intersects(line2, point3))
+                Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
+                if (LineIntersector.Intersects(line2, point4))
                     distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
-                else
-                {
-                    Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
-                    if (LineIntersector.Intersects(line2, point4))
-                        distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
-                }
             }
-            else return 0;
             return distances.Min();
         }
 
