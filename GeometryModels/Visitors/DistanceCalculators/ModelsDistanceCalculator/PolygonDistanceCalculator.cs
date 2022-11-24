@@ -1,4 +1,4 @@
-﻿using GeometryModels;
+using GeometryModels;
 using GeometryModels.GeometryPrimitiveInsiders;
 using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IModels;
@@ -108,7 +108,6 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
             return 0;
         return MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
     }
-       
 
     internal static double GetDistance(Polygon polygon, MultiPoint multiPoint)
     {

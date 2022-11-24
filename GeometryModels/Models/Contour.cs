@@ -1,22 +1,35 @@
-﻿namespace GeometryModels.Models
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Drawing;
+
+namespace GeometryModels.Models
 {
     public class Contour : IGeometryPrimitive
     {
         private List<Point> _points;
         public Contour(List<Point> points)
         {
+            if (points == null)
+                throw new ArgumentNullException("points");
+            if (points.Capacity == 0)
+                throw new ArgumentException("Длина списка points = 0");
             _points = points;
         }
         public Contour(Contour contour)
         {
+            if (contour == null)
+                throw new ArgumentNullException("contour");
             _points = contour.GetPoints();
         }
         public void AddPoint(Point point)
         {
+            if (point == null)
+                throw new ArgumentNullException("point");
             _points.Add(point);
         }
         public void Add(Contour hole)
         {
+            if (hole == null)
+                throw new ArgumentNullException("hole");
             hole.Add(hole);
         }
         public List<Point> GetPoints()
@@ -27,8 +40,12 @@
         {
             return _points.ElementAt(i);
         }
-        public Point GetNextPoint(Point point)
+        internal Point GetNextPoint(Point point)
         {
+            if (point == null)
+                throw new ArgumentNullException("point");
+            if (!_points.Contains(point))
+                throw new ArgumentException("point не принадлежит множеству точек контура");
             int index = _points.IndexOf(point);
             if (index < _points.Count - 1)
                 return _points.ElementAt(index + 1);
@@ -84,6 +101,8 @@
 
         public void Accept(IGeometryPrimitiveVisitor v)
         {
+            if (v == null)
+                throw new ArgumentNullException("v");
             v.Visit(this);
         }
 
