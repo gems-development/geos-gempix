@@ -45,8 +45,8 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
             distances[2] = double.MaxValue;
             distances[0] = PointDistanceCalculator.GetDistance(line.Point1, point);
             distances[1] = PointDistanceCalculator.GetDistance(line.Point2, point);
-            double[] eq1 = line.GetEquationOfLine();
-            double[] eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
+            var eq1 = line.GetEquationOfLine();
+            var eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
             // point1 = null конкретно здесь быть не может
             Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
             if (LineIntersector.Intersects(line, point1))
@@ -64,11 +64,11 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
             distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
             distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
             distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
-            double[] eq1 = line1.GetEquationOfLine();
-            double[] eq2 = line2.GetEquationOfLine();
+            var eq1 = line1.GetEquationOfLine();
+            var eq2 = line2.GetEquationOfLine();
             // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
-            double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
-            double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
+            var eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
+            var eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
             // точка пересечения перпенд. к 1 отрезку и второго отрезка
             Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
             // можно этот метод удобно переписать под линию кратчайшего расстояния
@@ -94,14 +94,14 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
             distances[1] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point2);
             distances[2] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point1);
             distances[3] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point2);
-            double[] eq1 = line1.GetEquationOfLine();
-            double[] eq2 = line2.GetEquationOfLine();
+            var eq1 = line1.GetEquationOfLine();
+            var eq2 = line2.GetEquationOfLine();
             // если прямые параллельны
             if (LineIntersector.GetPointOfIntersection(eq1, eq2) == null)
             {
                 // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
-                double[] eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
-                double[] eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
+                var eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
+                var eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
                 // точка пересечения перпенд. к 1 отрезку и второго отрезка
                 Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
                 // можно этот метод удобно переписать под линию кратчайшего расстояния

@@ -30,28 +30,18 @@ namespace GeometryModels.Models
             return PointDistanceCalculator.GetDistance(Point1, Point2);
         }
 
-        public double[] GetEquationOfLine()
+        public (double a, double b, double c) GetEquationOfLine()
         {
-            double[] ABC = new double[3];
             double deltaY = Point2.Y - Point1.Y;
             double deltaX = Point2.X - Point1.X;
-            ABC[0] = deltaY;
-            ABC[1] = -deltaX;
-            ABC[2] = Point1.Y * deltaX - Point1.X * deltaY;
-            return ABC;
+            return (deltaY, -deltaX, Point1.Y * deltaX - Point1.X * deltaY);
         }
 
-        public static double[] GetEquationOfPerpendicularLine(double[] lineEq, Point point)
+        public static (double a, double b, double c) GetEquationOfPerpendicularLine((double a, double b, double c) lineEq, Point point)
         {
             if (point == null)
                 throw new ArgumentNullException("point");
-            if (lineEq.Length != 3)
-                throw new ArgumentException("Уравнение прямой lineEq должно быть задано массивом из 3 элементов");
-            double[] ABC = new double[3];
-            ABC[0] = -lineEq[0];
-            ABC[1] = lineEq[1];
-            ABC[2] = lineEq[1] * point.X - point.Y * lineEq[0];
-            return ABC;
+            return (-lineEq.a, lineEq.b, lineEq.b * point.X - point.Y * lineEq.a);
         }
 
         public void Accept(IGeometryPrimitiveVisitor v)

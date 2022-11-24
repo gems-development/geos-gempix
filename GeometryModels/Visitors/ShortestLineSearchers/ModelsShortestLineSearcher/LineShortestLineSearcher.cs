@@ -41,17 +41,17 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.ModelsShortestLineSearch
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
 
-			double[] abc = line.GetEquationOfLine();
+			var abc = line.GetEquationOfLine();
 
-            double[] perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
+            var perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
 
-            if (abc[0] != 0)
+            if (abc.a != 0)
             {
 
-                double intersectX = ((abc[2] * perpendicular[0] / abc[0]) - perpendicular[2]) /
-                    (perpendicular[1] - (abc[1] * perpendicular[0]) / abc[0]);
+                double intersectX = ((abc.c * perpendicular.a / abc.a) - perpendicular.c) /
+                    (perpendicular.b - (abc.b * perpendicular.a) / abc.a);
 
-                double intersectY = -(abc[1] * intersectX + abc[2]) / abc[0];
+                double intersectY = -(abc.b * intersectX + abc.c) / abc.a;
 
                 Point intersect = new Point(intersectX, intersectY);
 
