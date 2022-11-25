@@ -1,4 +1,6 @@
-﻿using GeometryModels;
+using GeometryModels;
+using GeometryModels.GeometryPrimitiveInsiders;
+using GeometryModels.GeometryPrimitiveIntersectors;
 using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
 using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
@@ -14,6 +16,9 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         _result = 0;
     }
 
+    public double GetResult() =>
+        _result;
+
     public void Visit(Point point) =>
         _result = GetDistance(_polygon, point);
 
@@ -22,9 +27,6 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(Polygon polygon) =>
         _result = GetDistance(_polygon, polygon);
-
-    public double GetResult() =>
-        _result;
 
     public void Visit(MultiPoint multiPoint) =>
         _result = MultiPointDistanceCalculator.GetDistance(multiPoint, _polygon);
@@ -35,25 +37,25 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _polygon);
 
+    public void Visit(Contour contour) =>
+        _result = GetDistance(_polygon, contour);
+
     internal static double GetDistance(Polygon polygon, Point point)
     {
+        if (PolygonInsider.IsInside(polygon, point))
+            return 0;
         double result = 0;
         double distance = 0;
-        // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
-        {
             lines.Add(new Line(points[i], points[i + 1]));
-        }
         lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line in lines)
         {
             distance = LineDistanceCalculator.GetDistance(line, point);
             if (distance < result)
-            {
                 result = distance;
-            }
         }
         return result;
     }
@@ -61,65 +63,94 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Polygon polygon, Line line)
     {
+        if (PolygonInsider.IsInside(polygon, line))
+            return 0;
         double result = 0;
         double distance = 0;
-        // проверка если отрезок ВНУТРИ полигона... 
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
-        {
             lines.Add(new Line(points[i], points[i + 1]));
-        }
         lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line1 in lines)
         {
             distance = LineDistanceCalculator.GetDistance(line1, line);
             if (distance < result)
-            {
                 result = distance;
-            }
         }
         return result;
     }
 
     internal static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
+        if (PolygonInsider.IsInside(polygon1, polygon2) || PolygonInsider.IsInside(polygon2, polygon1))
+            return 0;
         double result = 0;
         double distance;
-        // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
-        {
             lines.Add(new Line(points[i], points[i + 1]));
-        }
         lines.Add(new Line(points[points.Count - 1], points[0]));
 
         foreach (Line line in lines)
         {
             distance = GetDistance(polygon1, line);
             if (distance < result)
-            {
                 result = distance;
-            }
         }
         return result;
     }
 
-    internal static double GetDistance(Polygon polygon, MultiLine multiLine) =>
-        MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
+    internal static double GetDistance(Polygon polygon, MultiLine multiLine)
+    {
+        if (PolygonInsider.IsInside(polygon, multiLine))
+            return 0;
+        return MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
+    }
 
-    internal static double GetDistance(Polygon polygon, MultiPoint multiPoint) =>
-        MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);
+    internal static double GetDistance(Polygon polygon, MultiPoint multiPoint)
+    {
+        if (PolygonInsider.IsInside(polygon, multiPoint))
+            return 0;
+        return MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);;
+    }
 
-    internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon) =>
-        MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);
-
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
+    internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon)
+    {
+        if (PolygonInsider.IsInside(polygon, multiPolygon))
+            return 0;
+        return MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);;
+    }
 
     internal static double GetDistance(Polygon polygon, Contour contour)
     {
-        throw new NotImplementedException();
+        if (PolygonIntersector.Intersects(polygon, contour))
+            return 0;
+        if (PolygonInsider.IsInside(polygon, contour))
+            return 0;
+        if (ContourInsider.IsInside(contour, polygon))
+            return 0;
+
+        double result = 0;
+        double distance;
+        List<Contour> contours = new List<Contour>(polygon.GetHoles());
+        contours.Add(new Contour(polygon.GetPoints()));
+        foreach (Contour contour1 in contours)
+        {
+            List<Point> points = contour1.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+                lines.Add(new Line(points[i], points[i + 1]));
+            lines.Add(new Line(points[points.Count - 1], points[0]));
+
+            foreach (Line line in lines)
+            {
+                distance = ContourDistanceCalculator.GetDistance(contour1, line);
+                if (distance < result)
+                    result = distance;
+            }
+        }
+        return result;
     }
 }

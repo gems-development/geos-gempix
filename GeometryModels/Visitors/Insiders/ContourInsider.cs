@@ -32,8 +32,8 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             Point vertex2 = closestLine.Point2;
             Point vertex3 = contour.GetNextPoint(vertex2);
             // уравнения этой стороны и соседней
-            double[] equation1 = closestLine.GetEquationOfLine();
-            double[] equation2 = new Line(vertex2, vertex3).GetEquationOfLine();
+            var equation1 = closestLine.GetEquationOfLine();
+            var equation2 = new Line(vertex2, vertex3).GetEquationOfLine();
             // уравнение биссектрисы
             double[] bis = GetEquationOfBisector(equation1, equation2, vertex1, vertex3);
             Point pointFromBis1;
@@ -97,14 +97,17 @@ namespace GeometryModels.GeometryPrimitiveInsiders
             return cos < 0;
         }
 
-        internal static double[] GetEquationOfBisector(double[] line1, double[] line2, Point first, Point last)
+        internal static double[] GetEquationOfBisector((double a1, double b1, double c1) lineEq1, 
+            (double a2, double b2, double c2) lineEq2, 
+            Point first, 
+            Point last)
         {
-            double a1 = line1[0];
-            double a2 = line2[0];
-            double b1 = line1[1];
-            double b2 = line2[1];
-            double c1 = line1[2];
-            double c2 = line2[2];
+            double a1 = lineEq1.a1;
+            double a2 = lineEq1.b1;
+            double b1 = lineEq1.c1;
+            double b2 = lineEq2.a2;
+            double c1 = lineEq2.b2;
+            double c2 = lineEq2.c2;
             double denum1 = Math.Sqrt(a1 * a1 + b1 * b1);
             double denum2 = Math.Sqrt(a2 * a2 + b2 * b2);
             // одна биссектриса для внешнего угла, другая для внутреннего

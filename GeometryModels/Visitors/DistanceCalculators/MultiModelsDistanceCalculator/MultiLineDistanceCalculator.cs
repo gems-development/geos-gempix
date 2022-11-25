@@ -1,4 +1,4 @@
-﻿using GeometryModels.Interfaces.IModels;
+using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
 using GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using Point = GeometryModels.Point;
@@ -31,6 +31,9 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
 
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _multiLine);
+
+    public void Visit(Contour contour) =>
+        _result = GetDistance(_multiLine, contour);
 
     internal static double GetDistance(MultiLine multiLine, Polygon polygon) =>
          GetDistance(
@@ -80,11 +83,10 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
 
-    internal static double GetDistance(MultiLine multiLine, Contour contour)
-    {
-        throw new NotImplementedException();
-    }
+    internal static double GetDistance(MultiLine multiLine, Contour contour) =>
+         GetDistance(
+             multiLine,
+             contour,
+             (line, primitive) => LineDistanceCalculator.GetDistance(line, (Contour)primitive));
 }

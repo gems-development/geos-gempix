@@ -1,5 +1,7 @@
-﻿using GeometryModels.Interfaces.IModels;
+﻿using GeometryModels.GeometryPrimitiveInsiders;
+using GeometryModels.Interfaces.IModels;
 using GeometryModels.Models;
+using System.Drawing;
 
 namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
@@ -35,11 +37,15 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _contour);
 
+        public void Visit(Contour contour) =>
+            _result = GetDistance(_contour, contour);
+
         internal static double GetDistance(Contour contour, Point point)
         {
+            if (ContourInsider.IsInside(contour, point))
+                return 0;
             double result = 0;
             double distance = 0;
-            // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
@@ -58,9 +64,10 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour, Line line)
         {
+            if (ContourInsider.IsInside(contour, line))
+                return 0;
             double result = 0;
             double distance = 0;
-            // проверка если отрезок ВНУТРИ полигона... 
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
@@ -105,7 +112,5 @@ namespace GeometryModels.Visitors.DistanceCalculators.ModelsDistanceCalculator
         internal static double GetDistance(Contour contour, MultiPolygon multiPolygon) =>
             MultiPolygonDistanceCalculator.GetDistance(multiPolygon, contour);
 
-        public void Visit(Contour contour) =>
-            throw new NotImplementedException();
     }
 }

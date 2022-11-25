@@ -15,44 +15,50 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
             Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
                 PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
 
-        // это для прямых, а не для отрезков, и надо учесть случай совпадения прямых
-        // метод пересечения отрезков будет включать в себя метод GetPointOfIntersection 
-        // его нужно прописать отдельно
         internal static bool IntersectsStraightLines(Line line1, Line line2)
         {
-            if (line1.Point1.X == line1.Point2.X && line2.Point1.X != line2.Point2.X)
+            if (GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine()) != null)
                 return true;
-            if (line1.Point1.X == line1.Point2.X && line2.Point1.X == line2.Point2.X)
-                return false;
-
-            double k1 = (line1.Point2.Y - line1.Point1.Y) / (line1.Point2.X - line1.Point1.X);
-            double k2 = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
-
-            return k2 - k1 > 0;
+            return false;
         }
 
         internal static bool Intersects(Line line1, Line line2)
         {
-            // отлов исключения
-            Point point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
+            Point? point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
+            if (point == null)
+                return false;
             if (Intersects(line1, point))
                 return true;
             return false;
         }
 
-        // подразумевается, что прямые не параллельны друг другу
-        internal static Point GetPointOfIntersection(double[] lineEq1, double[] lineEq2)
+        internal static Point? GetPointOfIntersection((double a1, double b1, double c1) lineEq1,
+            (double a2, double b2, double c2) lineEq2)
         {
-            if (lineEq1[0] / lineEq2[0] == lineEq1[1] / lineEq2[1] &&
-                lineEq1[1] / lineEq2[1] == lineEq1[2] / lineEq2[2])
-                throw new ArithmeticException("Отрезки не должны быть параллельны друг другу");
-            double A1 = lineEq1[0], B1 = lineEq1[1], C1 = lineEq1[2],
-                A2 = lineEq2[0], B2 = lineEq2[1], C2 = lineEq2[2];
-            // решение системы из двух уравнений прямых
-            double x = (-C2 + B2 * C1 / B1) / (A2 - B2 * A1 / B1);
-            double y = (-C1 - A1 * x) / B1;
+            double a1 = lineEq1.a1, b1 = lineEq1.b1, c1 = lineEq1.c1,
+               a2 = lineEq2.a2, b2 = lineEq2.b2, c2 = lineEq2.c2;
+            double x, y;
+            if (a1 == 0)
+            {
+                if (a2 == 0)
+                    return null;
+                y = -c1 / b1;
+                x = (-c2 - b2 * y) / a2;
+                return new Point(x, y);
+            }
+            if (a2 == 0)
+            {
+                y = -c2 / b2;
+                x = (-c1 - b1 * y) / a1;
+                return new Point(x, y);
+            }
+            if (b1 == 0 && b2 == 0)
+                return null;
+            y = (-c2 + c1 * a2 / a1) / (b2 - b1 * a2 / a1);
+            x = (-c1 - b1 * y) / a1;
             return new Point(x, y);
         }
+
         public bool GetResult() =>
             _result;
 
