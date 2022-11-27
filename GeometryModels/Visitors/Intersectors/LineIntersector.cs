@@ -24,12 +24,18 @@ namespace GeometryModels.GeometryPrimitiveIntersectors
 
         internal static bool Intersects(Line line1, Line line2)
         {
-            Point? point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
-            if (point == null)
-                return false;
-            if (Intersects(line1, point))
+            Point? point = GetPointOfIntersection(line1, line2);
+            if (point != null)
                 return true;
             return false;
+        }
+
+        internal static Point? GetPointOfIntersection(Line line1, Line line2)
+        {
+            Point? point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
+            if (Intersects(line1, point))
+                return point;
+            return null;
         }
 
         internal static Point? GetPointOfIntersection((double a1, double b1, double c1) lineEq1,

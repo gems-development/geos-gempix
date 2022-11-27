@@ -31,10 +31,7 @@ public class Polygon : IGeometryPrimitive
                 foreach (Line line in lines)
                 {
                     // должно быть line.Intersects(line1), но эти изменения еще не слиты
-                    pointOfIntersection = 
-                        LineIntersector.GetPointOfIntersection(
-                            line.GetEquationOfLine(),
-                            line1.GetEquationOfLine());
+                    pointOfIntersection = LineIntersector.GetPointOfIntersection(line, line1);
                     if (pointOfIntersection!= null && !lastPoint.Equals(pointOfIntersection))
                         throw new ArgumentException("points", 
                             "Порядок точек подразумевает самопересечения полигона, а это недопустимо");
