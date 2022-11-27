@@ -57,12 +57,6 @@ public class Polygon : IGeometryPrimitive
             throw new ArgumentException("Длина списка points = 0");
         if (holes.Capacity == 0)
             throw new ArgumentException("Длина списка holes = 0");
-        foreach (Point point in points)
-            if (point == null)
-                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
-        foreach (Contour hole in holes)
-            if (hole == null)
-                throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
         _points = new List<Point>();
         List<Line> lines = new List<Line>();
         foreach (Point point in points)
