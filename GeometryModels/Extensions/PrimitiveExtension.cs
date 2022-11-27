@@ -6,21 +6,21 @@ using GeometryModels.Visitors.ShortestLineSearchers;
 
 namespace GeometryModels.Extensions
 {
-    public class PrimitiveExtension
+    public static class PrimitiveExtension
     {
-        public static double GetDistance(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static double GetDistance(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
             new DistanceCalculator(primitive1, primitive2).GetResult();
 
-        public static bool IsInside(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static bool IsInside(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new Insider(primitive1, primitive2).GetResult();
 
-        public static bool Intersects(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static bool Intersects(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new Intersector(primitive1, primitive2).GetResult();
 
-        public static Line GetShortestLine(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static Line GetShortestLine(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new ShortestLineSearcher(primitive1, primitive2).GetResult();
 
-        public static bool IsTouching(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static bool IsTouching(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new Toucher(primitive1, primitive2).GetResult();
     }
 }
