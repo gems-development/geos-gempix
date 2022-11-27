@@ -1,4 +1,6 @@
-﻿using GeometryModels.Models;
+﻿using GeometryModels.GeometryPrimitiveInsiders;
+using GeometryModels.GeometryPrimitiveIntersectors;
+using GeometryModels.Models;
 using System.Diagnostics.CodeAnalysis;
 using Point = GeometryModels.Point;
 
@@ -12,11 +14,36 @@ public class Polygon : IGeometryPrimitive
         if (points == null)
             throw new ArgumentNullException("points");
         if (points.Capacity == 0)
-            throw new ArgumentException("Длина списка points = 0");
+            throw new ArgumentException("points", "Длина списка points = 0");
+        _points = new List<Point>();
+        List<Line> lines = new List<Line>();
         foreach (Point point in points)
+        {
             if (point == null)
                 throw new ArgumentNullException("points", "Один из элементов списка points равен null");
-        _points = points;
+            if (points.Contains(point))
+                throw new ArgumentException("points", "Список точек содержит повторяющиеся элементы");
+            if (points.Capacity > 1)
+            {
+                Point lastPoint = points.ElementAt(points.Capacity - 1);
+                Line line1 = new Line(lastPoint, point);
+                Point pointOfIntersection;
+                foreach (Line line in lines)
+                {
+                    // должно быть line.Intersects(line1), но эти изменения еще не слиты
+                    pointOfIntersection = 
+                        LineIntersector.GetPointOfIntersection(
+                            line.GetEquationOfLine(),
+                            line1.GetEquationOfLine());
+                    if (pointOfIntersection!= null && !lastPoint.Equals(pointOfIntersection))
+                        throw new ArgumentException("points", 
+                            "Порядок точек подразумевает самопересечения полигона, а это недопустимо");
+                    lines.Add(line1);
+                }
+                
+            }
+            points.Add(point);
+        }
         _holes = new List<Contour>();
     }
 
@@ -36,8 +63,57 @@ public class Polygon : IGeometryPrimitive
         foreach (Contour hole in holes)
             if (hole == null)
                 throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
-        _points = points;
-        _holes = holes;
+        _points = new List<Point>();
+        List<Line> lines = new List<Line>();
+        foreach (Point point in points)
+        {
+            if (point == null)
+                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
+            if (points.Contains(point))
+                throw new ArgumentException("points", "Список точек содержит повторяющиеся элементы");
+            if (points.Capacity > 1)
+            {
+                Point lastPoint = points.ElementAt(points.Capacity - 1);
+                Line line1 = new Line(lastPoint, point);
+                Point pointOfIntersection;
+                foreach (Line line in lines)
+                {
+                    // должно быть line.Intersects(line1), но эти изменения еще не слиты
+                    pointOfIntersection =
+                        LineIntersector.GetPointOfIntersection(
+                            line.GetEquationOfLine(),
+                            line1.GetEquationOfLine());
+                    if (pointOfIntersection != null && !lastPoint.Equals(pointOfIntersection))
+                        throw new ArgumentException("points",
+                            "Порядок точек подразумевает самопересечения полигона, а это недопустимо");
+                    lines.Add(line1);
+                }
+
+            }
+            points.Add(point);
+        }
+        _holes = new List<Contour>();
+        foreach (Contour hole in holes)
+        {
+            if (hole == null)
+                throw new ArgumentNullException("holes", "Один из элементов списка points равен null");
+            if (_holes.Contains(hole))
+                throw new ArgumentException("holes", "Список точек содержит повторяющиеся элементы");
+            if (_holes.Capacity > 1)
+            {
+                foreach (Contour hole1 in _holes)
+                {
+                    if (ContourIntersector.Intersects(hole, hole1))
+                        throw new ArgumentException("holes",
+                            "Нельзя, чтобы пересекались внутренние контуры");
+                    if (ContourInsider.IsInside(hole, hole1) || ContourInsider.IsInside(hole1, hole))
+                        throw new ArgumentException("holes",
+                            "Нельзя, чтобы один внутренний контур был внутри другого");
+                }
+
+            }
+            _holes.Add(hole);
+        }
     }
 
     public Polygon(Polygon polygon)
