@@ -18,9 +18,12 @@
         }
         public double GetLength()
         {
-            return PointDistanceCalculator.GetDistance(Point1, Point2);
+            return Math.Sqrt(GetSquareLength());
         }
-
+        public double GetSquareLength()
+        {
+			return PointDistanceCalculator.GetSquareDistance(Point1, Point2);
+		}
         public double[] GetEquationOfLine()
         {
             double[] ABC = new double[3];

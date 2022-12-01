@@ -38,8 +38,8 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
 	internal static Line GetShortestLine(Polygon polygon, Point point)
 	{
-		Line result = new Line(new Point(0, 0), new Point(0, 0));
-		Line distance = new Line(new Point(0,0), new Point(0,0));
+		Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+		Line curLine = new Line(new Point(0,0), new Point(0,0));
 		// проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
 		List<Point> points = polygon.GetPoints();
 		List<Line> lines = new List<Line>();
@@ -50,20 +50,20 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 		lines.Add(new Line(points[points.Count - 1], points[0]));
 		foreach (Line line in lines)
 		{
-			distance = LineShortestLineSearcher.GetShortestLine(line, point);
-			if (distance.GetLength() < result.GetLength())
+			curLine = LineShortestLineSearcher.GetShortestLine(line, point);
+			if (curLine.GetLength() < shortLine.GetLength())
 			{
-				result = new Line(distance);
+				shortLine = new Line(curLine);
 			}
 		}
-		return result;
+		return shortLine;
 	}
 
 
 	internal static Line GetShortestLine(Polygon polygon, Line line)
 	{
-		Line result = new Line(new Point(0, 0), new Point(0, 0));
-		Line distance = new Line(new Point(0, 0), new Point(0, 0));
+		Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+		Line curLine = new Line(new Point(0, 0), new Point(0, 0));
 		// проверка если отрезок ВНУТРИ полигона... 
 		List<Point> points = polygon.GetPoints();
 		List<Line> lines = new List<Line>();
@@ -74,19 +74,19 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 		lines.Add(new Line(points[points.Count - 1], points[0]));
 		foreach (Line line1 in lines)
 		{
-			distance = LineShortestLineSearcher.GetShortestLine(line1, line);
-			if (distance.GetLength() < result.GetLength())
+			curLine = LineShortestLineSearcher.GetShortestLine(line1, line);
+			if (curLine.GetLength() < shortLine.GetLength())
 			{
-				result = new Line(distance);
+				shortLine = new Line(curLine);
 			}
 		}
-		return result;
+		return shortLine;
 	}
 
 	internal static Line GetShortestLine(Polygon polygon1, Polygon polygon2)
 	{
-		Line result = new Line(new Point(0, 0), new Point(0, 0));
-		Line distance = new Line(new Point(0, 0), new Point(0, 0));
+		Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+		Line curLine = new Line(new Point(0, 0), new Point(0, 0));
 		// проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
 		List<Point> points = polygon2.GetPoints();
 		List<Line> lines = new List<Line>();
@@ -98,13 +98,13 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
 		foreach (Line line in lines)
 		{
-			distance = GetShortestLine(polygon1, line);
-			if (distance.GetLength() < result.GetLength())
+			curLine = GetShortestLine(polygon1, line);
+			if (curLine.GetLength() < shortLine.GetLength())
 			{
-				result = new Line(distance);
+				shortLine = new Line(curLine);
 			}
 		}
-		return result;
+		return shortLine;
 	}
 
 	internal static Line GetShortestLine(Polygon polygon, MultiLine multiLine) =>

@@ -67,18 +67,18 @@ namespace GeometryModels.Visitors.ShortestLineSearchers.MultiModelsShortestLineS
             IGeometryPrimitive primitive,
 			Func<Line, IGeometryPrimitive, Line> GetShortestLine)
         {
-			Line result = new Line(new Point(0, 0), new Point(0, 0));
-			Line distance = new Line(new Point(0, 0), new Point(0, 0));
+			Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+			Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             List<Line> lines = multiLine.GetLines();
             foreach (Line line in lines)
             {
-				distance = GetShortestLine.Invoke(line, primitive);
-				if (distance.GetLength() < result.GetLength())
+				curLine = GetShortestLine.Invoke(line, primitive);
+				if (curLine.GetLength() < shortLine.GetLength())
                 {
-					result = new Line(distance);
-                }
+					shortLine = new Line(curLine);
+                }   
             }
-            return result;
+            return shortLine;
         }
 
         public void Visit(Contour contour) =>
