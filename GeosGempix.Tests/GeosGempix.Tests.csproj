@@ -25,4 +25,8 @@
     <ProjectReference Include="..\GeosGempix\GeosGempix.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="InsiderTest\" />
+  </ItemGroup>
+
 </Project>

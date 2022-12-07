@@ -8,7 +8,7 @@ namespace GeosGempix.Tests
         [Fact]
         public void DistanceForTwoPoints_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(0, 0);
             Point point2 = new Point(4, 3);
             //Act.
@@ -20,7 +20,7 @@ namespace GeosGempix.Tests
         [Fact]
         public void DistanceBetweenPointAndLine_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(0, 0);
             Point point2 = new Point(1, 1);
             Point point3 = new Point(5, 1);

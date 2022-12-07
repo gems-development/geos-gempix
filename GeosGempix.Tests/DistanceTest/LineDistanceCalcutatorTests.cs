@@ -9,7 +9,7 @@ namespace GeosGempix.Tests.DistanceTest
 		[Fact]
 		public void GetDistanceBetweenPointAndline_Success()
 		{
-			//Arrage.
+			//Arrange.
 			Point point1 = new Point(2, 3);
 			Point point2 = new Point(7, 3);
 			Point point3 = new Point(5, 0);

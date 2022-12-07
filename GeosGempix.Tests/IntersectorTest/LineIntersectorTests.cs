@@ -12,7 +12,7 @@ namespace GeosGempix.Tests.IntersectorTest
 		public void IsLineIntersection_Success(double x11, double y11, double x12, double y12,
 														double x21, double y21, double x22, double y22)
 		{
-			//Arrage.
+			//Arrange.
 			Line line1 = new Line(new Point(x11, y11), new Point(x12, y12));
 			Line line2 = new Line(new Point(x21, y21), new Point(x22, y22));
 			//Act. + Assert.
@@ -23,7 +23,7 @@ namespace GeosGempix.Tests.IntersectorTest
 		[Fact]
 		public void IsIntersection_Success()
 		{
-			//Arrage.
+			//Arrange.
 			Line line1 = new Line(new Point(1, 1), new Point(3, -2));
 			Line line2 = new Line(new Point(4, 3), new Point(-2, -4));
 			//Act. + Assert.
