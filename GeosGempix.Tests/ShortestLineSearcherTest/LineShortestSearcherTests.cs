@@ -14,7 +14,19 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
 			//Act.
 			Line shortLine = LineShortestLineSearcher.GetShortestLine(line, point);
 			//Assert.
-			Assert.Equal(2, shortLine.GetLength());
+			Assert.Equal(Math.Sqrt(2), shortLine.GetLength());
+		}
+
+		[Fact]
+		public static void GetShortestLineBetweenLines()
+		{
+			//Arrage.
+			Line line1 = new Line(new Point(0, 0), new Point(0, 3));
+			Line line2 = new Line(new Point(3, 0), new Point(3, 3));
+			//Act.
+			Line shortLine = LineShortestLineSearcher.GetShortestLine(line1, line2);
+			//Assert.
+			Assert.Equal(3, shortLine.GetLength());
 		}
 	}
 }

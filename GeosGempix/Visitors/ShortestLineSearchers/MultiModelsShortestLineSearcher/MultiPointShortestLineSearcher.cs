@@ -71,17 +71,17 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
         IGeometryPrimitive primitive,
         Func<Point, IGeometryPrimitive, Line> GetShortestLine)
     {
-        Line result = new Line(new Point(0, 0), new Point(0, 0));
-        Line distance = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (Point point in multiPoint.GetPoints())
         {
-            distance = GetShortestLine.Invoke(point, primitive);
-            if (distance.GetLength() < result.GetLength())
+			curLine = GetShortestLine.Invoke(point, primitive);
+            if (curLine.GetLength() < shortLine.GetLength())
             {
-                result = new Line(distance);
+				shortLine = new Line(curLine);
             }
         }
-        return result;
+        return shortLine;
     }
 
     public void Visit(Contour contour) =>
