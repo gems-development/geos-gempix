@@ -12,9 +12,13 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         public LineIntersector(Line line) =>
             _line = line;
 
-        public static bool Intersects(Line line, Point point) =>
-            Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
+        public static bool Intersects(Line line, Point point)
+        {
+            if (point == null)
+                return false;
+            return Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
                 PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
+        }
 
         internal static bool IntersectsStraightLines(Line line1, Line line2)
         {

@@ -36,12 +36,12 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             var equation1 = closestLine.GetEquationOfLine();
             var equation2 = new Line(vertex2, vertex3).GetEquationOfLine();
             // уравнение биссектрисы
-            double[] bis = GetEquationOfBisector(equation1, equation2, vertex1, vertex3);
+            var bis = GetEquationOfBisector(equation1, equation2, vertex1, vertex3);
             Point pointFromBis1;
             Point pointFromBis2;
-            double a = bis[0];
-            double b = bis[1];
-            double c = bis[2];
+            double a = bis.a;
+            double b = bis.b;
+            double c = bis.c;
             double x, y;
             // надо понять, какой кусочек биссектрисы будет внешним для многоугольника
             if (b != 0)
@@ -98,20 +98,21 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return cos < 0;
         }
 
-        internal static double[] GetEquationOfBisector((double a1, double b1, double c1) lineEq1, 
+        internal static (double a, double b, double c) GetEquationOfBisector((double a1, double b1, double c1) lineEq1, 
             (double a2, double b2, double c2) lineEq2, 
             Point first, 
             Point last)
         {
             double a1 = lineEq1.a1;
-            double a2 = lineEq1.b1;
-            double b1 = lineEq1.c1;
-            double b2 = lineEq2.a2;
-            double c1 = lineEq2.b2;
+            double b1 = lineEq1.b1;
+            double c1 = lineEq1.c1;
+            double a2 = lineEq2.a2;
+            double b2 = lineEq2.b2;
             double c2 = lineEq2.c2;
             double denum1 = Math.Sqrt(a1 * a1 + b1 * b1);
             double denum2 = Math.Sqrt(a2 * a2 + b2 * b2);
             // одна биссектриса для внешнего угла, другая для внутреннего
+            // внешний угол = дополняющий до 180
             double[] bis1 = {
                 a1 * denum2 - a2 * denum1,
                 b1 * denum2 - b2 * denum1,
@@ -125,8 +126,8 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             double res1 = bis1[0] * first.X + bis1[1] * first.Y + bis1[2];
             double res2 = bis1[0] * last.X + bis1[1] * last.Y + bis1[2];
             if (res1 > 0 && res2 > 0 || res1 < 0 && res2 < 0)
-                return bis2;
-            return bis1;
+                return (bis2[0], bis2[1], bis2[2]);
+            return (bis1[0], bis1[1], bis1[2]);
         }
         internal static bool IsInside(Contour contour, Line line1)
         {

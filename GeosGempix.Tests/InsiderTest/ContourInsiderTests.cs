@@ -1,10 +1,5 @@
 ﻿using GeosGempix.Models;
-using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using GeosGempix.Extensions;
 
 namespace GeosGempix.Tests.ShortestLineSearcherTest
 {
@@ -30,11 +25,17 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            Point point = new Point(3, 3);
+            Point pointTrue1 = new Point(3, 3);
+            Point pointFalse1 = new Point(0, 3);
+            Point pointFalse2 = new Point(10, 3);
             //Act.
-            //Boolean b = tests._contour
+            Boolean t1 = tests._contour.IsInside(pointTrue1);
+            Boolean f1 = tests._contour.IsInside(pointFalse1);
+            Boolean f2 = tests._contour.IsInside(pointFalse2);
             //Assert.
-            //Assert.Equal(Math.Sqrt(2), shortLine.GetLength());
+            Assert.True(t1);
+            Assert.False(f1);
+            Assert.False(f2);
         }
     }
 }
