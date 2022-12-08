@@ -16,7 +16,7 @@ namespace GeosGempix.Tests.DistanceTest
 			//Act.
 			Line line = new Line(point1, point2);
 			//Assert.
-			Assert.Equal(3, DistanceExtension.GetDistance(line, point3));
+			Assert.Equal(3, line.GetDistance(point3));
 		}
 
 	}
