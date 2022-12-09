@@ -32,7 +32,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
             Point? point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
             if (point == null)
                 return false;
-            if (Intersects(line1, point))
+            if (Intersects(line1, point) && Intersects(line2, point))
                 return true;
             return false;
         }

@@ -37,5 +37,26 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
             Assert.False(f1);
             Assert.False(f2);
         }
+
+        [Fact]
+        public static void IsLineInsideContour()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            Line lineTrue = new Line(new Point(1, 1), new Point(8, 8));
+            Line lineFalse1 = new Line(new Point(5, 5), new Point(10, 5));
+            Line lineFalse2 = new Line(new Point(3, 0), new Point(6, 0));
+            Line lineFalse3 = new Line(new Point(3, 10), new Point(6, 10));
+            //Act.
+            Boolean t1 = tests._contour.IsInside(lineTrue);
+            Boolean f1 = tests._contour.IsInside(lineFalse1);
+            Boolean f2 = tests._contour.IsInside(lineFalse2);
+            Boolean f3 = tests._contour.IsInside(lineFalse3);
+            //Assert.
+            Assert.True(t1);
+            Assert.False(f1);
+            Assert.False(f2);
+            Assert.False(f3);
+        }
     }
 }
