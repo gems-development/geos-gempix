@@ -1,10 +1,10 @@
-﻿using GeometryModels.Models;
-using GeometryModels.Visitors.DistanceCalculators;
-using GeometryModels.Visitors.Insiders;
-using GeometryModels.Visitors.Intersectors;
-using GeometryModels.Visitors.ShortestLineSearchers;
+﻿using GeosGempix.Models;
+using GeosGempix.Visitors.DistanceCalculators;
+using GeosGempix.Visitors.Insiders;
+using GeosGempix.Visitors.Intersectors;
+using GeosGempix.Visitors.ShortestLineSearchers;
 
-namespace GeometryModels.Extensions
+namespace GeosGempix.Extensions
 {
     public static class PrimitiveExtension
     {

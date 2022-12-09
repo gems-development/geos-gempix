@@ -9,7 +9,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
 		public void CreatePolygon_Success()
 		{
-			//Arrage.
+			//Arrange.
 			List<Point> list = new List<Point>();
 			list.Add(new Point(1, 1));
 			list.Add(new Point(2, 2));
@@ -23,7 +23,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
 		public void PerimeterOfPolygon_Triangle_Success()
 		{
-			//Arrage.
+			//Arrange.
 			List<Point> list = new List<Point>();
 			list.Add(new Point(0, 0));
 			list.Add(new Point(3, 4));
@@ -37,7 +37,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
 		public void PerimeterOfPolygon_Square_Success()
 		{
-			//Arrage.
+			//Arrange.
 			List<Point> list = new List<Point>();
 			list.Add(new Point(0, 0));
 			list.Add(new Point(0, 3));
@@ -52,7 +52,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
 		public void SquareOfPolygon_Square_Success()
 		{
-			//Arrage.
+			//Arrange.
 			List<Point> list = new List<Point>();
 			list.Add(new Point(0, 0));
 			list.Add(new Point(0, 3));
@@ -67,7 +67,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
 		public void CreatePolygonWitрContouruccess()
 		{
-			//Arrage.
+			//Arrange.
 			Point point1 = new Point(0, 0);
 			Point point2 = new Point(0, 3);
 			Point point3 = new Point(3, 3);
