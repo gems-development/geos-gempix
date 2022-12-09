@@ -8,16 +8,16 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
         public Contour _contour;
         public ContourInsiderTests()
         {
-            List<Point> _points = new List<Point>();
-            Point _point1 = new Point(0, 0);
-            Point _point2 = new Point(9, 0);
-            Point _point3 = new Point(9, 9);
-            Point _point4 = new Point(0, 9);
-            _points.Add(_point1);
-            _points.Add(_point2);
-            _points.Add(_point3);
-            _points.Add(_point4);
-            _contour = new Contour(_points);
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(0, 0);
+            Point point2 = new Point(9, 0);
+            Point point3 = new Point(9, 9);
+            Point point4 = new Point(0, 9);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            _contour = new Contour(points);
         }
 
         [Fact]
@@ -57,6 +57,168 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
             Assert.False(f1);
             Assert.False(f2);
             Assert.False(f3);
+        }
+
+        [Fact]
+        public static void IsContourInsideContour1()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(3, 3);
+            Point point2 = new Point(3, 6);
+            Point point3 = new Point(6, 6);
+            Point point4 = new Point(6, 3);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            Contour contour = new Contour(points);
+            //Act.
+            Boolean t = tests._contour.IsInside(contour);
+            //Assert.
+            Assert.True(t);
+        }
+
+        [Fact]
+        public static void IsContourInsideContour2()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(7, 3);
+            Point point2 = new Point(7, 6);
+            Point point3 = new Point(10, 6);
+            Point point4 = new Point(10, 3);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            Contour contour = new Contour(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(contour);
+            //Assert.
+            Assert.False(f);
+        }
+
+        [Fact]
+        public static void IsContourInsideContour3()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(3, 10);
+            Point point2 = new Point(3, 13);
+            Point point3 = new Point(6, 10);
+            Point point4 = new Point(6, 13);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            Contour contour = new Contour(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(contour);
+            //Assert.
+            Assert.False(f);
+        }
+
+        [Fact]
+        public static void IsContourInsideContour4()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(3, 9);
+            Point point2 = new Point(3, 12);
+            Point point3 = new Point(6, 9);
+            Point point4 = new Point(6, 12);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            Contour contour = new Contour(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(contour);
+            //Assert.
+            Assert.False(f);
+        }
+
+        [Fact]
+        public static void IsContourInsideContour5()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(3, 6);
+            Point point2 = new Point(3, 9);
+            Point point3 = new Point(6, 9);
+            Point point4 = new Point(6, 6);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            points.Add(point4);
+            Contour contour = new Contour(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(contour);
+            //Assert.
+            Assert.False(f);
+        }
+
+        [Fact]
+        public static void IsMultiPointInsideContour1()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(3, 5);
+            Point point2 = new Point(7, 5);
+            Point point3 = new Point(5, 3);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            MultiPoint multiPoint = new MultiPoint(points);
+            //Act.
+            Boolean t = tests._contour.IsInside(multiPoint);
+            //Assert.
+            Assert.True(t);
+        }
+
+        [Fact]
+        public static void IsMultiPointInsideContour2()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(8, 8);
+            Point point2 = new Point(10, 8);
+            Point point3 = new Point(10 ,7);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            MultiPoint multiPoint = new MultiPoint(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(multiPoint);
+            //Assert.
+            Assert.False(f);
+        }
+
+        [Fact]
+        public static void IsMultiPointInsideContour3()
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            List<Point> points = new List<Point>();
+            Point point1 = new Point(8, 8);
+            Point point2 = new Point(9, 7);
+            Point point3 = new Point(8, 6);
+            points.Add(point1);
+            points.Add(point2);
+            points.Add(point3);
+            MultiPoint multiPoint = new MultiPoint(points);
+            //Act.
+            Boolean f = tests._contour.IsInside(multiPoint);
+            //Assert.
+            Assert.False(f);
         }
     }
 }
