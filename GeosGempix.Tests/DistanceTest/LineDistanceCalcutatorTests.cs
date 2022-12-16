@@ -1,5 +1,6 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
+using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
 namespace GeosGempix.Tests.DistanceTest
 {
@@ -16,7 +17,7 @@ namespace GeosGempix.Tests.DistanceTest
 			//Act.
 			Line line = new Line(point1, point2);
 			//Assert.
-			Assert.Equal(3, DistanceExtension.GetDistance(line, point3));
+			Assert.Equal(3, LineDistanceCalculator.GetDistance(line, point3));
 		}
 
 	}

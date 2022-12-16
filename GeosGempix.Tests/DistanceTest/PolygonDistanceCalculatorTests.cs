@@ -26,7 +26,7 @@ namespace GeosGempix.Tests.DistanceTest
             points.Add(point4);
             Polygon polygon = new Polygon(points);
             //Act. + Assert.
-            Assert.Equal(0, DistanceExtension.GetDistance(polygon, point));
+            Assert.Equal(0, PolygonDistanceCalculator.GetDistance(polygon, point));
         }
     }
 }
