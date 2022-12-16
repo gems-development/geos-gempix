@@ -41,7 +41,7 @@ namespace GeosGempix.Models
         {
             if (point == null)
                 throw new ArgumentNullException("point");
-            return (-lineEq.a, lineEq.b, lineEq.b * point.X - point.Y * lineEq.a);
+            return (-lineEq.b, lineEq.a, lineEq.b * point.X - point.Y * lineEq.a);
         }
 
         public void Accept(IGeometryPrimitiveVisitor v)

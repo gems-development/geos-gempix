@@ -13,7 +13,7 @@ namespace GeosGempix.Tests.DistanceTest
 		[Fact]
         public void GetDistanceBetweenPolygonAndPoint_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(0, 0);
             Point point2 = new Point(0, 3);
             Point point3 = new Point(5, 4);
@@ -26,7 +26,7 @@ namespace GeosGempix.Tests.DistanceTest
             points.Add(point4);
             Polygon polygon = new Polygon(points);
             //Act. + Assert.
-            Assert.Equal(0, PolygonDistanceCalculator.GetDistance(polygon, point));
+            Assert.Equal(0, polygon.GetDistance(point));
         }
     }
 }

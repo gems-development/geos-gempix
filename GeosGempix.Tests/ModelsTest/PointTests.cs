@@ -7,7 +7,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
         public void CreatePoint_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point = new Point(1, 3);
             //Act. + Assert.
             Assert.Equal(1, point.X);
@@ -17,7 +17,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
         public void EqualsPoints_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(0, 0);
             Point point2 = new Point(1, 1);
             //Act.
@@ -30,7 +30,7 @@ namespace GeosGempix.Tests.ModelsTest
 		[Fact]
         public void EqualPoints_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(1, 1);
             Point point2 = new Point(1, 1);
             //Act. + Assert.
