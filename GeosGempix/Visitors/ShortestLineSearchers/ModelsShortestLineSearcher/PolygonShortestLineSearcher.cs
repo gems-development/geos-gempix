@@ -4,6 +4,8 @@ using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
+using GeosGempix.Visitors.Insiders;
+using GeosGempix.Extensions;
 
 public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 {
@@ -41,7 +43,9 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
+        Insider insider = new Insider(polygon, point);
+        if(insider.GetResult())
+            return shortLine;
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -65,7 +69,9 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если отрезок ВНУТРИ полигона... 
+        Insider insider = new Insider(polygon, line);
+        if(insider.GetResult())
+            return shortLine;
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -88,7 +94,11 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
+        // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
+        Insider insider = new Insider(polygon1, polygon2);
+        Insider insider2 = new Insider(polygon2, polygon1);
+        if(insider.GetResult() || insider2.GetResult())
+            return shortLine;
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
