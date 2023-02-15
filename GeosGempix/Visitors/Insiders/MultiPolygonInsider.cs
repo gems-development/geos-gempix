@@ -39,7 +39,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
 
         internal static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
         {
-            List<Point> points = multiPoint.GetPoints();
+            List<Point> points = (List<Point>)multiPoint.GetPoints();
             List<Point> pointsForRemove = new List<Point>();
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
