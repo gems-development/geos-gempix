@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeosGempix.Visitors.Insiders;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
@@ -62,6 +63,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
+            Insider insider = new Insider(contour, point);
+            if(insider.GetResult())
+                return null;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
@@ -85,6 +89,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если отрезок ВНУТРИ контура... 
+            Insider insider = new Insider(contour, line);
+            if(insider.GetResult())
+                return null;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
@@ -108,6 +115,10 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если контур ВНУТРИ контура... какой внутри какого?)))
+            Insider insider1 = new Insider(contour1, contour2);
+            Insider insider2 = new Insider(contour2, contour1);
+            if(insider1.GetResult() || insider2.GetResult())
+                return null;
             List<Point> points = contour2.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
