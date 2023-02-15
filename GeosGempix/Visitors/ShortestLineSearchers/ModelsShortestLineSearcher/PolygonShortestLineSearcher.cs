@@ -7,6 +7,7 @@ using GeosGempix.MultiModels;
 using GeosGempix.Visitors.Insiders;
 using GeosGempix.Extensions;
 
+
 public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 {
     private Polygon _polygon;
@@ -43,9 +44,12 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        Insider insider = new Insider(polygon, point);
-        if(insider.GetResult())
-            return shortLine;
+        Insider insider;
+        foreach (Contour contour in polygon.GetHoles()){ 
+            insider = new Insider(contour, point);
+            if(insider.GetResult())
+            return null;
+        }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -69,9 +73,12 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        Insider insider = new Insider(polygon, line);
-        if(insider.GetResult())
-            return shortLine;
+        Insider insider;
+        foreach (Contour contour in polygon.GetHoles()){ 
+            insider = new Insider(contour, line);
+            if(insider.GetResult())
+            return null;
+        }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -95,10 +102,17 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
-        Insider insider = new Insider(polygon1, polygon2);
-        Insider insider2 = new Insider(polygon2, polygon1);
-        if(insider.GetResult() || insider2.GetResult())
-            return shortLine;
+        Insider insider;
+        foreach (Contour contour in polygon1.GetHoles()){ 
+            insider = new Insider(contour, polygon2);
+            if(insider.GetResult())
+            return null;
+        }
+        foreach (Contour contour in polygon2.GetHoles()){ 
+            insider = new Insider(contour, polygon1);
+            if(insider.GetResult())
+            return null;
+        }
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
