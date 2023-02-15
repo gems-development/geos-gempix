@@ -40,15 +40,17 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _polygon);
 
-    internal static Line GetShortestLine(Polygon polygon, Point point)
+    // добавление ? избавляет от warnings связанным с возможным возвратом null
+    internal static Line? GetShortestLine(Polygon polygon, Point point)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        Insider insider;
+        // Поскольку понятие Intersects (пересекается) оказалось шире, чем
+        // предполагалось изначально - оно включает в себя понятие "внутри", "касается"
+        // то логичнее будет использовать его
         foreach (Contour contour in polygon.GetHoles()){ 
-            insider = new Insider(contour, point);
-            if(insider.GetResult())
-            return null;
+            if(contour.Intersects(point))
+                return null;
         }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
