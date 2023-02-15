@@ -51,7 +51,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
             lines.Add(new Line(points[i], points[i + 1]));
-        lines.Add(new Line(points[points.Count - 1], points[0]));
+        lines.Add(new Line(points.Last(), points.First()));
         foreach (Line line in lines)
         {
             distance = LineDistanceCalculator.GetDistance(line, point);

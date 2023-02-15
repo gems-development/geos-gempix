@@ -61,16 +61,11 @@ public class Polygon : IGeometryPrimitive
         _holes.Add(hole);
     }
 
-    public List<Point> GetPoints() =>
-        _points;
-    public List<Contour> GetHoles() =>
-        _holes;
-    public Point GetPoint(int i) =>
-        _points.ElementAt(i);
-    public int GetCountOfPoints() =>
-        _points.Count;
-    public void RemovePoint(int i) =>
-        _points.RemoveAt(i);
+    public List<Point> GetPoints() => _points;
+    public List<Contour> GetHoles() => _holes;
+    public Point GetPoint(int i) => _points.ElementAt(i);
+    public int GetCountOfPoints() => _points.Count;
+    public void RemovePoint(int i) => _points.RemoveAt(i);
 
     public double GetSquare()
     {
@@ -131,8 +126,7 @@ public class Polygon : IGeometryPrimitive
         v.Visit(this);
     }
 
-    public override int GetHashCode() =>
-        HashCode.Combine(_points, _holes);
+    public override int GetHashCode() => HashCode.Combine(_points, _holes);
 
     public override bool Equals(object? obj)
     {

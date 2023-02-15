@@ -38,7 +38,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _line);
 
-        public static Line GetShortestLine(Line line, Point point)
+        internal static Line GetShortestLine(Line line, Point point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
 
@@ -49,10 +49,10 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             if (abc.a != 0)
             {
 
-                double intersectX = ((abc.c * perpendicular.a / abc.a) - perpendicular.c) /
-                    (perpendicular.b - (abc.b * perpendicular.a) / abc.a);
+                double intersectX = ( (perpendicular.c / perpendicular.a) - (abc.c / abc.a)) /
+                    ( (perpendicular.b / perpendicular.a) - (abc.b / abc.a));
 
-                double intersectY = -(abc.b * intersectX + abc.c) / abc.a;
+                double intersectY = - ( abc.b * intersectX + abc.c) / abc.a;
 
                 Point intersect = new Point(intersectX, intersectY);
 
@@ -63,47 +63,19 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 			return shortLine;
         }
 
-        internal static Line GetShortestLine(Line line1, Line line2)
+        public static Line GetShortestLine(Line line1, Line line2)
         {
-			double[] distances = new double[6];
 			Line shortLine = new Line(new Point(0, 0), new Point(10000000, 0));
-            if (!LineIntersector.Intersects(line1, line2))
+            Line shortLine1 = GetShortestLine(line1, line2.Point1);
+			Line shortLine2 = GetShortestLine(line1, line2.Point2);
+            if(shortLine1.GetLength() < shortLine.GetLength())
             {
-				distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
-                if (PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point1, line2.Point1);
-
-				distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
-				if (PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point1, line2.Point2);
-
-				distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
-				if (PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point2, line2.Point1);
-
-				distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
-				if (PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point2, line2.Point2);
-
-				double k = (line2.Point2.Y - line2.Point1.Y) / (line2.Point2.X - line2.Point1.X);
-				double b = line2.Point1.Y - k * line2.Point1.X;
-				double xz1 = (line1.Point1.X * line2.Point2.X - line1.Point1.X * line2.Point1.X +
-					line1.Point1.Y * line2.Point2.Y - line1.Point1.Y - line2.Point1.Y +
-					line2.Point1.Y * b - line2.Point2.Y * b) /
-					(k * line2.Point2.Y - k * line2.Point1.Y + line2.Point2.X - line2.Point1.X);
-				Point point1 = new Point(xz1, k * xz1 + b);
-				distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point1);
-				if (PointDistanceCalculator.GetDistance(line1.Point1, point1) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point1, point1);
-				double xz2 = (line1.Point2.X * line2.Point2.X - line1.Point2.X * line2.Point1.X +
-					line1.Point2.Y * line2.Point2.Y - line1.Point2.Y - line2.Point1.Y +
-					line2.Point1.Y * b - line2.Point2.Y * b) / (k * line2.Point2.Y - k * line2.Point1.Y +
-					line2.Point2.X - line2.Point1.X);
-				Point point2 = new Point(xz2, k * xz2 + b);
-				distances[5] = PointDistanceCalculator.GetDistance(line1.Point1, point2);
-				if (PointDistanceCalculator.GetDistance(line1.Point1, point2) <
-				   shortLine.GetLength()) shortLine = new Line(line1.Point1, point2);
-			}
+                shortLine = new Line(shortLine1);
+            }
+            else
+            {
+                shortLine = new Line(shortLine2);
+            }
 			return shortLine;
         }
 

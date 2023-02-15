@@ -8,7 +8,7 @@ namespace GeosGempix.Tests.ModelsTest
         [Fact]
         public void Createline_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(1, 3);
             Point point2 = new Point(2, 3);
             Line line = new Line(point1, point2);
@@ -20,7 +20,7 @@ namespace GeosGempix.Tests.ModelsTest
         [Fact]
         public void CalculatelineLength_Success()
         {
-            //Arrage.
+            //Arrange.
             Point point1 = new Point(0, 0);
             Point point2 = new Point(3, 4);
             Line line = new Line(point1, point2);

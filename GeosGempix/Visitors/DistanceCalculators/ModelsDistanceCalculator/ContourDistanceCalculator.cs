@@ -84,6 +84,27 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             return result;
         }
 
+        internal static double GetDistanceWithSquares(Contour contour, Line line)
+        {
+            if (ContourInsider.IsInside(contour, line))
+                return 0;
+            double result = 0;
+            double distance = 0;
+            List<Point> points = contour.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+                lines.Add(new Line(points[i], points[i + 1]));
+            lines.Add(new Line(points[points.Count - 1], points[0]));
+            foreach (Line line1 in lines)
+            {
+                distance = LineDistanceCalculator.GetDistanceWithSquaresOfDistances(line1, line);
+                if (distance < result)
+                    result = distance;
+            }
+
+            return Math.Sqrt(result);
+        }
+
         internal static double GetDistance(Contour contour1, Contour contour2)
         {
             double result = 0;
