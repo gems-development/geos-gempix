@@ -1,5 +1,6 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
+using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
 namespace GeosGempix.Tests.DistanceTest
 {

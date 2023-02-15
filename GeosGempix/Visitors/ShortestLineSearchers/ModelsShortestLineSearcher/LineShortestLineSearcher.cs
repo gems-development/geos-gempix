@@ -38,7 +38,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _line);
 
-        public static Line GetShortestLine(Line line, Point point)
+        internal static Line GetShortestLine(Line line, Point point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
 
