@@ -38,6 +38,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _line);
 
+        public void Visit(Contour contour) =>
+            _result = ContourShortestLineSearcher.GetShortestLine(contour, _line);
+
         internal static Line GetShortestLine(Line line, Point point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
@@ -79,6 +82,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 			return shortLine;
         }
 
+        internal static Line GetShortestLine(Line line, Contour contour) =>
+            ContourShortestLineSearcher.GetShortestLine(contour, line);
+
         internal static Line GetShortestLine(Line line, Polygon polygon) =>
             PolygonShortestLineSearcher.GetShortestLine(polygon, line);
 
@@ -90,8 +96,5 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line GetShortestLine(Line line, MultiPolygon multiPolygon) =>
             MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, line);
-
-        public void Visit(Contour contour) =>
-            throw new NotImplementedException();
     }
 }
