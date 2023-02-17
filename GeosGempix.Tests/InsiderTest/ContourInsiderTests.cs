@@ -1,5 +1,6 @@
 ﻿using GeosGempix.Models;
 using GeosGempix.Extensions;
+using GeosGempix.MultiModels;
 
 namespace GeosGempix.Tests.ShortestLineSearcherTest
 {
@@ -220,5 +221,101 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
             //Assert.
             Assert.False(f);
         }
-    }
+		
+        [Fact]
+		public static void IsMultiLineInsideContour1_Success()
+		{
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Line> lines = new List<Line>();
+			Point point1 = new Point(2, 2);
+			Point point2 = new Point(2, 6);
+			Point point3 = new Point(4, 6);
+            Point point4 = new Point(3, 3);
+            Line line1 = new Line(point1, point2);
+            Line line2 = new Line(point2, point3);
+            Line line3 = new Line(point3, point4);
+            lines.Add(line1);
+            lines.Add(line2);
+            lines.Add(line3);
+			MultiLine multiLine = new MultiLine(lines);
+			//Act.
+			Boolean f = tests._contour.IsInside(multiLine);
+			//Assert.
+			Assert.True(f);
+		}
+
+		[Fact]
+		public static void IsMultiLineInsideContour2_Success()
+		{
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Line> lines = new List<Line>();
+			Point point1 = new Point(2, 6);
+			Point point2 = new Point(4, 6);
+			Point point3 = new Point(4, 4);
+			Point point4 = new Point(4, 1);
+			Line line1 = new Line(point1, point2);
+			Line line2 = new Line(point3, point4);
+			lines.Add(line1);
+			lines.Add(line2);
+			MultiLine multiLine = new MultiLine(lines);
+			//Act.
+			Boolean f = tests._contour.IsInside(multiLine);
+			//Assert.
+			Assert.True(f);
+		}
+
+		[Theory]
+        [InlineData(8, 2, 8, 6, 10, 6, 9, 3)]
+		[InlineData(10, 2, 10, 6, 12, 6, 11, 3)]
+		[InlineData(9, 2, 9, 6, 11, 6, 10, 3)]
+		public static void IsMultiLineInsideContour1_Failed(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+		{
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Line> lines = new List<Line>();
+			Point point1 = new Point(x1, y1);
+			Point point2 = new Point(x2, y2);
+			Point point3 = new Point(x3, y3);
+			Point point4 = new Point(x4, y4);
+			Line line1 = new Line(point1, point2);
+			Line line2 = new Line(point2, point3);
+            Line line3 = new Line(point3, point4);
+			lines.Add(line1);
+			lines.Add(line2);
+            lines.Add(line3);
+			MultiLine multiLine = new MultiLine(lines);
+			//Act.
+			Boolean f = tests._contour.IsInside(multiLine);
+			//Assert.
+			Assert.False(f);
+		}
+
+		[Theory]
+		[InlineData(10, 3, 10, 6, 11, 3, 11, 6)]
+		[InlineData(3, 3, 6, 3, 5, 10, 10, 5)]
+		[InlineData(3, 3, 6, 3, 6, 6, 11, 6)]
+		[InlineData(0, 6, 9, 6, 4, 9, 4, 0)]
+		public static void IsMultiLineInsideContour2_Failed(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+		{
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Line> lines = new List<Line>();
+			Point point1 = new Point(x1, y1);
+			Point point2 = new Point(x2, y2);
+			Point point3 = new Point(x3, y3);
+			Point point4 = new Point(x4, y4);
+			Line line1 = new Line(point1, point2);
+			Line line2 = new Line(point3, point4);
+			lines.Add(line1);
+			lines.Add(line2);
+			MultiLine multiLine = new MultiLine(lines);
+			//Act.
+			Boolean f = tests._contour.IsInside(multiLine);
+			//Assert.
+			Assert.False(f);
+		}
+        
+	}
 }
