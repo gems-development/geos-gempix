@@ -14,9 +14,10 @@ namespace GeosGempix.Tests.ModelsTest
 			list.Add(new Point(1, 1));
 			list.Add(new Point(2, 2));
 			list.Add(new Point(3, 3));
+			list.Add(new Point(1, 1));
 			Polygon polygon = new Polygon(list);
 			//Act. + Assert.
-			Assert.Equal(3, polygon.GetCountOfPoints());
+			Assert.Equal(4, polygon.GetCountOfPoints());
 		}
 
 		// Проверка на вычисление периметра полигона

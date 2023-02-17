@@ -12,6 +12,8 @@ namespace GeosGempix.Models
                 throw new ArgumentNullException("points");
             if (points.Capacity == 0)
                 throw new ArgumentException("Длина списка points = 0");
+            if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
+                points.Add(points.FirstOrDefault()!);
             _points = points;
         }
         public Contour(Contour contour)
