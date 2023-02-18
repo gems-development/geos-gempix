@@ -29,6 +29,7 @@ namespace GeosGempix.Tests.ModelsTest
 			list.Add(new Point(0, 0));
 			list.Add(new Point(3, 4));
 			list.Add(new Point(6, 0));
+			list.Add(new Point(0, 0));
 			Polygon polygon = new Polygon(list);
 			//Act. + Assert.
 			Assert.Equal(16, polygon.GetPerimeter());
@@ -44,6 +45,7 @@ namespace GeosGempix.Tests.ModelsTest
 			list.Add(new Point(0, 3));
 			list.Add(new Point(3, 3));
 			list.Add(new Point(3, 0));
+			list.Add(new Point(0, 0));
 			Polygon polygon = new Polygon(list);
 			//Act. + Assert.
 			Assert.Equal(12, polygon.GetPerimeter());
@@ -59,6 +61,7 @@ namespace GeosGempix.Tests.ModelsTest
 			list.Add(new Point(0, 3));
 			list.Add(new Point(3, 3));
 			list.Add(new Point(3, 0));
+			list.Add(new Point(0, 0));
 			Polygon polygon = new Polygon(list);
 			//Act. + Assert.
 			Assert.Equal(9, polygon.GetSquare());
@@ -73,18 +76,26 @@ namespace GeosGempix.Tests.ModelsTest
 			Point point2 = new Point(0, 3);
 			Point point3 = new Point(3, 3);
 			Point point4 = new Point(3, 0);
-			Point point5 = new Point(1, 1);
-			Point point6 = new Point(2, 2);
-			Point point7 = new Point(2, 1);
+			Point point5 = new Point(0, 0);
+			
+			Point point6 = new Point(1, 1);
+			Point point7 = new Point(2, 2);
+			Point point8 = new Point(2, 1);
+			Point point9 = new Point(1, 1);
+			
 			List<Point> list1 = new List<Point>();
 			list1.Add(point1);
 			list1.Add(point2);
 			list1.Add(point3);
 			list1.Add(point4);
+			list1.Add(point5);
+			
 			List<Point> list2 = new List<Point>();
-			list2.Add(point5);
 			list2.Add(point6);
 			list2.Add(point7);
+			list2.Add(point8);
+			list2.Add(point9);
+			
 			Contour hole = new Contour(list2);
 			List<Contour> list3 = new List<Contour>();
 			list3.Add(hole);

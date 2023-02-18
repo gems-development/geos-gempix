@@ -8,18 +8,15 @@ namespace GeosGempix.Models
         private List<Point> _points;
         public Contour(List<Point> points)
         {
-            if (points == null)
-                throw new ArgumentNullException("points");
-            if (points.Capacity == 0)
-                throw new ArgumentException("Длина списка points = 0");
-            if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
-                points.Add(points.FirstOrDefault()!);
+            PointListValidate(points);
             _points = points;
         }
         public Contour(Contour contour)
         {
             if (contour == null)
                 throw new ArgumentNullException("contour");
+            if (!Equals(contour.GetPoints().FirstOrDefault(), contour.GetPoints().LastOrDefault()))
+                throw new ArgumentException("Некорректный набор точек");
             _points = contour.GetPoints();
         }
         public void AddPoint(Point point)
@@ -127,6 +124,16 @@ namespace GeosGempix.Models
         public override int GetHashCode()
         {
             return HashCode.Combine(_points);
+        }
+        
+        private void PointListValidate(List<Point> points)
+        {
+            if (points == null)
+                throw new ArgumentNullException("points");
+            if (points.Count == 0)
+                throw new ArgumentException("Длина списка points = 0");
+            if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
+                throw new ArgumentException("Некорректный набор точек");
         }
     }
 }
