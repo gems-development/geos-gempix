@@ -15,8 +15,6 @@ namespace GeosGempix.Models
         {
             if (contour == null)
                 throw new ArgumentNullException("contour");
-            if (!Equals(contour.GetPoints().FirstOrDefault(), contour.GetPoints().LastOrDefault()))
-                throw new ArgumentException("Некорректный набор точек");
             _points = contour.GetPoints();
         }
         public void AddPoint(Point point)
@@ -130,6 +128,9 @@ namespace GeosGempix.Models
         {
             if (points == null)
                 throw new ArgumentNullException("points");
+            foreach (Point point in points)
+                if (point == null)
+                    throw new ArgumentNullException("points", "Один из элементов списка points равен null");
             if (points.Count == 0)
                 throw new ArgumentException("Длина списка points = 0");
             if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
