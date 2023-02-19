@@ -32,6 +32,9 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(MultiPolygon multiPolygon) =>
         _result = GetShortestLine(_multiPolygon, multiPolygon);
 
+    public void Visit(Contour contour) =>
+        _result = GetShortestLine(_multiPolygon, contour);
+
     internal static Line GetShortestLine(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2) =>
         GetShortestLine(
             multiPolygon1,
@@ -69,6 +72,12 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
             point,
             (polygon, primitive) => PolygonShortestLineSearcher.GetShortestLine(polygon, (Point)primitive));
 
+    internal static Line GetShortestLine(MultiPolygon multiPolygon, Contour contour) =>
+        GetShortestLine(
+            multiPolygon,
+            contour,
+            (polygon, primitive) => PolygonShortestLineSearcher.GetShortestLine(polygon, (Contour)primitive));
+
     internal static Line GetShortestLine(
         MultiPolygon multiPolygon,
         IGeometryPrimitive primitive,
@@ -87,7 +96,4 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
         }
         return shortLine;
     }
-
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
 }
