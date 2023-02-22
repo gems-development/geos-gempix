@@ -39,6 +39,8 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _polygon);
+    public void Visit(Contour contour) =>
+        throw new NotImplementedException();
 
     // добавление ? избавляет от warnings связанным с возможным возвратом null
     internal static Line? GetShortestLine(Polygon polygon, Point point)

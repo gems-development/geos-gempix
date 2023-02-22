@@ -41,7 +41,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         internal static Line GetShortestLine(Point point, Line line) =>
             LineShortestLineSearcher.GetShortestLine(line, point);
 
-        internal static Line GetShortestLine(Point point, Polygon polygon) =>
+        internal static Line? GetShortestLine(Point point, Polygon polygon) =>
             PolygonShortestLineSearcher.GetShortestLine(polygon, point);
 
         internal static Line GetShortestLine(Point point, MultiLine multiLine) =>
@@ -53,7 +53,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         internal static Line GetShortestLine(Point point, MultiPolygon multiPolygon) =>
             MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, point);
 
-        internal static Line GetShortestLine(Point point, Contour contour) =>
+        internal static Line? GetShortestLine(Point point, Contour contour) =>
             ContourShortestLineSearcher.GetShortestLine(contour, point);
     }
 }

@@ -82,10 +82,10 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 			return shortLine;
         }
 
-        internal static Line GetShortestLine(Line line, Contour contour) =>
+        internal static Line? GetShortestLine(Line line, Contour contour) =>
             ContourShortestLineSearcher.GetShortestLine(contour, line);
 
-        internal static Line GetShortestLine(Line line, Polygon polygon) =>
+        internal static Line? GetShortestLine(Line line, Polygon polygon) =>
             PolygonShortestLineSearcher.GetShortestLine(polygon, line);
 
         internal static Line GetShortestLine(Line line, MultiLine multiLine) =>
