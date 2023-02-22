@@ -44,11 +44,9 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        Insider insider;
-        foreach (Contour contour in polygon.GetHoles()){ 
-            insider = new Insider(contour, point);
-            if(insider.GetResult())
-            return null;
+        foreach (Contour contour in polygon.GetHoles()){
+            if (contour.Intersects(point))
+                return null;
         }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
@@ -73,11 +71,9 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        Insider insider;
-        foreach (Contour contour in polygon.GetHoles()){ 
-            insider = new Insider(contour, line);
-            if(insider.GetResult())
-            return null;
+        foreach (Contour contour in polygon.GetHoles()){
+            if (contour.Intersects(line))
+                return null;
         }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
@@ -102,16 +98,13 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
-        Insider insider;
-        foreach (Contour contour in polygon1.GetHoles()){ 
-            insider = new Insider(contour, polygon2);
-            if(insider.GetResult())
-            return null;
+        foreach (Contour contour in polygon1.GetHoles()){
+            if (contour.Intersects(polygon2))
+                return null;
         }
-        foreach (Contour contour in polygon2.GetHoles()){ 
-            insider = new Insider(contour, polygon1);
-            if(insider.GetResult())
-            return null;
+        foreach (Contour contour in polygon2.GetHoles()){
+            if (contour.Intersects(polygon1))
+                return null;
         }
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
