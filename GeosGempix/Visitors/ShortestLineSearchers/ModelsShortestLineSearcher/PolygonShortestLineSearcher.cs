@@ -42,8 +42,6 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     // добавление ? избавляет от warnings связанным с возможным возвратом null
     internal static Line? GetShortestLine(Polygon polygon, Point point)
-
-    internal static Line GetShortestLine(Polygon polygon, Point point)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
@@ -70,7 +68,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     }
 
 
-    internal static Line GetShortestLine(Polygon polygon, Line line)
+    internal static Line? GetShortestLine(Polygon polygon, Line line)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
@@ -96,7 +94,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         return shortLine;
     }
 
-    internal static Line GetShortestLine(Polygon polygon1, Polygon polygon2)
+    internal static Line? GetShortestLine(Polygon polygon1, Polygon polygon2)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
