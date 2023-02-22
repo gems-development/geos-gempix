@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GeosGempix.Visitors.Insiders;
+using GeosGempix.Extensions;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
@@ -58,13 +59,13 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             _result = GetShortestLine(_contour, contour);
 
 
-        internal static Line GetShortestLine(Contour contour, Point point)
+        internal static Line? GetShortestLine(Contour contour, Point point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
             Insider insider = new Insider(contour, point);
-            if(insider.GetResult())
+            if (contour.Intersects(point))
                 return null;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
@@ -84,13 +85,12 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             return shortLine;
         }
 
-        internal static Line GetShortestLine(Contour contour, Line line)
+        internal static Line? GetShortestLine(Contour contour, Line line)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если отрезок ВНУТРИ контура... 
-            Insider insider = new Insider(contour, line);
-            if(insider.GetResult())
+            if (contour.Intersects(line))
                 return null;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
@@ -110,14 +110,12 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             return shortLine;
         }
 
-        internal static Line GetShortestLine(Contour contour1, Contour contour2)
+        internal static Line? GetShortestLine(Contour contour1, Contour contour2)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если контур ВНУТРИ контура... какой внутри какого?)))
-            Insider insider1 = new Insider(contour1, contour2);
-            Insider insider2 = new Insider(contour2, contour1);
-            if(insider1.GetResult() || insider2.GetResult())
+            if (contour1.Intersects(contour2) || contour2.Intersects(contour1))
                 return null;
             List<Point> points = contour2.GetPoints();
             List<Line> lines = new List<Line>();
