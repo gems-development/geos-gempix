@@ -92,7 +92,6 @@ namespace GeosGempix.Models
             {
                 lines.Add(new Line(points[i], points[i + 1]));
             }
-            lines.Add(new Line(points[points.Count - 1], points[0]));
             return lines;
         }
 

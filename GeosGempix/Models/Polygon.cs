@@ -84,12 +84,9 @@ public class Polygon : IGeometryPrimitive
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
         return lines;
     }
-
-
-
+    
     public bool isClockwiseBypass()
     {
         double answer = 0;
