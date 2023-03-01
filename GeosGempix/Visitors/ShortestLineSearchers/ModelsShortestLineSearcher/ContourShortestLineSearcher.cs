@@ -64,7 +64,6 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
-            Insider insider = new Insider(contour, point);
             if (contour.Intersects(point))
                 return null;
             List<Point> points = contour.GetPoints();
