@@ -1,10 +1,5 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Tests.InsiderTest
 {
@@ -90,6 +85,33 @@ namespace GeosGempix.Tests.InsiderTest
 			Assert.False(f2);
 			Assert.False(f3);
 			Assert.False(f4);
+		}
+
+		[Fact]
+		public static void IsLineInsideMultiPolygon()
+		{
+			//Arrange.
+			MultiPolygonInsiderTests tests = new MultiPolygonInsiderTests();
+			Line LineTrue1 = new Line(new Point(2, 7), new Point(7, 7));
+			Line LineFalse1 = new Line(new Point(4, 14), new Point(6, 14));
+			Line LineFalse2 = new Line(new Point(14, 14), new Point(15, 14));
+			Line LineFalse3 = new Line(new Point(8, 11), new Point(11, 11));
+			Line LineFalse4 = new Line(new Point(1, 5), new Point(7, 5));
+			Line LineFalse5 = new Line(new Point(11, 9), new Point(18, 9));
+			//Act.
+			Boolean t1 = tests._multiPolygon.IsInside(LineTrue1);
+			Boolean f1 = tests._multiPolygon.IsInside(LineFalse1);
+			Boolean f2 = tests._multiPolygon.IsInside(LineFalse2);
+			Boolean f3 = tests._multiPolygon.IsInside(LineFalse3);
+			Boolean f4 = tests._multiPolygon.IsInside(LineFalse4);
+			Boolean f5 = tests._multiPolygon.IsInside(LineFalse5);
+			//Assert.
+			Assert.True(t1);
+			Assert.False(f1);
+			Assert.False(f2);
+			Assert.False(f3);
+			Assert.False(f4);
+			Assert.False(f5);
 		}
 	}
 }
