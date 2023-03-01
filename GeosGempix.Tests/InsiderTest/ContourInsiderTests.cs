@@ -2,7 +2,7 @@
 using GeosGempix.Extensions;
 using GeosGempix.MultiModels;
 
-namespace GeosGempix.Tests.ShortestLineSearcherTest
+namespace GeosGempix.Tests.InsiderTest
 {
     public class ContourInsiderTests
     {
@@ -454,4 +454,5 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
 			Assert.False(f);
 		}
     }
+
 }
