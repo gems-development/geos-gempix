@@ -62,7 +62,7 @@ namespace GeosGempix.Models
         {
             double sum1 = 0;
             double sum2 = 0;
-            for (int i = 0; i <= _points.Count - 1; i++)
+            for (int i = 0; i < _points.Count; i++)
             {
                 sum1 = sum1 + _points[i].X * _points[i + 1].Y;
                 sum2 = sum2 + _points[i].Y * _points[i + 1].X;
@@ -74,7 +74,7 @@ namespace GeosGempix.Models
         public double GetPerimeter()
         {
             double perimeter = 0;
-            for (int i = 0; i <= _points.Count - 1; i++)
+            for (int i = 0; i < _points.Count; i++)
             {
                 perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
             }
