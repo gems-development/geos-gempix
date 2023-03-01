@@ -47,7 +47,7 @@ namespace GeosGempix.Models
             if (index < _points.Count - 1)
                 return _points.ElementAt(index + 1);
             else
-                return _points.ElementAt(0);
+                return _points.ElementAt(1);
         }
         public int GetCountOfPoints()
         {
@@ -62,13 +62,11 @@ namespace GeosGempix.Models
         {
             double sum1 = 0;
             double sum2 = 0;
-            for (int i = 0; i < _points.Count - 1; i++)
+            for (int i = 0; i <= _points.Count - 1; i++)
             {
                 sum1 = sum1 + _points[i].X * _points[i + 1].Y;
                 sum2 = sum2 + _points[i].Y * _points[i + 1].X;
             }
-            sum1 = sum1 + _points[_points.Count - 1].X * _points[0].Y;
-            sum2 = sum2 + _points[_points.Count - 1].Y * _points[0].X;
             double square = (sum2 - sum1) / 2;
             return square;
         }
@@ -76,11 +74,10 @@ namespace GeosGempix.Models
         public double GetPerimeter()
         {
             double perimeter = 0;
-            for (int i = 0; i <= _points.Count - 2; i++)
+            for (int i = 0; i <= _points.Count - 1; i++)
             {
                 perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
             }
-            perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count - 1], _points[0]);
             return perimeter;
         }
 
