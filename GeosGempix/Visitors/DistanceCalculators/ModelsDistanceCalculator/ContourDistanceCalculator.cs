@@ -51,7 +51,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line in lines)
             {
                 distance = LineDistanceCalculator.GetDistance(line, point);
@@ -73,7 +73,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line1 in lines)
             {
                 distance = LineDistanceCalculator.GetDistance(line1, line);
@@ -94,7 +94,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line1 in lines)
             {
                 distance = LineDistanceCalculator.GetDistanceWithSquaresOfDistances(line1, line);
@@ -114,7 +114,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line in lines)
             {
                 distance = GetDistance(contour1, line);
@@ -133,6 +133,5 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour, MultiPolygon multiPolygon) =>
             MultiPolygonDistanceCalculator.GetDistance(multiPolygon, contour);
-
     }
 }
