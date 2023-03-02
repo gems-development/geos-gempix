@@ -47,11 +47,11 @@ namespace GeosGempix.Models
             if (index < _points.Count - 1)
                 return _points.ElementAt(index + 1);
             else
-                return _points.ElementAt(1);
+                throw new ArgumentException("индекс должен быть меньше длины списка _points");
         }
         public int GetCountOfPoints()
         {
-            return _points.Count;
+            return _points.Count - 1;
         }
         public void RemovePoint(int i)
         {
