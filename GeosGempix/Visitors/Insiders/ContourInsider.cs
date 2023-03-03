@@ -3,6 +3,7 @@ using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using GeosGempix.MultiModels;
+using GeosGempix.Visitors;
 
 namespace GeosGempix.GeometryPrimitiveInsiders
 {
@@ -172,6 +173,63 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             if (IsInside(contour1, contour2.GetPoints()[0]) && !ContourIntersector.Intersects(contour1, contour2))
                 return true;
             return false;
+        }
+
+        internal static bool IsSctrictlyInside(Contour contour, Point point)
+        {
+            return IsInside(contour, point) && !ContourIntersector.IntersectsBorders(contour, point);
+        }
+        internal static bool IsSctrictlyInside(Contour contour, Line line1)
+        {
+            return IsInside(contour, line1) && !ContourIntersector.IntersectsBorders(contour, line1);
+        }
+        internal static bool IsSctrictlyInside(Contour contour, Polygon polygone)
+        {
+            return IsInside(contour, polygone) && !PolygonIntersector.IntersectsBorders(polygone, contour);
+        }
+        internal static bool IsSctrictlyInside(Contour contour, MultiPoint multiPoint)
+        {
+            return IsInside(contour, multiPoint) && !MultiPointIntersector.Intersects(multiPoint, contour);
+        }
+        internal static bool IsSctrictlyInside(Contour contour, MultiLine multiLine)
+        {
+            return IsInside(contour, multiLine) && !MultiLineIntersector.Intersects(multiLine, contour);
+        }
+        internal static bool IsSctrictlyInside(Contour contour, MultiPolygon multiPolygon)
+        {
+            return IsInside(contour, multiPolygon) && !MultiPolygonIntersector.IntersectsBorders(multiPolygon, contour);
+        }
+        internal static bool IsSctrictlyInside(Contour contour1, Contour contour2)
+        {
+            return IsInside(contour1, contour2) && !ContourIntersector.IntersectsBorders(contour1, contour2);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, Point point)
+        {
+            return IsInside(contour, point) && ContourIntersector.IntersectsBorders(contour, point);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, Line line1)
+        {
+            return IsInside(contour, line1) && ContourIntersector.IntersectsBorders(contour, line1);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, Polygon polygone)
+        {
+            return IsInside(contour, polygone) && PolygonIntersector.IntersectsBorders(polygone, contour);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiPoint multiPoint)
+        {
+            return IsInside(contour, multiPoint) && MultiPointIntersector.Intersects(multiPoint, contour);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiLine multiLine)
+        {
+            return IsInside(contour, multiLine) && MultiLineIntersector.Intersects(multiLine, contour);
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiPolygon multiPolygon)
+        {
+            return IsInside(contour, multiPolygon) && MultiPolygonIntersector.IntersectsBorders(multiPolygon, contour);
+        }
+        internal static bool IsInsideWithTouching(Contour contour1, Contour contour2)
+        {
+            return IsInside(contour1, contour2) && ContourIntersector.IntersectsBorders(contour1, contour2);
         }
 
         public bool GetResult() =>

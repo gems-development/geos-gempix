@@ -34,6 +34,28 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
             return false;
         }
 
+        internal static bool IntersectsBorders(Contour contour, Point point)
+        {
+            foreach (Line line in contour.GetLines())
+                if (LineIntersector.Intersects(line, point))
+                    return true;
+            return false;
+        }
+        internal static bool IntersectsBorders(Contour contour, Line line1)
+        {
+            foreach (Line line in contour.GetLines())
+                if (LineIntersector.Intersects(line, line1))
+                    return true;
+            return false;
+        }
+        internal static bool IntersectsBorders(Contour contour1, Contour contour2)
+        {
+            foreach (Line line in contour1.GetLines())
+                if (Intersects(contour2, line))
+                    return true;
+            return false;
+        }
+
         public bool GetResult() =>
             _result;
 

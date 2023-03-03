@@ -50,6 +50,44 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     return true;
             return false;
         }
+        internal static bool IntersectsBorders(Polygon polygon, Point point)
+        {
+            foreach (Contour contour in polygon.GetHoles())
+                if (ContourIntersector.Intersects(contour, point))
+                    return true;
+            foreach (Line line in polygon.GetLines())
+                if (LineIntersector.Intersects(line, point))
+                    return true;
+            return false;
+        }
+
+        internal static bool IntersectsBorders(Polygon polygon, Line line1)
+        {
+            foreach (Contour contour in polygon.GetHoles())
+                if (ContourIntersector.Intersects(contour, line1))
+                    return true;
+            foreach (Line line in polygon.GetLines())
+                if (LineIntersector.Intersects(line, line1))
+                    return true;
+            return false;
+        }
+        internal static bool IntersectsBorders(Polygon polygon1, Polygon polygon2)
+        {
+            foreach (Contour contour in polygon1.GetHoles())
+                if (PolygonIntersector.Intersects(polygon2, contour))
+                    return true;
+            foreach (Line line in polygon1.GetLines())
+                if (Intersects(polygon2, line))
+                    return true;
+            return false;
+        }
+        internal static bool IntersectsBorders(Polygon polygon, Contour contour)
+        {
+            foreach (Line line in contour.GetLines())
+                if (Intersects(polygon, line))
+                    return true;
+            return false;
+        }
 
         public bool GetResult() =>
             _result;

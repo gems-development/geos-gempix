@@ -61,7 +61,6 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         return result;
     }
 
-
     internal static double GetDistance(Polygon polygon, Line line)
     {
         if (PolygonInsider.IsInside(polygon, line))

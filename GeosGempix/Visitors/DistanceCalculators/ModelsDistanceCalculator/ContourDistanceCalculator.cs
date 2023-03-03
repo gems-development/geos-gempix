@@ -62,6 +62,27 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             return result;
         }
 
+        //Issue 1
+        internal static double GetDistanceToInnerPoint(Contour contour, Point point)
+        {
+            double result = 0;
+            double distance = 0;
+            List<Point> points = contour.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+                lines.Add(new Line(points[i], points[i + 1]));
+
+            foreach (Line line in lines)
+            {
+                distance = LineDistanceCalculator.GetDistance(line, point);
+                if (distance < result)
+                    result = distance;
+            }
+
+            return result;
+        }
+
+
 
         internal static double GetDistance(Contour contour, Line line)
         {
@@ -124,7 +145,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
             return result;
         }
-
+       
         internal static double GetDistance(Contour contour, MultiLine multiLine) =>
             MultiLineDistanceCalculator.GetDistance(multiLine, contour);
 
