@@ -249,14 +249,11 @@ namespace GeosGempix.Tests.DistanceTest
 			Assert.Equal(5, multiLine.GetDistance(point));
 		}
 		
-		// Проверка на расстояние между полигоном и точками, лежащими на нём
+		// Проверка на расстояние между точкой и полигоном
 		[Fact]
-		public void GetDistanceBetweenMatchPointAndPolygon()
+		public void GetDistanceBetweenPointAndPolygon_Success()
 		{
 			//Arrange.
-			var pointA = new Point(3, 4.5);
-			var pointB = new Point(5, 2);
-			
 			var point1 = new Point(0, 0);
 			var point2 = new Point(0, 5);
 			var point3 = new Point(5, 5);
@@ -291,10 +288,161 @@ namespace GeosGempix.Tests.DistanceTest
 				contour
 			};
 			var polygon = new Polygon(points1, contours);
+			
+			//Первый случай
+			var pointA = new Point(3, 4.5);
+			var pointB = new Point(5, 2);
+			
+			//Второй случай
+			var pointC = new Point(2, 2);
+			
+			//Третий случай
+			var pointD = new Point(9, 8);
+			var pointE = new Point(8, 1);
 
 			//Act. + Assert.
 			Assert.Equal(0, polygon.GetDistance(pointA));
 			Assert.Equal(0, polygon.GetDistance(pointB));
+			Assert.Equal(2, polygon.GetDistance(pointC));
+			Assert.Equal(5, polygon.GetDistance(pointD));
+			Assert.Equal(3, polygon.GetDistance(pointE));
+		}
+		
+		// Проверка на расстояние между точкой и мультиполигоном
+		[Fact]
+		public void GetDistanceBetweenPointAndMultiPolygon_Success()
+		{
+			//Arrange.
+			//Набор точек для внешних контуров
+			var point1 = new Point(0, 0);
+			var point2 = new Point(0, 5);
+			var point3 = new Point(5, 5);
+			var point4 = new Point(5, 0);
+			var point5 = new Point(0, 0);
+			
+			var point11 = new Point(0, 6);
+			var point21 = new Point(0, 11);
+			var point31 = new Point(5, 11);
+			var point41 = new Point(5, 6);
+			var point51 = new Point(0, 6);
+			
+			var point61 = new Point(6, 6);
+			var point71 = new Point(6, 11);
+			var point81 = new Point(11, 11);
+			var point91 = new Point(11, 6);
+			var point101 = new Point(6, 6);
+			
+			var points11 = new List<Point>
+			{
+				point1,
+				point2,
+				point3,
+				point4,
+				point5
+			};
+			var points21 = new List<Point>
+			{
+				point11,
+				point21,
+				point31,
+				point41,
+				point51
+			};
+			var points31 = new List<Point>
+			{
+				point61,
+				point71,
+				point81,
+				point91,
+				point101
+			};
+			
+			//Набор точек для внутренних контуров
+			var point32 = new Point(1, 1);
+			var point42 = new Point(1, 4);
+			var point52 = new Point(4, 4);
+			var point62 = new Point(4, 1);
+			var point72 = new Point(1, 1);
+			
+			var point33 = new Point(1, 7);
+			var point43 = new Point(1, 10);
+			var point53 = new Point(4, 10);
+			var point63 = new Point(4, 7);
+			var point73 = new Point(1, 7);
+			
+			var point34 = new Point(7, 7);
+			var point44 = new Point(7, 10);
+			var point54 = new Point(10, 10);
+			var point64 = new Point(10, 7);
+			var point74 = new Point(7, 7);
+			
+			var points41 = new List<Point>
+			{
+				point32,
+				point42,
+				point52,
+				point62,
+				point72
+			};
+			var points51 = new List<Point>
+			{
+				point33,
+				point43,
+				point53,
+				point63,
+				point73
+			};
+			var points61 = new List<Point>
+			{
+				point34,
+				point44,
+				point54,
+				point64,
+				point74
+			};
+			
+			var contour1 = new Contour(points41);
+			var contours1 = new List<Contour>
+			{
+				contour1
+			};
+			var polygon1 = new Polygon(points11, contours1);
+			
+			var contour2 = new Contour(points51);
+			var contours2 = new List<Contour>
+			{
+				contour2
+			};
+			var polygon2 = new Polygon(points21, contours2);
+			
+			var contour3 = new Contour(points61);
+			var contours3 = new List<Contour>
+			{
+				contour3
+			};
+			var polygon3 = new Polygon(points31, contours3);
+
+			var polygons = new List<Polygon>
+			{
+				polygon1,
+				polygon2,
+				polygon3
+			};
+			var multiPolygon = new MultiPolygon(polygons);
+			
+			//Второй случай
+			var pointA = new Point(4.5, 8);
+			var pointB = new Point(11, 9);
+			var pointC = new Point(2, 9);
+			var pointD = new Point(8, 2);
+			var pointE = new Point(14, 2);
+
+			//Act. + Assert.
+			Assert.Equal(0, multiPolygon.GetDistance(pointA));
+			Assert.Equal(0, multiPolygon.GetDistance(pointB));
+			Assert.Equal(2, multiPolygon.GetDistance(pointC));
+			Assert.Equal(3, multiPolygon.GetDistance(pointD));
+			Assert.Equal(5, multiPolygon.GetDistance(pointE));
 		}
 	}
 }
