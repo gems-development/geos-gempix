@@ -113,6 +113,11 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return false;
         }
 
+        internal static bool IsStrictlyInside(Polygon polygon, Point point)
+        {
+            throw new NotImplementedException();
+        }
+
         public bool GetResult() =>
             _result;
 

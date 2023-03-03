@@ -1,4 +1,6 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.Extensions;
+using GeosGempix.GeometryPrimitiveInsiders;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 
@@ -12,14 +14,13 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         public PolygonIntersector(Polygon polygon) =>
             _polygon = polygon;
 
+        // пример верно написанного метода ниже
         internal static bool Intersects(Polygon polygon, Point point)
         {
-            foreach (Contour contour in polygon.GetHoles())
-                if (ContourIntersector.Intersects(contour, point))
-                    return true;
-            foreach (Line line in polygon.GetLines())
-                if (LineIntersector.Intersects(line, point))
-                    return true;
+            if (IntersectsBorders(polygon, point))
+                return true;
+            if (PolygonInsider.IsStrictlyInside(polygon, point))
+                return true;
             return false;
         }
         internal static bool Intersects(Polygon polygon, Line line1)
@@ -50,10 +51,11 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     return true;
             return false;
         }
+        // тот метод, что ниже - написан верно
         internal static bool IntersectsBorders(Polygon polygon, Point point)
         {
             foreach (Contour contour in polygon.GetHoles())
-                if (ContourIntersector.Intersects(contour, point))
+                if (ContourIntersector.IntersectsBorders(contour, point))
                     return true;
             foreach (Line line in polygon.GetLines())
                 if (LineIntersector.Intersects(line, point))
