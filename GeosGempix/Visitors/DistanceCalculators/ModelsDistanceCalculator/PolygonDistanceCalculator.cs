@@ -134,18 +134,18 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
         double result = 0;
         double distance;
-        List<Contour> contours = new List<Contour>(polygon.GetHoles());
-        contours.Add(new Contour(polygon.GetPoints()));
-        foreach (Contour contour1 in contours)
+        List<Contour> holes = new List<Contour>(polygon.GetHoles());
+        holes.Add(new Contour(polygon.GetPoints()));
+        foreach (Contour hole in holes)
         {
-            List<Point> points = contour1.GetPoints();
+            List<Point> points = hole.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
 
             foreach (Line line in lines)
             {
-                distance = ContourDistanceCalculator.GetDistance(contour1, line);
+                distance = ContourDistanceCalculator.GetDistance(hole, line);
                 if (distance < result)
                     result = distance;
             }
