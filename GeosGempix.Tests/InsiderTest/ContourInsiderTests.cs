@@ -318,6 +318,44 @@ namespace GeosGempix.Tests.InsiderTest
         }
 
         [Fact]
+        public static void IsPolygonInsideContour1_Success()
+        {
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Point> points1 = new List<Point>();
+			points1.Add(new Point(1, 1));
+			points1.Add(new Point(1, 4));
+			points1.Add(new Point(4, 4));
+			points1.Add(new Point(4, 1));
+			Polygon polygon1 = new Polygon(points1);
+			//Act.
+			Boolean t1 = tests._contour.IsInside(polygon1);
+			//Assert.
+			Assert.True(t1);
+		}
+
+		[Theory]
+		[InlineData(0, 0, 0, 4, 4, 4, 4, 0)]
+		[InlineData(7, 7, 7, 12, 12, 12, 12, 7)]
+		public static void IsPolygonInsideContour1_Failed(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)
+		{
+			//Arrange.
+			ContourInsiderTests tests = new ContourInsiderTests();
+			List<Point> points1 = new List<Point>();
+			points1.Add(new Point(x1, y1));
+			points1.Add(new Point(x2, y2));
+			points1.Add(new Point(x3, y3));
+			points1.Add(new Point(x4, y4));
+			Polygon polygon1 = new Polygon(points1);
+			//Act.
+			Boolean f1 = tests._contour.IsInside(polygon1);
+			//Assert.
+			Assert.False(f1);
+		}
+
+
+
+		[Fact]
         public static void IsMultiPolygonInsideContour1_Success()
         {
             //Arrange.
