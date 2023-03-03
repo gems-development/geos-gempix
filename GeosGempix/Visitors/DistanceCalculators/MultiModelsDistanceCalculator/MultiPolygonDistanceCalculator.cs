@@ -82,7 +82,7 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
         IGeometryPrimitive primitive,
         Func<Polygon, IGeometryPrimitive, double> getDistance)
     {
-        double result = 0;
+        double result = double.MaxValue;
         double distance;
         List<Polygon> polygons = multiPolygon.GetPolygons();
         foreach (Polygon polygon in polygons)

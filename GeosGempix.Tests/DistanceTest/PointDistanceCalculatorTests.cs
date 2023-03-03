@@ -128,7 +128,7 @@ namespace GeosGempix.Tests.DistanceTest
 			var pointC = new Point(7, 6);
 
 			//Act. + Assert.
-			Assert.Equal(1, contour.GetDistance(pointA));
+			Assert.Equal(0, contour.GetDistance(pointA));
 			Assert.Equal(2, contour.GetDistance(pointB));
 			Assert.Equal(5, contour.GetDistance(pointC));
 		}

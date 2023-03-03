@@ -29,6 +29,8 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                     closestLine = line;
                 }
             }
+            if (distance.Equals(0))
+                return false;
             Point vertex1 = closestLine!.Point1;
             Point vertex2 = closestLine.Point2;
             Point vertex3 = contour.GetNextPoint(vertex2);
@@ -73,7 +75,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             // Нам нужен тот треугольник, обход которого совпадает с исходным
             // в нем находится нужная нам ВНЕШНЯЯ точка из биссектрисы
             bool bypass = contour.isClockwiseBypass();
-            bool bypass1 = new Contour(new List<Point>() { vertex2, pointFromBis1, vertex3 }).isClockwiseBypass();
+            bool bypass1 = new Contour(new List<Point>() { vertex2, pointFromBis1, vertex3, vertex2 }).isClockwiseBypass();
             Point pointFromBis;
             if (bypass == bypass1)
                 pointFromBis = pointFromBis1;

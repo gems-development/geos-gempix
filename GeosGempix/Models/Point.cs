@@ -35,8 +35,8 @@ namespace GeosGempix
         public override bool Equals(object? obj)
         {
             return obj is Point point &&
-                   X == point.X &&
-                   Y == point.Y;
+                   X.Equals(point.X) &&
+                   Y.Equals(point.Y);
         }
     }
 }

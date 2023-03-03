@@ -40,6 +40,6 @@ namespace GeosGempix.Visitors.DistanceCalculators
             _calculator = new MultiPolygonDistanceCalculator(multiPolygon);
 
         public void Visit(Contour contour) =>
-            throw new NotImplementedException();
+            _calculator = new ContourDistanceCalculator(contour);
     }
 }
