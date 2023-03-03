@@ -11,9 +11,9 @@ namespace GeosGempix.Tests.InsiderTest
         {
             List<Point> points = new List<Point>();
             Point point1 = new Point(0, 0);
-            Point point2 = new Point(9, 0);
+            Point point2 = new Point(0, 9);
             Point point3 = new Point(9, 9);
-            Point point4 = new Point(0, 9);
+            Point point4 = new Point(9, 0);
             points.Add(point1);
             points.Add(point2);
             points.Add(point3);
