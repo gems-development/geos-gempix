@@ -18,14 +18,14 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             if (PolygonIntersector.Intersects(polygon, point))
                 return false;
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
             {   // здесь есть дублирование проверок - как его избежать без дублирования кода?
                 if (ContourInsider.IsInside(hole, point))
                     return false;
             }
-            Contour contour = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             // а не хранить ли контур вместо списка точек?
-            if (ContourInsider.IsInside(contour, point))
+            if (ContourInsider.IsInside(mainContour, point))
                 return true;
             return false;
         }
@@ -33,7 +33,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             if (PolygonIntersector.Intersects(polygon, line1))
                 return false;
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
                 if (ContourInsider.IsInside(hole, line1))
                     return false;
             if (IsInside(polygon, line1.Point1))
@@ -45,7 +45,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             if (PolygonIntersector.Intersects(polygon1, polygon2))
                 return false;
-            foreach (Contour hole in polygon1.GetHoles())
+            foreach (var hole in polygon1.GetHoles())
                 if (ContourInsider.IsInside(hole, polygon2))
                     return false;
             if (IsInside(polygon1, polygon2.GetPoints()[0]))
@@ -58,11 +58,11 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             if (PolygonIntersector.Intersects(polygon, contour))
                 return false;
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
                 if (ContourInsider.IsInside(hole, contour))
                     return false;
-            Contour contour2 = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsInside(contour2, contour))
+            var mainContour = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(mainContour, contour))
                 return true;
             return false;
         }
@@ -72,12 +72,12 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             if (MultiPointIntersector.Intersects(multiPoint, polygon))
                 return false;
             // если хоть одна точка попадает хоть в одну "дырку" - всё, значит не внутри полигона
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
                 foreach (Point point in multiPoint.GetPoints())
                     if (ContourInsider.IsInside(hole, point))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsInside(contour1, multiPoint))
+            var mainContour = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(mainContour, multiPoint))
                 return true;
             return false;
         }
@@ -88,12 +88,12 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             if (MultiPolygonIntersector.Intersects(multiPolygon, polygon))
                 return false;
             // если хоть один полигон попадает хоть в одну "дырку" - всё, значит не внутри полигона
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
                 foreach (Polygon polygon1 in multiPolygon.GetPolygons())
                     if (ContourInsider.IsInside(hole, polygon1))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsInside(contour1, multiPolygon))
+            var mainContour = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(mainContour, multiPolygon))
                 return true;
             return false;
         }
@@ -103,12 +103,12 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             if (MultiLineIntersector.Intersects(multiLine, polygon))
                 return false;
             // если хоть одна линия попадает хоть в одну "дырку" - всё, значит не внутри полигона
-            foreach (Contour hole in polygon.GetHoles())
+            foreach (var hole in polygon.GetHoles())
                 foreach (Line line in multiLine.GetLines())
                     if (ContourInsider.IsInside(hole, line))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsInside(contour1, multiLine))
+            var mainContour = new Contour(polygon.GetPoints());
+            if (ContourInsider.IsInside(mainContour, multiLine))
                 return true;
             return false;
         }

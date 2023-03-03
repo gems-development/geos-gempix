@@ -136,7 +136,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         double distance;
         List<Contour> holes = new List<Contour>(polygon.GetHoles());
         holes.Add(new Contour(polygon.GetPoints()));
-        foreach (Contour hole in holes)
+        foreach (var hole in holes)
         {
             List<Point> points = hole.GetPoints();
             List<Line> lines = new List<Line>();
