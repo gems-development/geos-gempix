@@ -1,6 +1,7 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
+using GeosGempix.GeometryPrimitiveInsiders;
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {
@@ -15,70 +16,77 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         internal static bool Intersects(MultiPolygon multiPolygon, Point point)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, point))
-                    return true;
+            if (IntersectsBorders(multiPolygon, point))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, point))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon, Line line)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, line))
-                    return true;
+            if (IntersectsBorders(multiPolygon, line))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, line))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon, Polygon polygon1)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, polygon1))
-                    return true;
+            if (IntersectsBorders(multiPolygon, polygon1))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, polygon1))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon, MultiPoint multiPoint)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (MultiPointIntersector.Intersects(multiPoint, polygon))
-                    return true;
+            if (IntersectsBorders(multiPolygon, multiPoint))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, multiPoint))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon, MultiLine multiLine)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (MultiLineIntersector.Intersects(multiLine, polygon))
-                    return true;
+            if (IntersectsBorders(multiPolygon, multiLine))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, multiLine))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
-            foreach (Polygon polygon in multiPolygon2.GetPolygons())
-                if (Intersects(multiPolygon1, polygon))
-                    return true;
+            if (IntersectsBorders(multiPolygon1, multiPolygon2))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon1, multiPolygon2))
+                return true;
             return false;
         }
 
         internal static bool Intersects(MultiPolygon multiPolygon, Contour contour)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, contour))
-                    return true;
+            if (IntersectsBorders(multiPolygon, contour))
+                return true;
+            if (MultiPolygonInsider.IsStrictlyInside(multiPolygon, contour))
+                return true;
             return false;
         }
         internal static bool IntersectsBorders(MultiPolygon multiPolygon, Point point)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, point))
+                if (PolygonIntersector.IntersectsBorders(polygon, point))
                     return true;
             return false;
         }
         internal static bool IntersectsBorders(MultiPolygon multiPolygon, Line line)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, line))
+                if (PolygonIntersector.IntersectsBorders(polygon, line))
                     return true;
             return false;
         }
@@ -86,7 +94,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         internal static bool IntersectsBorders(MultiPolygon multiPolygon, Polygon polygon1)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, polygon1))
+                if (PolygonIntersector.IntersectsBorders(polygon, polygon1))
                     return true;
             return false;
         }
@@ -110,7 +118,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         internal static bool IntersectsBorders(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
             foreach (Polygon polygon in multiPolygon2.GetPolygons())
-                if (Intersects(multiPolygon1, polygon))
+                if (IntersectsBorders(multiPolygon1, polygon))
                     return true;
             return false;
         }
@@ -118,7 +126,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         internal static bool IntersectsBorders(MultiPolygon multiPolygon, Contour contour)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonIntersector.Intersects(polygon, contour))
+                if (PolygonIntersector.IntersectsBorders(polygon, contour))
                     return true;
             return false;
         }

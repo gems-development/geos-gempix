@@ -15,36 +15,71 @@ namespace GeosGempix.GeometryPrimitiveInsiders
 
         internal static bool IsInside(MultiPolygon multiPolygon, Point point)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonInsider.IsInside(polygon, point))
-                    return true;
-            return false;
+            return IsStrictlyInside(multiPolygon, point);
         }
 
         internal static bool IsInside(MultiPolygon multiPolygon, Line line)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonInsider.IsInside(polygon, line))
-                    return true;
-            return false;
+            return IsStrictlyInside(multiPolygon, line);
         }
 
-        internal static bool IsInside(MultiPolygon multiPolygon, Polygon polygon1)
+        internal static bool IsInside(MultiPolygon multiPolygon, Polygon polygon)
         {
-            foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonInsider.IsInside(polygon, polygon1))
-                    return true;
-            return false;
+            return IsStrictlyInside(multiPolygon, polygon);
         }
 
         internal static bool IsInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
+        {
+            return IsStrictlyInside(multiPolygon, multiPoint);
+        }
+
+        internal static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
+        {
+            return IsStrictlyInside(multiPolygon, multiLine);
+        }
+
+        internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+        {
+            return IsStrictlyInside(multiPolygon1, multiPolygon2);
+        }
+
+        internal static bool IsInside(MultiPolygon multiPolygon, Contour contour)
+        {
+            return IsStrictlyInside(multiPolygon, contour);
+        }
+
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Point point)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsStrictlyInside(polygon, point))
+                    return true;
+            return false;
+        }
+
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Line line)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsStrictlyInside(polygon, line))
+                    return true;
+            return false;
+        }
+
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Polygon polygon1)
+        {
+            foreach (Polygon polygon in multiPolygon.GetPolygons())
+                if (PolygonInsider.IsStrictlyInside(polygon, polygon1))
+                    return true;
+            return false;
+        }
+
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, MultiPoint multiPoint)
         {
             List<Point> points = (List<Point>)multiPoint.GetPoints();
             List<Point> pointsForRemove = new List<Point>();
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
                 foreach (Point point in points)
-                    if (PolygonInsider.IsInside(polygon, point))
+                    if (PolygonInsider.IsStrictlyInside(polygon, point))
                         pointsForRemove.Add(point);
                 foreach (Point point in pointsForRemove)
                     points.Remove(point);
@@ -55,14 +90,14 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return false;
         }
 
-        internal static bool IsInside(MultiPolygon multiPolygon, MultiLine multiLine)
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, MultiLine multiLine)
         {
             List<Line> lines = multiLine.GetLines();
             List<Line> linesForRemove = new List<Line>();
             foreach (Polygon polygon in multiPolygon.GetPolygons())
             {
                 foreach (Line line in lines)
-                    if (PolygonInsider.IsInside(polygon, line))
+                    if (PolygonInsider.IsStrictlyInside(polygon, line))
                         linesForRemove.Add(line);
                 foreach (Line line in linesForRemove)
                     lines.Remove(line);
@@ -73,14 +108,14 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return false;
         }
 
-        internal static bool IsInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
         {
             List<Polygon> polygons = multiPolygon2.GetPolygons();
             List<Polygon> polygonsForRemove = new List<Polygon>();
             foreach (Polygon polygon1 in multiPolygon1.GetPolygons())
             {
                 foreach (Polygon polygon in polygons)
-                    if (PolygonInsider.IsInside(polygon, polygon))
+                    if (PolygonInsider.IsStrictlyInside(polygon, polygon))
                         polygonsForRemove.Add(polygon);
                 foreach (Polygon polygon in polygonsForRemove)
                     polygons.Remove(polygon);
@@ -91,10 +126,10 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return false;
         }
 
-        internal static bool IsInside(MultiPolygon multiPolygon, Contour contour)
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Contour contour)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (PolygonInsider.IsInside(polygon, contour))
+                if (PolygonInsider.IsStrictlyInside(polygon, contour))
                     return true;
             return false;
         }
