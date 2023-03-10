@@ -78,13 +78,13 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
     internal static Line GetShortestLine(
         MultiPoint multiPoint,
         IGeometryPrimitive primitive,
-        Func<Point, IGeometryPrimitive, Line> GetShortestLine)
+        Func<Point, IGeometryPrimitive, Line> getShortestLine)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (Point point in multiPoint.GetPoints())
         {
-            curLine = GetShortestLine.Invoke(point, primitive);
+            curLine = getShortestLine(point, primitive);
             if (curLine.GetLength() < shortLine.GetLength())
             {
                 shortLine = new Line(curLine);

@@ -76,14 +76,14 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearc
         internal static Line GetShortestLine(
             MultiLine multiLine,
             IGeometryPrimitive primitive,
-            Func<Line, IGeometryPrimitive, Line> GetShortestLine)
+            Func<Line, IGeometryPrimitive, Line> getShortestLine)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             List<Line> lines = multiLine.GetLines();
             foreach (Line line in lines)
             {
-				curLine = GetShortestLine.Invoke(line, primitive);
+				curLine = getShortestLine(line, primitive);
                 if (curLine.GetLength() < shortLine.GetLength())
                 {
 					shortLine = new Line(curLine);
