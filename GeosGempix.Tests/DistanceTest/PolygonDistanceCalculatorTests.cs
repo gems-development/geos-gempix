@@ -9,10 +9,6 @@ namespace GeosGempix.Tests.DistanceTest
 {
     public class PolygonDistanceCalculatorTests
     {
-		// Проверка на растояние между полигоном и контуром
-		[Fact]
-        public void GetDistanceBetweenPolygonAnd_Success() { }
-        
         // Проверка на растояние между полигоном и полигоном
         [Fact]
         public void GetDistanceBetweenPolygonAndPolygon_Success() { }
