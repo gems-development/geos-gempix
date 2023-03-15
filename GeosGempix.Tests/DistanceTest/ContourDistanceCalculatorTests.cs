@@ -143,8 +143,8 @@ public class ContourDistanceCalculatorTests
         Assert.Equal(0,contour1.GetDistance(contour3));
         Assert.Equal(0,contour1.GetDistance(contour4));
         Assert.Equal(0,contour1.GetDistance(contour1));
-        Assert.Equal(2,contour1.GetDistance(contour5));
-        Assert.Equal(1,contour1.GetDistance(contour6));
+        Assert.Equal(2,contour1.GetDistance(contour5)); //failed
+        Assert.Equal(1,contour1.GetDistance(contour6)); //failed
         Assert.Equal(3,contour1.GetDistance(contour7));
         Assert.Equal(5,contour1.GetDistance(contour8));
     }
@@ -230,11 +230,11 @@ public class ContourDistanceCalculatorTests
 	    var multiPoint5 = new MultiPoint(points5);
 	    
 	    //Act. + Assert.
-	    Assert.Equal(0,contour.GetDistance(multiPoint1));
-	    Assert.Equal(0,contour.GetDistance(multiPoint2));
-	    Assert.Equal(0,contour.GetDistance(multiPoint3));
-	    Assert.Equal(1,contour.GetDistance(multiPoint4));
-	    Assert.Equal(5,contour.GetDistance(multiPoint5));
+	    Assert.Equal(0,contour.GetDistance(multiPoint1)); //failed
+	    Assert.Equal(0,contour.GetDistance(multiPoint2)); //failed
+	    Assert.Equal(0,contour.GetDistance(multiPoint3)); //failed
+	    Assert.Equal(1,contour.GetDistance(multiPoint4)); //failed
+	    Assert.Equal(5,contour.GetDistance(multiPoint5)); //failed
     }
     
     //Проверка на расстояние между контуром и мультилинией
@@ -364,12 +364,12 @@ public class ContourDistanceCalculatorTests
 	    
 	    //Act. + Assert.
 	    Assert.Equal(0,contour1.GetDistance(multiLine1));
-	    Assert.Equal(0,contour1.GetDistance(multiLine2));
+	    Assert.Equal(0,contour1.GetDistance(multiLine2)); //failed
 	    Assert.Equal(0,contour1.GetDistance(multiLine3));
 	    Assert.Equal(0,contour1.GetDistance(multiLine4));
 	    Assert.Equal(5,contour1.GetDistance(multiLine5));
 	    Assert.Equal(3,contour1.GetDistance(multiLine6));
-	    Assert.Equal(2,contour1.GetDistance(multiLine7));
+	    Assert.Equal(2,contour1.GetDistance(multiLine7)); //failed
     }
     
     //Проверка на расстояние между контуром и полигоном

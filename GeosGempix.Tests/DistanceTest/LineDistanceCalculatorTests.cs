@@ -123,9 +123,9 @@ namespace GeosGempix.Tests.DistanceTest
 			Assert.Equal(0,line1.GetDistance(contour));
 			Assert.Equal(0,line2.GetDistance(contour));
 			Assert.Equal(0,line3.GetDistance(contour));
-			Assert.Equal(1,line4.GetDistance(contour));
-			Assert.Equal(1,line5.GetDistance(contour));
-			Assert.Equal(5,line6.GetDistance(contour));
+			Assert.Equal(1,line4.GetDistance(contour)); //failed
+			Assert.Equal(1,line5.GetDistance(contour)); //failed
+			Assert.Equal(5,line6.GetDistance(contour)); //failed
 		}
 		
 		// Проверка на расстояние между отрезком и мультиточкой
@@ -298,11 +298,11 @@ namespace GeosGempix.Tests.DistanceTest
 			//Act. + Assert.
 			Assert.Equal(0,line1.GetDistance(polygon));
 			Assert.Equal(0,line2.GetDistance(polygon));
-			Assert.Equal(0,line3.GetDistance(polygon));
-			Assert.Equal(1,line4.GetDistance(polygon));
-			Assert.Equal(2,line5.GetDistance(polygon));
-			Assert.Equal(2,line6.GetDistance(polygon));
-			Assert.Equal(2,line7.GetDistance(polygon));
+			Assert.Equal(0,line3.GetDistance(polygon)); //failed
+			Assert.Equal(1,line4.GetDistance(polygon)); //failed
+			Assert.Equal(2,line5.GetDistance(polygon)); //failed
+			Assert.Equal(2,line6.GetDistance(polygon)); //failed
+			Assert.Equal(2,line7.GetDistance(polygon)); //failed
 		}
 		
 		//Проверка на расстояние между отрезком и мультиполигоном
@@ -456,10 +456,10 @@ namespace GeosGempix.Tests.DistanceTest
 			Assert.Equal(0,line1.GetDistance(multiPolygon));
 			Assert.Equal(0,line2.GetDistance(multiPolygon));
 			Assert.Equal(0,line3.GetDistance(multiPolygon));
-			Assert.Equal(1,line4.GetDistance(multiPolygon));
-			Assert.Equal(5,line5.GetDistance(multiPolygon));
-			Assert.Equal(1,line6.GetDistance(multiPolygon));
-			Assert.Equal(3,line7.GetDistance(multiPolygon));
+			Assert.Equal(1,line4.GetDistance(multiPolygon)); //failed
+			Assert.Equal(5,line5.GetDistance(multiPolygon)); //failed
+			Assert.Equal(1,line6.GetDistance(multiPolygon)); //failed
+			Assert.Equal(3,line7.GetDistance(multiPolygon)); //failed
 		}
 	}
 }
