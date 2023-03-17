@@ -78,7 +78,7 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
         IGeometryPrimitive primitive,
         Func<Point, IGeometryPrimitive, double> getDistance)
     {
-        double result = 0;
+        double result = double.MaxValue;
         double distance;
         foreach (Point point in multiPoint.GetPoints())
         {

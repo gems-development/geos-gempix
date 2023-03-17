@@ -45,7 +45,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     {
         if (PolygonInsider.IsInside(polygon, point))
             return 0;
-        double result = 0;
+        double result = double.MaxValue;
         double distance = 0;
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
@@ -66,7 +66,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     {
         if (PolygonInsider.IsInside(polygon, line))
             return 0;
-        double result = 0;
+        double result = double.MaxValue;
         double distance = 0;
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
@@ -86,7 +86,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     {
         if (PolygonInsider.IsInside(polygon1, polygon2) || PolygonInsider.IsInside(polygon2, polygon1))
             return 0;
-        double result = 0;
+        double result = double.MaxValue;
         double distance;
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
@@ -132,7 +132,7 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         if (ContourInsider.IsInside(contour, polygon))
             return 0;
 
-        double result = 0;
+        double result = double.MaxValue;
         double distance;
         List<Contour> holes = new List<Contour>(polygon.GetHoles());
         holes.Add(new Contour(polygon.GetPoints()));
