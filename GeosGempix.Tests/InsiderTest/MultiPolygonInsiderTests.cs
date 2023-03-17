@@ -9,59 +9,18 @@ namespace GeosGempix.Tests.InsiderTest
 		public MultiPolygon _multiPolygon;
 		public MultiPolygonInsiderTests() 
 		{
-			List<Point> points1 = new List<Point>();
-			List<Point> points2 = new List<Point>();
-			List<Point> points3 = new List<Point>();
-			List<Point> points4 = new List<Point>();
-			List<Point> points5 = new List<Point>();
-			List<Point> points6 = new List<Point>();
+			Contour hole1 = TestHelper.CreateContour(new Point(3, 3), new Point(3, 6), new Point(6, 6), new Point(6, 3));
+			Contour hole2 = TestHelper.CreateContour(new Point(3, 13), new Point(6, 13), new Point(6, 16), new Point(6, 16));
+			Contour hole3 = TestHelper.CreateContour(new Point(13, 13), new Point(13, 16), new Point(16, 16), new Point(16, 13));
 
-			points1.Add(new Point(0, 0));
-			points1.Add(new Point(0, 9));
-			points1.Add(new Point(9, 9));
-			points1.Add(new Point(9, 0));
-
-			points2.Add(new Point(3, 3));
-			points2.Add(new Point(3, 6));
-			points2.Add(new Point(6, 6));
-			points2.Add(new Point(6, 3));
-
-			points3.Add(new Point(0, 10));
-			points3.Add(new Point(0, 19));
-			points3.Add(new Point(9, 19));
-			points3.Add(new Point(9, 10));
-
-			points4.Add(new Point(3, 13));
-			points4.Add(new Point(6, 16));
-			points4.Add(new Point(6, 16));
-			points4.Add(new Point(6, 13));
-
-			points5.Add(new Point(10, 10));
-			points5.Add(new Point(10, 19));
-			points5.Add(new Point(19, 19));
-			points5.Add(new Point(19, 10));
-
-			points6.Add(new Point(13, 13));
-			points6.Add(new Point(13, 16));
-			points6.Add(new Point(16, 16));
-			points6.Add(new Point(16, 13));
-
-			Contour hole1 = new Contour(points2);
-			Contour hole2 = new Contour(points4);
-			Contour hole3 = new Contour(points6);
-
-			Polygon polygon1 = new Polygon(points1);
+			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(0, 0), new Point(0, 9), new Point(9, 9), new Point(9, 0));
 			polygon1.Add(hole1);
-			Polygon polygon2 = new Polygon(points3);
+			Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(0, 10), new Point(0, 19), new Point(9, 19), new Point(9, 10));
 			polygon2.Add(hole2);
-			Polygon polygon3 = new Polygon(points5);
+			Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(10, 10), new Point(10, 19), new Point(19, 19), new Point(19, 10));
 			polygon3.Add(hole3);
-			List<Polygon> polygons = new List<Polygon>();
-			polygons.Add(polygon1);
-			polygons.Add(polygon2);
-			polygons.Add(polygon3);
 
-			_multiPolygon = new MultiPolygon(polygons);
+			_multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
 		}
 
 		[Fact]
