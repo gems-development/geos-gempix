@@ -65,57 +65,63 @@ namespace GeosGempix.Tests.InsiderTest
 		}
 
 		[Fact]
-		public static void IsPointInsideMultiPolygon()
+		public static void IsPointInsideMultiPolygon_Success()
 		{
 			//Arrange.
 			MultiPolygonInsiderTests tests = new MultiPolygonInsiderTests();
 			Point pointTrue1 = new Point(8, 15);
-			Point pointFalse1 = new Point(4, 14);
-			Point pointFalse2 = new Point(6, 15);
-			Point pointFalse3 = new Point(9, 15);
-			Point pointFalse4 = new Point(10, 9);
 			//Act.
 			Boolean t1 = tests._multiPolygon.IsInside(pointTrue1);
-			Boolean f1 = tests._multiPolygon.IsInside(pointFalse1);
-			Boolean f2 = tests._multiPolygon.IsInside(pointFalse2);
-			Boolean f3 = tests._multiPolygon.IsInside(pointFalse3);
-			Boolean f4 = tests._multiPolygon.IsInside(pointFalse4);
 			//Assert.
 			Assert.True(t1);
-			Assert.False(f1);
-			Assert.False(f2);
-			Assert.False(f3);
-			Assert.False(f4);
 		}
 
-		[Fact]
-		public static void IsLineInsideMultiPolygon()
+        [Theory]
+		[InlineData(4, 14)]
+        [InlineData(6, 15)]
+        [InlineData(9, 15)]
+        [InlineData(10, 9)]
+        public static void IsPointInsideMultiPolygon_Failed(double x, double y)
+        {
+            //Arrange.
+            MultiPolygonInsiderTests tests = new MultiPolygonInsiderTests();
+            Point pointFalse1 = new Point(x, y);
+            //Act.
+            Boolean f1 = tests._multiPolygon.IsInside(pointFalse1);
+            //Assert.
+            Assert.False(f1);
+        }
+
+        [Fact]
+		public static void IsLineInsideMultiPolygon_Succes()
 		{
 			//Arrange.
 			MultiPolygonInsiderTests tests = new MultiPolygonInsiderTests();
 			Line LineTrue1 = new Line(new Point(2, 7), new Point(7, 7));
-			Line LineFalse1 = new Line(new Point(4, 14), new Point(6, 14));
-			Line LineFalse2 = new Line(new Point(14, 14), new Point(15, 14));
-			Line LineFalse3 = new Line(new Point(8, 11), new Point(11, 11));
-			Line LineFalse4 = new Line(new Point(1, 5), new Point(7, 5));
-			Line LineFalse5 = new Line(new Point(11, 9), new Point(18, 9));
 			//Act.
 			Boolean t1 = tests._multiPolygon.IsInside(LineTrue1);
-			Boolean f1 = tests._multiPolygon.IsInside(LineFalse1);
-			Boolean f2 = tests._multiPolygon.IsInside(LineFalse2);
-			Boolean f3 = tests._multiPolygon.IsInside(LineFalse3);
-			Boolean f4 = tests._multiPolygon.IsInside(LineFalse4);
-			Boolean f5 = tests._multiPolygon.IsInside(LineFalse5);
 			//Assert.
 			Assert.True(t1);
-			Assert.False(f1);
-			Assert.False(f2);
-			Assert.False(f3);
-			Assert.False(f4);
-			Assert.False(f5);
 		}
 
-		[Theory]
+        [Theory]
+		[InlineData(4, 14, 6, 14)]
+        [InlineData(14, 14, 15, 14)]
+        [InlineData(8, 11, 11, 11)]
+        [InlineData(1, 5, 7, 5)]
+        [InlineData(11, 9, 18, 9)]
+        public static void IsLineInsideMultiPolygon_Failed(double x1, double y1, double x2, double y2)
+        {
+            //Arrange.
+            MultiPolygonInsiderTests tests = new MultiPolygonInsiderTests();
+            Line LineFalse1 = new Line(new Point(x1, y1), new Point(x2, y2));
+            //Act.
+            Boolean f1 = tests._multiPolygon.IsInside(LineFalse1);
+            //Assert.
+            Assert.False(f1);
+        }
+
+        [Theory]
 		[InlineData(1, 14, 1, 15, 2, 15, 2, 14)]
 		[InlineData(11, 11, 11, 18, 18, 18, 18, 11)]
 		public static void IsContourInsideMultiPolygon_Success(double x1, double y1, double x2, double y2, double x3, double y3, double x4, double y4)

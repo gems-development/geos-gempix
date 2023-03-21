@@ -1,12 +1,6 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Tests.InsiderTest
 {
@@ -24,46 +18,61 @@ namespace GeosGempix.Tests.InsiderTest
 		}
 
 		[Fact]
-		public static void IsPointInsidePolygon()
+		public static void IsPointInsidePolygon_Success()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
 			Point pointTrue1 = new Point(3, 3);
-			Point pointFalse1 = new Point(0, 3);
-			Point pointFalse2 = new Point(10, 3);
 			//Act.
 			Boolean t1 = tests._polygon.IsInside(pointTrue1);
-			Boolean f1 = tests._polygon.IsInside(pointFalse1);
-			Boolean f2 = tests._polygon.IsInside(pointFalse2);
 			//Assert.
 			Assert.True(t1);
-			Assert.False(f1);
-			Assert.False(f2);
 		}
 
-		[Fact]
-		public static void IsLineInsidePolygon()
+        [Theory]
+		[InlineData(0, 3)]
+        [InlineData(10, 3)]
+        public static void IsPointInsidePolygon_Failed(double x, double y)
+        {
+            //Arrange.
+            PolygonInsiderTests tests = new PolygonInsiderTests();
+            Point pointFalse1 = new Point(x, y);
+            //Act.
+            Boolean f1 = tests._polygon.IsInside(pointFalse1);
+            //Assert.
+            Assert.False(f1);
+        }
+
+
+        [Fact]
+		public static void IsLineInsidePolygon_Success()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
 			Line lineTrue = new Line(new Point(1, 1), new Point(8, 8));
-			Line lineFalse1 = new Line(new Point(5, 5), new Point(10, 5));
-			Line lineFalse2 = new Line(new Point(3, 0), new Point(6, 0));
-			Line lineFalse3 = new Line(new Point(3, 10), new Point(6, 10));
 			//Act.
 			Boolean t1 = tests._polygon.IsInside(lineTrue);
-			Boolean f1 = tests._polygon.IsInside(lineFalse1);
-			Boolean f2 = tests._polygon.IsInside(lineFalse2);
-			Boolean f3 = tests._polygon.IsInside(lineFalse3);
 			//Assert.
 			Assert.True(t1);
-			Assert.False(f1);
-			Assert.False(f2);
-			Assert.False(f3);
 		}
 
-		[Fact]
-		public static void IsPolygonInsidePolygon1()
+        [Theory]
+		[InlineData(5, 5, 10, 5)]
+        [InlineData(3, 0, 6, 0)]
+        [InlineData(3, 10, 6, 10)]
+        public static void IsLineInsidePolygon_Failed(double x1, double y1, double x2, double y2)
+        {
+            //Arrange.
+            PolygonInsiderTests tests = new PolygonInsiderTests();
+            Line lineFalse1 = new Line(new Point(x1, y1), new Point(x2, y2));
+            //Act.
+            Boolean f1 = tests._polygon.IsInside(lineFalse1);
+            //Assert.
+            Assert.False(f1);
+        }
+
+        [Fact]
+		public static void IsPolygonInsidePolygon1_Success()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
@@ -83,16 +92,21 @@ namespace GeosGempix.Tests.InsiderTest
 			Assert.True(t);
 		}
 
-		[Fact]
-		public static void IsPolygonInsidePolygon2()
+		[Theory]
+		[InlineData(7, 3, 7, 6, 10, 6, 10, 3)]
+        [InlineData(3, 10, 3, 13, 6, 10, 6, 13)]
+        [InlineData(3, 9, 3, 12, 6, 9, 6, 12)]
+        [InlineData(3, 6, 3, 9, 6, 9, 6, 6)]
+        public static void IsPolygonInsidePolygon2_Failed(double x1, double y1, double x2, double y2,
+														double x3, double y3, double x4, double y4)
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
 			List<Point> points = new List<Point>();
-			Point point1 = new Point(7, 3);
-			Point point2 = new Point(7, 6);
-			Point point3 = new Point(10, 6);
-			Point point4 = new Point(10, 3);
+			Point point1 = new Point(x1, y1);
+			Point point2 = new Point(x2, y2);
+			Point point3 = new Point(x3, y3);
+			Point point4 = new Point(x4, y4);
 			points.Add(point1);
 			points.Add(point2);
 			points.Add(point3);
@@ -105,70 +119,7 @@ namespace GeosGempix.Tests.InsiderTest
 		}
 
 		[Fact]
-		public static void IsPolygonInsidePolygon3()
-		{
-			//Arrange.
-			PolygonInsiderTests tests = new PolygonInsiderTests();
-			List<Point> points = new List<Point>();
-			Point point1 = new Point(3, 10);
-			Point point2 = new Point(3, 13);
-			Point point3 = new Point(6, 10);
-			Point point4 = new Point(6, 13);
-			points.Add(point1);
-			points.Add(point2);
-			points.Add(point3);
-			points.Add(point4);
-			Polygon Polygon = new Polygon(points);
-			//Act.
-			Boolean f = tests._polygon.IsInside(Polygon);
-			//Assert.
-			Assert.False(f);
-		}
-
-		[Fact]
-		public static void IsPolygonInsidePolygon4()
-		{
-			//Arrange.
-			PolygonInsiderTests tests = new PolygonInsiderTests();
-			List<Point> points = new List<Point>();
-			Point point1 = new Point(3, 9);
-			Point point2 = new Point(3, 12);
-			Point point3 = new Point(6, 9);
-			Point point4 = new Point(6, 12);
-			points.Add(point1);
-			points.Add(point2);
-			points.Add(point3);
-			points.Add(point4);
-			Polygon Polygon = new Polygon(points);
-			//Act.
-			Boolean f = tests._polygon.IsInside(Polygon);
-			//Assert.
-			Assert.False(f);
-		}
-
-		[Fact]
-		public static void IsPolygonInsidePolygon5()
-		{
-			//Arrange.
-			PolygonInsiderTests tests = new PolygonInsiderTests();
-			List<Point> points = new List<Point>();
-			Point point1 = new Point(3, 6);
-			Point point2 = new Point(3, 9);
-			Point point3 = new Point(6, 9);
-			Point point4 = new Point(6, 6);
-			points.Add(point1);
-			points.Add(point2);
-			points.Add(point3);
-			points.Add(point4);
-			Polygon Polygon = new Polygon(points);
-			//Act.
-			Boolean f = tests._polygon.IsInside(Polygon);
-			//Assert.
-			Assert.False(f);
-		}
-
-		[Fact]
-		public static void IsMultiPointInsidePolygon1()
+		public static void IsMultiPointInsidePolygon1_Success()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
@@ -187,7 +138,7 @@ namespace GeosGempix.Tests.InsiderTest
 		}
 
 		[Fact]
-		public static void IsMultiPointInsidePolygon2()
+		public static void IsMultiPointInsidePolygon2_Failed()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
@@ -206,7 +157,7 @@ namespace GeosGempix.Tests.InsiderTest
 		}
 
 		[Fact]
-		public static void IsMultiPointInsidePolygon3()
+		public static void IsMultiPointInsidePolygon3_Failed()
 		{
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();

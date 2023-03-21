@@ -22,7 +22,7 @@ namespace GeosGempix.Tests.InsiderTest
         }
 
         [Fact]
-        public static void IsPointInsideContour()
+        public static void IsPointInsideContour_Success()
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
@@ -39,26 +39,47 @@ namespace GeosGempix.Tests.InsiderTest
             Assert.False(f2);
         }
 
+        [Theory]
+        [InlineData(0,3)]
+        [InlineData(10, 3)]
+        public static void IsPointInsideContour_Failed(double x, double y)
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            Point pointFalse = new Point(x, y);
+            //Act.
+            Boolean f1 = tests._contour.IsInside(pointFalse);
+            //Assert.
+            Assert.False(f1);
+        }
+
         [Fact]
-        public static void IsLineInsideContour()
+        public static void IsLineInsideContour_Success()
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
             Line lineTrue = new Line(new Point(1, 1), new Point(8, 8));
-            Line lineFalse1 = new Line(new Point(5, 5), new Point(10, 5));
-            Line lineFalse2 = new Line(new Point(3, 0), new Point(6, 0));
-            Line lineFalse3 = new Line(new Point(3, 10), new Point(6, 10));
             //Act.
             Boolean t1 = tests._contour.IsInside(lineTrue);
-            Boolean f1 = tests._contour.IsInside(lineFalse1);
-            Boolean f2 = tests._contour.IsInside(lineFalse2);
-            Boolean f3 = tests._contour.IsInside(lineFalse3);
             //Assert.
             Assert.True(t1);
-            Assert.False(f1);
-            Assert.False(f2);
-            Assert.False(f3);
         }
+
+        [Theory]
+        [InlineData(5, 5, 10, 5)]
+        [InlineData(3, 0, 6, 0)]
+        [InlineData(3, 10, 6, 10)]
+        public static void IsLineInsideContour_Failed(double x1, double y1, double x2, double y2)
+        {
+            //Arrange.
+            ContourInsiderTests tests = new ContourInsiderTests();
+            Line lineFalse1 = new Line(new Point(x1, y1), new Point(x2, y2));
+            //Act.
+            Boolean f1 = tests._contour.IsInside(lineFalse1);
+            //Assert.
+            Assert.False(f1);
+        }
+
 
         [Fact]
         public static void IsContourInsideContour1()
