@@ -48,7 +48,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return IsStrictlyInside(multiPolygon, contour);
         }
 
-        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Point point)
+        internal static bool IsStrictlyInside(MultiPolygon multiPolygon, Point point, bool intersectBordersCheckRequired = true)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
                 if (PolygonInsider.IsStrictlyInside(polygon, point))

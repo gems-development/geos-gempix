@@ -23,11 +23,11 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                 return true;
             return false;
         }
-        internal static bool Intersects(Polygon polygon, Line line1)
+        internal static bool Intersects(Polygon polygon, Line line)
         {
-            if (IntersectsBorders(polygon, line1))
+            if (IntersectsBorders(polygon, line))
                 return true;
-            if (PolygonInsider.IsStrictlyInside(polygon, line1))
+            if (PolygonInsider.IsStrictlyInside(polygon, line, false))
                 return true;
             return false;
         }
@@ -35,7 +35,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         {
             if (IntersectsBorders(polygon1, polygon2))
                 return true;
-            if (PolygonInsider.IsStrictlyInside(polygon1, polygon2))
+            if (PolygonInsider.IsStrictlyInside(polygon1, polygon2, false))
                 return true;
             return false;
         }
@@ -44,7 +44,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         {
             if (IntersectsBorders(polygon, contour))
                 return true;
-            if (PolygonInsider.IsStrictlyInside(polygon, contour))
+            if (PolygonInsider.IsStrictlyInside(polygon, contour, false))
                 return true;
             return false;
         }

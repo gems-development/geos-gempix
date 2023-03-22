@@ -23,11 +23,11 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     return true; 
             return false;
         }
-        internal static bool Intersects(Contour contour, Line line1)
+        internal static bool Intersects(Contour contour, Line line)
         {      
-            if (IntersectsBorders(contour, line1))
+            if (IntersectsBorders(contour, line))
                     return true;
-            if (ContourInsider.IsStrictlyInside(contour, line1))
+            if (ContourInsider.IsStrictlyInside(contour, line, false))
                 return true;
             return false;
         }
@@ -35,7 +35,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         {
             if (IntersectsBorders(contour2, contour2))
                     return true;
-            if (ContourInsider.IsStrictlyInside(contour1, contour2))
+            if (ContourInsider.IsStrictlyInside(contour1, contour2, false))
                 return true;
             return false;
         }

@@ -18,9 +18,9 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             return IsStrictlyInside(polygon, point);
         }
-        internal static bool IsInside(Polygon polygon, Line line1)
+        internal static bool IsInside(Polygon polygon, Line line)
         {
-            return IsStrictlyInside(polygon, line1);
+            return IsStrictlyInside(polygon, line);
         }
 
         internal static bool IsInside(Polygon polygon1, Polygon polygon2)
@@ -50,34 +50,34 @@ namespace GeosGempix.GeometryPrimitiveInsiders
 
         internal static bool IsStrictlyInside(Polygon polygon, Point point)
         {
-            if (PolygonIntersector.Intersects(polygon, point))
+            if (PolygonIntersector.IntersectsBorders(polygon, point))
                 return false;
             foreach (Contour hole in polygon.GetHoles())
             {   // здесь есть дублирование проверок - как его избежать без дублирования кода?
-                if (ContourInsider.IsInside(hole, point))
+                if (ContourInsider.IsStrictlyInside(hole, point))
                     return false;
             }
             Contour contour = new Contour(polygon.GetPoints());
             // а не хранить ли контур вместо списка точек?
-            if (ContourInsider.IsInside(contour, point))
+            if (ContourInsider.IsStrictlyInside(contour, point))
                 return true;
             return false;
         }
-        internal static bool IsStrictlyInside(Polygon polygon, Line line1)
+        internal static bool IsStrictlyInside(Polygon polygon, Line line, bool intersectBordersCheckRequired = true)
         {
-            if (PolygonIntersector.Intersects(polygon, line1))
+            if (!intersectBordersCheckRequired && PolygonIntersector.IntersectsBorders(polygon, line))
                 return false;
             foreach (Contour hole in polygon.GetHoles())
-                if (ContourInsider.IsStrictlyInside(hole, line1))
+                if (ContourInsider.IsStrictlyInside(hole, line))
                     return false;
-            if (IsInside(polygon, line1.Point1))
+            if (IsInside(polygon, line.Point1))
                 return true;
             return false;
         }
 
-        internal static bool IsStrictlyInside(Polygon polygon1, Polygon polygon2)
+        internal static bool IsStrictlyInside(Polygon polygon1, Polygon polygon2, bool intersectBordersCheckRequired = true)
         {
-            if (PolygonIntersector.Intersects(polygon1, polygon2))
+            if (!intersectBordersCheckRequired && PolygonIntersector.IntersectsBorders(polygon1, polygon2))
                 return false;
             foreach (Contour hole in polygon1.GetHoles())
                 if (ContourInsider.IsStrictlyInside(hole, polygon2))
@@ -88,15 +88,15 @@ namespace GeosGempix.GeometryPrimitiveInsiders
 
         }
 
-        internal static bool IsStrictlyInside(Polygon polygon, Contour contour)
+        internal static bool IsStrictlyInside(Polygon polygon, Contour contour, bool intersectBordersCheckRequired = true)
         {
-            if (PolygonIntersector.Intersects(polygon, contour))
+            if (!intersectBordersCheckRequired && PolygonIntersector.IntersectsBorders(polygon, contour))
                 return false;
             foreach (Contour hole in polygon.GetHoles())
                 if (ContourInsider.IsStrictlyInside(hole, contour))
                     return false;
             Contour contour2 = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsInside(contour2, contour))
+            if (ContourInsider.IsStrictlyInside(contour2, contour))
                 return true;
             return false;
         }
