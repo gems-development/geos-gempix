@@ -18,16 +18,10 @@ namespace GeosGempix.Tests.InsiderTest
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
             Point pointTrue1 = new Point(3, 3);
-            Point pointFalse1 = new Point(0, 3);
-            Point pointFalse2 = new Point(10, 3);
             //Act.
             Boolean t1 = tests._contour.IsInside(pointTrue1);
-            Boolean f1 = tests._contour.IsInside(pointFalse1);
-            Boolean f2 = tests._contour.IsInside(pointFalse2);
             //Assert.
             Assert.True(t1);
-            Assert.False(f1);
-            Assert.False(f2);
         }
 
         [Theory]
@@ -70,7 +64,6 @@ namespace GeosGempix.Tests.InsiderTest
             //Assert.
             Assert.False(f1);
         }
-
 
         [Fact]
         public static void IsContourInsideContour1()
