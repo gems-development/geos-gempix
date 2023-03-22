@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GeosGempix.Visitors.Validators
 {
-	public class Validator : IValidator
+	public class Validator : IValidator, IGeometryPrimitiveVisitor
 	{
 		private IValidator _validator;
 		private bool _validationPassed;

@@ -1,13 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GeosGempix.Interfaces.IVisitors;
 
 namespace GeosGempix.Visitors.Validators
 {
-	internal class MultiPointValidator
+    public class MultiPointValidator : IValidator
 	{
+        private bool _result;
+        private readonly MultiPoint _multipoint;
 
-	}
+        public MultiPointValidator(MultiPoint multipoint)
+        {
+            _multipoint = new MultiPoint(multipoint.GetPoints());
+            _result = false;
+        }
+
+        public bool Validate()
+        {
+            if(_multipoint!=null)
+                _result = true;
+            return _result;
+        }
+    }
 }
