@@ -1,15 +1,10 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Visitors.Validators
 {
-	public class Validator : IValidator, IGeometryPrimitiveVisitor
+    public class Validator : IValidator, IGeometryPrimitiveVisitor
 	{
 		private IValidator _validator;
 		private bool _validationPassed;
@@ -18,7 +13,6 @@ namespace GeosGempix.Visitors.Validators
 		public Validator(IGeometryPrimitive primitive)
 		{
 			primitive.Accept(this);
-			primitive.Accept(_validator!);
 			_validationPassed = _validator!.Validate();
 		}
 

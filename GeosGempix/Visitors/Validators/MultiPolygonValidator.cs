@@ -1,13 +1,8 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Visitors.Validators
 {
-	public class MultiPolygonValidator : IValidator
+    public class MultiPolygonValidator : IValidator
 	{
         private bool _result;
         private readonly MultiPolygon _multipolygon;
