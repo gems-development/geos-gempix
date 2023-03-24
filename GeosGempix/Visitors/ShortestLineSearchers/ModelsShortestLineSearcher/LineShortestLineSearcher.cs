@@ -51,9 +51,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
             if (abc.a != 0)
             {
-
-                double intersectX = ( (perpendicular.c / perpendicular.a) - (abc.c / abc.a)) /
-                    ( (perpendicular.b / perpendicular.a) - (abc.b / abc.a));
+                double intersectX = ((perpendicular.c - abc.c) / (-abc.a)) / ((perpendicular.b - abc.b) / (abc.a));
 
                 double intersectY = - ( abc.b * intersectX + abc.c) / abc.a;
 
