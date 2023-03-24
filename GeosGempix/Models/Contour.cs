@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.CodeAnalysis;
+﻿using GeosGempix.Visitors.Validators;
+using System.Diagnostics.CodeAnalysis;
 using System.Drawing;
 
 namespace GeosGempix.Models
@@ -10,7 +11,7 @@ namespace GeosGempix.Models
         {
             if (points == null)
                 throw new ArgumentNullException("points");
-            if (points.Capacity == 0)
+            if (points.Count == 0)
                 throw new ArgumentException("Длина списка points = 0");
             _points = points;
         }
@@ -25,12 +26,6 @@ namespace GeosGempix.Models
             if (point == null)
                 throw new ArgumentNullException("point");
             _points.Add(point);
-        }
-        public void Add(Contour hole)
-        {
-            if (hole == null)
-                throw new ArgumentNullException("hole");
-            hole.Add(hole);
         }
         public List<Point> GetPoints()
         {
@@ -126,5 +121,6 @@ namespace GeosGempix.Models
         {
             return HashCode.Combine(_points);
         }
+
     }
 }

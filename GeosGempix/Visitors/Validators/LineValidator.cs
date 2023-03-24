@@ -16,7 +16,7 @@ namespace GeosGempix.Visitors.Validators
 
         public bool Validate()
         {
-            if(_line.Point1!=null && _line.Point2!=null)
+            if(Math.Abs(_line.Point1.X - _line.Point2.X) < Double.Epsilon && Math.Abs(_line.Point1.Y - _line.Point2.Y) < Double.Epsilon)
 				_result = true;
 			return _result;
         }

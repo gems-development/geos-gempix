@@ -3,7 +3,6 @@ using GeosGempix.Visitors.Validators;
 
 public interface IGeometryPrimitive
 {
-    public void Accept(IGeometryPrimitiveVisitor v);
-    void Accept(Validator validator);
+    void Accept(IGeometryPrimitiveVisitor v);
     bool Equals(object obj);
 }
