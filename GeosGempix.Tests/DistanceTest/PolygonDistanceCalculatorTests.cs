@@ -13,14 +13,6 @@ namespace GeosGempix.Tests.DistanceTest
         [Fact]
         public void GetDistanceBetweenPolygonAndPolygon_Success() { }
         
-        // Проверка на растояние между полигоном и мультиточкой
-        [Fact]
-        public void GetDistanceBetweenPolygonAndMultiPoint_Success() { }
-        
-        // Проверка на растояние между полигоном и мультилинией
-        [Fact]
-        public void GetDistanceBetweenPolygonAndMultiLine_Success() { }
-        
         // Проверка на растояние между полигоном и мультиполигоном
         [Fact]
         public void GetDistanceBetweenPolygonAndMultiPolygon_Success() { }

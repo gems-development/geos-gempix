@@ -7,13 +7,13 @@ namespace GeosGempix.Tests.DistanceTest
 	{
 		// Проверка на расстояние между точкой и точкой
 		[Theory]
-		[InlineData(1, 1, 1, 1, 0)]
-		[InlineData(1, 1, 5, 4, 5)]
-		public void GetDistanceBetweenPointAndPoint(double x1, double y1, double x2, double y2, double res)
+		[InlineData(0, new double[] {1, 1, 1, 1})]
+		[InlineData(5, new double[] {1, 1, 5, 4})]
+		public void GetDistanceBetweenPointAndPoint(double res, double[] a)
 		{
 			//Arrange.
-			var point1 = new Point(x1, y1);
-			var point2 = new Point(x2, y2);
+			var point1 = new Point(a[0], a[1]);
+			var point2 = new Point(a[2], a[3]);
 
 			//Act. + Assert.
 			Assert.Equal(res, point1.GetDistance(point2));
@@ -21,15 +21,15 @@ namespace GeosGempix.Tests.DistanceTest
 
 		// Проверка на расстояние между точкой и прямой
 		[Theory]
-		[InlineData(1, 1, 1, 1, 5, 1, 0)]
-		[InlineData(1, 3, 1, 1, 5, 1, 2)]
-		[InlineData(3, 3, 1, 1, 5, 1, 2)]
-		[InlineData(0, 3, 4, 0, 8, 0, 5)]
-		public void GetDistanceBetweenPointAndLine(double x1, double y1, double x2, double y2, double x3, double y3, double res)
+		[InlineData(new double[]{1, 1}, new double[]{1, 1, 5, 1}, 0)]
+		[InlineData(new double[]{1, 3}, new double[]{1, 1, 5, 1}, 2)]
+		[InlineData(new double[]{3, 3}, new double[]{1, 1, 5, 1}, 2)]
+		[InlineData(new double[]{0, 3}, new double[]{4, 0, 8, 0}, 5)]
+		public void GetDistanceBetweenPointAndLine(double[] a, double[] b, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
-			var line = TestHelper.CreateLine(x2, y2, x3, y3);
+			var point = new Point(a[0], a[1]);
+			var line = TestHelper.CreateLine(b[0], b[1], b[2], b[3]);
 
 			//Act. + Assert.
 			Assert.Equal(res, line.GetDistance(point));
@@ -37,14 +37,14 @@ namespace GeosGempix.Tests.DistanceTest
 
 		// Проверка на расстояние между точкой и контуром
 		[Theory]
-		[InlineData(3, 0, 0)]
-		[InlineData(1, 1, 0)]
-		[InlineData(5, 1, 2)]
-		[InlineData(7, 6, 5)]
-		public void GetDistanceBetweenPointAndContour(double x1, double y1, double res)
+		[InlineData(new double[]{3, 0}, 0)]
+		[InlineData(new double[]{1, 1}, 0)]
+		[InlineData(new double[]{5, 1}, 2)]
+		[InlineData(new double[]{7, 6}, 5)]
+		public void GetDistanceBetweenPointAndContour(double[] a, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
+			var point = new Point(a[0], a[1]);
 			
 			var contour = TestHelper.CreateContour(
 				new Point(0, 0),
@@ -59,19 +59,18 @@ namespace GeosGempix.Tests.DistanceTest
 
 		// Проверка на расстояние между точкой и мультиточкой
 		[Theory]
-		[InlineData(2, 0, 0, 0, 1, 2, 2, 0, 0)]
-		[InlineData(1, 1, 0, 0, 1, 2, 2, 0, 1)]
-		[InlineData(1, 1, 0, 1, 1, 2, 1, 0, 1)]
-		public void GetDistanceBetweenMatchPointAndMultiPoint(double x1, double y1, double x2, double y2,  
-			double x3, double y3, double x4, double y4, double res)
+		[InlineData(new double[]{2, 0}, new double[]{0, 0, 1, 2, 2, 0}, 0)]
+		[InlineData(new double[]{1, 1}, new double[]{0, 0, 1, 2, 2, 0}, 1)]
+		[InlineData(new double[]{1, 1}, new double[]{0, 1, 1, 2, 1, 0}, 1)]
+		public void GetDistanceBetweenMatchPointAndMultiPoint(double[] a, double[] b, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
+			var point = new Point(a[0], a[1]);
 
 			var multiPoint = TestHelper.CreateMultiPoint(
-				new Point(x2, y2),
-				new Point(x3, y3),
-				new Point(x4, y4));
+				new Point(b[0], b[1]),
+				new Point(b[2], b[3]),
+				new Point(b[4], b[5]));
 
 			//Act. + Assert.
 			Assert.Equal(res, multiPoint.GetDistance(point));
@@ -79,12 +78,12 @@ namespace GeosGempix.Tests.DistanceTest
 
 		// Проверка на расстояние между точкой и мультилинией
 		[Theory]
-		[InlineData(6, 1, 0)]
-		[InlineData(12, 4, 5)]
-		public void GetDistanceBetweenMatchPointAndMultiLine(double x1, double y1, double res)
+		[InlineData(new double[]{6, 1}, 0)]
+		[InlineData(new double[]{12, 4}, 5)]
+		public void GetDistanceBetweenMatchPointAndMultiLine(double[] a, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
+			var point = new Point(a[0], a[1]);
 
 			var multiLine = TestHelper.CreateMultiLine(
 				TestHelper.CreateLine(0, 0, 3, 0),
@@ -97,15 +96,15 @@ namespace GeosGempix.Tests.DistanceTest
 
 		// Проверка на расстояние между точкой и полигоном
 		[Theory]
-		[InlineData(3, 4.5, 0)]
-		[InlineData(5, 2, 0)]
-		[InlineData(2, 2, 2)]
-		[InlineData(9, 8, 5)]
-		[InlineData(8, 1, 3)]
-		public void GetDistanceBetweenPointAndPolygon_Success(double x1, double y1, double res)
+		[InlineData(new double[]{3, 4.5}, 0)]
+		[InlineData(new double[]{5, 2}, 0)]
+		[InlineData(new double[]{2, 2}, 2)]
+		[InlineData(new double[]{9, 8}, 5)]
+		[InlineData(new double[]{8, 1}, 3)]
+		public void GetDistanceBetweenPointAndPolygon_Success(double[] a, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
+			var point = new Point(a[0], a[1]);
 			
 			var contour = TestHelper.CreateContour(
 				new Point(1, 1),
@@ -130,15 +129,15 @@ namespace GeosGempix.Tests.DistanceTest
 		
 		// Проверка на расстояние между точкой и мультиполигоном
 		[Theory]
-		[InlineData(4.5, 8, 0)]
-		[InlineData(11, 9, 0)]
-		[InlineData(2, 9, 2)]
-		[InlineData(8, 2, 3)]
-		[InlineData(14, 2, 5)]
-		public void GetDistanceBetweenPointAndMultiPolygon_Success(double x1, double y1, double res)
+		[InlineData(new double[]{4.5, 8}, 0)]
+		[InlineData(new double[]{11, 9}, 0)]
+		[InlineData(new double[]{2, 9}, 2)]
+		[InlineData(new double[]{8, 2}, 3)]
+		[InlineData(new double[]{14, 2}, 5)]
+		public void GetDistanceBetweenPointAndMultiPolygon_Success(double[] a, double res)
 		{
 			//Arrange.
-			var point = new Point(x1, y1);
+			var point = new Point(a[0], a[1]);
 			
 			//полигон 1
 			var contour1 = TestHelper.CreateContour(
