@@ -49,17 +49,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
             var perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
 
-            if (abc.a != 0)
-            {
-                double intersectX = ((perpendicular.c - abc.c) / (-abc.a)) / ((perpendicular.b - abc.b) / (abc.a));
+            Point intersect = LineIntersector.GetPointOfIntersection(abc, perpendicular);
 
-                double intersectY = - ( abc.b * intersectX + abc.c) / abc.a;
-
-                Point intersect = new Point(intersectX, intersectY);
-
-                shortLine = new Line(point, intersect);
-
-            }
+            shortLine = new Line(point, intersect);
 
 			return shortLine;
         }
