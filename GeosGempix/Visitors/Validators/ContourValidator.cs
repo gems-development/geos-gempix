@@ -1,24 +1,40 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.GeometryPrimitiveIntersectors;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 
 namespace GeosGempix.Visitors.Validators
 {
     internal class ContourValidator : IValidator
     {
-        private bool _result;
         private readonly Contour _contour;
 
         public ContourValidator(Contour contour) 
         {
             _contour = new Contour(contour);
-            _result = false;
         }
 
         public bool Validate()
         {
-            if(_contour!=null && _contour.GetLines().Count >= 3)
-                _result = true;
-            return _result;
+            int lineCount = _contour.GetLines().Count;
+            if (_contour == null || lineCount < 3)
+            {
+                return false;
+            }
+            List<Line> lines = _contour.GetLines();
+            for (int i = 0; i < lineCount; i++)
+            {
+                for (int j = 0; j < lineCount; j++)
+                {
+                    if (!lines[i].Point1.Equals(lines[j].Point2) && !lines[i].Point2.Equals(lines[j].Point1))
+                    {
+                        if (LineIntersector.Intersects(lines[i], lines[j]))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
     }
 }
