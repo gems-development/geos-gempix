@@ -1,5 +1,4 @@
-﻿using GeosGempix.GeometryPrimitiveIntersectors;
-using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;

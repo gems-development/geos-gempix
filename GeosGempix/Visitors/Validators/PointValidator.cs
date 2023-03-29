@@ -1,9 +1,8 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
-using GeosGempix.Models;
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class PointValidator : IValidator
+    internal class PointValidator : IValidator
     {
 		private bool _result;
 		private readonly Point _point;

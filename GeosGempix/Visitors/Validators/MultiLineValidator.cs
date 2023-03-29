@@ -3,7 +3,7 @@ using GeosGempix.MultiModels;
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class MultiLineValidator : IValidator
+    internal class MultiLineValidator : IValidator
 	{
         private bool _result;
         private readonly MultiLine _multiline;

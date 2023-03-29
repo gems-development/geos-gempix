@@ -1,7 +1,4 @@
-﻿using GeosGempix.Models;
-using System.Diagnostics.CodeAnalysis;
-
-namespace GeosGempix
+﻿namespace GeosGempix
 {
     public class Point : IGeometryPrimitive
     {

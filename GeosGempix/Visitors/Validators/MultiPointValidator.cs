@@ -2,7 +2,7 @@
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class MultiPointValidator : IValidator
+    internal class MultiPointValidator : IValidator
 	{
         private bool _result;
         private readonly MultiPoint _multipoint;

@@ -2,7 +2,7 @@
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class MultiPolygonValidator : IValidator
+    internal class MultiPolygonValidator : IValidator
 	{
         private bool _result;
         private readonly MultiPolygon _multipolygon;

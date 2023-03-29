@@ -2,6 +2,6 @@
 {
     public interface IValidator
 	{
-		public Boolean Validate();
+		bool Validate();
 	}
 }

@@ -1,9 +1,8 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
-using GeosGempix.Models;
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class PolygonValidator : IValidator
+    internal class PolygonValidator : IValidator
 	{
         private bool _result;
         private readonly Polygon _polygon;

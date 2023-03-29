@@ -1,6 +1,7 @@
 ﻿using GeosGempix.Visitors.Validators;
 using GeosGempix.Models;
 
+
 namespace GeosGempix.Tests.ValidatorTests
 {
     public class LineTests
@@ -9,9 +10,10 @@ namespace GeosGempix.Tests.ValidatorTests
         public static void LineTest_Success() 
         {
             //Arrange. + Act.
-            LineValidator lineValidator = new LineValidator(new Line(new Point(0, 0), new Point(1, 1)));
+            Line line = new Line(new Point(0, 0), new Point(1, 1));
+            var validator = new Validator(line);
             //Assert.
-            Assert.True(lineValidator.Validate());
+            Assert.True(validator.Validate());
         }
     }
 }

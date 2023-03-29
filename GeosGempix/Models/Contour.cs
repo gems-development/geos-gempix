@@ -1,8 +1,4 @@
-﻿using GeosGempix.Visitors.Validators;
-using System.Diagnostics.CodeAnalysis;
-using System.Drawing;
-
-namespace GeosGempix.Models
+﻿namespace GeosGempix.Models
 {
     public class Contour : IGeometryPrimitive
     {

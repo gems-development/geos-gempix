@@ -2,7 +2,6 @@
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using System.Drawing;
 
 namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {

@@ -3,7 +3,7 @@ using GeosGempix.Models;
 
 namespace GeosGempix.Visitors.Validators
 {
-    public class ContourValidator : IValidator
+    internal class ContourValidator : IValidator
     {
         private bool _result;
         private readonly Contour _contour;
@@ -16,7 +16,7 @@ namespace GeosGempix.Visitors.Validators
 
         public bool Validate()
         {
-            if(_contour!=null)
+            if(_contour!=null && _contour.GetLines().Count >= 3)
                 _result = true;
             return _result;
         }

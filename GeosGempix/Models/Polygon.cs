@@ -1,5 +1,4 @@
 ﻿using GeosGempix.Models;
-using System.Diagnostics.CodeAnalysis;
 using Point = GeosGempix.Point;
 
 public class Polygon : IGeometryPrimitive
