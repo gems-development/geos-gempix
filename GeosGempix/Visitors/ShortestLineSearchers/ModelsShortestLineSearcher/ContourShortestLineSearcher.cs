@@ -1,4 +1,4 @@
-﻿/*using GeosGempix.GeometryPrimitiveIntersectors;
+﻿using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
@@ -8,13 +8,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GeosGempix.Visitors.Insiders;
+using GeosGempix.Extensions;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
 	internal class ContourShortestLineSearcher : IModelShortestLineSearcher
 	{
 		private readonly Contour _contour;
-		private Contour _result;
+		private Line _result;
 
 		public ContourShortestLineSearcher(List<Point> points)
 			{
@@ -32,7 +34,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 			_contour = new Contour(contour);
 		}
 
-		public Contour GetResult() =>
+		public Line GetResult() =>
 			_result;
 
 		public void Visit(Point point) =>
@@ -53,20 +55,98 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 		public void Visit(MultiPolygon multiPolygon) =>
 			_result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _contour);
 
-		internal static Line GetShortestLine(Contour _contour, Polygon polygon) =>
-			PolygonShortestLineSearcher.GetShortestLine(polygon, _contour);
+        public void Visit(Contour contour) =>
+            _result = GetShortestLine(_contour, contour);
 
-		internal static Line GetShortestLine(Contour _contour, MultiLine multiLine) =>
-			MultiLineShortestLineSearcher.GetShortestLine(multiLine, _contour);
 
-		internal static Line GetShortestLine(Contour _contour, MultiPoint multiPoint) =>
-			MultiPointShortestLineSearcher.GetShortestLine(multiPoint, _contour);
+        internal static Line? GetShortestLine(Contour contour, Point point)
+        {
+            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+            // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
+            if (contour.Intersects(point))
+                return null;
+            List<Point> points = contour.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                lines.Add(new Line(points[i], points[i + 1]));
+            }
+            lines.Add(new Line(points[points.Count - 1], points[0]));
+            foreach (Line line in lines)
+            {
+                curLine = LineShortestLineSearcher.GetShortestLine(line, point);
+                if (curLine.GetLength() < shortLine.GetLength())
+                {
+                    shortLine = new Line(curLine);
+                }
+            }
+            return shortLine;
+        }
 
-		internal static Line GetShortestLine(Contour _contour, MultiPolygon multiPolygon) =>
-			MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _contour);
+        internal static Line? GetShortestLine(Contour contour, Line line)
+        {
+            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+            // проверка если отрезок ВНУТРИ контура... 
+            if (contour.Intersects(line))
+                return null;
+            List<Point> points = contour.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                lines.Add(new Line(points[i], points[i + 1]));
+            }
+            lines.Add(new Line(points[points.Count - 1], points[0]));
+            foreach (Line line1 in lines)
+            {
+                curLine = LineShortestLineSearcher.GetShortestLine(line1, line);
+                if (curLine.GetLength() < shortLine.GetLength())
+                {
+                    shortLine = new Line(curLine);
+                }
+            }
+            return shortLine;
+        }
 
-		public void Visit(Contour contour) =>
-			throw new NotImplementedException();
+        internal static Line? GetShortestLine(Contour contour1, Contour contour2)
+        {
+            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+            // проверка если контур ВНУТРИ контура... какой внутри какого?)))
+            if (contour1.Intersects(contour2) || contour2.Intersects(contour1))
+                return null;
+            List<Point> points = contour2.GetPoints();
+            List<Line> lines = new List<Line>();
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                lines.Add(new Line(points[i], points[i + 1]));
+            }
+            lines.Add(new Line(points[points.Count - 1], points[0]));
+
+            foreach (Line line in lines)
+            {
+                curLine = GetShortestLine(contour1, line);
+                if (curLine.GetLength() < shortLine.GetLength())
+                {
+                    shortLine = new Line(curLine);
+                }
+            }
+            return shortLine;
+        }
+
+        internal static Line GetShortestLine(Contour contour, Polygon polygon) =>
+			PolygonShortestLineSearcher.GetShortestLine(polygon, contour);
+
+		internal static Line GetShortestLine(Contour contour, MultiLine multiLine) =>
+			MultiLineShortestLineSearcher.GetShortestLine(multiLine, contour);
+
+		internal static Line GetShortestLine(Contour contour, MultiPoint multiPoint) =>
+			MultiPointShortestLineSearcher.GetShortestLine(multiPoint, contour);
+
+		internal static Line GetShortestLine(Contour contour, MultiPolygon multiPolygon) =>
+			MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, contour);
+
+		
 	}
 }
-*/

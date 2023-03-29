@@ -36,6 +36,9 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(MultiPolygon multiPolygon) =>
         _result = GetShortestLine(_multiPoint, multiPolygon);
 
+    public void Visit(Contour contour) =>
+        _result = GetShortestLine(_multiPoint, contour);
+
     internal static Line GetShortestLine(MultiPoint multiPoint, MultiPolygon multiPolygon) =>
         MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, multiPoint);
 
@@ -66,24 +69,27 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
              point1,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Point)primitive));
 
+    internal static Line GetShortestLine(MultiPoint multiPoint, Contour contour) =>
+         GetShortestLine(
+             multiPoint,
+             contour,
+             (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Contour)primitive));
+
     internal static Line GetShortestLine(
         MultiPoint multiPoint,
         IGeometryPrimitive primitive,
-        Func<Point, IGeometryPrimitive, Line> GetShortestLine)
+        Func<Point, IGeometryPrimitive, Line> getShortestLine)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (Point point in multiPoint.GetPoints())
         {
-			curLine = GetShortestLine.Invoke(point, primitive);
+            curLine = getShortestLine(point, primitive);
             if (curLine.GetLength() < shortLine.GetLength())
             {
-				shortLine = new Line(curLine);
+                shortLine = new Line(curLine);
             }
         }
         return shortLine;
     }
-
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
 }
