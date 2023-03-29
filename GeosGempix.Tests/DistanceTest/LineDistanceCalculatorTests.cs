@@ -1,6 +1,5 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
-using GeosGempix.MultiModels;
 
 namespace GeosGempix.Tests.DistanceTest
 {
@@ -8,17 +7,16 @@ namespace GeosGempix.Tests.DistanceTest
 	{
 		// Проверка на расстояние между отрезком и отрезком
 		[Theory]
-		[InlineData(0, 0, 4, 0, 0, 0, 4, 0, 0)]
-		[InlineData(2, 2, 7, 2, 6, 0, 6, 4, 0)]
-		[InlineData(0, 0, 2, 0, 2, 0, 2, 1, 0)]
-		[InlineData(0, 0, 4, 0, 0, 2, 4, 2, 2)]
-		[InlineData(0, 0, 1, 0, 5, 3, 5, 4, 5)]
-		public void GetDistanceBetweenLineAndLine(double x1, double y1, double x2, double y2,  
-			double x3, double y3, double x4, double y4, double res)
+		[InlineData(new double[]{0, 0, 4, 0}, new double[]{0, 0, 4, 0}, 0)]
+		[InlineData(new double[]{2, 2, 7, 2}, new double[]{6, 0, 6, 4}, 0)]
+		[InlineData(new double[]{0, 0, 2, 0}, new double[]{2, 0, 2, 1}, 0)]
+		[InlineData(new double[]{0, 0, 4, 0}, new double[]{0, 2, 4, 2}, 2)]
+		[InlineData(new double[]{0, 0, 1, 0}, new double[]{5, 3, 5, 4}, 5)]
+		public void GetDistanceBetweenLineAndLine(double[] a, double[] b, double res)
 		{
 			//Arrange.
-			var line1 = TestHelper.CreateLine(x1, y1, x2, y2);
-			var line2 = TestHelper.CreateLine(x3, y3, x4, y4);
+			var line1 = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
+			var line2 = TestHelper.CreateLine(b[0], b[1], b[2], b[3]);
 
 			//Act. + Assert.
 			Assert.Equal(res,line1.GetDistance(line2));
@@ -26,16 +24,16 @@ namespace GeosGempix.Tests.DistanceTest
 
 		//Проверка на расстояние между отрезком и контуром
 		[Theory]
-		[InlineData(1, 0, 3, 0, 0)]
-		[InlineData(2, 2, 6, 2, 0)]
-		[InlineData(4, 3, 7, 3, 0)]
-		[InlineData(1, 1, 1, 2, 1)] //failed
-		[InlineData(5, 1, 7, 4, 1)] //failed
-		[InlineData(8, 7, 9, 6, 5)] //failed
-		public void GetDistanceBetweenLineAndContour(double x1, double y1, double x2, double y2, double res)
+		[InlineData(new double[]{1, 0, 3, 0}, 0)]
+		[InlineData(new double[]{2, 2, 6, 2}, 0)]
+		[InlineData(new double[]{4, 3, 7, 3}, 0)]
+		[InlineData(new double[]{1, 1, 1, 2}, 1)] //failed
+		[InlineData(new double[]{5, 1, 7, 4}, 1)] //failed
+		[InlineData(new double[]{8, 7, 9, 6}, 5)] //failed
+		public void GetDistanceBetweenLineAndContour(double[] a, double res)
 		{
 			//Arrange.
-			var line = TestHelper.CreateLine(x1, y1, x2, y2);
+			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			var contour = TestHelper.CreateContour(
 				new Point(0, 0),
@@ -50,12 +48,13 @@ namespace GeosGempix.Tests.DistanceTest
 		
 		// Проверка на расстояние между отрезком и мультиточкой
 		[Theory]
-		[InlineData(0, 3, 3, 3, 0)]
-		[InlineData(0, 2, 3, 2, 1)]
-		[InlineData(5, 6, 6, 6, 5)]
-		public void GetDistanceBetweenLineAndMultiPoint_Success(double x1, double y1, double x2, double y2, double res)
+		[InlineData(new double[]{0, 3, 3, 3}, 0)]
+		[InlineData(new double[]{0, 2, 3, 2}, 1)]
+		[InlineData(new double[]{5, 6, 6, 6}, 5)]
+		public void GetDistanceBetweenLineAndMultiPoint_Success(double[] a, double res)
 		{
-			var line = TestHelper.CreateLine(x1, y1, x2, y2);
+			//Arrange.
+			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			var multiPoint = TestHelper.CreateMultiPoint(
 				new Point(0, 0),
@@ -68,14 +67,15 @@ namespace GeosGempix.Tests.DistanceTest
 		
 		// Проверка на расстояние между отрезком и мультилинией
 		[Theory]
-		[InlineData(0, 1, 6, 1, 0)]
-		[InlineData(4, 1, 6, 1, 0)]
-		[InlineData(4, 3, 5, 3, 0)]
-		[InlineData(3, 0, 4, 0, 1)]
-		[InlineData(7, 1, 7, 4, 2)]
-		public void GetDistanceBetweenLineAndMultiLine_Success(double x1, double y1, double x2, double y2, double res)
+		[InlineData(new double[]{0, 1, 6, 1}, 0)]
+		[InlineData(new double[]{4, 1, 6, 1}, 0)]
+		[InlineData(new double[]{4, 3, 5, 3}, 0)]
+		[InlineData(new double[]{3, 0, 4, 0}, 1)]
+		[InlineData(new double[]{7, 1, 7, 4}, 2)]
+		public void GetDistanceBetweenLineAndMultiLine_Success(double[] a, double res)
 		{
-			var line = TestHelper.CreateLine(x1, y1, x2, y2);
+			//Arrange.
+			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			var multiLine = TestHelper.CreateMultiLine(
 				TestHelper.CreateLine(1, 0, 1, 3),
@@ -88,17 +88,17 @@ namespace GeosGempix.Tests.DistanceTest
 		
 		//Проверка на расстояние между отрезком и полигоном
 		[Theory]
-		[InlineData(1, 1, 1, 6, 0)]
-		[InlineData(-1, 4, 3, 4, 0)]
-		[InlineData(1, 4, 6, 4, 0)] //failed
-		[InlineData(3, 3, 4, 4, 1)] //failed
-		[InlineData(9, 5, 11, 3, 2)] //failed
-		[InlineData(9, 0, 12, 0, 2)]
-		[InlineData(11, 10, 11, 12, 2)] //failed
-		public void GetDistanceBetweenLineAndPolygon_Success(double x1, double y1, double x2, double y2, double res)
+		[InlineData(new double[]{1, 1, 1, 6}, 0)]
+		[InlineData(new double[]{-1, 4, 3, 4}, 0)]
+		[InlineData(new double[]{1, 4, 6, 4}, 0)] //failed
+		[InlineData(new double[]{3, 3, 4, 4}, 1)] //failed
+		[InlineData(new double[]{9, 5, 11, 3}, 2)] //failed
+		[InlineData(new double[]{9, 0, 12, 0}, 2)]
+		[InlineData(new double[]{11, 10, 11, 12}, 2)] //failed
+		public void GetDistanceBetweenLineAndPolygon_Success(double[] a, double res)
 		{
 			//Arrange.
-			var line = TestHelper.CreateLine(x1, y1, x2, y2);
+			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			var contour = TestHelper.CreateContour(
 				new Point(2, 2),
@@ -123,16 +123,17 @@ namespace GeosGempix.Tests.DistanceTest
 		
 		//Проверка на расстояние между отрезком и мультиполигоном
 		[Theory]
-		[InlineData(6, 6, 8, 8, 0)]
-		[InlineData(4, 13, 8, 13, 0)]
-		[InlineData(15, 10, 15, 15, 0)] 
-		[InlineData(3, 12, 4, 12, 1)] //failed
-		[InlineData(20, 19, 21, 20, 5)] //failed
-		[InlineData(17, 10, 21, 13, 1)] //failed
-		[InlineData(10, 3, 14, 3, 3)] //failed
-		public void GetDistanceBetweenLineAndMultiPolygon_Success(double x1, double y1, double x2, double y2, double res)
+		[InlineData(new double[]{6, 6, 8, 8}, 0)]
+		[InlineData(new double[]{4, 13, 8, 13}, 0)]
+		[InlineData(new double[]{15, 10, 15, 15}, 0)] 
+		[InlineData(new double[]{3, 12, 4, 12}, 1)] //failed
+		[InlineData(new double[]{20, 19, 21, 20}, 5)] //failed
+		[InlineData(new double[]{17, 10, 21, 13}, 1)] //failed
+		[InlineData(new double[]{10, 3, 14, 3}, 3)] //failed
+		public void GetDistanceBetweenLineAndMultiPolygon_Success(double[] a, double res)
 		{
-			var line = TestHelper.CreateLine(x1, y1, x2, y2);
+			//Arrange.
+			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			//полигон 1
 			var contour1 = TestHelper.CreateContour(
