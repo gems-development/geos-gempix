@@ -14,8 +14,8 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         public static bool Intersects(Line line, Point point)
         {
-            if (point == null)
-                return false;
+            if (point == null || line == null)
+                throw new ArgumentException("Один из аргументов Intersects = null");
             return Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
                 PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
         }
@@ -42,11 +42,26 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         {
             double a1 = lineEq1.a1, b1 = lineEq1.b1, c1 = lineEq1.c1,
                a2 = lineEq2.a2, b2 = lineEq2.b2, c2 = lineEq2.c2;
+            if (a1 == 0 && b1 == 0)
+                throw new ArgumentException("Уравнение прямой lineEq1 задано неверно");
+            if (a2 == 0 && b2 == 0)
+                throw new ArgumentException("Уравнение прямой lineEq2 задано неверно");
             double x, y;
             if (a1 == 0)
-            {
+            { // значит b1 != 0
                 if (a2 == 0)
+                {
+                    // b2 != 0
+                    if (c1 / b1 == c2 / b2)
+                    {
+                        // значит, уравнения по сути одинаковые и это одна и та же прямая
+                        // невозможно получить точку пересечения
+                        throw new Exception("Прямые совпадают, невозможно получить единственную точку пересечения");
+                    }
+                    // а иначе прямые параллельны (но не совпадают) и точки пересечения нет
                     return null;
+                }
+                   
                 y = -c1 / b1;
                 x = (-c2 - b2 * y) / a2;
                 return new Point(x, y);
@@ -58,10 +73,109 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                 return new Point(x, y);
             }
             if (b1 == 0 && b2 == 0)
+            {
+                if (c1 / a1 == c2 / a2)
+                {
+                    throw new Exception("Прямые совпадают, невозможно получить единственную точку пересечения");
+                }
+                // а иначе прямые параллельны (но не совпадают) и точки пересечения нет
                 return null;
+            }
             y = (-c2 + c1 * a2 / a1) / (b2 - b1 * a2 / a1);
             x = (-c1 - b1 * y) / a1;
             return new Point(x, y);
+        }
+
+        // null - нет точки пересечения
+        // Массив из 1 элемента - одна точка пересечения
+        // Массив из двух элементов - пересечение представляет собой отрезок
+        // той же направленности, что и первый отрезок
+        internal static Point[]? GetPointOfIntersection(Line line1, Line line2)
+        {
+            if (line1 == null || line2 == null)
+            {
+                throw new ArgumentException("На вход подали line == null");
+            }
+            Point? point = null;
+            try
+            {
+                point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
+                if (point == null)
+                    return null;
+                return new Point[]{point};
+            }
+            catch (Exception e)
+            {
+                // значит, отрезки лежат на одной прямой и все сложно
+                // Проверим расположение точек относительно друг друга
+                // Раз 4 точки, значит 24 ситуации. Много. Буду играть с векторами и их направлениями.
+                // Положительное направление буду определять с помощью всего одной координаты вектора A1B1
+                // A1B1 = (x,y) - если x = 0, значит смотрим на y, иначе на х
+                Point A1 = line1.Point1;
+                Point B1 = line1.Point2;
+                Point A2 = line2.Point1;
+                Point B2 = line2.Point2;
+                double d1 = B1.X - A1.X; // d - direction
+                double d2;
+                if (d1 == 0) 
+                {
+                    d1 = B1.Y - A1.Y;
+                    d2 = B2.Y - A2.Y;
+                } else
+                    d2 = B2.X - A2.X;
+                bool co_directional = (d1 > 0 && d2 > 0) || (d1 < 0 && d2 < 0);
+                // сонаправлены - true, нет - false
+                // можно через d1*d2>0, но, думаю, проверки жрут меньше, тем более тут double
+                // Для начала проверим ситуации, когда нужно вернуть только одну точку.
+                if (co_directional) // если сонаправлены
+                {
+                    if (B1.Equals(A2)) // начало второго совпадает с концом первого
+                        return new Point[] { B1 };
+                    if (B2.Equals(A1)) // начало первого совпадает с концом второго
+                        return new Point[] { A1 };
+                } else // направлены в противоположные стороны
+                {
+                    if (A1.Equals(A2)) // начало второго совпадает с началом первого
+                        return new Point[] { A1 };
+                    if (B2.Equals(B1)) // конец первого совпадает с концом второго
+                        return new Point[] { B1 };
+                }
+                // Далее будем проверять ситуации, когда нужно вернуть null или две точки
+                // олицетворяющие отрезок.
+                // Понятие "внутри" включает в себя возможное совпадение каких-то точек
+                if (Intersects(line1, A2)) // A2 содержится "внутри" отрезка?
+                {
+                    if (Intersects(line1, B2)) // B2 тоже "внутри"?
+                    {
+                        // пример того, как вернуть именно сонаправленный line1 отрезок 
+                        if (co_directional)
+                            return new Point[] { A2, B2 }; 
+                        return new Point[] { B2, A2 };
+                    }
+                    else // B2 "снаружи" - но с какой стороны?
+                    {
+                        if (co_directional)
+                            return new Point[] { A2, B1 }; // B2 идет позже чем B1
+                        return new Point[] { A1, A2 }; // а иначе B2 вылетает в сторону A1
+                    }
+                }
+                else // A2 "снаружи"
+                {
+                    if (Intersects(line1, B2)) // B2 "внутри"?
+                    {
+                        if (co_directional)
+                            return new Point[] { A1, B2 }; // A2 вылетело за A1
+                        return new Point[] { B2, B1 }; // иначе A2 вылетело за B1 
+                    } else // A2 и B2 снаружи. 
+                    {
+                        // Но отрезок A1B1 может сам являться пересечением, это надо проверить
+                        if (Intersects(line2, A1))
+                            return new Point[] { A1, B1 }; // вторая точка автоматом внутри
+                        return null; //Пересечений нет вообще
+                    }
+
+                }
+            }
         }
 
         public bool GetResult() =>
