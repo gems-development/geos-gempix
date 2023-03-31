@@ -57,7 +57,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 if (ContourInsider.IsStrictlyInside(hole, point))
                     return false;
             }
-            Contour contour = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             // а не хранить ли контур вместо списка точек?
             if (ContourInsider.IsStrictlyInside(contour, point))
                 return true;
@@ -95,7 +95,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             foreach (Contour hole in polygon.GetHoles())
                 if (ContourInsider.IsStrictlyInside(hole, contour))
                     return false;
-            Contour contour2 = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             if (ContourInsider.IsStrictlyInside(contour2, contour))
                 return true;
             return false;
@@ -110,7 +110,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 foreach (Point point in multiPoint.GetPoints())
                     if (ContourInsider.IsStrictlyInside(hole, point))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             if (ContourInsider.IsStrictlyInside(contour1, multiPoint))
                 return true;
             return false;
@@ -126,7 +126,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 foreach (Polygon polygon1 in multiPolygon.GetPolygons())
                     if (ContourInsider.IsStrictlyInside(hole, polygon1))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             if (ContourInsider.IsStrictlyInside(contour1, multiPolygon))
                 return true;
             return false;
@@ -141,7 +141,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 foreach (Line line in multiLine.GetLines())
                     if (ContourInsider.IsStrictlyInside(hole, line))
                         return false;
-            Contour contour1 = new Contour(polygon.GetPoints());
+            var mainContour = new Contour(polygon.GetPoints());
             if (ContourInsider.IsStrictlyInside(contour1, multiLine))
                 return true;
             return false;

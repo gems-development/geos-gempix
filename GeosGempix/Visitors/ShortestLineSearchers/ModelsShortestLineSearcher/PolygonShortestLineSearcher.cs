@@ -40,15 +40,14 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _polygon);
     public void Visit(Contour contour) =>
-        throw new NotImplementedException();
+        _result = GetShortestLine(_polygon, contour);
 
-    // добавление ? избавляет от warnings связанным с возможным возвратом null
     internal static Line? GetShortestLine(Polygon polygon, Point point)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        foreach (Contour contour in polygon.GetHoles()){
-            if (contour.Intersects(point))
+        foreach (var hole in polygon.GetHoles()){
+            if (hole.Intersects(point))
                 return null;
         }
         List<Point> points = polygon.GetPoints();
@@ -74,8 +73,8 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        foreach (Contour contour in polygon.GetHoles()){
-            if (contour.Intersects(line))
+        foreach (var hole in polygon.GetHoles()){
+            if (hole.Intersects(line))
                 return null;
         }
         List<Point> points = polygon.GetPoints();
@@ -101,12 +100,12 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
-        foreach (Contour contour in polygon1.GetHoles()){
-            if (contour.Intersects(polygon2))
+        foreach (var hole in polygon1.GetHoles()){
+            if (hole.Intersects(polygon2))
                 return null;
         }
-        foreach (Contour contour in polygon2.GetHoles()){
-            if (contour.Intersects(polygon1))
+        foreach (var hole in polygon2.GetHoles()){
+            if (hole.Intersects(polygon1))
                 return null;
         }
         List<Point> points = polygon2.GetPoints();

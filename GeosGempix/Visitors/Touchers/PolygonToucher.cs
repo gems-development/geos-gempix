@@ -79,6 +79,11 @@ namespace GeosGempix.GeometryPrimitiveTouchers
 
         public void Visit(Contour contour)
         {
+            _result = IsTouching(_polygon, contour);
+        }
+
+        private bool IsTouching(Polygon polygon, Contour contour)
+        {
             throw new NotImplementedException();
         }
     }

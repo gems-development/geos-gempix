@@ -45,7 +45,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             if (ContourInsider.IsInside(contour, point))
                 return 0;
-            double result = 0;
+            double result = Double.MaxValue;
             double distance = 0;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
