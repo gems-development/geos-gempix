@@ -59,7 +59,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             }
             var mainContour = new Contour(polygon.GetPoints());
             // а не хранить ли контур вместо списка точек?
-            if (ContourInsider.IsStrictlyInside(contour, point))
+            if (ContourInsider.IsStrictlyInside(mainContour, point))
                 return true;
             return false;
         }
@@ -96,7 +96,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 if (ContourInsider.IsStrictlyInside(hole, contour))
                     return false;
             var mainContour = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsStrictlyInside(contour2, contour))
+            if (ContourInsider.IsStrictlyInside(mainContour, contour))
                 return true;
             return false;
         }
@@ -111,7 +111,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                     if (ContourInsider.IsStrictlyInside(hole, point))
                         return false;
             var mainContour = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsStrictlyInside(contour1, multiPoint))
+            if (ContourInsider.IsStrictlyInside(mainContour, multiPoint))
                 return true;
             return false;
         }
@@ -127,7 +127,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                     if (ContourInsider.IsStrictlyInside(hole, polygon1))
                         return false;
             var mainContour = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsStrictlyInside(contour1, multiPolygon))
+            if (ContourInsider.IsStrictlyInside(mainContour, multiPolygon))
                 return true;
             return false;
         }
@@ -142,7 +142,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                     if (ContourInsider.IsStrictlyInside(hole, line))
                         return false;
             var mainContour = new Contour(polygon.GetPoints());
-            if (ContourInsider.IsStrictlyInside(contour1, multiLine))
+            if (ContourInsider.IsStrictlyInside(mainContour, multiLine))
                 return true;
             return false;
         }

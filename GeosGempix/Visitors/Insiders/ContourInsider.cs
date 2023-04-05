@@ -53,17 +53,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         }
         internal static bool IsInside(Contour contour, Line line)
         {
-           
-            // здесь остается только вызов функции IsStrictlyInside и всё
              return IsStrictlyInside(contour, line);
-            // кусок кода ниже переезжает в метод IsStrictlyInside
-            /*
-            if (IsInside(contour, line1.Point1) && !ContourIntersector.IntersectsBorders(contour, line1))
-                return true;
-            return false;
-            */
-            // и так для каждого метода!
-            throw new NotImplementedException();
         }
 
         internal static bool IsInside(Contour contour, Polygon polygon)
@@ -71,7 +61,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return IsStrictlyInside(contour, polygon);
         }
 
-            internal static bool IsInside(Contour contour, MultiPoint multiPoint)
+        internal static bool IsInside(Contour contour, MultiPoint multiPoint)
         {
             return IsStrictlyInside(contour, multiPoint);
         }

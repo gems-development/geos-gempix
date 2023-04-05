@@ -134,7 +134,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             }
             return shortLine;
         }
-
+         
         internal static Line GetShortestLine(Contour contour, Polygon polygon) =>
 			PolygonShortestLineSearcher.GetShortestLine(polygon, contour);
 
