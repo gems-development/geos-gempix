@@ -32,6 +32,9 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(MultiPolygon multiPolygon) =>
         _result = GetShortestLine(_multiPolygon, multiPolygon);
 
+    public void Visit(Contour contour) =>
+        _result = GetShortestLine(_multiPolygon, contour);
+
     internal static Line GetShortestLine(MultiPolygon multiPolygon1, MultiPolygon multiPolygon2) =>
         GetShortestLine(
             multiPolygon1,
@@ -69,17 +72,23 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
             point,
             (polygon, primitive) => PolygonShortestLineSearcher.GetShortestLine(polygon, (Point)primitive));
 
+    internal static Line GetShortestLine(MultiPolygon multiPolygon, Contour contour) =>
+        GetShortestLine(
+            multiPolygon,
+            contour,
+            (polygon, primitive) => PolygonShortestLineSearcher.GetShortestLine(polygon, (Contour)primitive));
+
     internal static Line GetShortestLine(
         MultiPolygon multiPolygon,
         IGeometryPrimitive primitive,
-        Func<Polygon, IGeometryPrimitive, Line> GetShortestLine)
+        Func<Polygon, IGeometryPrimitive, Line> getShortestLine)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         List<Polygon> polygons = multiPolygon.GetPolygons();
         foreach (Polygon polygon in polygons)
         {
-			curLine = GetShortestLine.Invoke(polygon, primitive);
+			curLine = getShortestLine(polygon, primitive);
             if (curLine.GetLength() < shortLine.GetLength())
             {
 				shortLine = new Line(curLine);
@@ -87,7 +96,4 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
         }
         return shortLine;
     }
-
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
 }

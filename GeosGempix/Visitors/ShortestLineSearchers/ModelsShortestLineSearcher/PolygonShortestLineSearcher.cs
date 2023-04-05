@@ -4,6 +4,9 @@ using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
+using GeosGempix.Visitors.Insiders;
+using GeosGempix.Extensions;
+
 
 public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 {
@@ -36,12 +39,17 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     public void Visit(MultiPolygon multiPolygon) =>
         _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _polygon);
+    public void Visit(Contour contour) =>
+        _result = GetShortestLine(_polygon, contour);
 
-    internal static Line GetShortestLine(Polygon polygon, Point point)
+    internal static Line? GetShortestLine(Polygon polygon, Point point)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если точка ВНУТРИ полигона... то расстояние должно быть ноль О_О
+        foreach (var hole in polygon.GetHoles()){
+            if (hole.Intersects(point))
+                return null;
+        }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -61,11 +69,14 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     }
 
 
-    internal static Line GetShortestLine(Polygon polygon, Line line)
+    internal static Line? GetShortestLine(Polygon polygon, Line line)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если отрезок ВНУТРИ полигона... 
+        foreach (var hole in polygon.GetHoles()){
+            if (hole.Intersects(line))
+                return null;
+        }
         List<Point> points = polygon.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -84,11 +95,19 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         return shortLine;
     }
 
-    internal static Line GetShortestLine(Polygon polygon1, Polygon polygon2)
+    internal static Line? GetShortestLine(Polygon polygon1, Polygon polygon2)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
-        // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
+        // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
+        foreach (var hole in polygon1.GetHoles()){
+            if (hole.Intersects(polygon2))
+                return null;
+        }
+        foreach (var hole in polygon2.GetHoles()){
+            if (hole.Intersects(polygon1))
+                return null;
+        }
         List<Point> points = polygon2.GetPoints();
         List<Line> lines = new List<Line>();
         for (int i = 0; i < points.Count - 1; i++)
@@ -117,6 +136,27 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     internal static Line GetShortestLine(Polygon polygon, MultiPolygon multiPolygon) =>
         MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, polygon);
 
-    public void Visit(Contour contour) =>
-        throw new NotImplementedException();
+    internal static Line GetShortestLine(Polygon polygon, Contour contour)
+    {
+        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+        // проверка если контур ВНУТРИ полигона... или полигон внутри контура
+        List<Point> points = contour.GetPoints();
+        List<Line> lines = new List<Line>();
+        for (int i = 0; i < points.Count - 1; i++)
+        {
+            lines.Add(new Line(points[i], points[i + 1]));
+        }
+        lines.Add(new Line(points[points.Count - 1], points[0]));
+
+        foreach (Line line in lines)
+        {
+            curLine = GetShortestLine(polygon, line);
+            if (curLine.GetLength() < shortLine.GetLength())
+            {
+                shortLine = new Line(curLine);
+            }
+        }
+        return shortLine;
+    }
 }

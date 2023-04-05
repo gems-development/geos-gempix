@@ -44,13 +44,13 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             if (ContourInsider.IsInside(contour, point))
                 return 0;
-            double result = 0;
+            double result = Double.MaxValue;
             double distance = 0;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line in lines)
             {
                 distance = LineDistanceCalculator.GetDistance(line, point);
@@ -66,13 +66,13 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             if (ContourInsider.IsInside(contour, line))
                 return 0;
-            double result = 0;
+            double result = double.MaxValue;
             double distance = 0;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line1 in lines)
             {
                 distance = LineDistanceCalculator.GetDistance(line1, line);
@@ -87,13 +87,13 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             if (ContourInsider.IsInside(contour, line))
                 return 0;
-            double result = 0;
+            double result = double.MaxValue;
             double distance = 0;
             List<Point> points = contour.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line1 in lines)
             {
                 distance = LineDistanceCalculator.GetDistanceWithSquaresOfDistances(line1, line);
@@ -106,14 +106,14 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour1, Contour contour2)
         {
-            double result = 0;
+            double result = double.MaxValue;
             double distance;
             // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
             List<Point> points = contour2.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
                 lines.Add(new Line(points[i], points[i + 1]));
-            lines.Add(new Line(points[points.Count - 1], points[0]));
+            
             foreach (Line line in lines)
             {
                 distance = GetDistance(contour1, line);
@@ -132,6 +132,5 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour, MultiPolygon multiPolygon) =>
             MultiPolygonDistanceCalculator.GetDistance(multiPolygon, contour);
-
     }
 }

@@ -2,6 +2,7 @@
 using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
+using GeosGempix.GeometryPrimitiveIntersectors;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
@@ -37,6 +38,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         public void Visit(MultiPolygon multiPolygon) =>
             _result = MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, _line);
 
+        public void Visit(Contour contour) =>
+            _result = ContourShortestLineSearcher.GetShortestLine(contour, _line);
+
         internal static Line GetShortestLine(Line line, Point point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
@@ -45,19 +49,9 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
             var perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
 
-            if (abc.a != 0)
-            {
+            Point intersect = LineIntersector.GetPointOfIntersection(abc, perpendicular);
 
-                double intersectX = ( (perpendicular.c / perpendicular.a) - (abc.c / abc.a)) /
-                    ( (perpendicular.b / perpendicular.a) - (abc.b / abc.a));
-
-                double intersectY = - ( abc.b * intersectX + abc.c) / abc.a;
-
-                Point intersect = new Point(intersectX, intersectY);
-
-                shortLine = new Line(point, intersect);
-
-            }
+            shortLine = new Line(point, intersect);
 
 			return shortLine;
         }
@@ -78,7 +72,10 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 			return shortLine;
         }
 
-        internal static Line GetShortestLine(Line line, Polygon polygon) =>
+        internal static Line? GetShortestLine(Line line, Contour contour) =>
+            ContourShortestLineSearcher.GetShortestLine(contour, line);
+
+        internal static Line? GetShortestLine(Line line, Polygon polygon) =>
             PolygonShortestLineSearcher.GetShortestLine(polygon, line);
 
         internal static Line GetShortestLine(Line line, MultiLine multiLine) =>
@@ -89,8 +86,5 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line GetShortestLine(Line line, MultiPolygon multiPolygon) =>
             MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, line);
-
-        public void Visit(Contour contour) =>
-            throw new NotImplementedException();
     }
 }

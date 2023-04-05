@@ -41,6 +41,6 @@ namespace GeosGempix.Visitors.ShortestLineSearchers
             _searcher = new MultiPolygonShortestLineSearcher(multiPolygon);
 
         public void Visit(Contour contour) =>
-            throw new NotImplementedException();
+            _searcher = new ContourShortestLineSearcher(contour);
     }
 }

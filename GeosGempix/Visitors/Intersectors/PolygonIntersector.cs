@@ -14,8 +14,8 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         internal static bool Intersects(Polygon polygon, Point point)
         {
-            foreach (Contour contour in polygon.GetHoles())
-                if (ContourIntersector.Intersects(contour, point))
+            foreach (var hole in polygon.GetHoles())
+                if (ContourIntersector.Intersects(hole, point))
                     return true;
             foreach (Line line in polygon.GetLines())
                 if (LineIntersector.Intersects(line, point))
@@ -24,8 +24,8 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         }
         internal static bool Intersects(Polygon polygon, Line line1)
         {
-            foreach (Contour contour in polygon.GetHoles())
-                if (ContourIntersector.Intersects(contour, line1))
+            foreach (var hole in polygon.GetHoles())
+                if (ContourIntersector.Intersects(hole, line1))
                     return true;
             foreach (Line line in polygon.GetLines())
                 if (LineIntersector.Intersects(line, line1))
@@ -34,8 +34,8 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         }
         internal static bool Intersects(Polygon polygon1, Polygon polygon2)
         {
-            foreach (Contour contour in polygon1.GetHoles())
-                if (PolygonIntersector.Intersects(polygon2, contour))
+            foreach (var hole in polygon1.GetHoles())
+                if (PolygonIntersector.Intersects(polygon2, hole))
                     return true;
             foreach (Line line in polygon1.GetLines())
                 if (Intersects(polygon2, line))

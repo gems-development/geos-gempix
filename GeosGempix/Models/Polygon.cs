@@ -10,33 +10,15 @@ public class Polygon : IGeometryPrimitive
 
     public Polygon(List<Point> points)
     {
-        if (points == null)
-            throw new ArgumentNullException("points");
-        if (points.Capacity == 0)
-            throw new ArgumentException("Длина списка points = 0");
-        foreach (Point point in points)
-            if (point == null)
-                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
+        PointListValidate(points);
         _points = points;
         _holes = new List<Contour>();
     }
 
     public Polygon(List<Point> points, List<Contour> holes)
     {
-        if (points == null)
-            throw new ArgumentNullException("points");
-        if (holes == null)
-            throw new ArgumentNullException("holes");
-        if (points.Capacity == 0)
-            throw new ArgumentException("Длина списка points = 0");
-        if (holes.Capacity == 0)
-            throw new ArgumentException("Длина списка holes = 0");
-        foreach (Point point in points)
-            if (point == null)
-                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
-        foreach (Contour hole in holes)
-            if (hole == null)
-                throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
+        PointListValidate(points);
+        ContourListValidate(holes);
         _points = points;
         _holes = holes;
     }
@@ -70,28 +52,24 @@ public class Polygon : IGeometryPrimitive
 
     public double GetSquare()
     {
-        double square = 0;
-        double sum1 = 0;
-        double sum2 = 0;
-        for (int i = 0; i < _points.Count - 1; i++)
-        {
-            sum1 = sum1 + _points[i].X * _points[i + 1].Y;
-            sum2 = sum2 + _points[i].Y * _points[i + 1].X;
-        }
-        sum1 = sum1 + _points[_points.Count - 1].X * _points[0].Y;
-        sum2 = sum2 + _points[_points.Count - 1].Y * _points[0].X;
-        square = (sum2 - sum1) / 2;
-        return square;
+        double contourSquare = 0;
+        
+        var mainContour = new Contour(_points); 
+        contourSquare = mainContour.GetSquare();
+
+        for (int i = 0; i <= _holes.Count - 1; i++)
+            contourSquare -= _holes[i].GetSquare();
+
+        return contourSquare;
     }
 
     public double GetPerimeter()
     {
         double perimeter = 0;
-        for (int i = 0; i <= _points.Count - 2; i++)
+        for (int i = 0; i <= _points.Count - 1; i++)
         {
             perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
         }
-        perimeter = perimeter + PointDistanceCalculator.GetDistance(_points[_points.Count - 1], _points[0]);
         return perimeter;
     }
 
@@ -103,12 +81,9 @@ public class Polygon : IGeometryPrimitive
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
         return lines;
     }
-
-
-
+    
     public bool isClockwiseBypass()
     {
         double answer = 0;
@@ -134,5 +109,29 @@ public class Polygon : IGeometryPrimitive
         return obj is Polygon polygon &&
                EqualityComparer<List<Point>>.Default.Equals(_points, polygon._points) &&
                EqualityComparer<List<Contour>>.Default.Equals(_holes, polygon._holes);
+    }
+
+    private void PointListValidate(List<Point> points)
+    {
+        if (points == null)
+            throw new ArgumentNullException("points");
+        foreach (Point point in points)
+            if (point == null)
+                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
+        if (points.Count == 0)
+            throw new ArgumentException("Длина списка points = 0");
+        if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
+            throw new ArgumentException("Некорректный набор точек");
+    }
+    
+    private void ContourListValidate(List<Contour> holes)
+    {
+        if (holes == null)
+            throw new ArgumentNullException("holes");
+        if (holes.Count == 0)
+            throw new ArgumentException("Длина списка holes = 0");
+        foreach (Contour hole in holes)
+            if (hole == null)
+                throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
     }
 }
