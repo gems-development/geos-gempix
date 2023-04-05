@@ -101,15 +101,16 @@ namespace GeosGempix.Tests.ValidatorTests
             points.Add(new Point(3, 3));
             points.Add(new Point(3, 0));
             List<Point> points1 = new List<Point>();
-            points1.Add(new Point(0, 0));
-            points1.Add(new Point(0, 1));
-            points1.Add(new Point(1, 0));
             points1.Add(new Point(1, 1));
+            points1.Add(new Point(1, 2));
+            points1.Add(new Point(2, 1));
+            points1.Add(new Point(2, 2));
             Contour hole = new Contour(points1);
             Polygon polygon = new Polygon(points);
+            polygon.Add(hole);
             var validator = new Validator(polygon);
             //Assert.
-            Assert.True(validator.Validate());
+            Assert.False(validator.Validate());
         }
 
 
@@ -124,14 +125,15 @@ namespace GeosGempix.Tests.ValidatorTests
             points.Add(new Point(3, 0));
             List<Point> points1 = new List<Point>();
             points1.Add(new Point(0, 0));
-            points1.Add(new Point(1, 0));
+            points1.Add(new Point(0, 1));
             points1.Add(new Point(1, 1));
             points1.Add(new Point(1, 0));
             Contour hole = new Contour(points1);
             Polygon polygon = new Polygon(points);
+            polygon.Add(hole);
             var validator = new Validator(polygon);
             //Assert.
-            Assert.True(validator.Validate());
+            Assert.False(validator.Validate());
         }
 
 
@@ -151,9 +153,10 @@ namespace GeosGempix.Tests.ValidatorTests
             points1.Add(new Point(1, 1));
             Contour hole = new Contour(points1);
             Polygon polygon = new Polygon(points);
+            polygon.Add(hole);
             var validator = new Validator(polygon);
             //Assert.
-            Assert.True(validator.Validate());
+            Assert.False(validator.Validate());
         }
     }
 }

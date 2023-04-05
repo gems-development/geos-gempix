@@ -17,11 +17,12 @@ namespace GeosGempix.Visitors.Validators
         public bool Validate()
         {
             int lineCount = _polygon.GetLines().Count;
+            
             if (_polygon == null || lineCount < 3)
-            {
                 return false;
-            }
-            var contours = new[] { _polygon.OuterContour }.Union(_polygon.GetHoles()).ToArray();
+
+            var contours = _polygon.GetHoles();
+            contours.Add(_polygon.OuterContour);
 
             if (CheckContoursSelfIntersection(contours))
                 return false;
