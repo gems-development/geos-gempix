@@ -6,6 +6,8 @@ public class Polygon : IGeometryPrimitive
     private List<Point> _points;
     private List<Contour> _holes;
 
+    public Contour OuterContour => new Contour(_points);
+
     public Polygon(List<Point> points)
     {
         if (points == null)

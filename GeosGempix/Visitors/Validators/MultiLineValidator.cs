@@ -16,7 +16,7 @@ namespace GeosGempix.Visitors.Validators
 
         public bool Validate()
         {
-            if(_multiline!=null)
+            if(_multiline!=null && _multiline.GetLines().Count > 1)
                 _result = true;
             return _result;
         }

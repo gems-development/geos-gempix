@@ -1,6 +1,6 @@
-﻿using GeosGempix.GeometryPrimitiveIntersectors;
-using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
+using GeosGempix.Visitors.Validators.Helpers;
 
 namespace GeosGempix.Visitors.Validators
 {
@@ -20,21 +20,7 @@ namespace GeosGempix.Visitors.Validators
             {
                 return false;
             }
-            List<Line> lines = _contour.GetLines();
-            for (int i = 0; i < lineCount; i++)
-            {
-                for (int j = 0; j < lineCount; j++)
-                {
-                    if (!lines[i].Point1.Equals(lines[j].Point2) && !lines[i].Point2.Equals(lines[j].Point1))
-                    {
-                        if (LineIntersector.Intersects(lines[i], lines[j]))
-                        {
-                            return false;
-                        }
-                    }
-                }
-            }
-            return true;
+            return !GeometryPrimitiveValidationHelper.IsContourSelfIntersecting(_contour.GetLines());
         }
     }
 }

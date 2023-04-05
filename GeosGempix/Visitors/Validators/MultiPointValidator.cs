@@ -15,7 +15,7 @@ namespace GeosGempix.Visitors.Validators
 
         public bool Validate()
         {
-            if(_multipoint!=null)
+            if(_multipoint!=null && _multipoint.GetPoints().Count > 1)
                 _result = true;
             return _result;
         }

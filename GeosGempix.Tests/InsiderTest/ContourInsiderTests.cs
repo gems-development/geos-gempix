@@ -1,7 +1,7 @@
 ﻿using GeosGempix.Models;
 using GeosGempix.Extensions;
 
-namespace GeosGempix.Tests.ShortestLineSearcherTest
+namespace GeosGempix.Tests.InsiderTest
 {
     public class ContourInsiderTests
     {       
