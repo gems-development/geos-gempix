@@ -54,7 +54,7 @@ namespace GeosGempix.Tests.ValidatorTests
 
 
         [Fact]
-        public static void PolygonTest_Star_Failed()
+        public static void PolygonTest_StarSelfIntersecting_Failed()
         {
             //Arrange. + Act.
             List<Point> points = new List<Point>();
@@ -92,7 +92,7 @@ namespace GeosGempix.Tests.ValidatorTests
 
 
         [Fact]
-        public static void PolygonTest_SquareWithHole_Failed()
+        public static void PolygonTest_SquareWithHoleIntersecting_Failed()
         {
             //Arrange. + Act.
             List<Point> points = new List<Point>();
@@ -114,7 +114,7 @@ namespace GeosGempix.Tests.ValidatorTests
 
 
         [Fact]
-        public static void PolygonTest1_SquareWithHole_Failed()
+        public static void PolygonTest_SquareWithHoleIntersectingTwoLines_Failed()
         {
             //Arrange. + Act.
             List<Point> points = new List<Point>();
@@ -136,7 +136,7 @@ namespace GeosGempix.Tests.ValidatorTests
 
 
         [Fact]
-        public static void PolygonTest2_SquareWithHole_Failed()
+        public static void PolygonTest_SquareWithHolePartiallyOutOfBounds_Failed()
         {
             //Arrange. + Act.
             List<Point> points = new List<Point>();

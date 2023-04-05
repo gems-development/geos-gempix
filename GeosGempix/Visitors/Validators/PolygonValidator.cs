@@ -1,18 +1,17 @@
 ﻿using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IVisitors;
+using GeosGempix.Models;
 using GeosGempix.Visitors.Validators.Helpers;
 
 namespace GeosGempix.Visitors.Validators
 {
     internal class PolygonValidator : IValidator
 	{
-        private bool _result;
         private readonly Polygon _polygon;
 
         public PolygonValidator(Polygon polygon) 
         {
             _polygon = new Polygon(polygon);
-            _result = false;
         }
 
         public bool Validate()
@@ -22,37 +21,40 @@ namespace GeosGempix.Visitors.Validators
             {
                 return false;
             }
-            if(GeometryPrimitiveValidationHelper.IsContourSelfIntersecting(_polygon.GetLines()))
-            {
-                return false; 
-            }
-            var holes = _polygon.GetHoles();
-            foreach ( var hole in holes ) 
-            {
-                if(GeometryPrimitiveValidationHelper.IsContourSelfIntersecting(hole.GetLines()))
-                    return false;
-            }
-            if (AreHolesIntersects())
+            var contours = new[] { _polygon.OuterContour }.Union(_polygon.GetHoles()).ToArray();
+
+            if (CheckContoursSelfIntersection(contours))
                 return false;
+
+            if (CheckContoursIntersection(contours))
+                return false;
+
             return true;
         }
 
-        private bool AreHolesIntersects()
+        private bool CheckContoursSelfIntersection(IReadOnlyCollection<Contour> contours) 
         {
-            var holes = _polygon.GetHoles();
-            if(holes.Count > 0)
+            foreach (var contour in contours)
             {
-                holes.Add(_polygon.OuterContour);
-                for (int i = 0; i < holes.Count; i++)
+                if (GeometryPrimitiveValidationHelper.IsContourSelfIntersecting(contour.GetLines()))
+                    return true;
+            }
+            return false;
+        }
+
+        private bool CheckContoursIntersection(IReadOnlyCollection<Contour> contours)
+        {
+            for (int i = 0; i < contours.Count; i++)
+            {
+                for (int j = i + 1; j < contours.Count; j++)
                 {
-                    for (int j = i; j < holes.Count; j++)
-                    {
-                        if (ContourIntersector.Intersects(holes[i], holes[j]))
-                            return true;
-                    }
+                    if (ContourIntersector.Intersects(contours.ElementAt(i), contours.ElementAt(j)))
+                        return true;
                 }
             }
             return false;
         }
+
+
     }
 }
