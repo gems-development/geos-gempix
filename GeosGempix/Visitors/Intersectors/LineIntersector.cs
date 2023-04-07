@@ -1,6 +1,7 @@
 ﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
+using GeosGempix.Errors;
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {
@@ -14,8 +15,10 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         public static bool Intersects(Line line, Point point)
         {
-            if (point == null || line == null)
-                throw new ArgumentException("Один из аргументов Intersects = null");
+            if (point == null)
+                throw new LibraryException(ErrorCode.NULL_ARGUMENT, "Intersects: point = null");
+            if (line == null)
+                throw new LibraryException(ErrorCode.NULL_ARGUMENT, "Intersects: line = null");
             return Math.Abs(PointDistanceCalculator.GetDistance(point, line.Point1) +
                 PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
         }
@@ -43,9 +46,13 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
             double a1 = lineEq1.a1, b1 = lineEq1.b1, c1 = lineEq1.c1,
                a2 = lineEq2.a2, b2 = lineEq2.b2, c2 = lineEq2.c2;
             if (a1 == 0 && b1 == 0)
-                throw new ArgumentException("Уравнение прямой lineEq1 задано неверно");
+                throw new LibraryException(
+                    ErrorCode.ILLEGAL_ARGUMENT, 
+                    "Уравнение прямой lineEq1 задано неверно");
             if (a2 == 0 && b2 == 0)
-                throw new ArgumentException("Уравнение прямой lineEq2 задано неверно");
+                throw new LibraryException(
+                    ErrorCode.ILLEGAL_ARGUMENT, 
+                    "Уравнение прямой lineEq2 задано неверно");
             double x, y;
             if (a1 == 0)
             { // значит b1 != 0
@@ -55,8 +62,9 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     if (c1 / b1 == c2 / b2)
                     {
                         // значит, уравнения по сути одинаковые и это одна и та же прямая
-                        // невозможно получить точку пересечения
-                        throw new Exception("Прямые совпадают, невозможно получить единственную точку пересечения");
+                        throw new LibraryException(
+                            ErrorCode.ILLEGAL_ARGUMENT, 
+                            "Прямые совпадают, невозможно получить единственную точку пересечения");
                     }
                     // а иначе прямые параллельны (но не совпадают) и точки пересечения нет
                     return null;
@@ -76,7 +84,9 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
             {
                 if (c1 / a1 == c2 / a2)
                 {
-                    throw new Exception("Прямые совпадают, невозможно получить единственную точку пересечения");
+                    throw new LibraryException(
+                        ErrorCode.ILLEGAL_ARGUMENT, 
+                        "Прямые совпадают, невозможно получить единственную точку пересечения");
                 }
                 // а иначе прямые параллельны (но не совпадают) и точки пересечения нет
                 return null;
@@ -92,19 +102,22 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         // той же направленности, что и первый отрезок
         internal static Point[]? GetPointOfIntersection(Line line1, Line line2)
         {
-            if (line1 == null || line2 == null)
-            {
-                throw new ArgumentException("На вход подали line == null");
-            }
+            if (line1 == null)
+                throw new LibraryException(ErrorCode.NULL_ARGUMENT, "line1 == null");
+            if (line2 == null)
+                throw new LibraryException(ErrorCode.NULL_ARGUMENT, "line2 == null");
+
             Point? point = null;
             try
             {
                 point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
                 if (point == null)
                     return null;
-                return new Point[]{point};
+                if (Intersects(line1, point) && Intersects(line2, point))
+                    return new Point[] { point };
+                return null;
             }
-            catch (Exception e)
+            catch (LibraryException e)
             {
                 // значит, отрезки лежат на одной прямой и все сложно
                 // Проверим расположение точек относительно друг друга
