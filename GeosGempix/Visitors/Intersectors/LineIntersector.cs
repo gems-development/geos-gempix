@@ -123,8 +123,9 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     return null;
                 case LineEquationsStatus.INTERSECTS:
                 {
-                    Point point = GetPointOfIntersection(lineEq1, lineEq2)!; 
-                    // в строке выше второй раз прогоняются проверки значений a1 a2 и т д
+                    Point point = GetPointOfIntersectionIfStatusIntersects(lineEq1, lineEq2)!; 
+                    // в строке выше второй раз прогоняются проверки значений, но их гораздо меньше
+                    // Но по итогу дублирование кода аж 3 раза, по сути
                     if (Intersects(line1, point) && Intersects(line2, point))
                         return new Point[] { point };
                     return null;
@@ -230,10 +231,30 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         public void Visit(Contour contour) =>
             _result = ContourIntersector.Intersects(contour, _line);
 
-        /*
-        Убрать исключения и catch
-        Использовать его Внутри метода для отрезков
-        и ПЕРЕД вызовом метода для прямых */
+        private static Point GetPointOfIntersectionIfStatusIntersects(
+            (double a1, double b1, double c1) lineEq1,
+            (double a2, double b2, double c2) lineEq2)
+        {
+            double a1 = lineEq1.a1, b1 = lineEq1.b1, c1 = lineEq1.c1,
+               a2 = lineEq2.a2, b2 = lineEq2.b2, c2 = lineEq2.c2;
+            double x, y;
+            if (a1 == 0)
+            { 
+                y = -c1 / b1;
+                x = (-c2 - b2 * y) / a2;
+                return new Point(x, y);
+            }
+            if (a2 == 0)
+            {
+                y = -c2 / b2;
+                x = (-c1 - b1 * y) / a1;
+                return new Point(x, y);
+            }
+            y = (-c2 + c1 * a2 / a1) / (b2 - b1 * a2 / a1);
+            x = (-c1 - b1 * y) / a1;
+            return new Point(x, y);
+        }
+
         public static LineEquationsStatus GetLineEquationsStatus(
             (double a1, double b1, double c1) lineEq1,
             (double a2, double b2, double c2) lineEq2)
