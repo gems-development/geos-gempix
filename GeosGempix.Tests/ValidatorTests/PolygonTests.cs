@@ -217,5 +217,23 @@ namespace GeosGempix.Tests.ValidatorTests
             //Assert.
             Assert.False(validator.Validate());
         }
+
+        [Fact]
+        public static void PolygonTest_LineIintersectPolygon_Failed()
+        {
+            //Arrange. + Act.
+            List<Point> points = new List<Point>
+            {
+                new Point(0, 0),
+                new Point(0, 2),
+                new Point(2, 2),
+                new Point(2, 0),
+                new Point(5, 0)
+            };
+            Polygon polygon = new Polygon(points);
+            var validator = new Validator(polygon);
+            //Assert.
+            Assert.False(validator.Validate());
+        }
     }
 }
