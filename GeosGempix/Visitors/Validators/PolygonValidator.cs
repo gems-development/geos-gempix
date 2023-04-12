@@ -1,4 +1,6 @@
-﻿using GeosGempix.GeometryPrimitiveIntersectors;
+﻿using GeosGempix.Extensions;
+using GeosGempix.GeometryPrimitiveInsiders;
+using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.Validators.Helpers;
@@ -30,6 +32,9 @@ namespace GeosGempix.Visitors.Validators
             if (CheckContoursIntersection(contours))
                 return false;
 
+            if(CheckAnyHoleIsOutsideOuterContour())
+                return false;
+
             return true;
         }
 
@@ -56,6 +61,22 @@ namespace GeosGempix.Visitors.Validators
             return false;
         }
 
+        private bool CheckAnyHoleIsOutsideOuterContour()
+        {
+            var holes = _polygon.GetHoles();
+            if(holes.Count > 1)
+            {
+                var contour = _polygon.OuterContour;
+                foreach (var hole in holes)
+                {
+                    if (!ContourInsider.IsInside(contour, hole))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
 
     }
 }
