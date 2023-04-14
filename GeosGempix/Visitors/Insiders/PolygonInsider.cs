@@ -48,20 +48,19 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return IsStrictlyInside(polygon, multiLine);
         }
 
-        internal static bool IsStrictlyInside(Polygon polygon, Point point)
+        internal static bool IsStrictlyInside(Polygon polygon, Point point, bool intersectBordersCheckRequired = true)
         {
-            if (PolygonIntersector.IntersectsBorders(polygon, point))
-                return false;
+            bool doesIntersectBorders = false;
+            if (intersectBordersCheckRequired)
+                doesIntersectBorders = PolygonIntersector.IntersectsBorders(polygon, point);
             foreach (Contour hole in polygon.GetHoles())
             {   // здесь есть дублирование проверок - как его избежать без дублирования кода?
                 if (ContourInsider.IsStrictlyInside(hole, point))
                     return false;
             }
             var mainContour = new Contour(polygon.GetPoints());
-            // а не хранить ли контур вместо списка точек?
-            if (ContourInsider.IsStrictlyInside(mainContour, point))
-                return true;
-            return false;
+            
+            return !doesIntersectBorders && ContourInsider.IsStrictlyInside(mainContour, point);
         }
         internal static bool IsStrictlyInside(Polygon polygon, Line line, bool intersectBordersCheckRequired = true)
         {

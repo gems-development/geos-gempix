@@ -172,9 +172,12 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             return IsStrictlyInside(contour, line.Point1)
                 && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour, line)));
         }
-        internal static bool IsStrictlyInside(Contour contour, Polygon polygon)
+        internal static bool IsStrictlyInside(Contour contour, Polygon polygon, bool intersectBordersCheckRequired = true)
         {
-            return IsStrictlyInside(contour, polygon.GetPoints()[0]) && !PolygonIntersector.IntersectsBorders(polygon, contour);
+            bool doesIntersectBorders = false;
+            if (intersectBordersCheckRequired)
+                doesIntersectBorders = PolygonIntersector.IntersectsBorders(polygon, contour);
+            return !doesIntersectBorders && IsStrictlyInside(contour, polygon.GetPoints()[0]);
         }
         internal static bool IsStrictlyInside(Contour contour, MultiPoint multiPoint)
         {
@@ -199,10 +202,10 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         }
         internal static bool IsStrictlyInside(Contour contour1, Contour contour2, bool intersectBordersCheckRequired = true)
         {
-            if (IsStrictlyInside(contour1, contour2.GetPoints()[0]) 
-                 && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour1, contour2))))
-                return true;
-            return false;
+            bool doesIntersectBorders = false;
+            if (intersectBordersCheckRequired)
+                doesIntersectBorders = ContourIntersector.IntersectsBorders(contour1, contour2);
+            return !doesIntersectBorders && IsStrictlyInside(contour1, contour2.GetPoints()[0]);
         }
         // в методах IsInsideWithTouching будут использоваться более сложные вещи.
         // Пока что напиши throw new NotImplementedException()
