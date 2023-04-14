@@ -132,7 +132,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     // Положительное направление буду определять
                     // с помощью всего одной координаты вектора A1B1
                     // A1B1 = (x,y) - если x = 0, значит смотрим на y, иначе на х
-                    var (p1, p2, p3, p4) = (line1.Point1, line1.Point2, line2.Point1, line2.Point1);
+                    var (p1, p2, p3, p4) = (line1.Point1, line1.Point2, line2.Point1, line2.Point2);
                     var (x1, x2, x3, x4) = (p1.X, p2.X, p3.X, p4.X);
                     var (y1, y2, y3, y4) = (p1.Y, p2.Y, p3.Y, p4.Y);
 
