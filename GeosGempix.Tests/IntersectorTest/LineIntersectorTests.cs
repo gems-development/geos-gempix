@@ -6,6 +6,18 @@ namespace GeosGempix.Tests.IntersectorTest
 {
 	public class LineIntersectorTests
 	{
+		// Тест сценария из ContourToucherTests
+		[Theory]
+		[InlineData(true, new double[]{5,5,5,9}, new double[]{3,7,7,11})]
+		public void IsIntersectionLineAndLine_Temp(bool res, double[] a, double[] b)
+		{
+			//Arrange.
+			var line1 = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
+			var line2 = TestHelper.CreateLine(b[0],b[1],b[2],b[3]);
+			//Act. + Assert.
+			Assert.Equal(res,line1.Intersects(line2));
+		}
+		
 		// Проверка на пересечение между отрезком и отрезком
 		[Theory]
 		[InlineData(true, new double[]{2,4,7,4}, new double[]{4,4,4,7})]

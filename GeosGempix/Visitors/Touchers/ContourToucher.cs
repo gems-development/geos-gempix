@@ -40,6 +40,12 @@ namespace GeosGempix.Extensions
             foreach (Line line in contour1.GetLines())
                 if (PolygonToucher.IsTouching(polygon2, line))
                     return true;
+            var holes = polygon2.GetHoles();
+            foreach (var hole in holes)
+            {
+                if (IsTouching(contour1, hole))
+                    return true;
+            }
             return false;
         }
 
