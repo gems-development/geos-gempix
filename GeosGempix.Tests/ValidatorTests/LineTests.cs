@@ -15,5 +15,15 @@ namespace GeosGempix.Tests.ValidatorTests
             //Assert.
             Assert.True(validator.Validate());
         }
+
+        [Fact]
+        public static void LineTest_Failed()
+        {
+            //Arrange. + Act.
+            Line line = new Line(new Point(0, 0), new Point(0, 0));
+            var validator = new Validator(line);
+            //Assert.
+            Assert.False(validator.Validate());
+        }
     }
 }

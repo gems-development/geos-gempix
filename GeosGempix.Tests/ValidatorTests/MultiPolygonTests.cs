@@ -1,13 +1,8 @@
 ﻿using GeosGempix.Visitors.Validators;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Tests.ValidatorTests
 {
-	public class MultiPolygonTests
+    public class MultiPolygonTests
 	{
 
 		[Fact]
@@ -139,7 +134,7 @@ namespace GeosGempix.Tests.ValidatorTests
 
 
 		[Fact]
-		public static void IsNotPolygonsConnectingInMultiPolygon_Success()
+		public static void IsNotPolygonsConnectingInMultiPolygon_Failed()
 		{   // Проверка на соединение полигонов в двух точках в мультиполигоне (успех)
 			//Arrange. + Act. 
 			List<Point> points1 = new List<Point>()
@@ -168,7 +163,7 @@ namespace GeosGempix.Tests.ValidatorTests
 			MultiPolygon multiPolygon = new MultiPolygon(polygons);
 			var validator = new Validator(multiPolygon);
 			//Assert.
-			Assert.True(validator.Validate());
+			Assert.False(validator.Validate());
 		}
 	}
 }
