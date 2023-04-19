@@ -36,11 +36,11 @@ jobs:
       continue-on-error: true
       run: dotnet test --blame --no-restore --verbosity quiet
       
-  review:
-    runs-on: windows-latest
-    environment: dev
-    needs: build-and-test
-    
-    steps:
-    - name: "review"
-      run: dotnet
+#  review:
+#    runs-on: windows-latest
+#    environment: dev
+#    needs: build-and-test
+#    
+#    steps:
+#    - name: "review"
+#      run: dotnet
