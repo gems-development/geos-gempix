@@ -4,20 +4,18 @@ namespace GeosGempix.Visitors.Validators
 {
     internal class MultiPointValidator : IValidator
 	{
-        private bool _result;
         private readonly MultiPoint _multipoint;
 
         public MultiPointValidator(MultiPoint multipoint)
         {
             _multipoint = new MultiPoint(multipoint.GetPoints());
-            _result = false;
         }
 
         public bool Validate()
         {
-            if(_multipoint!=null && _multipoint.GetPoints().Count > 1)
-                _result = true;
-            return _result;
+            if(_multipoint == null || _multipoint.GetPoints().Count < 2)
+                return false;
+            return true;
         }
     }
 }
