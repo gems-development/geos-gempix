@@ -2,6 +2,7 @@ using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
+using System.Drawing;
 
 namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
@@ -38,7 +39,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             _result = MultiPolygonDistanceCalculator.GetDistance(multiPolygon, _line);
 
         public void Visit(Contour contour) =>
-            ContourDistanceCalculator.GetDistance(contour, _line);
+            _result = ContourDistanceCalculator.GetDistance(contour, _line);
 
         internal static double GetDistance(Line line, Point point)
         {
@@ -57,66 +58,40 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Line line1, Line line2)
         {
-            double[] distances = new double[5];
-            distances[4] = double.MaxValue;
+            double[] distances = new double[4];
             if (LineIntersector.Intersects(line1, line2))
                 return 0;
-            distances[0] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point1);
-            distances[1] = PointDistanceCalculator.GetDistance(line1.Point1, line2.Point2);
-            distances[2] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point1);
-            distances[3] = PointDistanceCalculator.GetDistance(line1.Point2, line2.Point2);
-            var eq1 = line1.GetEquationOfLine();
-            var eq2 = line2.GetEquationOfLine();
-            // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
-            var eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
-            var eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
-            // точка пересечения перпенд. к 1 отрезку и второго отрезка
-            Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
-            // можно этот метод удобно переписать под линию кратчайшего расстояния
-            // вместо distances будут Line
-            if (LineIntersector.Intersects(line2, point3))
-                distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
-            else
-            {
-                Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
-                if (LineIntersector.Intersects(line2, point4))
-                    distances[4] = PointDistanceCalculator.GetDistance(line1.Point1, point3);
-            }
+            distances[0] = LineDistanceCalculator.GetDistance(line1, line2.Point1);
+            distances[1] = LineDistanceCalculator.GetDistance(line1, line2.Point2);
+            distances[2] = LineDistanceCalculator.GetDistance(line2, line1.Point1);
+            distances[3] = LineDistanceCalculator.GetDistance(line2, line1.Point2);
             return distances.Min();
         }
 
         internal static double GetDistanceWithSquaresOfDistances(Line line1, Line line2)
         {
-            double[] distances = new double[5];
-            distances[4] = double.MaxValue;
+            double[] distances = new double[4];
             if (LineIntersector.Intersects(line1, line2))
                 return 0;
-            distances[0] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point1);
-            distances[1] = PointDistanceCalculator.GetSquareDistance(line1.Point1, line2.Point2);
-            distances[2] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point1);
-            distances[3] = PointDistanceCalculator.GetSquareDistance(line1.Point2, line2.Point2);
-            var eq1 = line1.GetEquationOfLine();
-            var eq2 = line2.GetEquationOfLine();
-            // если прямые параллельны
-            if (LineIntersector.GetPointOfIntersection(eq1, eq2) == null)
-            {
-                // найдем уравнения перпендикуляров к отрезку в точках p1 и p2
-                var eq3 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point1);
-                var eq4 = Line.GetEquationOfPerpendicularLine(eq1, line1.Point2);
-                // точка пересечения перпенд. к 1 отрезку и второго отрезка
-                Point? point3 = LineIntersector.GetPointOfIntersection(eq3, eq2);
-                // можно этот метод удобно переписать под линию кратчайшего расстояния
-                // вместо distances будут Line
-                if (LineIntersector.Intersects(line2, point3))
-                    distances[4] = PointDistanceCalculator.GetSquareDistance(line1.Point1, point3);
-                else
-                {
-                    Point? point4 = LineIntersector.GetPointOfIntersection(eq4, eq2);
-                    if (LineIntersector.Intersects(line2, point4))
-                        distances[4] = PointDistanceCalculator.GetSquareDistance(line1.Point1, point3);
-                }
-            }
+            distances[0] = LineDistanceCalculator.GetSquareDistance(line1, line2.Point1);
+            distances[1] = LineDistanceCalculator.GetSquareDistance(line1, line2.Point2);
+            distances[2] = LineDistanceCalculator.GetSquareDistance(line2, line1.Point1);
+            distances[3] = LineDistanceCalculator.GetSquareDistance(line2, line1.Point2);
             return Math.Sqrt(distances.Min());
+        }
+
+        private static double GetSquareDistance(Line line, Point point)
+        {
+            double[] distances = new double[3];
+            distances[2] = double.MaxValue;
+            distances[0] = PointDistanceCalculator.GetSquareDistance(line.Point1, point);
+            distances[1] = PointDistanceCalculator.GetSquareDistance(line.Point2, point);
+            var eq1 = line.GetEquationOfLine();
+            var eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
+            Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
+            if (LineIntersector.Intersects(line, point1))
+                distances[2] = PointDistanceCalculator.GetSquareDistance(point1, point);
+            return distances.Min();
         }
 
         internal static double GetDistance(Line line, Polygon polygon) =>

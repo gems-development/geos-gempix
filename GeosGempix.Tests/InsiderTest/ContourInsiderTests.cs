@@ -9,7 +9,12 @@ namespace GeosGempix.Tests.InsiderTest
         public Contour _contour;
         public ContourInsiderTests()
         {
-            _contour = TestHelper.CreateContour(new Point(0, 0), new Point(0, 9), new Point(9, 9), new Point(9, 0));
+            _contour = TestHelper.CreateContour(
+                new Point(0, 0), 
+                new Point(0, 9), 
+                new Point(9, 9), 
+                new Point(9, 0),
+                new Point(0, 0));
         }
 
         [Fact]
@@ -70,7 +75,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            Contour contour = TestHelper.CreateContour(new Point(3, 3), new Point(3, 6), new Point(6, 6), new Point(6, 3));
+            Contour contour = TestHelper.CreateContour(
+                new Point(3, 3), 
+                new Point(3, 6), 
+                new Point(6, 6), 
+                new Point(6, 3), 
+                new Point(3, 3));
 			//Act.
 			Boolean t = tests._contour.IsInside(contour);
             //Assert.
@@ -82,7 +92,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(7, 3), new Point(7, 6), new Point(10, 6), new Point(10, 3));
+			Contour contour = TestHelper.CreateContour(
+                new Point(7, 3), 
+                new Point(7, 6), 
+                new Point(10, 6), 
+                new Point(10, 3),
+                new Point(7, 3));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -94,7 +109,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 10), new Point(3, 13), new Point(6, 10), new Point(6, 13));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 10), 
+                new Point(3, 13), 
+                new Point(6, 10), 
+                new Point(6, 13),
+                new Point(3, 10));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -106,7 +126,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 9), new Point(3, 12), new Point(6, 9), new Point(6, 12));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 9), 
+                new Point(3, 12), 
+                new Point(6, 9), 
+                new Point(6, 12),
+                new Point(3, 9));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -118,7 +143,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 6), new Point(3, 9), new Point(6, 9), new Point(6, 6));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 6), 
+                new Point(3, 9), 
+                new Point(6, 9), 
+                new Point(6, 6),
+                new Point(3, 6));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.

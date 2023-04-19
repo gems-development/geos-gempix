@@ -83,7 +83,7 @@ public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
         IGeometryPrimitive primitive,
         Func<Polygon, IGeometryPrimitive, Line> getShortestLine)
     {
-        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         List<Polygon> polygons = multiPolygon.GetPolygons();
         foreach (Polygon polygon in polygons)

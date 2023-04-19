@@ -61,8 +61,8 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line? GetShortestLine(Contour contour, Point point)
         {
-            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
-            Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
+            Line curLine = null;
             // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
             if (contour.Intersects(point))
                 return null;
@@ -86,7 +86,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line? GetShortestLine(Contour contour, Line line)
         {
-            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если отрезок ВНУТРИ контура... 
             if (contour.Intersects(line))
@@ -111,7 +111,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line? GetShortestLine(Contour contour1, Contour contour2)
         {
-            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+             Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             // проверка если контур ВНУТРИ контура... какой внутри какого?)))
             if (contour1.Intersects(contour2) || contour2.Intersects(contour1))
