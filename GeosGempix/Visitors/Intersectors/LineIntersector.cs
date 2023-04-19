@@ -139,21 +139,9 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     // проверка на вертикальность отрезков (если первый вертикальный, то и второй тоже)
                     (double c1, double c2, double c3, double c4) cort = 
                         x1 == x2 ? (y1, y2, y3, y4) : (x1, x2, x3, x4);
-                    bool revLine1; 
-                    bool revLine2; 
+                    var revLine1 = cort.c1 > cort.c2;
+                    var revLine2 = cort.c3 > cort.c4;
 
-                    if (x1 == x2) 
-                    { 
-                        cort = (y1, y2, y3, y4);
-                        revLine1 = y1 > y2;
-                        revLine2 = y3 > y4; 
-                    }
-                    else 
-                    { 
-                        cort = (x1, x2, x3, x4); 
-                        revLine1 = x1 > x2; 
-                        revLine2 = x3 > x4; 
-                    };
                     if (revLine1)  // допустим, было x1 x2 x3 x4
                         cort = (cort.c2, cort.c1, cort.c3, cort.c4);  // теперь x2 x1 x3 x4 - x2 x1 по возраст.
                     if (revLine2) 
