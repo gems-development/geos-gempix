@@ -23,12 +23,7 @@ namespace GeosGempix.Models
                 throw new ArgumentNullException("point");
             _points.Add(point);
         }
-        public void Add(Contour hole)
-        {
-            if (hole == null)
-                throw new ArgumentNullException("hole");
-            hole.Add(hole);
-        }
+       
         public List<Point> GetPoints()
         {
             return _points;
