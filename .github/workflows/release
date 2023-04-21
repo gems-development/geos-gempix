@@ -1,0 +1,32 @@
+#name: Release to NuGet
+#
+#on:
+#  release:
+#    types: [published]
+#    
+#jobs:
+#  build:
+#    runs-on: windows-latest
+#    steps:
+#    - name: Checkout
+#      uses: actions/checkout@v3
+
+#    - name: Setup .NET Core
+#      uses: actions/setup-dotnet@v3
+#      with:
+#        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+#    - name: Install dependencies
+#      run: dotnet restore
+
+#    - name: Build
+#      run: dotnet build -c Release
+
+#    - name: Test
+#      run: dotnet test -c Release --no-build
+
+#    - name: Pack nugets
+#      run: dotnet pack -c Release --no-build --output .
+
+#    - name: Push to NuGet
+#      run: dotnet nuget push "*.nupkg" --api-key ${{secrets.nuget_api_key}} --source https://api.nuget.org/v3/index.json
