@@ -5,6 +5,7 @@ using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using GeosGempix.MultiModels;
+using GeosGempix.Extensions;
 
 public class PolygonDistanceCalculator : IModelDistanceCalculator
 {
@@ -63,18 +64,23 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Polygon polygon, Line line)
     {
-        if (PolygonInsider.IsInside(polygon, line))
+        if (polygon.Intersects(line))
             return 0;
         double result = double.MaxValue;
         double distance = 0;
-        List<Point> points = polygon.GetPoints();
-        List<Line> lines = new List<Line>();
-        for (int i = 0; i < points.Count - 1; i++)
-            lines.Add(new Line(points[i], points[i + 1]));
+        List<Line> lines = polygon.GetLines();
         
         foreach (Line line1 in lines)
         {
             distance = LineDistanceCalculator.GetDistance(line1, line);
+            if (distance < result)
+                result = distance;
+        }
+
+        foreach (Contour hole in polygon.GetHoles())
+        { // где метод вычисления расстояния до внутренней точки контура?
+          // почему до сих пор не написан?
+            distance = ContourDistanceCalculator.GetDistance(hole, line);
             if (distance < result)
                 result = distance;
         }

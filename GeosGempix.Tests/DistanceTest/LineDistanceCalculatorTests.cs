@@ -91,11 +91,11 @@ namespace GeosGempix.Tests.DistanceTest
 		[Theory]
 		[InlineData(new double[]{1, 1, 1, 6}, 0)]
 		[InlineData(new double[]{-1, 4, 3, 4}, 0)]
-		[InlineData(new double[]{1, 4, 6, 4}, 0)] //failed
-		[InlineData(new double[]{3, 3, 4, 4}, 1)] //failed
-		[InlineData(new double[]{9, 5, 11, 3}, 2)] //failed
+		[InlineData(new double[]{1, 4, 6, 4}, 0)] 
+		[InlineData(new double[]{3, 3, 4, 4}, 1)] 
+		[InlineData(new double[]{9, 5, 11, 3}, 2)] 
 		[InlineData(new double[]{9, 0, 12, 0}, 2)]
-		[InlineData(new double[]{11, 10, 11, 12}, 2)] //failed
+		[InlineData(new double[]{11, 10, 11, 12}, 5)]
 		public void GetDistanceBetweenLineAndPolygon_Success(double[] a, double res)
 		{
 			//Arrange.

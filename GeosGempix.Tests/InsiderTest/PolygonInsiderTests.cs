@@ -14,7 +14,8 @@ namespace GeosGempix.Tests.InsiderTest
 			points.Add(new Point(0, 9));
 			points.Add(new Point(9, 9));
 			points.Add(new Point(9, 0));
-			_polygon = new Polygon(points);
+            points.Add(new Point(0, 0));
+            _polygon = new Polygon(points);
 		}
 
 		[Fact]
@@ -111,7 +112,8 @@ namespace GeosGempix.Tests.InsiderTest
 			points.Add(point2);
 			points.Add(point3);
 			points.Add(point4);
-			Polygon Polygon = new Polygon(points);
+            points.Add(point1);
+            Polygon Polygon = new Polygon(points);
 			//Act.
 			Boolean f = tests._polygon.IsInside(Polygon);
 			//Assert.
@@ -313,15 +315,48 @@ namespace GeosGempix.Tests.InsiderTest
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
 
-			Contour hole1 = TestHelper.CreateContour(new Point(2, 2), new Point(2, 3), new Point(3, 3), new Point(3, 2));
-			Contour hole2 = TestHelper.CreateContour(new Point(6, 2), new Point(6, 3), new Point(7, 3), new Point(7, 2));
-			Contour hole3 = TestHelper.CreateContour(new Point(6, 6), new Point(6, 7), new Point(7, 7), new Point(7, 6));
+			Contour hole1 = TestHelper.CreateContour(
+				new Point(2, 2), 
+				new Point(2, 3), 
+				new Point(3, 3), 
+				new Point(3, 2),
+                new Point(2, 2));
+			Contour hole2 = TestHelper.CreateContour(
+				new Point(6, 2), 
+				new Point(6, 3), 
+				new Point(7, 3), 
+				new Point(7, 2),
+                new Point(6, 2));
+			Contour hole3 = TestHelper.CreateContour(
+				new Point(6, 6), 
+				new Point(6, 7), 
+				new Point(7, 7), 
+				new Point(7, 6),
+                new Point(6, 6));
 
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(1, 1), new Point(1, 4), new Point(4, 4), new Point(4, 1));
+			Polygon polygon1 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(1, 1), 
+				new Point(1, 4), 
+				new Point(4, 4), 
+				new Point(4, 1),
+                new Point(1, 1));
 			polygon1.Add(hole1);
-			Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 1), new Point(5, 4), new Point(8, 4), new Point(8, 1));
+			Polygon polygon2 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(5, 1), 
+				new Point(5, 4), 
+				new Point(8, 4), 
+				new Point(8, 1),
+                new Point(5, 1));
 			polygon2.Add(hole2);
-			Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 5), new Point(5, 8), new Point(8, 8), new Point(8, 5));
+			Polygon polygon3 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(5, 5), 
+				new Point(5, 8), 
+				new Point(8, 8), 
+				new Point(8, 5),
+                new Point(5, 5));
 			polygon3.Add(hole3);
 
 			MultiPolygon multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
@@ -345,15 +380,47 @@ namespace GeosGempix.Tests.InsiderTest
 
 			//Arrange.
 			PolygonInsiderTests tests = new PolygonInsiderTests();
-			Contour hole1 = TestHelper.CreateContour(new Point(x1 + 1, y1 + 1), new Point(x2 + 1, y2 - 1), new Point(x3 - 1, y3 - 1), new Point(x4 - 1, y4 + 1));
-			Contour hole2 = TestHelper.CreateContour(new Point(x5 + 1, y5 + 1), new Point(x6 + 1, y6 - 1), new Point(x7 - 1, y7 - 1), new Point(x8 - 1, y8 + 1));
-			Contour hole3 = TestHelper.CreateContour(new Point(x9 + 1, y9 + 1), new Point(x10 + 1, y10 - 1), new Point(x11 - 1, y11 - 1), new Point(x12 - 1, y12 + 1));
+			Contour hole1 = TestHelper.CreateContour(
+				new Point(x1 + 1, y1 + 1), 
+				new Point(x2 + 1, y2 - 1), 
+				new Point(x3 - 1, y3 - 1), 
+				new Point(x4 - 1, y4 + 1),
+                new Point(x1 + 1, y1 + 1));
+			Contour hole2 = TestHelper.CreateContour(
+				new Point(x5 + 1, y5 + 1), 
+				new Point(x6 + 1, y6 - 1), 
+				new Point(x7 - 1, y7 - 1), 
+				new Point(x8 - 1, y8 + 1));
+			Contour hole3 = TestHelper.CreateContour(
+				new Point(x9 + 1, y9 + 1), 
+				new Point(x10 + 1, y10 - 1), 
+				new Point(x11 - 1, y11 - 1), 
+				new Point(x12 - 1, y12 + 1),
+                new Point(x9 + 1, y9 + 1));
 
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), new Point(x4, y4));
+			Polygon polygon1 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(x1, y1), 
+				new Point(x2, y2), 
+				new Point(x3, y3), 
+				new Point(x4, y4),
+                new Point(x1, y1));
 			polygon1.Add(hole1);
-			Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x5, y5), new Point(x6, y6), new Point(x7, y7), new Point(x8, y8));
+			Polygon polygon2 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(x5, y5), 
+				new Point(x6, y6), 
+				new Point(x7, y7), 
+				new Point(x8, y8),
+                new Point(x5, y5));
 			polygon2.Add(hole2);
-			Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x9, y9), new Point(x10, y10), new Point(x11, y11), new Point(x12, y12));
+			Polygon polygon3 = TestHelper.CreatePolygon(
+				new List<Contour>(), 
+				new Point(x9, y9), 
+				new Point(x10, y10), 
+				new Point(x11, y11), 
+				new Point(x12, y12),
+                new Point(x9, y9));
 			polygon3.Add(hole3);
 
 			MultiPolygon multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
