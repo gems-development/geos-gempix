@@ -85,11 +85,10 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             Line? closestLine = null;
             double distance = double.MaxValue;
-            double curDistance;
             // нашли самую близкую сторону
             foreach (Line line in contour.GetLines())
             {
-                curDistance = LineDistanceCalculator.GetDistance(line, point);
+                double curDistance = LineDistanceCalculator.GetDistance(line, point);
                 if (distance > curDistance)
                 {
                     distance = curDistance;
