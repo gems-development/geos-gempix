@@ -44,7 +44,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     internal static Line? GetShortestLine(Polygon polygon, Point point)
     {
-        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (var hole in polygon.GetHoles()){
             if (hole.Intersects(point))
@@ -71,8 +71,8 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     internal static Line? GetShortestLine(Polygon polygon, Line line)
     {
-        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
-        Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
+        Line curLine = null;
         foreach (var hole in polygon.GetHoles()){
             if (hole.Intersects(line))
                 return null;
@@ -97,8 +97,8 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
 
     internal static Line? GetShortestLine(Polygon polygon1, Polygon polygon2)
     {
-        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
-        Line curLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
+        Line curLine = null;
         // проверка если полигон ВНУТРИ полигона... какой внутри какого?))) Думаю любой внутри любого
         foreach (var hole in polygon1.GetHoles()){
             if (hole.Intersects(polygon2))

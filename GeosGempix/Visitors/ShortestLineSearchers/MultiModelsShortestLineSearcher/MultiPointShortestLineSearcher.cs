@@ -4,6 +4,7 @@ using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
 using Point = GeosGempix.Point;
+using GeosGempix.Extensions;
 
 public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
 {
@@ -51,11 +52,16 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
              multiPoint2,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (MultiPoint)primitive));
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, Polygon polygon) =>
-         GetShortestLine(
+    internal static Line GetShortestLine(MultiPoint multiPoint, Polygon polygon)
+    {
+        if (polygon.IsInside(multiPoint))
+            return null;
+        return GetShortestLine(
              multiPoint,
              polygon,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Polygon)primitive));
+    }
+         
 
     internal static Line GetShortestLine(MultiPoint multiPoint, Line line) =>
          GetShortestLine(
@@ -80,7 +86,7 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
         IGeometryPrimitive primitive,
         Func<Point, IGeometryPrimitive, Line> getShortestLine)
     {
-        Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+        Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
         Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (Point point in multiPoint.GetPoints())
         {

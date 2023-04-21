@@ -1,3 +1,4 @@
+using GeosGempix.Extensions;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
@@ -82,6 +83,8 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
         IGeometryPrimitive primitive,
         Func<Polygon, IGeometryPrimitive, double> getDistance)
     {
+        if (multiPolygon.Intersects(primitive))
+            return 0;
         double result = double.MaxValue;
         double distance;
         List<Polygon> polygons = multiPolygon.GetPolygons();

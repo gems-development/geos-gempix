@@ -78,7 +78,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearc
             IGeometryPrimitive primitive,
             Func<Line, IGeometryPrimitive, Line> getShortestLine)
         {
-            Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
+            Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
             Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             List<Line> lines = multiLine.GetLines();
             foreach (Line line in lines)

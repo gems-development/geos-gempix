@@ -30,21 +30,12 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                 PointDistanceCalculator.GetDistance(point, line.Point2) - line.GetLength()) < 0.00000001;
         }
 
-        internal static bool IntersectsStraightLines(Line line1, Line line2)
-        {
-            if (GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine()) != null)
-                return true;
-            return false;
-        }
-
         internal static bool Intersects(Line line1, Line line2)
         {
-            Point? point = GetPointOfIntersection(line1.GetEquationOfLine(), line2.GetEquationOfLine());
-            if (point == null)
+            Point[] points = GetPointOfIntersection(line1, line2);
+            if (points == null)
                 return false;
-            if (Intersects(line1, point) && Intersects(line2, point))
-                return true;
-            return false;
+            return true;
         }
 
         internal static Point? GetPointOfIntersection(
