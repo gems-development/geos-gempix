@@ -29,10 +29,33 @@ namespace GeosGempix.Extensions
         }
         internal static bool IsTouching(Contour contour1, Contour contour2)
         {
+            foreach (Line line in contour2.GetLines())
+            {
+                if (contour1.IsInside(PullLineEnds(line).Point1) && contour1.IsInside(PullLineEnds(line).Point2))
+                    return false;
+            }
+            
             foreach (Line line in contour1.GetLines())
+            {
                 if (IsTouching(contour2, line))
                     return true;
+            }
+                
             return false;
+        }
+
+        private static (Point Point1, Point Point2) PullLineEnds(Line line)
+        {
+            const double step = 0.00000002;
+            var vx = line.Point2.X - line.Point1.X;
+            var vy = line.Point2.Y - line.Point1.Y;
+            var denominator = Math.Sqrt(vx * vx + vy * vy);
+            var x1 = line.Point1.X + step * vx / denominator;
+            var y1 = line.Point1.Y + step * vy / denominator;
+            var x2 = line.Point2.X - step * vx / denominator;
+            var y2 = line.Point2.Y - step * vy / denominator;
+
+            return (Point1: new Point(x1, y1), Point2: new Point(x2, y2));
         }
 
         internal static bool IsTouching(Contour contour1, Polygon polygon2)

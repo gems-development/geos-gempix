@@ -26,6 +26,26 @@ namespace GeosGempix.Tests.InsiderTest
         }
 
         [Theory]
+        [InlineData(true, new double[] {0.00000002,0})]
+        [InlineData(true, new double[] {4.99999998,0})]
+        public static void IsPointInsideContour_Temp(bool res, double[] a)
+        {
+	        //Arrange.
+	        var point = new Point(a[0], a[1]);
+	        
+	        var contour = TestHelper.CreateContour(
+		        new Point(0, 5),
+		        new Point(0, 10),
+		        new Point(3, 8),
+		        new Point(5, 10),
+		        new Point(5, 5),
+		        new Point(0, 5));
+	        
+	        //Act + Assert.
+	        Assert.Equal(res, contour.IsInside(point));
+        }
+
+        [Theory]
         [InlineData(0,3)]
         [InlineData(10, 3)]
         public static void IsPointInsideContour_Failed(double x, double y)
