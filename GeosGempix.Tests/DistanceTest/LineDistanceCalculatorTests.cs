@@ -117,10 +117,10 @@ namespace GeosGempix.Tests.DistanceTest
 		[InlineData(new double[]{6, 6, 8, 8}, 0)]
 		[InlineData(new double[]{4, 13, 8, 13}, 0)]
 		[InlineData(new double[]{15, 10, 15, 15}, 0)] 
-		[InlineData(new double[]{3, 12, 4, 12}, 1)] //failed
-		[InlineData(new double[]{20, 19, 21, 20}, 5)] //failed
-		[InlineData(new double[]{17, 10, 21, 13}, 1)] //failed
-		[InlineData(new double[]{10, 3, 14, 3}, 3)] //failed
+		[InlineData(new double[]{3, 12, 4, 12}, 1)]
+		[InlineData(new double[]{20, 19, 21, 20}, 5)]
+		[InlineData(new double[]{17, 10, 21, 13}, 1)]
+		[InlineData(new double[]{10, 3, 14, 3}, 3)]
 		public void GetDistanceBetweenLineAndMultiPolygon_Success(double[] a, double res)
 		{
 			//Arrange.

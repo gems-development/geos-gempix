@@ -76,7 +76,7 @@ public class MultiPointIntersectorTests
     
     // Проверка на пересечение между мультиточкой и мультиполигоном
     [Theory]
-    [InlineData(true, new double[]{4,15,10,16,10,15})] //failed
+    [InlineData(true, new double[]{4,15,10,16,10,15})]
     [InlineData(true, new double[]{14,16,15,19,21,15})]
     [InlineData(false, new double[]{4,10,10,15,21,16})]
     public void IsIntersectionMultiPointAndMultiPolygon(bool res, double[] b)

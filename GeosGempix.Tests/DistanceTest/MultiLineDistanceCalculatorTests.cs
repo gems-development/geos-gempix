@@ -40,7 +40,7 @@ public class MultiLineDistanceCalculatorTests
     [InlineData(0, new double[]{0, 0, 0, 8, 2, 2, 2, 6, 6, 2, 6, 6})]
     [InlineData(0, new double[]{4, 3, 4, 5, 4, 6, 4, 8, 10, 3, 10, 6})]
     [InlineData(0, new double[]{-1, 4, 10, 4, 4, 3, 4, 5, 11, 2, 11, 6})]
-    [InlineData(1, new double[]{3, 3, 3, 5, 4, 3, 4, 5, 5, 3, 5, 5})] //failed
+    [InlineData(1, new double[]{3, 3, 3, 5, 4, 3, 4, 5, 5, 3, 5, 5})]
     [InlineData(5, new double[]{12, 11, 13, 11, 12, 11, 12, 12, 12, 12, 13, 12})]
     public void GetDistanceBetweenMultiLineAndPolygon(double res, double[] a)
     {
@@ -50,22 +50,15 @@ public class MultiLineDistanceCalculatorTests
             TestHelper.CreateLine(a[4], a[5], a[6], a[7]),
             TestHelper.CreateLine(a[8], a[9], a[10], a[11]));
         
-        var contour = TestHelper.CreateContour(
-            new Point(2, 2),
-            new Point(2, 6),
-            new Point(6, 6),
-            new Point(6, 2),
-            new Point(2, 2));
-			
-        var contours = new List<Contour>{ contour };
-			
         var polygon = TestHelper.CreatePolygon(
-            contours,
-            new Point(0, 0),
-            new Point(0, 8),
-            new Point(8, 8),
-            new Point(8, 0),
-            new Point(0, 0));
+            new List<Contour>
+            {
+                TestHelper.CreateContour(
+                    new Point(2, 2), new Point(2, 6), new Point(6, 6),
+                    new Point(6, 2), new Point(2, 2))
+            },
+            new Point(0, 0), new Point(0, 8), new Point(8, 8),
+            new Point(8, 0), new Point(0, 0));
         
         //Act. + Assert.
         Assert.Equal(res,multiLine.GetDistance(polygon));

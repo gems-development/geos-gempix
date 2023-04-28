@@ -9,7 +9,7 @@ namespace GeosGempix.Tests.IntersectorTest
 		// Проверка на пересечение между отрезком и отрезком
 		[Theory]
 		[InlineData(true, new double[]{2,4,7,4}, new double[]{4,4,4,7})]
-		[InlineData(true, new double[]{2,4,4,4}, new double[]{3,4,7,4})] //failed
+		[InlineData(true, new double[]{2,4,4,4}, new double[]{3,4,7,4})]
 		[InlineData(false, new double[]{2,4,7,4}, new double[]{2,6,7,6})]
 		public void IsIntersectionLineAndLine(bool res, double[] a, double[] b)
 		{
@@ -22,7 +22,7 @@ namespace GeosGempix.Tests.IntersectorTest
 
 		// Проверка на пересечение между отрезком и контуром
 		[Theory]
-		[InlineData(true, new double[]{5,5,7,5})] //failed
+		[InlineData(true, new double[]{5,5,7,5})]
 		[InlineData(true, new double[]{8,5,10,5})]
 		[InlineData(true, new double[]{-1,5,10,5})]
 		[InlineData(true, new double[]{0,5,9,5})]
@@ -82,7 +82,7 @@ namespace GeosGempix.Tests.IntersectorTest
 		[Theory]
 		[InlineData(true, new double[]{-1,4,4,4})]
 		[InlineData(true, new double[]{4,3,4,6})]
-		[InlineData(true, new double[]{4,4,5,4})] //failed
+		[InlineData(true, new double[]{4,4,5,4})]
 		[InlineData(true, new double[]{9,4,11,4})]
 		[InlineData(false, new double[]{10,3,10,6})]
 		public void IsIntersectionLineAndPolygon(bool res, double[] a)
@@ -106,9 +106,9 @@ namespace GeosGempix.Tests.IntersectorTest
 		
 		// Проверка на пересечение между отрезком и мультиполигоном
 		[Theory]
-		[InlineData(true, new double[]{4,15,5,15})] //failed
+		[InlineData(true, new double[]{4,15,5,15})]
 		[InlineData(true, new double[]{15,18,15,21})]
-		[InlineData(true, new double[]{0,4,0,6})] //failed
+		[InlineData(true, new double[]{0,4,0,6})]
 		[InlineData(false, new double[]{10,15,10,16})]
 		public void IsIntersectionLineAndMultiPolygon(bool res, double[] a)
 		{
