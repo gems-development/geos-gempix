@@ -61,18 +61,6 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             double[] distances = new double[4];
             if (LineIntersector.Intersects(line1, line2))
                 return 0;
-            distances[0] = LineDistanceCalculator.GetDistance(line1, line2.Point1);
-            distances[1] = LineDistanceCalculator.GetDistance(line1, line2.Point2);
-            distances[2] = LineDistanceCalculator.GetDistance(line2, line1.Point1);
-            distances[3] = LineDistanceCalculator.GetDistance(line2, line1.Point2);
-            return distances.Min();
-        }
-
-        internal static double GetDistanceWithSquaresOfDistances(Line line1, Line line2)
-        {
-            double[] distances = new double[4];
-            if (LineIntersector.Intersects(line1, line2))
-                return 0;
             distances[0] = LineDistanceCalculator.GetSquareDistance(line1, line2.Point1);
             distances[1] = LineDistanceCalculator.GetSquareDistance(line1, line2.Point2);
             distances[2] = LineDistanceCalculator.GetSquareDistance(line2, line1.Point1);

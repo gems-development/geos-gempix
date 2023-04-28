@@ -86,11 +86,10 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
         if (multiPolygon.Intersects(primitive))
             return 0;
         double result = double.MaxValue;
-        double distance;
         List<Polygon> polygons = multiPolygon.GetPolygons();
         foreach (Polygon polygon in polygons)
         {
-            distance = getDistance?.Invoke(polygon, primitive) ?? 0;
+            double distance = getDistance?.Invoke(polygon, primitive) ?? 0;
             if (distance < result)
             {
                 result = distance;
