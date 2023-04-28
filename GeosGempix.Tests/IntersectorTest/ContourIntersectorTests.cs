@@ -9,6 +9,7 @@ public class ContourIntersectorTests
     private Contour _contour;
     private Polygon _polygon;
     private MultiPolygon _multiPolygon;
+    
     public ContourIntersectorTests()
     {
         _contour = TestHelper.CreateContour(

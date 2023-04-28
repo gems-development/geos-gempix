@@ -11,17 +11,17 @@ public class ContourToucherTests
             new object[]
             {
                 TestHelper.CreateContour(
-                    new Point(5, 0), new Point(5, 5),
-                    new Point(8, 3), new Point(10, 5),
-                    new Point(10, 0), new Point(5, 0))
+                    new Point(0, 5), new Point(0, 10),
+                    new Point(3, 8), new Point(5, 10),
+                    new Point(5, 5), new Point(0, 5))
             },
             
             new object[]
             {
                 TestHelper.CreateContour(
-                    new Point(0, 5), new Point(0, 10),
-                    new Point(3, 8), new Point(5, 10),
-                    new Point(5, 5), new Point(0, 5))
+                    new Point(5, 0), new Point(5, 5),
+                    new Point(8, 3), new Point(10, 5),
+                    new Point(10, 0), new Point(5, 0))
             },
             
             new object[]
@@ -43,7 +43,7 @@ public class ContourToucherTests
             new Point(3, 3), new Point(5, 5),
             new Point(5, 0), new Point(0, 0));
         //Act + Assert.
-        Assert.True(contour1.IsTouching(contour2));
+        Assert.True(contour2.IsTouching(contour1));
     }
 
     public static IEnumerable<object[]> Data1 =>

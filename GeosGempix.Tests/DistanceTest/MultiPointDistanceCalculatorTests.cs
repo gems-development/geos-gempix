@@ -112,23 +112,16 @@ public class MultiPointDistanceCalculatorTests
             new Point(a[0], a[1]),
             new Point(a[2], a[3]),
             new Point(a[4], a[5]));
-        
-        var contour = TestHelper.CreateContour(
-            new Point(2, 2),
-            new Point(2, 6),
-            new Point(6, 6),
-            new Point(6, 2),
-            new Point(2, 2));
-			
-        var contours = new List<Contour>{ contour };
-			
+
         var polygon = TestHelper.CreatePolygon(
-            contours,
-            new Point(0, 0),
-            new Point(0, 8),
-            new Point(8, 8),
-            new Point(8, 0),
-            new Point(0, 0));
+            new List<Contour>
+            {
+                TestHelper.CreateContour(
+                    new Point(2, 2), new Point(2, 6), new Point(6, 6),
+                    new Point(6, 2), new Point(2, 2))
+            },
+            new Point(0, 0), new Point(0, 8), new Point(8, 8),
+            new Point(8, 0), new Point(0, 0));
         
         //Act. + Assert.
         Assert.Equal(res,multiPoint.GetDistance(polygon));
@@ -159,62 +152,38 @@ public class MultiPointDistanceCalculatorTests
             new Point(a[0], a[1]),
             new Point(a[2], a[3]),
             new Point(a[4], a[5]));
-        
-        //полигон 1
-        var contour1 = TestHelper.CreateContour(
-            new Point(3, 3),
-            new Point(3, 6),
-            new Point(6, 6),
-            new Point(6, 3),
-            new Point(3, 3));
-			
-        var contours1 = new List<Contour>{ contour1 };
-			
-        var polygon1 = TestHelper.CreatePolygon(
-            contours1,
-            new Point(0, 0),
-            new Point(0, 9),
-            new Point(9, 9),
-            new Point(9, 0),
-            new Point(0, 0));
-			
-        //полигон 2
-        var contour2 = TestHelper.CreateContour(
-            new Point(3, 13),
-            new Point(3, 16),
-            new Point(6, 16),
-            new Point(6, 13),
-            new Point(3, 13));
-			
-        var contours2 = new List<Contour>{ contour2 };
-			
-        var polygon2 = TestHelper.CreatePolygon(
-            contours2,
-            new Point(0, 10),
-            new Point(0, 19),
-            new Point(9, 19),
-            new Point(9, 10),
-            new Point(0, 10));
-			
-        //полигон 3
-        var contour3 = TestHelper.CreateContour(
-            new Point(13, 13),
-            new Point(13, 16),
-            new Point(16, 16),
-            new Point(16, 13),
-            new Point(13, 13));
-			
-        var contours3 = new List<Contour>{ contour3 };
-			
-        var polygon3 = TestHelper.CreatePolygon(
-            contours3,
-            new Point(10, 10),
-            new Point(10, 19),
-            new Point(19, 19),
-            new Point(19, 10),
-            new Point(10, 10));
-			
-        var multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
+
+        var multiPolygon = TestHelper.CreateMultiPolygon(
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(3, 3), new Point(3, 6), new Point(6, 6),
+                        new Point(6, 3), new Point(3, 3))
+                },
+                new Point(0, 0), new Point(0, 9), new Point(9, 9),
+                new Point(9, 0), new Point(0, 0)),
+            
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(3, 13), new Point(3, 16), new Point(6, 16),
+                        new Point(6, 13), new Point(3, 13))
+                },
+                new Point(0, 10), new Point(0, 19), new Point(9, 19),
+                new Point(9, 10), new Point(0, 10)),
+            
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(13, 13), new Point(13, 16), new Point(16, 16),
+                        new Point(16, 13), new Point(13, 13))
+                },
+                new Point(10, 10), new Point(10, 19), new Point(19, 19),
+                new Point(19, 10), new Point(10, 10))
+        );
         
         //Act. + Assert.
         Assert.Equal(res,multiPoint.GetDistance(multiPolygon));

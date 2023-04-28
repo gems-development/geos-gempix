@@ -39,23 +39,16 @@ public class MultiLineIntersectorTests
             TestHelper.CreateLine(a[0],a[1],a[2],a[3]),
             TestHelper.CreateLine(a[4],a[5],a[6],a[7]),
             TestHelper.CreateLine(a[8],a[9],a[10],a[11]));
-        
-        var contour = TestHelper.CreateContour(
-            new Point(3, 3),
-            new Point(3, 6),
-            new Point(6, 6),
-            new Point(6, 3),
-            new Point(3, 3));
-			
-        var contours = new List<Contour>{ contour };
-			
+
         var polygon = TestHelper.CreatePolygon(
-            contours,
-            new Point(0, 0),
-            new Point(0, 9),
-            new Point(9, 9),
-            new Point(9, 0),
-            new Point(0, 0));
+            new List<Contour>
+            {
+                TestHelper.CreateContour(
+                    new Point(3, 3), new Point(3, 6), new Point(6, 6),
+                    new Point(6, 3), new Point(3, 3))
+            },
+            new Point(0, 0), new Point(0, 9), new Point(9, 9),
+            new Point(9, 0), new Point(0, 0));
         
         //Act. + Assert.
         Assert.Equal(res,multiLine.Intersects(polygon));
@@ -72,62 +65,38 @@ public class MultiLineIntersectorTests
             TestHelper.CreateLine(a[0],a[1],a[2],a[3]),
             TestHelper.CreateLine(a[4],a[5],a[6],a[7]),
             TestHelper.CreateLine(a[8],a[9],a[10],a[11]));
-        
-        //полигон 1
-        var contour1 = TestHelper.CreateContour(
-            new Point(3, 3),
-            new Point(3, 6),
-            new Point(6, 6),
-            new Point(6, 3),
-            new Point(3, 3));
-			
-        var contours1 = new List<Contour>{ contour1 };
-			
-        var polygon1 = TestHelper.CreatePolygon(
-            contours1,
-            new Point(0, 0),
-            new Point(0, 9),
-            new Point(9, 9),
-            new Point(9, 0),
-            new Point(0, 0));
-			
-        //полигон 2
-        var contour2 = TestHelper.CreateContour(
-            new Point(3, 14),
-            new Point(3, 17),
-            new Point(6, 17),
-            new Point(6, 14),
-            new Point(3, 14));
-			
-        var contours2 = new List<Contour>{ contour2 };
-			
-        var polygon2 = TestHelper.CreatePolygon(
-            contours2,
-            new Point(0, 11),
-            new Point(0, 20),
-            new Point(9, 20),
-            new Point(9, 11),
-            new Point(0, 11));
-			
-        //полигон 3
-        var contour3 = TestHelper.CreateContour(
-            new Point(14,14),
-            new Point(14,17),
-            new Point(17,17),
-            new Point(17,14),
-            new Point(14,14));
-			
-        var contours3 = new List<Contour>{ contour3 };
-			
-        var polygon3 = TestHelper.CreatePolygon(
-            contours3,
-            new Point(11,11),
-            new Point(11,20),
-            new Point(20,20),
-            new Point(20,11),
-            new Point(11,11));
-			
-        var multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
+
+        var multiPolygon = TestHelper.CreateMultiPolygon(
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(3, 3), new Point(3, 6), new Point(6, 6),
+                        new Point(6, 3), new Point(3, 3))
+                },
+                new Point(0, 0), new Point(0, 9), new Point(9, 9),
+                new Point(9, 0), new Point(0, 0)),
+            
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(3, 14), new Point(3, 17), new Point(6, 17),
+                        new Point(6, 14), new Point(3, 14))
+                },
+                new Point(0, 11), new Point(0, 20), new Point(9, 20),
+                new Point(9, 11), new Point(0, 11)),
+            
+            TestHelper.CreatePolygon(
+                new List<Contour>
+                {
+                    TestHelper.CreateContour(
+                        new Point(14,14), new Point(14,17), new Point(17,17),
+                        new Point(17,14), new Point(14,14))
+                },
+                new Point(11,11), new Point(11,20), new Point(20,20),
+                new Point(20,11), new Point(11,11))
+        );
         
         //Act. + Assert.
         Assert.Equal(res,multiLine.Intersects(multiPolygon));
