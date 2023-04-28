@@ -29,18 +29,18 @@ namespace GeosGempix.Extensions
         }
         internal static bool IsTouching(Contour contour1, Contour contour2)
         {
-            foreach (Line line in contour2.GetLines())
+            foreach (var line in contour2.GetLines())
             {
-                if (contour1.IsInside(PullLineEnds(line).Point1) && contour1.IsInside(PullLineEnds(line).Point2))
+                var pulledLineEnds = PullLineEnds(line);
+                if (contour1.IsInside(pulledLineEnds.Point1) && contour1.IsInside(pulledLineEnds.Point2))
                     return false;
             }
             
-            foreach (Line line in contour1.GetLines())
+            foreach (var line in contour1.GetLines())
             {
                 if (IsTouching(contour2, line))
                     return true;
             }
-                
             return false;
         }
 

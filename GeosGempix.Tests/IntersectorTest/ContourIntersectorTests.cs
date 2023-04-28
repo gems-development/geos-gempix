@@ -60,7 +60,7 @@ public class ContourIntersectorTests
     }
     
     // Проверка на пересечение между контуром и контуром
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> ContourAndContourIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -94,7 +94,7 @@ public class ContourIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(ContourAndContourIntersectionTestData))]
     public void IsIntersectionContourAndContour(bool res, Contour contour)
     {
         //Arrange.
@@ -104,7 +104,7 @@ public class ContourIntersectorTests
     }
 
     // Проверка на пересечение между контуром и мультиточкой
-    public static IEnumerable<object[]> Data1 =>
+    public static IEnumerable<object[]> ContourAndMultiPointIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -142,7 +142,7 @@ public class ContourIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data1))]
+    [MemberData(nameof(ContourAndMultiPointIntersectionTestData))]
     public void IsIntersectionContourAndMultiPoint(bool res, MultiPoint multiPoint)
     {
         //Arrange.
@@ -152,7 +152,7 @@ public class ContourIntersectorTests
     }
 
     // Проверка на пересечение между контуром и мультилинией
-    public static IEnumerable<object[]> Data2 =>
+    public static IEnumerable<object[]> ContourAndMultiLineIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -190,7 +190,7 @@ public class ContourIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data2))]
+    [MemberData(nameof(ContourAndMultiLineIntersectionTestData))]
     public void IsIntersectionContourAndMultiLine(bool res, MultiLine multiLine)
     {
         //Arrange.
@@ -200,7 +200,7 @@ public class ContourIntersectorTests
     }
     
     // Проверка на пересечение между контуром и полигоном
-    public static IEnumerable<object[]> Data3 =>
+    public static IEnumerable<object[]> ContourAndPolygonIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -234,7 +234,7 @@ public class ContourIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data3))]
+    [MemberData(nameof(ContourAndPolygonIntersectionTestData))]
     public void IsIntersectionContourAndPolygon(bool res, Contour contour)
     {
         //Arrange.
@@ -244,7 +244,7 @@ public class ContourIntersectorTests
     }
     
     // Проверка на пересечение между контуром и мультиполигоном
-    public static IEnumerable<object[]> Data4 =>
+    public static IEnumerable<object[]> ContourAndMultipolygonIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -278,7 +278,7 @@ public class ContourIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data4))]
+    [MemberData(nameof(ContourAndMultipolygonIntersectionTestData))]
     public void IsIntersectionContourAndMultiPolygon(bool res, Contour contour)
     {
         //Arrange.

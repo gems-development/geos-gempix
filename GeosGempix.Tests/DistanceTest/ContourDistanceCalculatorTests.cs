@@ -15,7 +15,7 @@ public class ContourDistanceCalculatorTests
 	}
 
 	//Проверка на расстояние между контуром и контуром
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> ContourAndContourDistanceTestData =>
 	    new List<object[]>
 	    {     
 		    new object[]
@@ -69,7 +69,7 @@ public class ContourDistanceCalculatorTests
 	    };
     
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(ContourAndContourDistanceTestData))]
     public void GetDistanceBetweenContourAndContour(double res, Contour contour2)
     {
         //Arrange.
@@ -120,7 +120,7 @@ public class ContourDistanceCalculatorTests
     }
     
     //Проверка на расстояние между контуром и полигоном
-    public static IEnumerable<object[]> Data1 =>
+    public static IEnumerable<object[]> ContourAndPolygonDistanceTestData =>
 	    new List<object[]>
 	    {     
 		    new object[]
@@ -198,7 +198,7 @@ public class ContourDistanceCalculatorTests
 	    };
     
     [Theory]
-    [MemberData(nameof(Data1))]
+    [MemberData(nameof(ContourAndPolygonDistanceTestData))]
     public void GetDistanceBetweenContourAndPolygon_Success(double res, Polygon polygon)
     {
 	    //Arrange.
@@ -207,7 +207,7 @@ public class ContourDistanceCalculatorTests
 	    Assert.Equal(res,tests._contour.GetDistance(polygon));
     }
 
-    public static IEnumerable<object[]> Data2 =>
+    public static IEnumerable<object[]> ContourAndMultiPolygonDistanceTestData =>
 	    new List<object[]>
 	    {     
 		    new object[]
@@ -267,7 +267,7 @@ public class ContourDistanceCalculatorTests
 	    };
     
     [Theory]
-    [MemberData(nameof(Data2))]
+    [MemberData(nameof(ContourAndMultiPolygonDistanceTestData))]
     public void GetDistanceBetweenContourAndMultiPolygon_Success(double res, Contour contour)
     {
 	    //Arrange.

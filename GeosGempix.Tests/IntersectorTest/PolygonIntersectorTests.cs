@@ -67,7 +67,7 @@ public class PolygonIntersectorTests
     }
 
     // Проверка на пересечение между полигоном и полигоном
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> PolygonAndPolygonIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -125,7 +125,7 @@ public class PolygonIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(PolygonAndPolygonIntersectionTestData))]
     public void IsIntersectionPolygonAndPolygon(bool res, Polygon polygon)
     {
         //Arrange.
@@ -135,7 +135,7 @@ public class PolygonIntersectorTests
     }
     
     // Проверка на пересечение между полигоном и мультиполигоном (Success)
-    public static IEnumerable<object[]> Data1 =>
+    public static IEnumerable<object[]> PolygonAndMultiPolygonIntersectionTestDataSuccess =>
         new List<object[]>
         {     
             new object[]
@@ -167,7 +167,7 @@ public class PolygonIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data1))]
+    [MemberData(nameof(PolygonAndMultiPolygonIntersectionTestDataSuccess))]
     public void IsIntersectionPolygonAndMultiPolygon_Success(bool res, Polygon polygon)
     {
         //Arrange.
@@ -177,7 +177,7 @@ public class PolygonIntersectorTests
     }
     
     // Проверка на пересечение между полигоном и мультиполигоном (Failed)
-    public static IEnumerable<object[]> Data2 =>
+    public static IEnumerable<object[]> PolygonAndMultiPolygonIntersectionTestDataFailed =>
         new List<object[]>
         {     
             new object[]
@@ -196,7 +196,7 @@ public class PolygonIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data2))]
+    [MemberData(nameof(PolygonAndMultiPolygonIntersectionTestDataFailed))]
     public void IsIntersectionPolygonAndMultiPolygon_Failed(bool res, Polygon polygon)
     {
         //Arrange.

@@ -54,7 +54,7 @@ public class MultiPointDistanceCalculatorTests
     }
     
     // Проверка на растояние между мультиточкой и полигоном
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> MultiPointAndPolygonDistanceTestData =>
         new List<object[]>
         {     
             new object[]
@@ -255,7 +255,7 @@ public class MultiPointDistanceCalculatorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(MultiPointAndPolygonDistanceTestData))]
     public void GetDistanceBetweenMultiPointAndPolygon_LieOn(MultiPoint multiPoint, Polygon polygon)
     {
         //Act. + Assert.

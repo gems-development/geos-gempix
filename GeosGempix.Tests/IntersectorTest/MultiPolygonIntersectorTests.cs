@@ -6,7 +6,7 @@ namespace GeosGempix.Tests.IntersectorTest;
 public class MultiPolygonIntersectorTests
 {
     // Проверка на пересечение между мультиполигоном и мультиполигоном
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> MultiPolygonAndMultiPolygonIntersectionTestData =>
         new List<object[]>
         {     
             new object[]
@@ -157,7 +157,7 @@ public class MultiPolygonIntersectorTests
         };
     
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(MultiPolygonAndMultiPolygonIntersectionTestData))]
     public void IsIntersectionMultiPolygonAndMultiPolygon(bool res, MultiPolygon multiPolygon1, MultiPolygon multiPolygon2)
     {
         //Act. + Assert.
