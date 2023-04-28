@@ -85,11 +85,11 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         internal static bool IsStrictlyInside(Contour contour, Point point)
         {
             Line? closestLine = null;
-            double distance = double.MaxValue;
+            decimal distance = decimal.MaxValue;
             // нашли самую близкую сторону
             foreach (Line line in contour.GetLines())
             {
-                double curDistance = LineDistanceCalculator.GetDistance(line, point);
+                decimal curDistance = LineDistanceCalculator.GetSquareDistanceDecimal(line, point);
                 if (distance > curDistance)
                 {
                     distance = curDistance;

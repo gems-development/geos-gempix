@@ -82,6 +82,20 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             return distances.Min();
         }
 
+        public static decimal GetSquareDistanceDecimal(Line line, Point point)
+        {
+            decimal[] distances = new decimal[3];
+            distances[2] = decimal.MaxValue;
+            distances[0] = PointDistanceCalculator.GetSquareDistanceDecimal(line.Point1, point);
+            distances[1] = PointDistanceCalculator.GetSquareDistanceDecimal(line.Point2, point);
+            var eq1 = line.GetEquationOfLine();
+            var eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
+            Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
+            if (LineIntersector.Intersects(line, point1))
+                distances[2] = PointDistanceCalculator.GetSquareDistanceDecimal(point1, point);
+            return distances.Min();
+        }
+
         internal static double GetDistance(Line line, Polygon polygon) =>
             PolygonDistanceCalculator.GetDistance(polygon, line);
 
