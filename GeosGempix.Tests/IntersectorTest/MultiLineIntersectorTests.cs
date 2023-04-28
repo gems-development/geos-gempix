@@ -8,7 +8,7 @@ public class MultiLineIntersectorTests
     // Проверка на пересечение между мультилинией и мультилинией
     [Theory]
     [InlineData(true, new double[]{3,3,7,3,3,6,7,7,8,7,9,3})]
-    [InlineData(true, new double[]{2,1,4,3,2,5,2,7,4,4,5,4})] //failed
+    [InlineData(true, new double[]{2,1,4,3,2,5,2,7,4,4,5,4})]
     [InlineData(false, new double[]{3,3,7,3,2,5,2,7,8,7,9,3})]
     public void IsIntersectionMultiLineAndMultiLine(bool res, double[] a)
     {
@@ -29,7 +29,7 @@ public class MultiLineIntersectorTests
     
     // Проверка на пересечение между мультилинией и полигоном
     [Theory]
-    [InlineData(true, new double[]{-1,5,-1,8,4,5,5,4,10,2,10,5})] //failed
+    [InlineData(true, new double[]{-1,5,-1,8,4,5,5,4,10,2,10,5})]
     [InlineData(true, new double[]{-1,5,-1,8,8,5,10,5,10,1,11,4})]
     [InlineData(false, new double[]{-1,5,-1,8,10,2,10,5,10,1,11,4})]
     public void IsIntersectionMultiLineAndPolygon(bool res, double[] a)
