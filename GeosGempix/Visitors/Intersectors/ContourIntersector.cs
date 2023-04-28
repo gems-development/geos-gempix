@@ -48,7 +48,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
             return false;
         }
-        internal static bool Intersects(Contour contour, Line line)
+        internal static bool IntersectsBorders(Contour contour, Line line)
         {
             foreach (Line contourLine in contour.GetLines())
                 if (LineIntersector.Intersects(line, contourLine))

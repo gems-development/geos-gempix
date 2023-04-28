@@ -230,7 +230,8 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                     return IsInside(contour, line.Point1);
                 }
             }
-            
+
+            return false;
         }
         internal static bool IsStrictlyInside(Contour contour, Polygon polygon, bool intersectBordersCheckRequired = true)
         {
