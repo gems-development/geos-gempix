@@ -10,7 +10,12 @@ namespace GeosGempix.Tests.InsiderTest
         public Contour _contour;
         public ContourInsiderTests()
         {
-            _contour = TestHelper.CreateContour(new Point(0, 0), new Point(0, 9), new Point(9, 9), new Point(9, 0));
+            _contour = TestHelper.CreateContour(
+                new Point(0, 0), 
+                new Point(0, 9), 
+                new Point(9, 9), 
+                new Point(9, 0),
+                new Point(0, 0));
         }
 
         [Fact]
@@ -115,7 +120,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            Contour contour = TestHelper.CreateContour(new Point(3, 3), new Point(3, 6), new Point(6, 6), new Point(6, 3));
+            Contour contour = TestHelper.CreateContour(
+                new Point(3, 3), 
+                new Point(3, 6), 
+                new Point(6, 6), 
+                new Point(6, 3), 
+                new Point(3, 3));
 			//Act.
 			Boolean t = tests._contour.IsInside(contour);
             //Assert.
@@ -127,7 +137,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(7, 3), new Point(7, 6), new Point(10, 6), new Point(10, 3));
+			Contour contour = TestHelper.CreateContour(
+                new Point(7, 3), 
+                new Point(7, 6), 
+                new Point(10, 6), 
+                new Point(10, 3),
+                new Point(7, 3));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -139,7 +154,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 10), new Point(3, 13), new Point(6, 10), new Point(6, 13));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 10), 
+                new Point(3, 13), 
+                new Point(6, 10), 
+                new Point(6, 13),
+                new Point(3, 10));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -151,7 +171,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 9), new Point(3, 12), new Point(6, 9), new Point(6, 12));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 9), 
+                new Point(3, 12), 
+                new Point(6, 9), 
+                new Point(6, 12),
+                new Point(3, 9));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -163,7 +188,12 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-			Contour contour = TestHelper.CreateContour(new Point(3, 6), new Point(3, 9), new Point(6, 9), new Point(6, 6));
+			Contour contour = TestHelper.CreateContour(
+                new Point(3, 6), 
+                new Point(3, 9), 
+                new Point(6, 9), 
+                new Point(6, 6),
+                new Point(3, 6));
 			//Act.
 			Boolean f = tests._contour.IsInside(contour);
             //Assert.
@@ -175,7 +205,10 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            MultiPoint multiPoint = TestHelper.CreateMultiPoint(new Point(3, 5), new Point(7, 5), new Point(5, 3));
+            MultiPoint multiPoint = TestHelper.CreateMultiPoint(
+                new Point(3, 5), 
+                new Point(7, 5), 
+                new Point(5, 3));
             //Act.
             Boolean t = tests._contour.IsInside(multiPoint);
             //Assert.
@@ -187,7 +220,10 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            MultiPoint multiPoint = TestHelper.CreateMultiPoint(new Point(8, 8), new Point(10, 8), new Point(10, 7));
+            MultiPoint multiPoint = TestHelper.CreateMultiPoint(
+                new Point(8, 8), 
+                new Point(10, 8), 
+                new Point(10, 7));
 			//Act.
 			Boolean f = tests._contour.IsInside(multiPoint);
             //Assert.
@@ -199,7 +235,10 @@ namespace GeosGempix.Tests.InsiderTest
         {
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
-            MultiPoint multiPoint = TestHelper.CreateMultiPoint(new Point(8, 8), new Point(9, 7), new Point(8, 6));
+            MultiPoint multiPoint = TestHelper.CreateMultiPoint(
+                new Point(8, 8), 
+                new Point(9, 7), 
+                new Point(8, 6));
 			//Act.
 			Boolean f = tests._contour.IsInside(multiPoint);
             //Assert.
@@ -215,7 +254,10 @@ namespace GeosGempix.Tests.InsiderTest
             Point point2 = new Point(2, 6);
             Point point3 = new Point(4, 6);
             Point point4 = new Point(3, 3);
-            MultiLine multiLine = TestHelper.CreateMultiLine(new Line(point1, point2), new Line(point2, point3), new Line(point3, point4));
+            MultiLine multiLine = TestHelper.CreateMultiLine(
+                new Line(point1, point2), 
+                new Line(point2, point3), 
+                new Line(point3, point4));
 			//Act.
 			Boolean f = tests._contour.IsInside(multiLine);
             //Assert.
@@ -233,7 +275,9 @@ namespace GeosGempix.Tests.InsiderTest
             Point point4 = new Point(4, 1);
             Line line1 = new Line(point1, point2);
             Line line2 = new Line(point3, point4);
-            MultiLine multiLine = TestHelper.CreateMultiLine(new Line(point1, point2), new Line(point3, point4));
+            MultiLine multiLine = TestHelper.CreateMultiLine(
+                new Line(point1, point2), 
+                new Line(point3, point4));
 			//Act.
 			Boolean f = tests._contour.IsInside(multiLine);
             //Assert.
@@ -255,7 +299,10 @@ namespace GeosGempix.Tests.InsiderTest
             Line line1 = new Line(point1, point2);
             Line line2 = new Line(point2, point3);
             Line line3 = new Line(point3, point4);
-            MultiLine multiLine = TestHelper.CreateMultiLine(new Line(point1, point2), new Line(point2, point3), new Line(point3, point4));
+            MultiLine multiLine = TestHelper.CreateMultiLine(
+                new Line(point1, point2), 
+                new Line(point2, point3), 
+                new Line(point3, point4));
 			//Act.
 			Boolean f = tests._contour.IsInside(multiLine);
             //Assert.
@@ -275,7 +322,9 @@ namespace GeosGempix.Tests.InsiderTest
             Point point2 = new Point(x2, y2);
             Point point3 = new Point(x3, y3);
             Point point4 = new Point(x4, y4);
-            MultiLine multiLine = TestHelper.CreateMultiLine(new Line(point1, point2), new Line(point3, point4));
+            MultiLine multiLine = TestHelper.CreateMultiLine(
+                new Line(point1, point2), 
+                new Line(point3, point4));
             //Act.
             Boolean f = tests._contour.IsInside(multiLine);
             //Assert.
@@ -287,7 +336,13 @@ namespace GeosGempix.Tests.InsiderTest
         {
 			//Arrange.
 			ContourInsiderTests tests = new ContourInsiderTests();
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(),new Point(1, 1), new Point(1, 4), new Point(4, 4), new Point(4, 1));
+			Polygon polygon1 = TestHelper.CreatePolygon(
+                new List<Contour>(),
+                new Point(1, 1), 
+                new Point(1, 4), 
+                new Point(4, 4), 
+                new Point(4, 1), 
+                new Point(1, 1));
 			//Act.
 			Boolean t1 = tests._contour.IsInside(polygon1);
 			//Assert.
@@ -301,7 +356,13 @@ namespace GeosGempix.Tests.InsiderTest
 		{
 			//Arrange.
 			ContourInsiderTests tests = new ContourInsiderTests();
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), new Point(x4, y4));
+			Polygon polygon1 = TestHelper.CreatePolygon(
+                new List<Contour>(), 
+                new Point(x1, y1), 
+                new Point(x2, y2), 
+                new Point(x3, y3), 
+                new Point(x4, y4),
+                new Point(x1, y1));
 			//Act.
 			Boolean f1 = tests._contour.IsInside(polygon1);
 			//Assert.
@@ -316,15 +377,15 @@ namespace GeosGempix.Tests.InsiderTest
             //Arrange.
             ContourInsiderTests tests = new ContourInsiderTests();
            
-            Contour hole1 = TestHelper.CreateContour(new Point(2, 2), new Point(2, 3), new Point(3, 3), new Point(3, 2));
-            Contour hole2 = TestHelper.CreateContour(new Point(6, 2), new Point(6, 3), new Point(7, 3), new Point(7, 2));
-			Contour hole3 = TestHelper.CreateContour(new Point(6, 6), new Point(6, 7), new Point(7, 7), new Point(7, 6));
+            Contour hole1 = TestHelper.CreateContour(new Point(2, 2), new Point(2, 3), new Point(3, 3), new Point(3, 2), new Point(2, 2));
+            Contour hole2 = TestHelper.CreateContour(new Point(6, 2), new Point(6, 3), new Point(7, 3), new Point(7, 2), new Point(6, 2));
+			Contour hole3 = TestHelper.CreateContour(new Point(6, 6), new Point(6, 7), new Point(7, 7), new Point(7, 6), new Point(6, 6));
 
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(1, 1), new Point(1, 4), new Point(4, 4), new Point(4, 1));
+			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(1, 1), new Point(1, 4), new Point(4, 4), new Point(4, 1), new Point(1, 1));
             polygon1.Add(hole1);
-            Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 1), new Point(5, 4), new Point(8, 4), new Point(8, 1));
+            Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 1), new Point(5, 4), new Point(8, 4), new Point(8, 1), new Point(5, 1));
 			polygon2.Add(hole2);
-            Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 5), new Point(5, 8), new Point(8, 8), new Point(8, 5));
+            Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(5, 5), new Point(5, 8), new Point(8, 8), new Point(8, 5), new Point(5, 5));
 			polygon3.Add(hole3);
 
             MultiPolygon multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
@@ -349,15 +410,48 @@ namespace GeosGempix.Tests.InsiderTest
 			//Arrange.
 			ContourInsiderTests tests = new ContourInsiderTests();
 
-			Contour hole1 = TestHelper.CreateContour(new Point(x1 + 1, y1 + 1), new Point(x2 + 1, y2 - 1), new Point(x3 - 1, y3 - 1), new Point(x4 - 1, y4 + 1));
-			Contour hole2 = TestHelper.CreateContour(new Point(x5 + 1, y5 + 1), new Point(x6 + 1, y6 - 1), new Point(x7 - 1, y7 - 1), new Point(x8 - 1, y8 + 1));
-			Contour hole3 = TestHelper.CreateContour(new Point(x9 + 1, y9 + 1), new Point(x10 + 1, y10 - 1), new Point(x11 - 1, y11 - 1), new Point(x12 - 1, y12 + 1));
+			Contour hole1 = TestHelper.CreateContour(
+                new Point(x1 + 1, y1 + 1), 
+                new Point(x2 + 1, y2 - 1), 
+                new Point(x3 - 1, y3 - 1), 
+                new Point(x4 - 1, y4 + 1),
+                new Point(x1 + 1, y1 + 1));
+			Contour hole2 = TestHelper.CreateContour(
+                new Point(x5 + 1, y5 + 1), 
+                new Point(x6 + 1, y6 - 1), 
+                new Point(x7 - 1, y7 - 1), 
+                new Point(x8 - 1, y8 + 1),
+                new Point(x5 + 1, y5 + 1));
+			Contour hole3 = TestHelper.CreateContour(
+                new Point(x9 + 1, y9 + 1), 
+                new Point(x10 + 1, y10 - 1), 
+                new Point(x11 - 1, y11 - 1), 
+                new Point(x12 - 1, y12 + 1),
+                new Point(x9 + 1, y9 + 1));
 
-			Polygon polygon1 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x1, y1), new Point(x2, y2), new Point(x3, y3), new Point(x4, y4));
+			Polygon polygon1 = TestHelper.CreatePolygon(
+                new List<Contour>(), 
+                new Point(x1, y1), 
+                new Point(x2, y2), 
+                new Point(x3, y3), 
+                new Point(x4, y4),
+                new Point(x1, y1));
 			polygon1.Add(hole1);
-			Polygon polygon2 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x5, y5), new Point(x6, y6), new Point(x7, y7), new Point(x8, y8));
+			Polygon polygon2 = TestHelper.CreatePolygon(
+                new List<Contour>(), 
+                new Point(x5, y5), 
+                new Point(x6, y6), 
+                new Point(x7, y7), 
+                new Point(x8, y8),
+                new Point(x5, y5));
 			polygon2.Add(hole2);
-			Polygon polygon3 = TestHelper.CreatePolygon(new List<Contour>(), new Point(x9, y9), new Point(x10, y10), new Point(x11, y11), new Point(x12, y12));
+			Polygon polygon3 = TestHelper.CreatePolygon(
+                new List<Contour>(), 
+                new Point(x9, y9), 
+                new Point(x10, y10), 
+                new Point(x11, y11), 
+                new Point(x12, y12),
+                new Point(x9, y9));
 			polygon3.Add(hole3);
 
 			MultiPolygon multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);

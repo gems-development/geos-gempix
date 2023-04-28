@@ -5,6 +5,7 @@ using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using GeosGempix.MultiModels;
+using GeosGempix.Extensions;
 
 public class PolygonDistanceCalculator : IModelDistanceCalculator
 {
@@ -43,39 +44,38 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Polygon polygon, Point point)
     {
-        if (PolygonInsider.IsInside(polygon, point))
+        if (PolygonIntersector.Intersects(polygon, point))
             return 0;
         double result = double.MaxValue;
-        double distance = 0;
-        List<Point> points = polygon.GetPoints();
-        List<Line> lines = new List<Line>();
-        for (int i = 0; i < points.Count - 1; i++)
-            lines.Add(new Line(points[i], points[i + 1]));
+        List<Line> lines = polygon.GetLines();
         
         foreach (Line line in lines)
         {
-            distance = LineDistanceCalculator.GetDistance(line, point);
+            double distance = LineDistanceCalculator.GetDistance(line, point);
             if (distance < result)
                 result = distance;
         }
         return result;
     }
 
-
     internal static double GetDistance(Polygon polygon, Line line)
     {
-        if (PolygonInsider.IsInside(polygon, line))
+        if (polygon.Intersects(line))
             return 0;
         double result = double.MaxValue;
-        double distance = 0;
-        List<Point> points = polygon.GetPoints();
-        List<Line> lines = new List<Line>();
-        for (int i = 0; i < points.Count - 1; i++)
-            lines.Add(new Line(points[i], points[i + 1]));
+        List<Line> lines = polygon.GetLines();
         
         foreach (Line line1 in lines)
         {
-            distance = LineDistanceCalculator.GetDistance(line1, line);
+            double distance = LineDistanceCalculator.GetDistance(line1, line);
+            if (distance < result)
+                result = distance;
+        }
+
+        foreach (Contour hole in polygon.GetHoles())
+        { // где метод вычисления расстояния до внутренней точки контура?
+          // почему до сих пор не написан?
+            double distance = ContourDistanceCalculator.GetDistance(hole, line);
             if (distance < result)
                 result = distance;
         }
@@ -84,18 +84,14 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Polygon polygon1, Polygon polygon2)
     {
-        if (PolygonInsider.IsInside(polygon1, polygon2) || PolygonInsider.IsInside(polygon2, polygon1))
+        if (PolygonIntersector.Intersects(polygon1, polygon2))
             return 0;
         double result = double.MaxValue;
-        double distance;
-        List<Point> points = polygon2.GetPoints();
-        List<Line> lines = new List<Line>();
-        for (int i = 0; i < points.Count - 1; i++)
-            lines.Add(new Line(points[i], points[i + 1]));
+        List<Line> lines = polygon2.GetLines();
 
         foreach (Line line in lines)
         {
-            distance = GetDistance(polygon1, line);
+            double distance = GetDistance(polygon1, line);
             if (distance < result)
                 result = distance;
         }
@@ -104,21 +100,21 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Polygon polygon, MultiLine multiLine)
     {
-        if (PolygonInsider.IsInside(polygon, multiLine))
+        if (MultiLineIntersector.Intersects(multiLine, polygon))
             return 0;
         return MultiLineDistanceCalculator.GetDistance(multiLine, polygon);
     }
 
     internal static double GetDistance(Polygon polygon, MultiPoint multiPoint)
     {
-        if (PolygonInsider.IsInside(polygon, multiPoint))
+        if (MultiPointIntersector.Intersects(multiPoint, polygon))
             return 0;
         return MultiPointDistanceCalculator.GetDistance(multiPoint, polygon);;
     }
 
     internal static double GetDistance(Polygon polygon, MultiPolygon multiPolygon)
     {
-        if (PolygonInsider.IsInside(polygon, multiPolygon))
+        if (MultiPolygonIntersector.Intersects(multiPolygon, polygon))
             return 0;
         return MultiPolygonDistanceCalculator.GetDistance(multiPolygon, polygon);;
     }
@@ -127,25 +123,17 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
     {
         if (PolygonIntersector.Intersects(polygon, contour))
             return 0;
-        if (PolygonInsider.IsInside(polygon, contour))
-            return 0;
-        if (ContourInsider.IsInside(contour, polygon))
-            return 0;
 
         double result = double.MaxValue;
-        double distance;
-        List<Contour> holes = new List<Contour>(polygon.GetHoles());
-        holes.Add(new Contour(polygon.GetPoints()));
-        foreach (var hole in holes)
+        List<Contour> contours = new List<Contour>(polygon.GetHoles());
+        contours.Add(new Contour(polygon.GetPoints()));
+        foreach (var c in contours)
         {
-            List<Point> points = hole.GetPoints();
-            List<Line> lines = new List<Line>();
-            for (int i = 0; i < points.Count - 1; i++)
-                lines.Add(new Line(points[i], points[i + 1]));
+            List<Line> lines = c.GetLines();
 
             foreach (Line line in lines)
             {
-                distance = ContourDistanceCalculator.GetDistance(hole, line);
+                double distance = ContourDistanceCalculator.GetDistance(c, line);
                 if (distance < result)
                     result = distance;
             }

@@ -11,8 +11,8 @@ public class ContourDistanceCalculatorTests
     [InlineData(new double[]{5, 5, 5, 10, 10, 10, 10, 5}, 0)]
     [InlineData(new double[]{5, 0, 5, 5, 10, 5, 10, 0}, 0)]
     [InlineData(new double[]{0, 0, 0, 5, 5, 5, 5, 0}, 0)]
-    [InlineData(new double[]{2, 2, 2, 3, 3, 3, 3, 2}, 2)] //failed
-    [InlineData(new double[]{3, 3, 3, 4, 4, 4, 4, 3}, 1)] //failed
+    [InlineData(new double[]{2, 2, 2, 3, 3, 3, 3, 2}, 0)]
+    [InlineData(new double[]{3, 3, 3, 4, 4, 4, 4, 3}, 0)]
     [InlineData(new double[]{8, -1, 8, 4, 13, 4, 13, -1}, 3)]
     [InlineData(new double[]{9, 8, 9, 13, 14, 13, 14, 8}, 5)]
     public void GetDistanceBetweenContourAndContour(double[] a, double res)

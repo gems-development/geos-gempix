@@ -23,12 +23,7 @@ namespace GeosGempix.Models
                 throw new ArgumentNullException("point");
             _points.Add(point);
         }
-        public void Add(Contour hole)
-        {
-            if (hole == null)
-                throw new ArgumentNullException("hole");
-            hole.Add(hole);
-        }
+       
         public List<Point> GetPoints()
         {
             return _points;
@@ -62,7 +57,7 @@ namespace GeosGempix.Models
         {
             double sum1 = 0;
             double sum2 = 0;
-            for (int i = 0; i < _points.Count; i++)
+            for (int i = 0; i < _points.Count-1; i++)
             {
                 sum1 = sum1 + _points[i].X * _points[i + 1].Y;
                 sum2 = sum2 + _points[i].Y * _points[i + 1].X;

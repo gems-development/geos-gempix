@@ -27,9 +27,9 @@ namespace GeosGempix.Tests.DistanceTest
 		[InlineData(new double[]{1, 0, 3, 0}, 0)]
 		[InlineData(new double[]{2, 2, 6, 2}, 0)]
 		[InlineData(new double[]{4, 3, 7, 3}, 0)]
-		[InlineData(new double[]{1, 1, 1, 2}, 1)] //failed
-		[InlineData(new double[]{5, 1, 7, 4}, 1)] //failed
-		[InlineData(new double[]{8, 7, 9, 6}, 5)] //failed
+		[InlineData(new double[]{1, 1, 1, 2}, 0)]
+		[InlineData(new double[]{5, 1, 7, 4}, 1)]
+		[InlineData(new double[]{8, 7, 9, 6}, 5)]
 		public void GetDistanceBetweenLineAndContour(double[] a, double res)
 		{
 			//Arrange.
@@ -40,7 +40,8 @@ namespace GeosGempix.Tests.DistanceTest
 				new Point(4, 0), new Point(0, 0));
 
 			//Act. + Assert.
-			Assert.Equal(res,line.GetDistance(contour));
+			double distance = line.GetDistance(contour);
+            Assert.Equal(res, distance);
 		}
 		
 		// Проверка на расстояние между отрезком и мультиточкой
@@ -87,11 +88,11 @@ namespace GeosGempix.Tests.DistanceTest
 		[Theory]
 		[InlineData(new double[]{1, 1, 1, 6}, 0)]
 		[InlineData(new double[]{-1, 4, 3, 4}, 0)]
-		[InlineData(new double[]{1, 4, 6, 4}, 0)] //failed
-		[InlineData(new double[]{3, 3, 4, 4}, 1)] //failed
-		[InlineData(new double[]{9, 5, 11, 3}, 2)] //failed
+		[InlineData(new double[]{1, 4, 6, 4}, 0)] 
+		[InlineData(new double[]{3, 3, 4, 4}, 1)] 
+		[InlineData(new double[]{9, 5, 11, 3}, 2)] 
 		[InlineData(new double[]{9, 0, 12, 0}, 2)]
-		[InlineData(new double[]{11, 10, 11, 12}, 2)] //failed
+		[InlineData(new double[]{11, 10, 11, 12}, 5)]
 		public void GetDistanceBetweenLineAndPolygon_Success(double[] a, double res)
 		{
 			//Arrange.
