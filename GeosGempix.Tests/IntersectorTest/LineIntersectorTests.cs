@@ -1,5 +1,4 @@
 ﻿using GeosGempix.Extensions;
-using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Models;
 
 namespace GeosGempix.Tests.IntersectorTest

@@ -1,14 +1,9 @@
 ﻿using GeosGempix.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GeosGempix.Models;
 
 namespace GeosGempix.Tests.DistanceTest
 {
-    public class PolygonDistanceCalculatorTests
+	public class PolygonDistanceCalculatorTests
     {
         // Проверка на растояние между полигоном и полигоном
         [Theory]

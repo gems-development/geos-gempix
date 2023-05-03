@@ -1,12 +1,6 @@
 ﻿using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Tests.ShortestLineSearcherTest
 {

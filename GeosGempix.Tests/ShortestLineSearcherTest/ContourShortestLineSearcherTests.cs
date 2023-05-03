@@ -1,14 +1,9 @@
 ﻿using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GeosGempix.Tests.ShortestLineSearcherTest
 {
-    public class ContourShortestLineSearcherTests
+	public class ContourShortestLineSearcherTests
     {       
         private Contour _contour;
         public ContourShortestLineSearcherTests()
