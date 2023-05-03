@@ -1,8 +1,9 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.GeometryPrimitiveIntersectors;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
-using GeosGempix.GeometryPrimitiveIntersectors;
+using GeosGempix.Visitors.Intersectors;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
@@ -43,33 +44,37 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 
         internal static Line GetShortestLine(Line line, Point point)
         {
-            Line shortLine = new Line(new Point(0, 0), new Point(0 ,0));
-
-			var abc = line.GetEquationOfLine();
-
-            var perpendicular = Line.GetEquationOfPerpendicularLine(abc, point);
-
-            Point intersect = LineIntersector.GetPointOfIntersection(abc, perpendicular);
-
-            shortLine = new Line(point, intersect);
-
-			return shortLine;
+            double[] distances = new double[3];
+            distances[2] = double.MaxValue;
+            distances[0] = PointDistanceCalculator.GetDistance(line.Point1, point);
+            distances[1] = PointDistanceCalculator.GetDistance(line.Point2, point);
+            var eq1 = line.GetEquationOfLine();
+            var eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
+            Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
+            if (LineIntersector.Intersects(line, point1))
+                distances[2] = PointDistanceCalculator.GetDistance(point1, point);
+            double minDistance = distances.Min();
+            if (distances[0].Equals(minDistance))
+                return new Line(line.Point1, point);
+            if (distances[1].Equals(minDistance))
+                return new Line(line.Point2, point);
+            return new Line(point1, point);
         }
 
         public static Line GetShortestLine(Line line1, Line line2)
         {
-			Line shortLine = new Line(new Point(0, 0), new Point(10000000, 0));
             Line shortLine1 = GetShortestLine(line1, line2.Point1);
 			Line shortLine2 = GetShortestLine(line1, line2.Point2);
-            if(shortLine1.GetLength() < shortLine.GetLength())
-            {
-                shortLine = new Line(shortLine1);
-            }
-            else
-            {
+            Line shortLine3 = GetShortestLine(line2, line1.Point1);
+            Line shortLine4 = GetShortestLine(line2, line1.Point2);
+            Line shortLine = new Line(shortLine1);
+            if (shortLine2.GetLength() < shortLine.GetLength())
                 shortLine = new Line(shortLine2);
-            }
-			return shortLine;
+            if (shortLine3.GetLength() < shortLine.GetLength())
+                shortLine = new Line(shortLine3);
+            if (shortLine4.GetLength() < shortLine.GetLength())
+                shortLine = new Line(shortLine4);
+            return shortLine;
         }
 
         internal static Line? GetShortestLine(Line line, Contour contour) =>

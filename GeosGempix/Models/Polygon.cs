@@ -57,7 +57,7 @@ public class Polygon : IGeometryPrimitive
         var mainContour = new Contour(_points); 
         contourSquare = mainContour.GetSquare();
 
-        for (int i = 0; i <= _holes.Count - 1; i++)
+        for (int i = 0; i < _holes.Count; i++)
             contourSquare -= _holes[i].GetSquare();
 
         return contourSquare;
@@ -66,7 +66,7 @@ public class Polygon : IGeometryPrimitive
     public double GetPerimeter()
     {
         double perimeter = 0;
-        for (int i = 0; i <= _points.Count - 1; i++)
+        for (int i = 0; i < _points.Count - 1; i++)
         {
             perimeter += PointDistanceCalculator.GetDistance(_points[i], _points[i + 1]);
         }

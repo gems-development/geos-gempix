@@ -3,6 +3,7 @@ using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using GeosGempix.MultiModels;
+using GeosGempix.Visitors;
 
 namespace GeosGempix.GeometryPrimitiveInsiders
 {
@@ -16,19 +17,85 @@ namespace GeosGempix.GeometryPrimitiveInsiders
 
         internal static bool IsInside(Contour contour, Point point)
         {
+            return IsStrictlyInside(contour, point);
+        }
+
+        internal static (double a, double b, double c) GetEquationOfBisector((double a1, double b1, double c1) lineEq1, 
+            (double a2, double b2, double c2) lineEq2, 
+            Point first, 
+            Point last)
+        {
+            double a1 = lineEq1.a1;
+            double b1 = lineEq1.b1;
+            double c1 = lineEq1.c1;
+            double a2 = lineEq2.a2;
+            double b2 = lineEq2.b2;
+            double c2 = lineEq2.c2;
+            double denum1 = Math.Sqrt(a1 * a1 + b1 * b1);
+            double denum2 = Math.Sqrt(a2 * a2 + b2 * b2);
+            // одна биссектриса для внешнего угла, другая для внутреннего
+            // внешний угол = дополняющий до 180
+            double[] bis1 = {
+                a1 * denum2 - a2 * denum1,
+                b1 * denum2 - b2 * denum1,
+                c1 * denum2 - c2 * denum1 };
+            double[] bis2 = {
+                a1 * denum2 + a2 * denum1,
+                b1 * denum2 + b2 * denum1,
+                c1 * denum2 + c2 * denum1 };
+            // если подставить координаты точек в уравнения,
+            // то если результаты одного знака, то это бис-са внешнего угла, иначе - внутреннего
+            double res1 = bis1[0] * first.X + bis1[1] * first.Y + bis1[2];
+            double res2 = bis1[0] * last.X + bis1[1] * last.Y + bis1[2];
+            if (res1 > 0 && res2 > 0 || res1 < 0 && res2 < 0)
+                return (bis2[0], bis2[1], bis2[2]);
+            return (bis1[0], bis1[1], bis1[2]);
+        }
+        internal static bool IsInside(Contour contour, Line line)
+        {
+             return IsStrictlyInside(contour, line);
+        }
+
+        internal static bool IsInside(Contour contour, Polygon polygon)
+        {
+            return IsStrictlyInside(contour, polygon);
+        }
+
+        internal static bool IsInside(Contour contour, MultiPoint multiPoint)
+        {
+            return IsStrictlyInside(contour, multiPoint);
+        }
+
+        internal static bool IsInside(Contour contour, MultiLine multiLine)
+        {
+            return IsStrictlyInside(contour, multiLine);
+        }
+
+        internal static bool IsInside(Contour contour, MultiPolygon multiPolygon)
+        {
+            return IsStrictlyInside(contour, multiPolygon);
+        }
+
+        internal static bool IsInside(Contour contour1, Contour contour2)
+        {
+            return IsStrictlyInside(contour1, contour2);
+        }
+
+        internal static bool IsStrictlyInside(Contour contour, Point point)
+        {
             Line? closestLine = null;
             double distance = double.MaxValue;
-            double curDistance;
             // нашли самую близкую сторону
             foreach (Line line in contour.GetLines())
             {
-                curDistance = LineDistanceCalculator.GetDistance(line, point);
+                double curDistance = LineDistanceCalculator.GetDistance(line, point);
                 if (distance > curDistance)
                 {
                     distance = curDistance;
                     closestLine = line;
                 }
             }
+            // если расстояние до одной из сторон = 0, значит, точка лежит на стороне, а не внутри
             if (distance.Equals(0))
                 return false;
             Point vertex1 = closestLine!.Point1;
@@ -99,81 +166,75 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             // косинус не может быть 0
             return cos < 0;
         }
-
-        internal static (double a, double b, double c) GetEquationOfBisector((double a1, double b1, double c1) lineEq1, 
-            (double a2, double b2, double c2) lineEq2, 
-            Point first, 
-            Point last)
+        internal static bool IsStrictlyInside(Contour contour, Line line, bool intersectBordersCheckRequired = true)
         {
-            double a1 = lineEq1.a1;
-            double b1 = lineEq1.b1;
-            double c1 = lineEq1.c1;
-            double a2 = lineEq2.a2;
-            double b2 = lineEq2.b2;
-            double c2 = lineEq2.c2;
-            double denum1 = Math.Sqrt(a1 * a1 + b1 * b1);
-            double denum2 = Math.Sqrt(a2 * a2 + b2 * b2);
-            // одна биссектриса для внешнего угла, другая для внутреннего
-            // внешний угол = дополняющий до 180
-            double[] bis1 = {
-                a1 * denum2 - a2 * denum1,
-                b1 * denum2 - b2 * denum1,
-                c1 * denum2 - c2 * denum1 };
-            double[] bis2 = {
-                a1 * denum2 + a2 * denum1,
-                b1 * denum2 + b2 * denum1,
-                c1 * denum2 + c2 * denum1 };
-            // если подставить координаты точек в уравнения,
-            // то если результаты одного знака, то это бис-са внешнего угла, иначе - внутреннего
-            double res1 = bis1[0] * first.X + bis1[1] * first.Y + bis1[2];
-            double res2 = bis1[0] * last.X + bis1[1] * last.Y + bis1[2];
-            if (res1 > 0 && res2 > 0 || res1 < 0 && res2 < 0)
-                return (bis2[0], bis2[1], bis2[2]);
-            return (bis1[0], bis1[1], bis1[2]);
+            return IsStrictlyInside(contour, line.Point1)
+                && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour, line)));
         }
-        internal static bool IsInside(Contour contour, Line line1)
+        internal static bool IsStrictlyInside(Contour contour, Polygon polygon, bool intersectBordersCheckRequired = true)
         {
-            if (IsInside(contour, line1.Point1) && !ContourIntersector.Intersects(contour, line1))
-                return true;
-            return false;
+            bool doesIntersectBorders = false;
+            if (intersectBordersCheckRequired)
+                doesIntersectBorders = PolygonIntersector.IntersectsBorders(polygon, contour);
+            return !doesIntersectBorders && IsStrictlyInside(contour, polygon.GetPoints()[0]);
         }
-
-        internal static bool IsInside(Contour contour, Polygon polygon)
-        {
-            if (IsInside(contour, polygon.GetPoints()[0]) && !PolygonIntersector.Intersects(polygon, contour))
-                return true;
-            return false;
-        }
-
-        internal static bool IsInside(Contour contour, MultiPoint multiPoint)
+        internal static bool IsStrictlyInside(Contour contour, MultiPoint multiPoint)
         {
             foreach (Point point in multiPoint.GetPoints())
-                if (!IsInside(contour, point))
+                if (!IsStrictlyInside(contour, point))
                     return false;
             return true;
         }
-
-        internal static bool IsInside(Contour contour, MultiLine multiLine)
+        internal static bool IsStrictlyInside(Contour contour, MultiLine multiLine)
         {
             foreach (Line line in multiLine.GetLines())
-                if (!IsInside(contour, line))
+                if (!IsStrictlyInside(contour, line))
                     return false;
             return true;
         }
-
-        internal static bool IsInside(Contour contour, MultiPolygon multiPolygon)
+        internal static bool IsStrictlyInside(Contour contour, MultiPolygon multiPolygon)
         {
             foreach (Polygon polygon in multiPolygon.GetPolygons())
-                if (!IsInside(contour, polygon))
+                if (!IsStrictlyInside(contour, polygon))
                     return false;
             return true;
         }
-
-        internal static bool IsInside(Contour contour1, Contour contour2)
+        internal static bool IsStrictlyInside(Contour contour1, Contour contour2, bool intersectBordersCheckRequired = true)
         {
-            if (IsInside(contour1, contour2.GetPoints()[0]) && !ContourIntersector.Intersects(contour1, contour2))
-                return true;
-            return false;
+            bool doesIntersectBorders = false;
+            if (intersectBordersCheckRequired)
+                doesIntersectBorders = ContourIntersector.IntersectsBorders(contour1, contour2);
+            return !doesIntersectBorders && IsStrictlyInside(contour1, contour2.GetPoints()[0]);
+        }
+        // в методах IsInsideWithTouching будут использоваться более сложные вещи.
+        // Пока что напиши throw new NotImplementedException()
+        internal static bool IsInsideWithTouching(Contour contour, Point point)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour, Line line)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour, Polygon polygone)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiPoint multiPoint)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiLine multiLine)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour, MultiPolygon multiPolygon)
+        {
+            throw new NotImplementedException();
+        }
+        internal static bool IsInsideWithTouching(Contour contour1, Contour contour2)
+        {
+            throw new NotImplementedException();
         }
 
         public bool GetResult() =>

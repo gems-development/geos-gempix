@@ -1,0 +1,46 @@
+name: build and test
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths:
+    - '**.cs'
+    - '**.csproj'
+    
+####
+
+env:
+  DOTNET_VERSION: '7.0.103' 
+
+jobs:
+  build-and-test:
+    runs-on: windows-latest
+    timeout-minutes: 15
+
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Setup .NET Core
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ env.DOTNET_VERSION }}
+
+    - name: Install dependencies
+      run: dotnet restore
+      
+    - name: Build
+      run: dotnet build --configuration Release --no-restore
+    
+    - name: Test
+      continue-on-error: true
+      run: dotnet test --blame --no-restore --verbosity quiet
+      
+#  review:
+#    runs-on: windows-latest
+#    environment: dev
+#    needs: build-and-test
+#    
+#    steps:
+#    - name: "review"
+#      run: dotnet

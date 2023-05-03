@@ -71,11 +71,10 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
         Func<Line, IGeometryPrimitive, double> getDistance)
     {
         double result = Double.MaxValue;
-        double distance;
         List<Line> lines = multiLine.GetLines();
         foreach (Line line in lines)
         {
-            distance = getDistance?.Invoke(line, primitive) ?? 0;
+            double distance = getDistance?.Invoke(line, primitive) ?? 0;
             if (distance < result)
             {
                 result = distance;

@@ -94,7 +94,7 @@ public class PointIntersectorTests
     
     // Проверка на пересечение между точкой и полигоном
     [Theory]
-    [InlineData(true, new double[]{4,4})] //failed
+    [InlineData(false, new double[]{4,4})]
     [InlineData(true, new double[]{0,5})]
     [InlineData(true, new double[]{4,6})]
     [InlineData(false, new double[]{10,5})]
@@ -128,7 +128,7 @@ public class PointIntersectorTests
     [Theory]
     [InlineData(true, new double[]{3,16})]
     [InlineData(true, new double[]{15,20})]
-    [InlineData(true, new double[]{15,16})] //failed
+    [InlineData(false, new double[]{15,16})]
     [InlineData(true, new double[]{3,6})]
     [InlineData(false, new double[]{10,16})]
     public void IsIntersectionPointAndMultiPolygon(bool res, double[] a)

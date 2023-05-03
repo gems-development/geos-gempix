@@ -71,7 +71,7 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
         GetDistance(
             multiPoint,
             contour,
-            (point, primitive) => PointDistanceCalculator.GetDistance(point, (Point)primitive));
+            (point, primitive) => PointDistanceCalculator.GetDistance(point, (Contour)primitive));
 
     internal static double GetDistance(
         MultiPoint multiPoint,
@@ -79,10 +79,9 @@ public class MultiPointDistanceCalculator : IModelDistanceCalculator
         Func<Point, IGeometryPrimitive, double> getDistance)
     {
         double result = double.MaxValue;
-        double distance;
         foreach (Point point in multiPoint.GetPoints())
         {
-            distance = getDistance?.Invoke(point, primitive) ?? 0;
+            double distance = getDistance?.Invoke(point, primitive) ?? 0;
             if (distance < result)
             {
                 result = distance;

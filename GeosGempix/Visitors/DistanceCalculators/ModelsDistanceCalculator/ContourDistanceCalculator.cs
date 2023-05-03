@@ -1,7 +1,11 @@
-﻿using GeosGempix.GeometryPrimitiveInsiders;
+﻿using GeosGempix.Extensions;
+using GeosGempix.GeometryPrimitiveInsiders;
+using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
+using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
+using System.Drawing;
 
 namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
@@ -42,18 +46,14 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour, Point point)
         {
-            if (ContourInsider.IsInside(contour, point))
+            if (ContourIntersector.Intersects(contour, point))
                 return 0;
             double result = Double.MaxValue;
-            double distance = 0;
-            List<Point> points = contour.GetPoints();
-            List<Line> lines = new List<Line>();
-            for (int i = 0; i < points.Count - 1; i++)
-                lines.Add(new Line(points[i], points[i + 1]));
+            List<Line> lines = contour.GetLines();
             
             foreach (Line line in lines)
             {
-                distance = LineDistanceCalculator.GetDistance(line, point);
+                double distance = LineDistanceCalculator.GetDistance(line, point);
                 if (distance < result)
                     result = distance;
             }
@@ -64,18 +64,14 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Contour contour, Line line)
         {
-            if (ContourInsider.IsInside(contour, line))
+            if (ContourIntersector.Intersects(contour, line))
                 return 0;
             double result = double.MaxValue;
-            double distance = 0;
-            List<Point> points = contour.GetPoints();
-            List<Line> lines = new List<Line>();
-            for (int i = 0; i < points.Count - 1; i++)
-                lines.Add(new Line(points[i], points[i + 1]));
+            List<Line> lines = contour.GetLines();
             
             foreach (Line line1 in lines)
             {
-                distance = LineDistanceCalculator.GetDistance(line1, line);
+                double distance = line1.GetShortestLine(line).GetLength();
                 if (distance < result)
                     result = distance;
             }
@@ -85,18 +81,14 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistanceWithSquares(Contour contour, Line line)
         {
-            if (ContourInsider.IsInside(contour, line))
+            if (ContourIntersector.Intersects(contour, line))
                 return 0;
             double result = double.MaxValue;
-            double distance = 0;
-            List<Point> points = contour.GetPoints();
-            List<Line> lines = new List<Line>();
-            for (int i = 0; i < points.Count - 1; i++)
-                lines.Add(new Line(points[i], points[i + 1]));
+            List<Line> lines = contour.GetLines();
             
             foreach (Line line1 in lines)
             {
-                distance = LineDistanceCalculator.GetDistanceWithSquaresOfDistances(line1, line);
+                double distance = LineDistanceCalculator.GetDistance(line1, line);
                 if (distance < result)
                     result = distance;
             }
@@ -108,11 +100,9 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             double result = double.MaxValue;
             double distance;
-            // проверка если полигон ВНУТРИ полигона... какой внутри какого?)))
-            List<Point> points = contour2.GetPoints();
-            List<Line> lines = new List<Line>();
-            for (int i = 0; i < points.Count - 1; i++)
-                lines.Add(new Line(points[i], points[i + 1]));
+            if (ContourIntersector.Intersects(contour1, contour2))
+                return 0;
+            List<Line> lines = contour2.GetLines();
             
             foreach (Line line in lines)
             {

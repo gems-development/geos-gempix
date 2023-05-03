@@ -23,6 +23,7 @@ namespace GeosGempix.Tests.ProductivityTest
             points.Add(point1);
             points.Add(point2);
             points.Add(point3);
+            points.Add(point1);
             Contour contour = new Contour(points);
             //Act.
             sw1.Start();
