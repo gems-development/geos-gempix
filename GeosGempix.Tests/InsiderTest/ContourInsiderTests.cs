@@ -1,5 +1,6 @@
 ﻿using GeosGempix.Models;
 using GeosGempix.Extensions;
+using GeosGempix.GeometryPrimitiveInsiders;
 using GeosGempix.MultiModels;
 
 namespace GeosGempix.Tests.InsiderTest
@@ -28,6 +29,28 @@ namespace GeosGempix.Tests.InsiderTest
             //Assert.
             Assert.True(t1);
         }
+        
+        public static IEnumerable<object[]> Data =>
+	        new List<object[]>
+	        {     
+		        new object[] { new Point(0.00000002,0) },
+		        new object[] { new Point(4.99999998,0) }
+	        };
+
+        [Theory]
+        [MemberData(nameof(Data))]
+        public static void IsPointInsideContour_Temp(Point point)
+        {
+	        //Arrange.
+	        var contour = TestHelper.CreateContour(
+		        new Point(0, 5), new Point(0, 10),
+		        new Point(3, 8), new Point(5, 10),
+		        new Point(5, 5), new Point(0, 5));
+	        //Act.
+	        var f1 = contour.IsInside(point);
+	        //Assert.
+	        Assert.False(f1);
+        }
 
         [Theory]
         [InlineData(0,3)]
@@ -53,6 +76,28 @@ namespace GeosGempix.Tests.InsiderTest
             Boolean t1 = tests._contour.IsInside(lineTrue);
             //Assert.
             Assert.True(t1);
+        }
+        
+        [Theory]
+        [InlineData(false, new double[]{0,0}, new double[]{3,2})]
+        [InlineData(false, new double[]{0,2}, new double[]{6,2})]
+        [InlineData(false, new double[]{1,3}, new double[]{6,3})]
+        [InlineData(false, new double[]{1,4}, new double[]{5,4})]
+        public static void IsLineInsideContourInternal(bool res, double[] a, double[] b)
+        {
+	        //Arrange.
+	        var line = new Line(new Point(a[0], a[1]), new Point(b[0], b[1]));
+	        
+	        var contour = TestHelper.CreateContour(
+		        new Point(0, 0),
+		        new Point(0, 6),
+		        new Point(3, 3),
+		        new Point(6, 6),
+		        new Point(6, 0),
+		        new Point(0, 0));
+	        
+	        //Act + Assert.
+	        Assert.Equal(res, contour.IsInside(line));
         }
 
         [Theory]

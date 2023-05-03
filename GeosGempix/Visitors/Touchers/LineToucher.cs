@@ -22,7 +22,7 @@ namespace GeosGempix.GeometryPrimitiveTouchers
 
         internal static bool IsTouching(Line line1, Line line2)
         {
-            return IsTouching(line1, line2.Point1) && IsTouching(line1, line2.Point2);
+            return IsTouching(line1, line2.Point1) || IsTouching(line1, line2.Point2);
         }
         public bool GetResult()
         {

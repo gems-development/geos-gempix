@@ -1,4 +1,5 @@
-﻿using GeosGempix.GeometryPrimitiveIntersectors;
+﻿using System.Collections;
+using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
@@ -84,11 +85,11 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         internal static bool IsStrictlyInside(Contour contour, Point point)
         {
             Line? closestLine = null;
-            double distance = double.MaxValue;
+            decimal distance = decimal.MaxValue;
             // нашли самую близкую сторону
             foreach (Line line in contour.GetLines())
             {
-                double curDistance = LineDistanceCalculator.GetDistance(line, point);
+                decimal curDistance = LineDistanceCalculator.GetSquareDistanceDecimal(line, point);
                 if (distance > curDistance)
                 {
                     distance = curDistance;
@@ -170,6 +171,67 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             return IsStrictlyInside(contour, line.Point1)
                 && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour, line)));
+            return false;
+        }
+
+        internal static bool IsInsideInternal(Contour contour, Line line)
+        {
+            if (IsInside(contour, line))
+                return true;
+            
+            var pointsOfIntersection = new List<Point>();
+            var equation = line.GetEquationOfLine();
+            
+            foreach (var line0 in contour.GetLines())
+                pointsOfIntersection.Add(LineIntersector.GetPointOfIntersection(equation, line0.GetEquationOfLine()));
+
+            if (pointsOfIntersection.Count > 2)
+                return false;
+
+            foreach (var point0 in pointsOfIntersection)
+            {
+                if (Math.Abs(point0.X - line.Point1.X) > double.Epsilon &&
+                    Math.Abs(point0.Y - line.Point1.Y) > double.Epsilon)
+                {
+                    foreach (var point1 in pointsOfIntersection)
+                    {
+                        if (Math.Abs(point1.X - line.Point2.X) > double.Epsilon &&
+                            Math.Abs(point1.Y - line.Point2.Y) > double.Epsilon)
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+
+            var topsWithIntersection = new List<Point>();
+            foreach (var point0 in contour.GetPoints())
+            {
+                foreach (var point1 in pointsOfIntersection)
+                {
+                    if (Math.Abs(point0.X - point1.X) > double.Epsilon &&
+                        Math.Abs(point0.Y - point1.Y) > double.Epsilon)
+                    {
+                        topsWithIntersection.Add(point1);
+                    }
+                }
+            }
+
+            foreach (var point2 in topsWithIntersection)
+            {
+                if (Math.Abs(point2.X - line.Point1.X) > double.Epsilon &&
+                    Math.Abs(point2.Y - line.Point1.Y) > double.Epsilon)
+                {
+                    return IsInside(contour, line.Point2);
+                }
+                if (Math.Abs(point2.X - line.Point2.X) > double.Epsilon &&
+                    Math.Abs(point2.Y - line.Point2.Y) > double.Epsilon)
+                {
+                    return IsInside(contour, line.Point1);
+                }
+            }
+
+            return false;
         }
         internal static bool IsStrictlyInside(Contour contour, Polygon polygon, bool intersectBordersCheckRequired = true)
         {
