@@ -86,6 +86,31 @@ namespace GeosGempix.Models
             }
             return lines;
         }
+        public Contour GetOuterRectengle()
+        {
+
+            double maxX = double.MinValue;
+            double maxY = double.MinValue;
+            double minX = double.MaxValue;
+            double minY = double.MaxValue;
+            foreach (Point point in GetPoints())
+            {
+                if(maxX <= point.X)
+                    maxX = point.X;
+                if (maxY <= point.Y)
+                    maxY = point.Y;
+                if (minX >= point.X)
+                    minX = point.X;
+                if (minY >= point.Y)
+                    minY = point.Y;
+            }
+            List<Point> points = new List<Point>();
+            points.Add(new Point(minX, minY));
+            points.Add(new Point(minX, maxY));
+            points.Add(new Point(maxX, maxY));
+            points.Add(new Point(maxX, minY));
+            return new Contour(points);
+        }
 
         public void Accept(IGeometryPrimitiveVisitor v)
         {

@@ -55,14 +55,20 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
                     return true;
             return false;
         }
-        internal static bool IntersectsBorders(Contour contour1, Contour contour2)
+        internal static bool IntersectsBorders(Contour contour1, Contour contour2, bool intersectOuterRectenglesCheckRequired = true)
         {
+            if (intersectOuterRectenglesCheckRequired)
+                if (!IsOuterRectengleIntersects(contour1, contour2))
+                    return false;
             foreach (Line line in contour1.GetLines())
                 if (IntersectsBorders(contour2, line))
                     return true;
             return false;
         }
-
+        internal static bool IsOuterRectengleIntersects(Contour contour1, Contour contour2)
+        {
+            return IntersectsBorders(contour1.GetOuterRectengle(), contour2.GetOuterRectengle(), false);
+        }
         public bool GetResult() =>
             _result;
 
