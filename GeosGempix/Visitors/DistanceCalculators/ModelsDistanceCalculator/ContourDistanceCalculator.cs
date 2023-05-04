@@ -85,9 +85,9 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             double result = double.MaxValue;
             List<Line> lines = contour.GetLines();
             
-            foreach (Line line1 in lines)
+            foreach (Line contourLine in lines)
             {
-                double distance = line1.GetShortestLine(line).GetLength();
+                double distance = LineDistanceCalculator.GetDistance(line, contourLine);
                 if (distance < result)
                     result = distance;
             }
@@ -119,9 +119,9 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             var result = double.MaxValue;
             var lines = contour.GetLines();
             
-            foreach (var line1 in lines)
+            foreach (var contourLine in lines)
             {
-                var distance = line1.GetShortestLine(line).GetLength();
+                var distance = LineDistanceCalculator.GetDistance(line, contourLine);
                 if (distance < result)
                     result = distance;
             }
