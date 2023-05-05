@@ -36,11 +36,8 @@ namespace GeosGempix.Tests.DistanceTest
 			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
 			var contour = TestHelper.CreateContour(
-				new Point(0, 0),
-				new Point(0, 4),
-				new Point(4, 4),
-				new Point(4, 0),
-				new Point(0, 0));
+				new Point(0, 0), new Point(0, 4), new Point(4, 4),
+				new Point(4, 0), new Point(0, 0));
 
 			//Act. + Assert.
 			double distance = line.GetDistance(contour);
@@ -101,22 +98,15 @@ namespace GeosGempix.Tests.DistanceTest
 			//Arrange.
 			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
 			
-			var contour = TestHelper.CreateContour(
-				new Point(2, 2),
-				new Point(2, 5),
-				new Point(5, 5),
-				new Point(5, 2),
-				new Point(2, 2));
-			
-			var contours = new List<Contour>{ contour };
-			
 			var polygon = TestHelper.CreatePolygon(
-				contours,
-				new Point(0, 0),
-				new Point(0, 7),
-				new Point(7, 7),
-				new Point(7, 0),
-				new Point(0, 0));
+				new List<Contour>
+				{
+					TestHelper.CreateContour(
+						new Point(2, 2), new Point(2, 5), new Point(5, 5),
+						new Point(5, 2), new Point(2, 2))
+				},
+				new Point(0, 0), new Point(0, 7), new Point(7, 7),
+				new Point(7, 0), new Point(0, 0));
 
 			//Act. + Assert.
 			Assert.Equal(res,line.GetDistance(polygon));
@@ -127,70 +117,46 @@ namespace GeosGempix.Tests.DistanceTest
 		[InlineData(new double[]{6, 6, 8, 8}, 0)]
 		[InlineData(new double[]{4, 13, 8, 13}, 0)]
 		[InlineData(new double[]{15, 10, 15, 15}, 0)] 
-		[InlineData(new double[]{3, 12, 4, 12}, 1)] //failed
-		[InlineData(new double[]{20, 19, 21, 20}, 5)] //failed
-		[InlineData(new double[]{17, 10, 21, 13}, 1)] //failed
-		[InlineData(new double[]{10, 3, 14, 3}, 3)] //failed
+		[InlineData(new double[]{3, 12, 4, 12}, 1)]
+		[InlineData(new double[]{20, 19, 21, 20}, 5)]
+		[InlineData(new double[]{17, 10, 21, 13}, 1)]
+		[InlineData(new double[]{10, 3, 14, 3}, 3)]
 		public void GetDistanceBetweenLineAndMultiPolygon_Success(double[] a, double res)
 		{
 			//Arrange.
 			var line = TestHelper.CreateLine(a[0], a[1], a[2], a[3]);
-			
-			//полигон 1
-			var contour1 = TestHelper.CreateContour(
-				new Point(2, 2),
-				new Point(2, 5),
-				new Point(5, 5),
-				new Point(5, 2),
-				new Point(2, 2));
-			
-			var contours1 = new List<Contour>{ contour1 };
-			
-			var polygon1 = TestHelper.CreatePolygon(
-				contours1,
-				new Point(0, 0),
-				new Point(0, 7),
-				new Point(7, 7),
-				new Point(7, 0),
-				new Point(0, 0));
-			
-			//полигон 2
-			var contour2 = TestHelper.CreateContour(
-				new Point(2, 11),
-				new Point(2, 14),
-				new Point(5, 14),
-				new Point(5, 11),
-				new Point(2, 11));
-			
-			var contours2 = new List<Contour>{ contour2 };
-			
-			var polygon2 = TestHelper.CreatePolygon(
-				contours2,
-				new Point(0, 9),
-				new Point(0, 16),
-				new Point(7, 16),
-				new Point(7, 9),
-				new Point(0, 9));
-			
-			//полигон 3
-			var contour3 = TestHelper.CreateContour(
-				new Point(11, 11),
-				new Point(11, 14),
-				new Point(14, 14),
-				new Point(14, 11),
-				new Point(11, 11));
-			
-			var contours3 = new List<Contour>{ contour3 };
-			
-			var polygon3 = TestHelper.CreatePolygon(
-				contours3,
-				new Point(9, 9),
-				new Point(9, 16),
-				new Point(16, 16),
-				new Point(16, 9),
-				new Point(9, 9));
-			
-			var multiPolygon = TestHelper.CreateMultiPolygon(polygon1, polygon2, polygon3);
+
+			var multiPolygon = TestHelper.CreateMultiPolygon(
+				TestHelper.CreatePolygon(
+					new List<Contour>
+					{
+						TestHelper.CreateContour(
+							new Point(2, 2), new Point(2, 5), new Point(5, 5),
+							new Point(5, 2), new Point(2, 2))
+					},
+					new Point(0, 0), new Point(0, 7), new Point(7, 7),
+					new Point(7, 0), new Point(0, 0)),
+				
+				TestHelper.CreatePolygon(
+					new List<Contour>
+					{
+						TestHelper.CreateContour(
+							new Point(2, 11), new Point(2, 14), new Point(5, 14),
+							new Point(5, 11), new Point(2, 11))
+					},
+					new Point(0, 9), new Point(0, 16), new Point(7, 16),
+					new Point(7, 9), new Point(0, 9)),
+				
+				TestHelper.CreatePolygon(
+					new List<Contour>
+					{
+						TestHelper.CreateContour(
+							new Point(11, 11), new Point(11, 14), new Point(14, 14),
+							new Point(14, 11), new Point(11, 11))
+					},
+					new Point(9, 9), new Point(9, 16), new Point(16, 16),
+					new Point(16, 9), new Point(9, 9))
+			);
 
 			//Act. + Assert.
 			Assert.Equal(res,line.GetDistance(multiPolygon));

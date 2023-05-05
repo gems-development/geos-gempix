@@ -1,9 +1,7 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 using GeosGempix.GeometryPrimitiveInsiders;
-
-
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {
@@ -48,10 +46,10 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
             return false;
         }
-        internal static bool IntersectsBorders(Contour contour, Line line1)
+        internal static bool IntersectsBorders(Contour contour, Line line)
         {
-            foreach (Line line in contour.GetLines())
-                if (LineIntersector.Intersects(line, line1))
+            foreach (Line contourLine in contour.GetLines())
+                if (LineIntersector.Intersects(line, contourLine))
                     return true;
             return false;
         }
