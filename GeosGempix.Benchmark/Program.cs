@@ -1,6 +1,4 @@
-﻿using System;
-using System.Security.Cryptography;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 using GeosGempix;
 using GeosGempix.Models;
@@ -8,7 +6,7 @@ using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 
 namespace MyBenchmarks
 {
-    public class LineDistanceCalculatorBench
+	public class LineDistanceCalculatorBench
     {
         public LineDistanceCalculatorBench()
         {

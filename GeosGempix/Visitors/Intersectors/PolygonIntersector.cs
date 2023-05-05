@@ -1,12 +1,11 @@
-﻿using GeosGempix.Extensions;
-using GeosGempix.GeometryPrimitiveInsiders;
+﻿using GeosGempix.GeometryPrimitiveInsiders;
 using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {
-    public class PolygonIntersector : IModelsIntersector
+	public class PolygonIntersector : IModelsIntersector
     {
         private bool _result;
         private Polygon _polygon;

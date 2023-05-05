@@ -2,11 +2,10 @@
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 using GeosGempix.Errors;
-using System.Drawing;
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {
-    public enum LineEquationsStatus
+	public enum LineEquationsStatus
     {
         Intersects,
         Parallel,

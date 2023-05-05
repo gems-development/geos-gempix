@@ -9,14 +9,8 @@ namespace GeosGempix.Tests.ValidatorTests
         public static void ContourTest1_Success()
         {
 			//Arrange. + Act.
-			List<Point> points = new List<Point>
-			{
-				new Point(0, 0),
-				new Point(0, 2),
-				new Point(2, 2),
-				new Point(2, 0)
-			};
-			Contour contour = new Contour(points);
+			Contour contour = TestHelper.CreateContour(new Point(0, 0), new Point(0, 2), new Point(2, 2), 
+                                                       new Point(2, 0), new Point(0, 0));
             var validator = new Validator(contour);
             //Assert.
             Assert.True(validator.Validate());
@@ -26,14 +20,8 @@ namespace GeosGempix.Tests.ValidatorTests
         public static void ContourTest1_Failed()
         {
 			//Arrange. + Act.
-			List<Point> points = new List<Point>
-			{
-				new Point(0, 0),
-				new Point(0, 2),
-				new Point(2, 0),
-				new Point(2, 2)
-			};
-			Contour contour = new Contour(points);
+			Contour contour = TestHelper.CreateContour(new Point(0, 0), new Point(0 ,2), new Point(2, 0), 
+                                                       new Point(2, 2), new Point(0, 0));
             var validator = new Validator(contour);
             //Assert.
             Assert.False(validator.Validate());
@@ -44,15 +32,8 @@ namespace GeosGempix.Tests.ValidatorTests
         public static void ContourTest2_Success()
         {
 			//Arrange. + Act.
-			List<Point> points = new List<Point>
-			{
-				new Point(0, 0),
-				new Point(0, 2),
-				new Point(2, 2),
-				new Point(2, 1),
-				new Point(1, 0)
-			};
-			Contour contour = new Contour(points);
+			Contour contour = TestHelper.CreateContour(new Point(0, 0), new Point(0, 2), new Point(2, 2), 
+                                                       new Point(2, 1), new Point(1, 0), new Point(0, 0));
             var validator = new Validator(contour);
             //Assert.
             Assert.True(validator.Validate());
@@ -63,15 +44,8 @@ namespace GeosGempix.Tests.ValidatorTests
         public static void ContourTest2_Failed()
         {
 			//Arrange. + Act.
-			List<Point> points = new List<Point>
-			{
-				new Point(0, 0),
-				new Point(6, 2),
-				new Point(4, 0),
-				new Point(-6, 3),
-				new Point(6, 3)
-			};
-			Contour contour = new Contour(points);
+			Contour contour = TestHelper.CreateContour(new Point(0, 0), new Point(6, 2), new Point(4, 0), 
+                                                       new Point(-6, 3), new Point(6, 3), new Point(0, 0));
             var validator = new Validator(contour);
             //Assert.
             Assert.False(validator.Validate());
