@@ -77,6 +77,12 @@ public class MultiPolygonDistanceCalculator : IModelDistanceCalculator
             multiPolygon,
             contour,
             (polygon, primitive) => PolygonDistanceCalculator.GetDistance(polygon, (Contour)primitive));
+    
+    internal static double GetDistanceInside(MultiPolygon multiPolygon, Contour contour) =>
+        GetDistance(
+            multiPolygon,
+            contour,
+            (polygon, primitive) => PolygonDistanceCalculator.GetDistanceInside(polygon, (Contour)primitive));
 
     internal static double GetDistance(
         MultiPolygon multiPolygon,

@@ -64,4 +64,7 @@ public class PointDistanceCalculator : IModelDistanceCalculator
 
     internal static double GetDistance(Point point, Contour contour) =>
         ContourDistanceCalculator.GetDistance(contour, point);
+    
+    internal static double GetDistanceInside(Point point, Contour contour) =>
+        ContourDistanceCalculator.GetDistanceInside(contour, point);
 }

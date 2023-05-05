@@ -153,7 +153,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             
             foreach (Line line in lines)
             {
-                var distance = GetDistance(contour1, line);
+                var distance = GetDistanceInside(contour1, line);
                 if (distance < result)
                     result = distance;
             }
@@ -165,28 +165,28 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
         {
             if (!contour.IsInside(polygon))
                 return 0;
-            return PolygonDistanceCalculator.GetDistance(polygon, contour);
+            return PolygonDistanceCalculator.GetDistanceInside(polygon, contour);
         }
         
         internal static double GetDistanceInside(Contour contour, MultiPoint multiPoint)
         {
             if (!contour.IsInside(multiPoint))
                 return 0;
-            return MultiPointDistanceCalculator.GetDistance(multiPoint, contour);
+            return MultiPointDistanceCalculator.GetDistanceInside(multiPoint, contour);
         }
         
         internal static double GetDistanceInside(Contour contour, MultiLine multiLine)
         {
             if (!contour.IsInside(multiLine))
                 return 0;
-            return MultiLineDistanceCalculator.GetDistance(multiLine, contour);
+            return MultiLineDistanceCalculator.GetDistanceInside(multiLine, contour);
         }
         
         internal static double GetDistanceInside(Contour contour, MultiPolygon multiPolygon)
         {
             if (!contour.IsInside(multiPolygon))
                 return 0;
-            return MultiPolygonDistanceCalculator.GetDistance(multiPolygon, contour);
+            return MultiPolygonDistanceCalculator.GetDistanceInside(multiPolygon, contour);
         }
 
         internal static double GetDistance(Contour contour, MultiLine multiLine) =>
