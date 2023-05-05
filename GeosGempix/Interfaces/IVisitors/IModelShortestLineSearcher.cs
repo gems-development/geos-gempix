@@ -4,6 +4,6 @@ namespace GeosGempix.Interfaces.IVisitors
 {
     public interface IModelShortestLineSearcher : IGeometryPrimitiveVisitor
     {
-        public Line GetResult();
+        public Line? GetResult();
     }
 }
