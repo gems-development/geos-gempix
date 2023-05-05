@@ -29,13 +29,6 @@ public static class TestHelper
 		pointList.AddRange(points);
 		return new Polygon(pointList, contours);
 	}
-	
-	public static Polygon CreatePolygon(params Point[] points)
-	{
-		var pointList = new List<Point>();
-		pointList.AddRange(points);
-		return new Polygon(pointList);
-	}
 
 	public static MultiPoint CreateMultiPoint(params Point[] points)
 	{
