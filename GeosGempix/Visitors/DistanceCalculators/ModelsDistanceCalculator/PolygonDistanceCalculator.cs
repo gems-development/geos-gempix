@@ -1,5 +1,4 @@
 using GeosGempix;
-using GeosGempix.GeometryPrimitiveInsiders;
 using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;

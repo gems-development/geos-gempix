@@ -4,11 +4,10 @@ using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using GeosGempix.MultiModels;
-using GeosGempix.Visitors;
 
 namespace GeosGempix.GeometryPrimitiveInsiders
 {
-    public class ContourInsider : IModelInsider
+	public class ContourInsider : IModelInsider
     {
         private bool _result;
         private Contour _contour;

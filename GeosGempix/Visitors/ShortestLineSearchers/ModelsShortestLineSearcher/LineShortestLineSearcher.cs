@@ -3,11 +3,10 @@ using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
-using GeosGempix.Visitors.Intersectors;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 {
-    public class LineShortestLineSearcher : IModelShortestLineSearcher
+	public class LineShortestLineSearcher : IModelShortestLineSearcher
     {
         private readonly Line _line;
         private Line _result;

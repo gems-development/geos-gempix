@@ -1,11 +1,10 @@
-﻿using GeosGempix.Extensions;
-using GeosGempix.Models;
+﻿using GeosGempix.Models;
 using GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator;
 using System.Diagnostics;
 
 namespace GeosGempix.Tests.ProductivityTest
 {
-    public class GetDistanceTests
+	public class GetDistanceTests
     {
         [Fact]
         public static void IsPointInsideContour()

@@ -1,5 +1,4 @@
 ﻿using GeosGempix;
-using System.Diagnostics.CodeAnalysis;
 
 public class MultiPoint : IGeometryPrimitive
 {

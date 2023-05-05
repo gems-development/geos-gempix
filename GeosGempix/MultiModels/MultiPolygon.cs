@@ -1,6 +1,4 @@
-﻿using System.Diagnostics.CodeAnalysis;
-
-public class MultiPolygon : IGeometryPrimitive
+﻿public class MultiPolygon : IGeometryPrimitive
 {
     private List<Polygon> _polygons;
 
