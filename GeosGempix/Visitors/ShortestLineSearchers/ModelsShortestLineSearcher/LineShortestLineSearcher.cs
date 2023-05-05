@@ -9,7 +9,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
 	public class LineShortestLineSearcher : IModelShortestLineSearcher
     {
         private readonly Line _line;
-        private Line _result;
+        private Line? _result;
 
         public LineShortestLineSearcher(Point point1, Point point2) =>
             _line = new Line(point1, point2);
@@ -17,7 +17,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         public LineShortestLineSearcher(Line line) =>
             _line = line;
 
-        public Line GetResult() =>
+        public Line? GetResult() =>
             _result;
 
         public void Visit(Point point) =>
@@ -82,10 +82,10 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
         internal static Line? GetShortestLine(Line line, Polygon polygon) =>
             PolygonShortestLineSearcher.GetShortestLine(polygon, line);
 
-        internal static Line GetShortestLine(Line line, MultiLine multiLine) =>
+        internal static Line? GetShortestLine(Line line, MultiLine multiLine) =>
             MultiLineShortestLineSearcher.GetShortestLine(multiLine, line);
 
-        internal static Line GetShortestLine(Line line, MultiPoint multiPoint) =>
+        internal static Line? GetShortestLine(Line line, MultiPoint multiPoint) =>
             MultiPointShortestLineSearcher.GetShortestLine(multiPoint, line);
 
         internal static Line GetShortestLine(Line line, MultiPolygon multiPolygon) =>

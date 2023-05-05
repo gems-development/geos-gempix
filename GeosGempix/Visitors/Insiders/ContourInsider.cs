@@ -150,7 +150,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 pointFromBis = pointFromBis2;
             // будем смотреть на угол между нормалью, проходящей через point,
             // и биссектрисой (вектором внешнего ее продолжения)
-            Point p = LineIntersector.GetPointOfIntersection(
+            Point? p = LineIntersector.GetPointOfIntersection(
                 equation1,
                 Line.GetEquationOfPerpendicularLine(equation1, point));
             // координаты вектора внешней части биссектрисы
@@ -170,7 +170,6 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             return IsStrictlyInside(contour, line.Point1)
                 && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour, line)));
-            return false;
         }
 
         internal static bool IsInsideInternal(Contour contour, Line line)

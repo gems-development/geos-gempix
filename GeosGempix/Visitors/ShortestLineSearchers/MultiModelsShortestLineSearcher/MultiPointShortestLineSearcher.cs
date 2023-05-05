@@ -9,14 +9,14 @@ using GeosGempix.Extensions;
 public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
 {
     private MultiPoint _multiPoint;
-    private Line _result;
+    private Line? _result;
 
     public MultiPointShortestLineSearcher(MultiPoint multiPoint)
     {
         _multiPoint = multiPoint;
     }
 
-    public Line GetResult() =>
+    public Line? GetResult() =>
         _result;
 
     public void Visit(Point point) =>
@@ -43,7 +43,7 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
     internal static Line GetShortestLine(MultiPoint multiPoint, MultiPolygon multiPolygon) =>
         MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, multiPoint);
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, MultiLine multiLine) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint, MultiLine multiLine) =>
         MultiLineShortestLineSearcher.GetShortestLine(multiLine, multiPoint);
 
     internal static Line GetShortestLine(MultiPoint multiPoint1, MultiPoint multiPoint2) =>
@@ -52,7 +52,7 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
              multiPoint2,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (MultiPoint)primitive));
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, Polygon polygon)
+    internal static Line? GetShortestLine(MultiPoint multiPoint, Polygon polygon)
     {
         if (polygon.IsInside(multiPoint))
             return null;

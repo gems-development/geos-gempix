@@ -8,7 +8,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers
 {
     public class ShortestLineSearcher : IModelShortestLineSearcher
     {
-        private readonly Line _result;
+        private readonly Line? _result;
 
         private IModelShortestLineSearcher _searcher;
 

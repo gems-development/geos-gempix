@@ -6,12 +6,12 @@ using Point = GeosGempix.Point;
 public class MultiPolygonShortestLineSearcher : IModelShortestLineSearcher
 {
     private MultiPolygon _multiPolygon;
-    private Line _result;
+    private Line? _result;
 
     public MultiPolygonShortestLineSearcher(MultiPolygon multiPolygon) =>
         _multiPolygon = multiPolygon;
 
-    public Line GetResult() =>
+    public Line? GetResult() =>
         _result;
 
     public void Visit(Point point) =>

@@ -31,7 +31,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         internal static bool Intersects(Line line1, Line line2)
         {
-            Point[] points = GetPointOfIntersection(line1, line2);
+            Point[]? points = GetPointOfIntersection(line1, line2);
             if (points == null)
                 return false;
             return true;
