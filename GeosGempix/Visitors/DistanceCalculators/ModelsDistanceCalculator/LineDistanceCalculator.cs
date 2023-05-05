@@ -2,11 +2,10 @@ using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using System.Drawing;
 
 namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
-    public class LineDistanceCalculator : IModelDistanceCalculator
+	public class LineDistanceCalculator : IModelDistanceCalculator
     {
         private Line _line;
         private double _result;

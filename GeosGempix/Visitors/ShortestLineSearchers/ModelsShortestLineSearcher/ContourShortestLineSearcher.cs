@@ -1,14 +1,7 @@
-﻿using GeosGempix.GeometryPrimitiveIntersectors;
-using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GeosGempix.Visitors.Insiders;
 using GeosGempix.Extensions;
 
 namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher

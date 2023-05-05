@@ -1,15 +1,12 @@
 ﻿using GeosGempix.Extensions;
-using GeosGempix.GeometryPrimitiveInsiders;
 using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
-using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
-using System.Drawing;
 
 namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 {
-    internal class ContourDistanceCalculator : IModelDistanceCalculator
+	internal class ContourDistanceCalculator : IModelDistanceCalculator
     {
         private Contour _contour;
         private double _result;

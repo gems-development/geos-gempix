@@ -4,7 +4,6 @@ using GeosGempix.Models;
 using GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher;
 using GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearcher;
 using GeosGempix.MultiModels;
-using GeosGempix.Visitors.Insiders;
 using GeosGempix.Extensions;
 
 

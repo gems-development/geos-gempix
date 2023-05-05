@@ -3,7 +3,7 @@ using GeosGempix.Models;
 
 namespace GeosGempix.Tests.DistanceTest
 {
-    public class PolygonDistanceCalculatorTests
+	public class PolygonDistanceCalculatorTests
     {
         // Проверка на растояние между полигоном и полигоном
         [Theory]

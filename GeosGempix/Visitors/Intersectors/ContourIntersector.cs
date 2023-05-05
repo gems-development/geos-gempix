@@ -1,9 +1,7 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 using GeosGempix.GeometryPrimitiveInsiders;
-
-
 
 namespace GeosGempix.GeometryPrimitiveIntersectors
 {

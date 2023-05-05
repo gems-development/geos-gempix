@@ -1,5 +1,4 @@
 ﻿using GeosGempix.Models;
-using System.Diagnostics.CodeAnalysis;
 using Point = GeosGempix.Point;
 
 public class Polygon : IGeometryPrimitive
@@ -7,17 +6,19 @@ public class Polygon : IGeometryPrimitive
     private List<Point> _points;
     private List<Contour> _holes;
 
+    public Contour OuterContour => new Contour(_points);
+
     public Polygon(List<Point> points)
     {
-        PointListValidate(points);
+        //PointListValidate(points);
         _points = points;
         _holes = new List<Contour>();
     }
 
     public Polygon(List<Point> points, List<Contour> holes)
     {
-        PointListValidate(points);
-        ContourListValidate(holes);
+        //PointListValidate(points);
+        //ContourListValidate(holes);
         _points = points;
         _holes = holes;
     }
@@ -108,29 +109,5 @@ public class Polygon : IGeometryPrimitive
         return obj is Polygon polygon &&
                EqualityComparer<List<Point>>.Default.Equals(_points, polygon._points) &&
                EqualityComparer<List<Contour>>.Default.Equals(_holes, polygon._holes);
-    }
-
-    private void PointListValidate(List<Point> points)
-    {
-        if (points == null)
-            throw new ArgumentNullException("points");
-        foreach (Point point in points)
-            if (point == null)
-                throw new ArgumentNullException("points", "Один из элементов списка points равен null");
-        if (points.Count == 0)
-            throw new ArgumentException("Длина списка points = 0");
-        if (!Equals(points.FirstOrDefault(), points.LastOrDefault()))
-            throw new ArgumentException("Некорректный набор точек");
-    }
-    
-    private void ContourListValidate(List<Contour> holes)
-    {
-        if (holes == null)
-            throw new ArgumentNullException("holes");
-        if (holes.Count == 0)
-            throw new ArgumentException("Длина списка holes = 0");
-        foreach (Contour hole in holes)
-            if (hole == null)
-                throw new ArgumentNullException("holes", "Один из элементов списка holes равен null");
     }
 }

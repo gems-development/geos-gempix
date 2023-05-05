@@ -16,6 +16,13 @@ public static class TestHelper
 		return new Contour(pointList);
 	}
 
+	public static Polygon CreatePolygon(params Point[] points) 
+	{
+		var pointList = new List<Point>();
+		pointList.AddRange(points);
+		return new Polygon(pointList);
+	}
+
 	public static Polygon CreatePolygon(List<Contour> contours, params Point[] points)
 	{
 		var pointList = new List<Point>();
