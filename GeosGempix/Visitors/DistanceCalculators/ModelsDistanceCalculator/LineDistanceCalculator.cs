@@ -109,5 +109,8 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
         internal static double GetDistance(Line line, Contour contour) =>
             ContourDistanceCalculator.GetDistance(contour, line);
+        
+        internal static double GetDistanceInside(Line line, Contour contour) =>
+            ContourDistanceCalculator.GetDistanceInside(contour, line);
     }
 }

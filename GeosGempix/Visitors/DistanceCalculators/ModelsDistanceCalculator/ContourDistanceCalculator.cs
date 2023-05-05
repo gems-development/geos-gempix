@@ -57,7 +57,23 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
             return result;
         }
+        
+        internal static double GetDistanceInside(Contour contour, Point point)
+        {
+            if (!contour.IsInside(point))
+                return 0;
+            var result = double.MaxValue;
+            var lines = contour.GetLines();
+            
+            foreach (var line in lines)
+            {
+                var distance = LineDistanceCalculator.GetDistance(line, point);
+                if (distance < result)
+                    result = distance;
+            }
 
+            return result;
+        }
 
         internal static double GetDistance(Contour contour, Line line)
         {
@@ -66,9 +82,9 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             double result = double.MaxValue;
             List<Line> lines = contour.GetLines();
             
-            foreach (Line line1 in lines)
+            foreach (Line contourLine in lines)
             {
-                double distance = line1.GetShortestLine(line).GetLength();
+                double distance = LineDistanceCalculator.GetDistance(line, contourLine);
                 if (distance < result)
                     result = distance;
             }
@@ -92,6 +108,23 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
 
             return Math.Sqrt(result);
         }
+        
+        internal static double GetDistanceInside(Contour contour, Line line)
+        {
+            if (!contour.IsInside(line))
+                return 0;
+            var result = double.MaxValue;
+            var lines = contour.GetLines();
+            
+            foreach (var contourLine in lines)
+            {
+                var distance = LineDistanceCalculator.GetDistance(line, contourLine);
+                if (distance < result)
+                    result = distance;
+            }
+
+            return result;
+        }
 
         internal static double GetDistance(Contour contour1, Contour contour2)
         {
@@ -109,6 +142,51 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             }
 
             return result;
+        }
+        
+        internal static double GetDistanceInside(Contour contour1, Contour contour2)
+        {
+            if (!contour1.IsInside(contour2))
+                return 0;
+            double result = double.MaxValue;
+            List<Line> lines = contour2.GetLines();
+            
+            foreach (Line line in lines)
+            {
+                var distance = GetDistanceInside(contour1, line);
+                if (distance < result)
+                    result = distance;
+            }
+
+            return result;
+        }
+
+        internal static double GetDistanceInside(Contour contour, Polygon polygon)
+        {
+            if (!contour.IsInside(polygon))
+                return 0;
+            return PolygonDistanceCalculator.GetDistanceInside(polygon, contour);
+        }
+        
+        internal static double GetDistanceInside(Contour contour, MultiPoint multiPoint)
+        {
+            if (!contour.IsInside(multiPoint))
+                return 0;
+            return MultiPointDistanceCalculator.GetDistanceInside(multiPoint, contour);
+        }
+        
+        internal static double GetDistanceInside(Contour contour, MultiLine multiLine)
+        {
+            if (!contour.IsInside(multiLine))
+                return 0;
+            return MultiLineDistanceCalculator.GetDistanceInside(multiLine, contour);
+        }
+        
+        internal static double GetDistanceInside(Contour contour, MultiPolygon multiPolygon)
+        {
+            if (!contour.IsInside(multiPolygon))
+                return 0;
+            return MultiPolygonDistanceCalculator.GetDistanceInside(multiPolygon, contour);
         }
 
         internal static double GetDistance(Contour contour, MultiLine multiLine) =>
