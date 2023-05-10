@@ -1,4 +1,5 @@
-﻿using GeosGempix.Interfaces.IVisitors;
+﻿using GeosGempix.Extensions;
+using GeosGempix.Interfaces.IVisitors;
 using GeosGempix.Models;
 using GeosGempix.MultiModels;
 
@@ -34,6 +35,13 @@ namespace GeosGempix.GeometryPrimitiveTouchers
         }
         internal static bool IsTouching(Polygon polygon1, Polygon polygon2)
         {
+            var outside = new Contour(polygon1.GetPoints());
+            foreach (var hole in polygon2.GetHoles())
+            {
+                if (ContourToucher.IsTouching(outside, hole))
+                    return true;
+            }
+            
             foreach (Line line in polygon1.GetLines())
             {
                 if (IsTouching(polygon2, line))
