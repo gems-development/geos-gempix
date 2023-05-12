@@ -40,13 +40,13 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
     public void Visit(Contour contour) =>
         _result = GetShortestLine(_multiPoint, contour);
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, MultiPolygon multiPolygon) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint, MultiPolygon multiPolygon) =>
         MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, multiPoint);
 
     internal static Line? GetShortestLine(MultiPoint multiPoint, MultiLine multiLine) =>
         MultiLineShortestLineSearcher.GetShortestLine(multiLine, multiPoint);
 
-    internal static Line GetShortestLine(MultiPoint multiPoint1, MultiPoint multiPoint2) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint1, MultiPoint multiPoint2) =>
          GetShortestLine(
              multiPoint1,
              multiPoint2,
@@ -63,25 +63,25 @@ public class MultiPointShortestLineSearcher : IModelShortestLineSearcher
     }
          
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, Line line) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint, Line line) =>
          GetShortestLine(
              multiPoint,
              line,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Line)primitive));
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, Point point1) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint, Point point1) =>
          GetShortestLine(
              multiPoint,
              point1,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Point)primitive));
 
-    internal static Line GetShortestLine(MultiPoint multiPoint, Contour contour) =>
+    internal static Line? GetShortestLine(MultiPoint multiPoint, Contour contour) =>
          GetShortestLine(
              multiPoint,
              contour,
              (point, primitive) => PointShortestLineSearcher.GetShortestLine(point, (Contour)primitive));
 
-    internal static Line GetShortestLine(
+    internal static Line? GetShortestLine(
         MultiPoint multiPoint,
         IGeometryPrimitive primitive,
         Func<Point, IGeometryPrimitive, Line> getShortestLine)

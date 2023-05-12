@@ -17,7 +17,7 @@ namespace GeosGempix.Extensions
         public static bool Intersects(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new Intersector(primitive1, primitive2).GetResult();
 
-        public static Line GetShortestLine(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
+        public static Line? GetShortestLine(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>
                 new ShortestLineSearcher(primitive1, primitive2).GetResult();
 
         public static bool IsTouching(this IGeometryPrimitive primitive1, IGeometryPrimitive primitive2) =>

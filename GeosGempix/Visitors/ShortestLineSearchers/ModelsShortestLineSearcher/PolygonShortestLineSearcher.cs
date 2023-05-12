@@ -44,7 +44,6 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
     internal static Line? GetShortestLine(Polygon polygon, Point point)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
-        Line curLine = new Line(new Point(0, 0), new Point(0, 0));
         foreach (var hole in polygon.GetHoles()){
             if (hole.Intersects(point))
                 return null;
@@ -58,7 +57,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line in lines)
         {
-            curLine = LineShortestLineSearcher.GetShortestLine(line, point);
+            var curLine = LineShortestLineSearcher.GetShortestLine(line, point);
             if (curLine.GetLength() < shortLine.GetLength())
             {
 				shortLine = new Line(curLine);
@@ -124,16 +123,16 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         return shortLine;
     }
 
-    internal static Line GetShortestLine(Polygon polygon, MultiLine multiLine) =>
+    internal static Line? GetShortestLine(Polygon polygon, MultiLine multiLine) =>
         MultiLineShortestLineSearcher.GetShortestLine(multiLine, polygon);
 
-    internal static Line GetShortestLine(Polygon polygon, MultiPoint multiPoint) =>
+    internal static Line? GetShortestLine(Polygon polygon, MultiPoint multiPoint) =>
         MultiPointShortestLineSearcher.GetShortestLine(multiPoint, polygon);
 
-    internal static Line GetShortestLine(Polygon polygon, MultiPolygon multiPolygon) =>
+    internal static Line? GetShortestLine(Polygon polygon, MultiPolygon multiPolygon) =>
         MultiPolygonShortestLineSearcher.GetShortestLine(multiPolygon, polygon);
 
-    internal static Line GetShortestLine(Polygon polygon, Contour contour)
+    internal static Line? GetShortestLine(Polygon polygon, Contour contour)
     {
         Line shortLine = new Line(new Point(0, 0), new Point(0, 0));
         // проверка если контур ВНУТРИ полигона... или полигон внутри контура
