@@ -68,7 +68,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             
             foreach (Line line1 in lines)
             {
-                double distance = line1.GetShortestLine(line).GetLength();
+                double distance = line1!.GetShortestLine(line)!.GetLength();
                 if (distance < result)
                     result = distance;
             }

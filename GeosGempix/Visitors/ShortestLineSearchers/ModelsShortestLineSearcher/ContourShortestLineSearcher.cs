@@ -52,13 +52,13 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             _result = GetShortestLine(_contour, contour);
 
 
-        internal static Line? GetShortestLine(Contour contour, Point point)
+        internal static Line? GetShortestLine(Contour? contour, Point? point)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
             // проверка если точка ВНУТРИ контура... то расстояние должно быть ноль О_О
             if (contour.Intersects(point))
                 return null;
-            List<Point> points = contour.GetPoints();
+            List<Point> points = contour!.GetPoints();
             List<Line> lines = new List<Line>();
             for (int i = 0; i < points.Count - 1; i++)
             {
@@ -68,7 +68,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             foreach (Line line in lines)
             {
                 var curLine = LineShortestLineSearcher.GetShortestLine(line, point);
-                if (curLine.GetLength() < shortLine.GetLength())
+                if (curLine!.GetLength() < shortLine.GetLength())
                 {
                     shortLine = new Line(curLine);
                 }
@@ -92,7 +92,7 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.ModelsShortestLineSearcher
             foreach (Line line1 in lines)
             {
                 var curLine = LineShortestLineSearcher.GetShortestLine(line1, line);
-                if (curLine.GetLength() < shortLine.GetLength())
+                if (curLine!.GetLength() < shortLine.GetLength())
                 {
                     shortLine = new Line(curLine);
                 }

@@ -157,8 +157,8 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             double x1 = pointFromBis.X - vertex2.X;
             double y1 = pointFromBis.Y - vertex2.Y;
             // координаты вектора нормали (неизвестно, внутренняя она или внешняя, в этом и смысл)
-            double x2 = point.X - p.X;
-            double y2 = point.Y - p.Y;
+            double x2 = point.X - p!.X;
+            double y2 = point.Y - p!.Y;
             // скалярное произведение разделить на произведение длин векторов
             double cos = (x1 * x2 + y1 * y2) / (Math.Sqrt(x1 * x1 + y1 * y1) + Math.Sqrt(x2 * x2 + y2 * y2));
             // если косинус больше нуля, то угол от 0 до 90 градусов, а значит, точка снаружи
@@ -181,7 +181,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             var equation = line.GetEquationOfLine();
             
             foreach (var line0 in contour.GetLines())
-                pointsOfIntersection.Add(LineIntersector.GetPointOfIntersection(equation, line0.GetEquationOfLine()));
+                pointsOfIntersection.Add(LineIntersector.GetPointOfIntersection(equation, line0.GetEquationOfLine())!);
 
             if (pointsOfIntersection.Count > 2)
                 return false;

@@ -35,11 +35,11 @@ public class PointDistanceCalculator : IModelDistanceCalculator
     public double GetResult() =>
         _result;
 
-    internal static double GetDistance(Point point1, Point point2) =>
+    internal static double GetDistance(Point? point1, Point? point2) =>
         Math.Sqrt(GetSquareDistance(point1, point2));
 
-    internal static double GetSquareDistance(Point point1, Point point2) =>
-        (point2.X - point1.X) * (point2.X - point1.X) + (point2.Y - point1.Y) * (point2.Y - point1.Y);
+    internal static double GetSquareDistance(Point? point1, Point? point2) =>
+        (point2!.X - point1!.X) * (point2!.X - point1!.X) + (point2!.Y - point1!.Y) * (point2!.Y - point1!.Y);
 
     internal static decimal GetSquareDistanceDecimal(Point point1, Point point2) =>
         ((decimal)point2.X - (decimal)point1.X) * 

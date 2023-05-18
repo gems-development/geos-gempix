@@ -41,37 +41,37 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearc
              GetShortestLine(
                  multiLine,
                  polygon,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Polygon)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Polygon)primitive)!);
 
         internal static Line? GetShortestLine(MultiLine multiLine, Line line1) =>
              GetShortestLine(
                  multiLine,
                  line1,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Line)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Line)primitive)!);
 
         internal static Line? GetShortestLine(MultiLine multiLine, Point point) =>
              GetShortestLine(
                  multiLine,
                  point,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Point)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Point)primitive)!);
 
         internal static Line? GetShortestLine(MultiLine multiLine1, MultiLine multiLine2) =>
              GetShortestLine(
                  multiLine1,
                  multiLine2,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiLine)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiLine)primitive)!);
 
         internal static Line? GetShortestLine(MultiLine multiLine, MultiPoint multiPoint) =>
              GetShortestLine(
                  multiLine,
                  multiPoint,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiPoint)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (MultiPoint)primitive)!);
 
         internal static Line? GetShortestLine(MultiLine multiLine, Contour contour) =>
              GetShortestLine(
                  multiLine,
                  contour,
-                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Contour)primitive));
+                 (line, primitive) => LineShortestLineSearcher.GetShortestLine(line, (Contour)primitive)!);
 
         internal static Line? GetShortestLine(
             MultiLine multiLine,
@@ -79,12 +79,11 @@ namespace GeosGempix.Visitors.ShortestLineSearchers.MultiModelsShortestLineSearc
             Func<Line, IGeometryPrimitive, Line> getShortestLine)
         {
             Line shortLine = new Line(new Point(0, 0), new Point(double.MaxValue, double.MaxValue));
-            Line curLine = new Line(new Point(0, 0), new Point(0, 0));
             List<Line> lines = multiLine.GetLines();
             foreach (Line? line in lines)
             {
-				curLine = getShortestLine(line, primitive);
-                if (curLine.GetLength() < shortLine.GetLength())
+				var curLine = getShortestLine(line, primitive);
+                if (curLine!.GetLength() < shortLine.GetLength())
                 {
 					shortLine = new Line(curLine);
                 }
