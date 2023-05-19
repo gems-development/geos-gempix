@@ -5,7 +5,7 @@
         public Point Point1 { get; private set; }
         public Point Point2 { get; private set; }
 
-        public Line(Point point1, Point point2)
+        public Line(Point? point1, Point? point2)
         {
             if (point1 == null)
                 throw new ArgumentNullException("point1");

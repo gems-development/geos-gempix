@@ -94,7 +94,7 @@
 		public bool isClockwiseBypass()
 		{
 			double answer = 0;
-			foreach (Line line in GetLines())
+			foreach (Line? line in GetLines())
 			{
 				answer += (line.Point2.X - line.Point1.X) * (line.Point2.Y + line.Point1.Y);
 			}
@@ -121,9 +121,9 @@
 					throw new ArgumentNullException("points", "Один из элементов списка points равен null");
 			if (points.Count == 0)
 				throw new ArgumentException("Длина списка points = 0");
-			Point point1 = points.FirstOrDefault();
-			Point point2 = points.LastOrDefault();
-			Boolean t = point1.Equals(point2);
+			Point? point1 = points.FirstOrDefault();
+			Point? point2 = points.LastOrDefault();
+			Boolean t = point1!.Equals(point2);
 			if (!t)
 				throw new ArgumentException("Некорректный набор точек");
 		}

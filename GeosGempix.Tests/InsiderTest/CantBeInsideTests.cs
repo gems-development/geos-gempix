@@ -9,7 +9,7 @@ namespace GeosGempix.Tests.InsiderTest
         public Point _point;
         public Line _line;
         public MultiPoint _multiPoint;
-        public MultiLine _multiLine;
+        public MultiLine? _multiLine;
         public CantBeInsideTests()
         {
             List<Point> points = new List<Point>();

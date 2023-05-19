@@ -91,7 +91,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             var eq2 = Line.GetEquationOfPerpendicularLine(eq1, point);
             Point? point1 = LineIntersector.GetPointOfIntersection(eq1, eq2);
             if (LineIntersector.Intersects(line, point1))
-                distances[2] = PointDistanceCalculator.GetSquareDistanceDecimal(point1, point);
+                distances[2] = PointDistanceCalculator.GetSquareDistanceDecimal(point1!, point);
             return distances.Min();
         }
 

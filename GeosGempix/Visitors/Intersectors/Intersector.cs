@@ -11,10 +11,10 @@ namespace GeosGempix.Visitors.Intersectors
 
         private IModelsIntersector _intersector;
 
-        public Intersector(IGeometryPrimitive primitive1, IGeometryPrimitive primitive2)
+        public Intersector(IGeometryPrimitive? primitive1, IGeometryPrimitive? primitive2)
         {
-            primitive1.Accept(this);
-            primitive2.Accept(_intersector!);
+            primitive1!.Accept(this);
+            primitive2!.Accept(_intersector!);
             _result = _intersector!.GetResult();
         }
 
