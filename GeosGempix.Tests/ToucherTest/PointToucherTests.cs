@@ -11,7 +11,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndPoint), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingPoint(bool result, Point point1, Point point2)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point1.IsTouching(point2));
     }
     
@@ -19,7 +19,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndLine), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingLine(bool result, Point point, Line line)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point.IsTouching(line));
     }
     
@@ -27,7 +27,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndContour), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingContour(bool result, Point point, Contour contour)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, contour.IsTouching(point));
     }
     
@@ -35,7 +35,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndMultiPoint), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingMultiPoint(bool result, Point point, MultiPoint multiPoint)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point.IsTouching(multiPoint));
     }
     
@@ -43,7 +43,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndMultiLine), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingMultiLine(bool result, Point point, MultiLine multiLine)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point.IsTouching(multiLine));
     }
     
@@ -51,7 +51,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndPolygon), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingPolygon(bool result, Point point, Polygon polygon)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point.IsTouching(polygon));
     }
     
@@ -59,7 +59,7 @@ public class PointToucherTests
     [MemberData(nameof(PointToucherTestData.PointAndMultiPolygon), MemberType = typeof(PointToucherTestData))]
     public static void IsPointTouchingMultiPolygon(bool result, Point point, MultiPolygon multiPolygon)
     {
-        //Assert
+        //Act + Assert.
         Assert.Equal(result, point.IsTouching(multiPolygon));
     }
 }
