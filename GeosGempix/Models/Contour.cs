@@ -123,7 +123,7 @@
 				throw new ArgumentException("Длина списка points = 0");
 			Point? point1 = points.FirstOrDefault();
 			Point? point2 = points.LastOrDefault();
-			Boolean t = point1.Equals(point2);
+			Boolean t = point1!.Equals(point2);
 			if (!t)
 				throw new ArgumentException("Некорректный набор точек");
 		}
