@@ -1,4 +1,4 @@
-﻿using GeosGempix.Extensions;
+using GeosGempix.Extensions;
 using GeosGempix.GeometryPrimitiveIntersectors;
 using GeosGempix.Interfaces.IModels;
 using GeosGempix.Models;
@@ -85,6 +85,7 @@ namespace GeosGempix.Visitors.DistanceCalculators.ModelsDistanceCalculator
             foreach (Line contourLine in lines)
             {
                 double distance = LineDistanceCalculator.GetDistance(line, contourLine);
+
                 if (distance < result)
                     result = distance;
             }

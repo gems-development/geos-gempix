@@ -12,9 +12,9 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
 			Line line = new Line(new Point(-3,-3), new Point(3,3));
 			Point point = new Point(0, 2);
 			//Act.
-			Line shortLine = LineShortestLineSearcher.GetShortestLine(line, point);
+			Line shortLine = LineShortestLineSearcher.GetShortestLine(line, point)!;
 			//Assert.
-			Assert.Equal(Math.Sqrt(2), shortLine.GetLength());
+			Assert.Equal(Math.Sqrt(2), shortLine!.GetLength());
 		}
 
 		[Fact]
@@ -24,7 +24,7 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
 			Line line1 = new Line(new Point(0, 0), new Point(0, 3));
 			Line line2 = new Line(new Point(3, 0), new Point(3, 3));
 			//Act.
-			Line shortLine = LineShortestLineSearcher.GetShortestLine(line1, line2);
+			Line shortLine = LineShortestLineSearcher.GetShortestLine(line1, line2)!;
 			//Assert.
 			Assert.Equal(3, shortLine.GetLength());
 		}

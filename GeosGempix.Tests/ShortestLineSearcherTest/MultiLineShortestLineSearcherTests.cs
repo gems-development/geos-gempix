@@ -20,9 +20,9 @@ namespace GeosGempix.Tests.ShortestLineSearcherTest
 			//Act.
 			MultiLineShortestLineSearcher multiLineShortestLineSearcher = new MultiLineShortestLineSearcher(multiLine);
 			multiLineShortestLineSearcher.Visit(point);
-			Line line = multiLineShortestLineSearcher.GetResult();
+			Line? line = multiLineShortestLineSearcher.GetResult();
 			//Assert.
-			Assert.Equal(2, line.GetLength());
+			Assert.Equal(2, line?.GetLength());
 		}
 	}
 }

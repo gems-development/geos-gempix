@@ -150,15 +150,15 @@ namespace GeosGempix.GeometryPrimitiveInsiders
                 pointFromBis = pointFromBis2;
             // будем смотреть на угол между нормалью, проходящей через point,
             // и биссектрисой (вектором внешнего ее продолжения)
-            Point p = LineIntersector.GetPointOfIntersection(
+            Point? p = LineIntersector.GetPointOfIntersection(
                 equation1,
                 Line.GetEquationOfPerpendicularLine(equation1, point));
             // координаты вектора внешней части биссектрисы
             double x1 = pointFromBis.X - vertex2.X;
             double y1 = pointFromBis.Y - vertex2.Y;
             // координаты вектора нормали (неизвестно, внутренняя она или внешняя, в этом и смысл)
-            double x2 = point.X - p.X;
-            double y2 = point.Y - p.Y;
+            double x2 = point.X - p!.X;
+            double y2 = point.Y - p!.Y;
             // скалярное произведение разделить на произведение длин векторов
             double cos = (x1 * x2 + y1 * y2) / (Math.Sqrt(x1 * x1 + y1 * y1) + Math.Sqrt(x2 * x2 + y2 * y2));
             // если косинус больше нуля, то угол от 0 до 90 градусов, а значит, точка снаружи
@@ -170,7 +170,6 @@ namespace GeosGempix.GeometryPrimitiveInsiders
         {
             return IsStrictlyInside(contour, line.Point1)
                 && (!intersectBordersCheckRequired || (intersectBordersCheckRequired && !ContourIntersector.IntersectsBorders(contour, line)));
-            return false;
         }
 
         internal static bool IsInsideInternal(Contour contour, Line line)
@@ -182,7 +181,7 @@ namespace GeosGempix.GeometryPrimitiveInsiders
             var equation = line.GetEquationOfLine();
             
             foreach (var line0 in contour.GetLines())
-                pointsOfIntersection.Add(LineIntersector.GetPointOfIntersection(equation, line0.GetEquationOfLine()));
+                pointsOfIntersection.Add(LineIntersector.GetPointOfIntersection(equation, line0.GetEquationOfLine())!);
 
             if (pointsOfIntersection.Count > 2)
                 return false;

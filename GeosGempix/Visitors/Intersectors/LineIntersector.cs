@@ -19,7 +19,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
         public LineIntersector(Line line) =>
             _line = line;
 
-        public static bool Intersects(Line line, Point point)
+        public static bool Intersects(Line line, Point? point)
         {
             if (point == null)
                 throw new ArgumentNullException("Intersects: point = null");
@@ -31,7 +31,7 @@ namespace GeosGempix.GeometryPrimitiveIntersectors
 
         internal static bool Intersects(Line line1, Line line2)
         {
-            Point[] points = GetPointOfIntersection(line1, line2);
+            Point[]? points = GetPointOfIntersection(line1, line2);
             if (points == null)
                 return false;
             return true;
