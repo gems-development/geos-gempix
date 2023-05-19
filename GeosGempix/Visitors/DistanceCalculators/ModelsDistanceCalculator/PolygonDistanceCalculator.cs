@@ -72,8 +72,8 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
         }
 
         foreach (Contour hole in polygon.GetHoles())
-        { // где метод вычисления расстояния до внутренней точки контура?
-          // почему до сих пор не написан?
+        { // РіРґРµ РјРµС‚РѕРґ РІС‹С‡РёСЃР»РµРЅРёСЏ СЂР°СЃСЃС‚РѕСЏРЅРёСЏ РґРѕ РІРЅСѓС‚СЂРµРЅРЅРµР№ С‚РѕС‡РєРё РєРѕРЅС‚СѓСЂР°?
+          // РїРѕС‡РµРјСѓ РґРѕ СЃРёС… РїРѕСЂ РЅРµ РЅР°РїРёСЃР°РЅ?
             double distance = ContourDistanceCalculator.GetDistance(hole, line);
             if (distance < result)
                 result = distance;
@@ -136,6 +136,20 @@ public class PolygonDistanceCalculator : IModelDistanceCalculator
                 if (distance < result)
                     result = distance;
             }
+        }
+        return result;
+    }
+    
+    internal static double GetDistanceInside(Polygon polygon, Contour contour)
+    {
+        double result = double.MaxValue;
+        List<Contour> contours = new List<Contour>(polygon.GetHoles());
+        contours.Add(new Contour(polygon.GetPoints()));
+        foreach (var c in contours)
+        {
+            var distance = ContourDistanceCalculator.GetDistanceInside(contour, c);
+            if (distance < result)
+                result = distance;
         }
         return result;
     }

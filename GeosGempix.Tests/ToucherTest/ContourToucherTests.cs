@@ -5,7 +5,7 @@ namespace GeosGempix.Tests.ToucherTest;
 
 public class ContourToucherTests
 {
-    public static IEnumerable<object[]> Data0 =>
+    public static IEnumerable<object[]> ContourAndContourToucherTestDataSuccess =>
         new List<object[]>
         {     
             new object[]
@@ -34,7 +34,7 @@ public class ContourToucherTests
         };
 
     [Theory]
-    [MemberData(nameof(Data0))]
+    [MemberData(nameof(ContourAndContourToucherTestDataSuccess))]
     public static void IsContourTouchingContour_Success(Contour contour2)
     {
         //Arrange
@@ -46,7 +46,7 @@ public class ContourToucherTests
         Assert.True(contour2.IsTouching(contour1));
     }
 
-    public static IEnumerable<object[]> Data1 =>
+    public static IEnumerable<object[]> ContourAndContourToucherTestDataFailed =>
         new List<object[]>
         {     
             new object[]
@@ -63,14 +63,14 @@ public class ContourToucherTests
         };
     
     [Theory]
-    [MemberData(nameof(Data1))]
+    [MemberData(nameof(ContourAndContourToucherTestDataFailed))]
     public static void IsContourTouchingContour_Failed(Contour contour1, Contour contour2)
     {
         //Act + Assert.
         Assert.False(contour2.IsTouching(contour1));
     }
     
-    public static IEnumerable<object[]> Data2 =>
+    public static IEnumerable<object[]> ContourAndPolygonToucherInsideTestData =>
         new List<object[]>
         {     
             new object[]
@@ -110,8 +110,8 @@ public class ContourToucherTests
         };
 
     [Theory]
-    [MemberData(nameof(Data2))]
-    public static void IsContourTouchingPolygon(Contour contour, Polygon polygon)
+    [MemberData(nameof(ContourAndPolygonToucherInsideTestData))]
+    public static void IsContourTouchingPolygon_Inside(Contour contour, Polygon polygon)
     {
         //Act + Assert.
         Assert.True(contour.IsTouching(polygon));

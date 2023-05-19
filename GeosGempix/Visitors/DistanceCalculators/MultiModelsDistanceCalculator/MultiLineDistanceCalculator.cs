@@ -89,4 +89,10 @@ public class MultiLineDistanceCalculator : IModelDistanceCalculator
              multiLine,
              contour,
              (line, primitive) => LineDistanceCalculator.GetDistance(line, (Contour)primitive));
+    
+    internal static double GetDistanceInside(MultiLine multiLine, Contour contour) =>
+        GetDistance(
+            multiLine,
+            contour,
+            (line, primitive) => LineDistanceCalculator.GetDistanceInside(line, (Contour)primitive));
 }
