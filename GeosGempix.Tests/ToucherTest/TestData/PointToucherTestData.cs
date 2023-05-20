@@ -6,57 +6,12 @@ namespace GeosGempix.Tests.ToucherTest.TestData;
 
 internal class PointToucherTestData
 {
-    private static Contour _contour = TestHelper.CreateContour(
-        new Point(0, 0), new Point(0, 5), new Point(3, 3),
-        new Point(5, 5), new Point(5, 0), new Point(0, 0));
-
     private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
         new Point(0, 0), new Point(2, 2), new Point(5, 0));
 
     private static MultiLine _multiLine = TestHelper.CreateMultiLine(
         TestHelper.CreateLine(3,1,7,2), TestHelper.CreateLine(2,4,7,4), TestHelper.CreateLine(4,8,5,5));
-    
-    private static Polygon _polygon = TestHelper.CreatePolygon(
-        new List<Contour>
-        {
-            TestHelper.CreateContour(
-                new Point(3, 3), new Point(3, 6), new Point(6, 6),
-                new Point(6, 3), new Point(3, 3))
-        },
-        new Point(0, 0), new Point(0, 9), new Point(9, 9),
-        new Point(9, 0), new Point(0, 0));
 
-    private static MultiPolygon _multiPolygon = TestHelper.CreateMultiPolygon(
-        TestHelper.CreatePolygon(
-            new List<Contour>
-            {
-                TestHelper.CreateContour(
-                    new Point(2,2), new Point(2, 6), new Point(6, 6),
-                    new Point(6, 2), new Point(2,2))
-            },
-            new Point(0, 0), new Point(0, 8), new Point(8, 8),
-            new Point(8, 0), new Point(0, 0)),
-
-        TestHelper.CreatePolygon(
-            new List<Contour>
-            {
-                TestHelper.CreateContour(
-                    new Point(2,12), new Point(2,16), new Point(6,16),
-                    new Point(6,12), new Point(2,12))
-            },
-            new Point(0, 10), new Point(0, 18), new Point(8, 18),
-            new Point(8, 10), new Point(0, 10)),
-
-        TestHelper.CreatePolygon(
-            new List<Contour>
-            {
-                TestHelper.CreateContour(
-                    new Point(12,12), new Point(12,16), new Point(16,16),
-                    new Point(16,12), new Point(12,12))
-            },
-            new Point(10,10), new Point(10,18), new Point(18,18),
-            new Point(18,10), new Point(10,10)));
-    
     public static IEnumerable<object[]> PointAndPoint =>
         new List<object[]>
     {
@@ -75,10 +30,10 @@ internal class PointToucherTestData
     public static IEnumerable<object[]> PointAndContour =>
         new List<object[]>
         {
-            new object[] {true, new Point(3, 3), _contour},
-            new object[] {true, new Point(5, 1), _contour},
-            new object[] {false, new Point(3, 5), _contour},
-            new object[] {false, new Point(1, 2), _contour}
+            new object[] {true, new Point(3, 3), TestData._contour},
+            new object[] {true, new Point(5, 1), TestData._contour},
+            new object[] {false, new Point(3, 5), TestData._contour},
+            new object[] {false, new Point(1, 2), TestData._contour}
         };
     
     public static IEnumerable<object[]> PointAndMultiPoint =>
@@ -99,24 +54,24 @@ internal class PointToucherTestData
     public static IEnumerable<object[]> PointAndPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(6,4), _polygon},
-            new object[] {true, new Point(6,6), _polygon},
-            new object[] {true, new Point(9, 4), _polygon},
-            new object[] {true, new Point(9, 9), _polygon},
-            new object[] {false, new Point(4, 5), _polygon},
-            new object[] {false, new Point(7, 5), _polygon},
-            new object[] {false, new Point(11, 5), _polygon}
+            new object[] {true, new Point(6,4), TestData._polygon},
+            new object[] {true, new Point(6,6), TestData._polygon},
+            new object[] {true, new Point(9, 4), TestData._polygon},
+            new object[] {true, new Point(9, 9), TestData._polygon},
+            new object[] {false, new Point(4, 5), TestData._polygon},
+            new object[] {false, new Point(7, 5), TestData._polygon},
+            new object[] {false, new Point(11, 5), TestData._polygon}
         };
     
     public static IEnumerable<object[]> PointAndMultiPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(6,15), _multiPolygon},
-            new object[] {true, new Point(8,10), _multiPolygon},
-            new object[] {true, new Point(18,14), _multiPolygon},
-            new object[] {true, new Point(6,6), _multiPolygon},
-            new object[] {false, new Point(4,14), _multiPolygon},
-            new object[] {false, new Point(4,9), _multiPolygon},
-            new object[] {false, new Point(17, 14), _multiPolygon}
+            new object[] {true, new Point(6,15), TestData._multiPolygon},
+            new object[] {true, new Point(8,10), TestData._multiPolygon},
+            new object[] {true, new Point(18,14), TestData._multiPolygon},
+            new object[] {true, new Point(6,6), TestData._multiPolygon},
+            new object[] {false, new Point(4,14), TestData._multiPolygon},
+            new object[] {false, new Point(4,9), TestData._multiPolygon},
+            new object[] {false, new Point(17, 14), TestData._multiPolygon}
         };
 }
