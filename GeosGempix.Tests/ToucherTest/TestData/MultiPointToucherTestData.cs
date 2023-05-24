@@ -4,9 +4,6 @@ namespace GeosGempix.Tests.ToucherTest.TestData;
 
 public class MultiPointToucherTestData
 {
-    private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
-        new Point(0, 2), new Point(2, 0), new Point(4, 2));
-
     public static IEnumerable<object[]> MultiPointAndMultiPoint =>
         new List<object[]>
         {
@@ -109,4 +106,7 @@ public class MultiPointToucherTestData
                 TestData._multiPolygon
             }
         };
+    
+    private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
+        new Point(0, 2), new Point(2, 0), new Point(4, 2));
 }

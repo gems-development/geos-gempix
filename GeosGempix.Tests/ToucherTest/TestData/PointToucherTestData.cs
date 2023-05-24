@@ -6,12 +6,6 @@ namespace GeosGempix.Tests.ToucherTest.TestData;
 
 internal class PointToucherTestData
 {
-    private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
-        new Point(0, 0), new Point(2, 2), new Point(5, 0));
-
-    private static MultiLine _multiLine = TestHelper.CreateMultiLine(
-        TestHelper.CreateLine(3,1,7,2), TestHelper.CreateLine(2,4,7,4), TestHelper.CreateLine(4,8,5,5));
-
     public static IEnumerable<object[]> PointAndPoint =>
         new List<object[]>
     {
@@ -74,4 +68,10 @@ internal class PointToucherTestData
             new object[] {false, new Point(4,9), TestData._multiPolygon},
             new object[] {false, new Point(17, 14), TestData._multiPolygon}
         };
+    
+    private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
+        new Point(0, 0), new Point(2, 2), new Point(5, 0));
+
+    private static MultiLine _multiLine = TestHelper.CreateMultiLine(
+        TestHelper.CreateLine(3,1,7,2), TestHelper.CreateLine(2,4,7,4), TestHelper.CreateLine(4,8,5,5));
 }
