@@ -104,7 +104,6 @@ public class MultiPolygonIntersectorTestData
                 )
             },
             
-            
             new object[]
             {
                 false,

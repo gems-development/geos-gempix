@@ -2,13 +2,13 @@
 
 namespace GeosGempix.Tests.IntersectorTest.TestData;
 
-public class TestData
+public class BaseTestData
 {
-    public static Contour _contour = TestHelper.CreateContour(
+    public static Contour Contour = TestHelper.CreateContour(
         new Point(0, 0), new Point(0, 9), new Point(9, 9),
         new Point(9, 0), new Point(0, 0));
     
-    public static Polygon _polygon = TestHelper.CreatePolygon(
+    public static Polygon Polygon = TestHelper.CreatePolygon(
         new List<Contour>
         {
             TestHelper.CreateContour(
@@ -18,7 +18,7 @@ public class TestData
         new Point(0, 0), new Point(0, 9), new Point(9, 9),
         new Point(9, 0), new Point(0, 0));
     
-    public static MultiPolygon _multiPolygon = TestHelper.CreateMultiPolygon(
+    public static MultiPolygon MultiPolygon = TestHelper.CreateMultiPolygon(
         TestHelper.CreatePolygon(
             new List<Contour>
             {

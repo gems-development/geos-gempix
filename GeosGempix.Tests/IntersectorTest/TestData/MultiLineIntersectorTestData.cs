@@ -39,21 +39,21 @@ public class MultiLineIntersectorTestData
                 true, 
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(-1,5,-1,8), TestHelper.CreateLine(4,5,5,4), TestHelper.CreateLine(10,2,10,5)), 
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[]
             {
                 true, 
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(-1,5,-1,8), TestHelper.CreateLine(8,5,10,5), TestHelper.CreateLine(10,1,11,4)), 
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[]
             {
                 false, 
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(-1,5,-1,8), TestHelper.CreateLine(10,2,10,5), TestHelper.CreateLine(10,1,11,4)), 
-                TestData._polygon
+                BaseTestData.Polygon
             }
         };
     
@@ -65,14 +65,14 @@ public class MultiLineIntersectorTestData
                 true, 
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(4,15,5,16), TestHelper.CreateLine(14,19,17,19), TestHelper.CreateLine(9,5,11,6)), 
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[]
             {
                 false, 
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(-1,9,-1,11), TestHelper.CreateLine(10,14,10,17), TestHelper.CreateLine(13,4,16,7)), 
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             }
         };
 }

@@ -41,16 +41,16 @@ public class MultiPointIntersectorTestData
     public static IEnumerable<object[]> MultiPointAndPolygon =>
         new List<object[]>
         {
-            new object[] {true, TestHelper.CreateMultiPoint(new Point(4,4), new Point(4,11), new Point(10,4)), TestData._polygon},
-            new object[] {true, TestHelper.CreateMultiPoint(new Point(0,0), new Point(4,8), new Point(7,5)), TestData._polygon},
-            new object[] {false, TestHelper.CreateMultiPoint(new Point(-1,5), new Point(4,11), new Point(10,2)), TestData._polygon}
+            new object[] {true, TestHelper.CreateMultiPoint(new Point(4,4), new Point(4,11), new Point(10,4)), BaseTestData.Polygon},
+            new object[] {true, TestHelper.CreateMultiPoint(new Point(0,0), new Point(4,8), new Point(7,5)), BaseTestData.Polygon},
+            new object[] {false, TestHelper.CreateMultiPoint(new Point(-1,5), new Point(4,11), new Point(10,2)), BaseTestData.Polygon}
         };
     
     public static IEnumerable<object[]> MultiPointAndMultiPolygon =>
         new List<object[]>
         {
-            new object[] {true, TestHelper.CreateMultiPoint(new Point(4,15), new Point(10,16), new Point(10,15)), TestData._multiPolygon},
-            new object[] {true, TestHelper.CreateMultiPoint(new Point(14,16), new Point(15,19), new Point(21,15)), TestData._multiPolygon},
-            new object[] {false, TestHelper.CreateMultiPoint(new Point(4,10), new Point(10,15), new Point(21,16)), TestData._multiPolygon}
+            new object[] {true, TestHelper.CreateMultiPoint(new Point(4,15), new Point(10,16), new Point(10,15)), BaseTestData.MultiPolygon},
+            new object[] {true, TestHelper.CreateMultiPoint(new Point(14,16), new Point(15,19), new Point(21,15)), BaseTestData.MultiPolygon},
+            new object[] {false, TestHelper.CreateMultiPoint(new Point(4,10), new Point(10,15), new Point(21,16)), BaseTestData.MultiPolygon}
         };
 }

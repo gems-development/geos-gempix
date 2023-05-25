@@ -9,7 +9,7 @@ public class PolygonIntersectorTestData
         {     
             new object[]
             {
-                true, TestData._polygon,
+                true, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                 new List<Contour>
                 {
@@ -22,7 +22,7 @@ public class PolygonIntersectorTestData
             },
             new object[]
             {
-                true, TestData._polygon,
+                true, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new List<Contour>
                     {
@@ -35,7 +35,7 @@ public class PolygonIntersectorTestData
             },
             new object[]
             {
-                true, TestData._polygon,
+                true, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new List<Contour>
                     {
@@ -48,7 +48,7 @@ public class PolygonIntersectorTestData
             },
             new object[]
             {
-                false, TestData._polygon,
+                false, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new List<Contour>
                     {

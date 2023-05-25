@@ -7,28 +7,28 @@ public class ContourIntersectorTestData
         {     
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateContour(
                     new Point(2,2), new Point(2,12), new Point(12,12),
                     new Point(12,2), new Point(2,2))
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateContour(
                     new Point(9,0), new Point(9,9), new Point(18,9),
                     new Point(18,0), new Point(9,0))
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateContour(
                     new Point(2,2), new Point(2,7), new Point(7,7),
                     new Point(7,2), new Point(2,2))
             },
             new object[]
             {
-                false, TestData._contour,
+                false, BaseTestData.Contour,
                 TestHelper.CreateContour(
                     new Point(11,0), new Point(11,9), new Point(20,9),
                     new Point(20,0), new Point(11,0))
@@ -40,22 +40,22 @@ public class ContourIntersectorTestData
         {     
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiPoint(new Point(5,5), new Point(6,7), new Point(7,6))
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiPoint(new Point(8,6), new Point(10,7), new Point(10,5))
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiPoint(new Point(9,0), new Point(10,2), new Point(11,1))
             },
             new object[]
             {
-                false, TestData._contour,
+                false, BaseTestData.Contour,
                 TestHelper.CreateMultiPoint(new Point(11,4), new Point(12,7), new Point(14,5))
             }
         };
@@ -65,7 +65,7 @@ public class ContourIntersectorTestData
         {     
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(3,1,7,2),
                     TestHelper.CreateLine(2,4,7,4),
@@ -73,7 +73,7 @@ public class ContourIntersectorTestData
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(10,2,13,3),
                     TestHelper.CreateLine(9,4,12,4),
@@ -81,7 +81,7 @@ public class ContourIntersectorTestData
             },
             new object[]
             {
-                true, TestData._contour,
+                true, BaseTestData.Contour,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(7,4,8,7),
                     TestHelper.CreateLine(10,6,13,5),
@@ -89,7 +89,7 @@ public class ContourIntersectorTestData
             },
             new object[]
             {
-                false, TestData._contour,
+                false, BaseTestData.Contour,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(10,3,12,2),
                     TestHelper.CreateLine(11,4,14,5),
@@ -106,7 +106,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(2,2), new Point(2,11), new Point(11,11),
                     new Point(11,2), new Point(2,2)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[]
             {
@@ -114,7 +114,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(4,4), new Point(4,5), new Point(5,5),
                     new Point(5,4), new Point(4,4)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[]
             {
@@ -122,7 +122,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(9,0), new Point(9,9), new Point(18,9),
                     new Point(18,0), new Point(9,0)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[]
             {
@@ -130,7 +130,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(11,0), new Point(11,9), new Point(20,9),
                     new Point(20,0), new Point(11,0)),
-                TestData._polygon
+                BaseTestData.Polygon
             }
         };
     
@@ -143,7 +143,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(8,13), new Point(8,18), new Point(12,18),
                     new Point(12,13), new Point(8,13)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[]
             {
@@ -151,7 +151,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(20,9), new Point(20,11), new Point(23,11),
                     new Point(23,9), new Point(20,9)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[]
             {
@@ -159,7 +159,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(4,4), new Point(4,5), new Point(5,5),
                     new Point(5,4), new Point(4,4)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[]
             {
@@ -167,7 +167,7 @@ public class ContourIntersectorTestData
                 TestHelper.CreateContour(
                     new Point(10,13), new Point(10,18), new Point(12,18),
                     new Point(12,13), new Point(10,13)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             }
         };
 }

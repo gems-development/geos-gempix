@@ -19,9 +19,9 @@ public class PointIntersectorTestData
     public static IEnumerable<object[]> PointAndContour =>
         new List<object[]>
         {
-            new object[] {true, new Point(0,5), TestData._contour},
-            new object[] {true, new Point(3,5), TestData._contour},
-            new object[] {false, new Point(10,7), TestData._contour}
+            new object[] {true, new Point(0,5), BaseTestData.Contour},
+            new object[] {true, new Point(3,5), BaseTestData.Contour},
+            new object[] {false, new Point(10,7), BaseTestData.Contour}
         };
     
     public static IEnumerable<object[]> PointAndMultiPoint =>
@@ -69,19 +69,19 @@ public class PointIntersectorTestData
     public static IEnumerable<object[]> PointAndPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(4,4), TestData._polygon},
-            new object[] {true, new Point(0,5), TestData._polygon},
-            new object[] {true, new Point(4,6), TestData._polygon},
-            new object[] {false, new Point(10, 5), TestData._polygon},
+            new object[] {true, new Point(4,4), BaseTestData.Polygon},
+            new object[] {true, new Point(0,5), BaseTestData.Polygon},
+            new object[] {true, new Point(4,6), BaseTestData.Polygon},
+            new object[] {false, new Point(10, 5), BaseTestData.Polygon},
         };
     
     public static IEnumerable<object[]> PointAndMultiPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(3,16), TestData._multiPolygon},
-            new object[] {true, new Point(15,20), TestData._multiPolygon},
-            new object[] {true, new Point(15,16), TestData._multiPolygon},
-            new object[] {true, new Point(3,6), TestData._multiPolygon},
-            new object[] {false, new Point(10,16), TestData._multiPolygon},
+            new object[] {true, new Point(3,16), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(15,20), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(15,16), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(3,6), BaseTestData.MultiPolygon},
+            new object[] {false, new Point(10,16), BaseTestData.MultiPolygon},
         };
 }
