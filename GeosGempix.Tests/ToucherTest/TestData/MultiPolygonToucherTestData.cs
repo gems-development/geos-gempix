@@ -10,7 +10,7 @@ public class MultiPolygonToucherTestData
             new object[]
             {
                 true,
-                TestData._multiPolygon,
+                BaseTestData.MultiPolygon,
                 TestHelper.CreateMultiPolygon(
                     TestHelper.CreatePolygon(
                         new List<Contour>

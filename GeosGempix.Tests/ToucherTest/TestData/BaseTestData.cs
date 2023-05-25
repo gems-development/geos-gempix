@@ -1,14 +1,24 @@
 ﻿using GeosGempix.Models;
+using GeosGempix.MultiModels;
 
 namespace GeosGempix.Tests.ToucherTest.TestData;
 
-public class TestData
+public class BaseTestData
 {
-    public static Contour _contour = TestHelper.CreateContour(
+    public static MultiPoint MultiPointPointTest = TestHelper.CreateMultiPoint(
+        new Point(0, 0), new Point(2, 2), new Point(5, 0));
+    
+    public static MultiPoint MultiPointMultiPointTest = TestHelper.CreateMultiPoint(
+        new Point(0, 2), new Point(2, 0), new Point(4, 2));
+
+    public static MultiLine MultiLinePointTest = TestHelper.CreateMultiLine(
+        TestHelper.CreateLine(3,1,7,2), TestHelper.CreateLine(2,4,7,4), TestHelper.CreateLine(4,8,5,5));
+    
+    public static Contour Contour = TestHelper.CreateContour(
         new Point(0, 0), new Point(0, 5), new Point(3, 3),
         new Point(5, 5), new Point(5, 0), new Point(0, 0));
     
-    public static Polygon _polygon = TestHelper.CreatePolygon(
+    public static Polygon Polygon = TestHelper.CreatePolygon(
         new List<Contour>
         {
             TestHelper.CreateContour(
@@ -18,7 +28,7 @@ public class TestData
         new Point(0, 0), new Point(0, 9), new Point(9, 9),
         new Point(9, 0), new Point(0, 0));
 
-    public static MultiPolygon _multiPolygon = TestHelper.CreateMultiPolygon(
+    public static MultiPolygon MultiPolygon = TestHelper.CreateMultiPolygon(
         TestHelper.CreatePolygon(
             new List<Contour>
             {

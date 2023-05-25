@@ -24,54 +24,48 @@ internal class PointToucherTestData
     public static IEnumerable<object[]> PointAndContour =>
         new List<object[]>
         {
-            new object[] {true, new Point(3, 3), TestData._contour},
-            new object[] {true, new Point(5, 1), TestData._contour},
-            new object[] {false, new Point(3, 5), TestData._contour},
-            new object[] {false, new Point(1, 2), TestData._contour}
+            new object[] {true, new Point(3, 3), BaseTestData.Contour},
+            new object[] {true, new Point(5, 1), BaseTestData.Contour},
+            new object[] {false, new Point(3, 5), BaseTestData.Contour},
+            new object[] {false, new Point(1, 2), BaseTestData.Contour}
         };
     
     public static IEnumerable<object[]> PointAndMultiPoint =>
         new List<object[]>
         {
-            new object[] {true, new Point(0, 0), _multiPoint},
-            new object[] {false, new Point(2, 0), _multiPoint}
+            new object[] {true, new Point(0, 0), BaseTestData.MultiPointPointTest},
+            new object[] {false, new Point(2, 0), BaseTestData.MultiPointPointTest}
         };
     
     public static IEnumerable<object[]> PointAndMultiLine =>
         new List<object[]>
         {
-            new object[] {true, new Point(4, 4), _multiLine},
-            new object[] {true, new Point(7, 2), _multiLine},
-            new object[] {false, new Point(3, 5), _multiLine}
+            new object[] {true, new Point(4, 4), BaseTestData.MultiLinePointTest},
+            new object[] {true, new Point(7, 2), BaseTestData.MultiLinePointTest},
+            new object[] {false, new Point(3, 5), BaseTestData.MultiLinePointTest}
         };
     
     public static IEnumerable<object[]> PointAndPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(6,4), TestData._polygon},
-            new object[] {true, new Point(6,6), TestData._polygon},
-            new object[] {true, new Point(9, 4), TestData._polygon},
-            new object[] {true, new Point(9, 9), TestData._polygon},
-            new object[] {false, new Point(4, 5), TestData._polygon},
-            new object[] {false, new Point(7, 5), TestData._polygon},
-            new object[] {false, new Point(11, 5), TestData._polygon}
+            new object[] {true, new Point(6,4), BaseTestData.Polygon},
+            new object[] {true, new Point(6,6), BaseTestData.Polygon},
+            new object[] {true, new Point(9, 4), BaseTestData.Polygon},
+            new object[] {true, new Point(9, 9), BaseTestData.Polygon},
+            new object[] {false, new Point(4, 5), BaseTestData.Polygon},
+            new object[] {false, new Point(7, 5), BaseTestData.Polygon},
+            new object[] {false, new Point(11, 5), BaseTestData.Polygon}
         };
     
     public static IEnumerable<object[]> PointAndMultiPolygon =>
         new List<object[]>
         {
-            new object[] {true, new Point(6,15), TestData._multiPolygon},
-            new object[] {true, new Point(8,10), TestData._multiPolygon},
-            new object[] {true, new Point(18,14), TestData._multiPolygon},
-            new object[] {true, new Point(6,6), TestData._multiPolygon},
-            new object[] {false, new Point(4,14), TestData._multiPolygon},
-            new object[] {false, new Point(4,9), TestData._multiPolygon},
-            new object[] {false, new Point(17, 14), TestData._multiPolygon}
+            new object[] {true, new Point(6,15), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(8,10), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(18,14), BaseTestData.MultiPolygon},
+            new object[] {true, new Point(6,6), BaseTestData.MultiPolygon},
+            new object[] {false, new Point(4,14), BaseTestData.MultiPolygon},
+            new object[] {false, new Point(4,9), BaseTestData.MultiPolygon},
+            new object[] {false, new Point(17, 14), BaseTestData.MultiPolygon}
         };
-    
-    private static MultiPoint _multiPoint = TestHelper.CreateMultiPoint(
-        new Point(0, 0), new Point(2, 2), new Point(5, 0));
-
-    private static MultiLine _multiLine = TestHelper.CreateMultiLine(
-        TestHelper.CreateLine(3,1,7,2), TestHelper.CreateLine(2,4,7,4), TestHelper.CreateLine(4,8,5,5));
 }

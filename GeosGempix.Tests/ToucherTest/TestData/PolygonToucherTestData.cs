@@ -33,7 +33,7 @@ public class PolygonToucherTestData
             
             new object[]
             {
-                true, TestData._polygon,
+                true, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new List<Contour>
                     {
@@ -47,7 +47,7 @@ public class PolygonToucherTestData
             
             new object[]
             {
-                false, TestData._polygon,
+                false, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new Point(8,2), new Point(8,7), new Point(13,7), 
                     new Point(13,2), new Point(8,2))
@@ -55,7 +55,7 @@ public class PolygonToucherTestData
             
             new object[]
             {
-                false, TestData._polygon,
+                false, BaseTestData.Polygon,
                 TestHelper.CreatePolygon(
                     new List<Contour>
                     {
@@ -83,7 +83,7 @@ public class PolygonToucherTestData
                     },
                     new Point(12,12), new Point(12,16), new Point(16,16),
                     new Point(16,12), new Point(12,12)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             
             new object[]
@@ -98,7 +98,7 @@ public class PolygonToucherTestData
                     },
                     new Point(14,5), new Point(14,10), new Point(20,10),
                     new Point(20,5), new Point(14,5)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             
             new object[]
@@ -107,7 +107,7 @@ public class PolygonToucherTestData
                 TestHelper.CreatePolygon(
                     new Point(3,12), new Point(6,12), new Point(6,6),
                     new Point(3,6), new Point(3,12)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             
             new object[]
@@ -116,7 +116,7 @@ public class PolygonToucherTestData
                 TestHelper.CreatePolygon(
                     new Point(11,2), new Point(11,7), new Point(16,7),
                     new Point(16,2), new Point(11,2)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             }
         };
     

@@ -39,22 +39,22 @@ public class MultiLineToucherTestData
             new object[] {true,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(3,5,6,5), TestHelper.CreateLine(9,3,9,7), TestHelper.CreateLine(11,1,11,6)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[] {true,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(4,4,5,5), TestHelper.CreateLine(9,4,14,4), TestHelper.CreateLine(11,6,15,6)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[] {false,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(5,5,11,5), TestHelper.CreateLine(9,7,13,7), TestHelper.CreateLine(12,0,12,3)),
-                TestData._polygon
+                BaseTestData.Polygon
             },
             new object[] {false,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(1,2,1,7), TestHelper.CreateLine(2,9,6,9), TestHelper.CreateLine(11,2,11,6)),
-                TestData._polygon
+                BaseTestData.Polygon
             }
         };
     
@@ -64,22 +64,22 @@ public class MultiLineToucherTestData
             new object[] {true,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(8,2,8,5), TestHelper.CreateLine(8,14,10,14), TestHelper.CreateLine(12,12,16,16)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[] {true,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(4,12,4,14), TestHelper.CreateLine(8,8,10,10), TestHelper.CreateLine(13,14,15,14)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[] {false,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(4,6,4,12), TestHelper.CreateLine(7,14,11,14), TestHelper.CreateLine(13,7,13,10)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             },
             new object[] {false,
                 TestHelper.CreateMultiLine(
                     TestHelper.CreateLine(9,13,9,16), TestHelper.CreateLine(11,3,11,7), TestHelper.CreateLine(14,3,14,7)),
-                TestData._multiPolygon
+                BaseTestData.MultiPolygon
             }
         };
 }

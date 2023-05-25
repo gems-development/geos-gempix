@@ -17,10 +17,10 @@ public class LineToucherTestData
     public static IEnumerable<object[]> LineAndContour =>
         new List<object[]>
         {
-            new object[] {true, TestHelper.CreateLine(0,0,5,0), TestData._contour},
-            new object[] {true, TestHelper.CreateLine(0,5,5,5), TestData._contour},
-            new object[] {true, TestHelper.CreateLine(5,1,5,3), TestData._contour},
-            new object[] {false, TestHelper.CreateLine(0,0,5,5), TestData._contour}
+            new object[] {true, TestHelper.CreateLine(0,0,5,0), BaseTestData.Contour},
+            new object[] {true, TestHelper.CreateLine(0,5,5,5), BaseTestData.Contour},
+            new object[] {true, TestHelper.CreateLine(5,1,5,3), BaseTestData.Contour},
+            new object[] {false, TestHelper.CreateLine(0,0,5,5), BaseTestData.Contour}
         };
     
     public static IEnumerable<object[]> LineAndMultiPoint =>
@@ -51,23 +51,23 @@ public class LineToucherTestData
     public static IEnumerable<object[]> LineAndPolygon =>
         new List<object[]>
         {
-            new object[] {true, TestHelper.CreateLine(3,3,6,6), TestData._polygon},
-            new object[] {true, TestHelper.CreateLine(9,2,9,8), TestData._polygon},
-            new object[] {true, TestHelper.CreateLine(7,9,12,9), TestData._polygon},
-            new object[] {true, TestHelper.CreateLine(6,4,6,5), TestData._polygon},
-            new object[] {true, TestHelper.CreateLine(6,-2,11,2), TestData._polygon},
-            new object[] {false, TestHelper.CreateLine(1,4,4,4), TestData._polygon},
-            new object[] {false, TestHelper.CreateLine(4,4,5,5), TestData._polygon},
-            new object[] {false, TestHelper.CreateLine(4,1,8,5), TestData._polygon},
-            new object[] {false, TestHelper.CreateLine(5,5,11,5), TestData._polygon}
+            new object[] {true, TestHelper.CreateLine(3,3,6,6), BaseTestData.Polygon},
+            new object[] {true, TestHelper.CreateLine(9,2,9,8), BaseTestData.Polygon},
+            new object[] {true, TestHelper.CreateLine(7,9,12,9), BaseTestData.Polygon},
+            new object[] {true, TestHelper.CreateLine(6,4,6,5), BaseTestData.Polygon},
+            new object[] {true, TestHelper.CreateLine(6,-2,11,2), BaseTestData.Polygon},
+            new object[] {false, TestHelper.CreateLine(1,4,4,4), BaseTestData.Polygon},
+            new object[] {false, TestHelper.CreateLine(4,4,5,5), BaseTestData.Polygon},
+            new object[] {false, TestHelper.CreateLine(4,1,8,5), BaseTestData.Polygon},
+            new object[] {false, TestHelper.CreateLine(5,5,11,5), BaseTestData.Polygon}
         };
     
     public static IEnumerable<object[]> LineAndMultiPolygon =>
         new List<object[]>
         {
-            new object[] {true, TestHelper.CreateLine(6,8,10,10), TestData._multiPolygon},
-            new object[] {true, TestHelper.CreateLine(5,18,14,18), TestData._multiPolygon},
-            new object[] {false, TestHelper.CreateLine(6,14,12,14), TestData._multiPolygon},
-            new object[] {false, TestHelper.CreateLine(6,4,6,14), TestData._multiPolygon}
+            new object[] {true, TestHelper.CreateLine(6,8,10,10), BaseTestData.MultiPolygon},
+            new object[] {true, TestHelper.CreateLine(5,18,14,18), BaseTestData.MultiPolygon},
+            new object[] {false, TestHelper.CreateLine(6,14,12,14), BaseTestData.MultiPolygon},
+            new object[] {false, TestHelper.CreateLine(6,4,6,14), BaseTestData.MultiPolygon}
         };
 }
