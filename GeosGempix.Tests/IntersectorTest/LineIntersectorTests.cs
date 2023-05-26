@@ -1,5 +1,6 @@
 ﻿using GeosGempix.Extensions;
 using GeosGempix.Models;
+using GeosGempix.Tests.IntersectorTest.TestData;
 
 namespace GeosGempix.Tests.IntersectorTest
 {
@@ -7,145 +8,54 @@ namespace GeosGempix.Tests.IntersectorTest
 	{
 		// Проверка на пересечение между отрезком и отрезком
 		[Theory]
-		[InlineData(true, new double[]{2,4,7,4}, new double[]{4,4,4,7})]
-		[InlineData(true, new double[]{2,4,4,4}, new double[]{3,4,7,4})]
-		[InlineData(false, new double[]{2,4,7,4}, new double[]{2,6,7,6})]
-		public void IsIntersectionLineAndLine(bool res, double[] a, double[] b)
+		[MemberData(nameof(LineIntersectorTestData.LineAndLine), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndLine(bool result, Line line1, Line line2)
 		{
-			//Arrange.
-			var line1 = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-			var line2 = TestHelper.CreateLine(b[0],b[1],b[2],b[3]);
 			//Act. + Assert.
-			Assert.Equal(res,line1.Intersects(line2));
+			Assert.Equal(result,line1.Intersects(line2));
 		}
 
 		// Проверка на пересечение между отрезком и контуром
 		[Theory]
-		[InlineData(true, new double[]{5,5,7,5})]
-		[InlineData(true, new double[]{8,5,10,5})]
-		[InlineData(true, new double[]{-1,5,10,5})]
-		[InlineData(true, new double[]{0,5,9,5})]
-		[InlineData(false, new double[]{10,3,10,7})]
-		public void IsIntersectionLineAndContour(bool res, double[] a)
+		[MemberData(nameof(LineIntersectorTestData.LineAndContour), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndContour(bool res, Line line, Contour contour)
 		{
-			//Arrange.
-			var line = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-			
-			var contour = TestHelper.CreateContour(
-				new Point(0, 0), new Point(0, 9), new Point(9, 9),
-				new Point(9, 0), new Point(0, 0));
-			
 			//Act. + Assert.
 			Assert.Equal(res,line.Intersects(contour));
 		}
 		
 		// Проверка на пересечение между отрезком и мультиточкой
 		[Theory]
-		[InlineData(true, new double[]{3,6,7,6}, new double[]{4,4,5,6,6,5})]
-		[InlineData(false, new double[]{2,5,7,5}, new double[]{3,3,5,6,6,4})]
-		[InlineData(false, new double[]{2,2,7,2}, new double[]{4,4,5,6,6,5})]
-		public void IsIntersectionLineAndMultiPoint(bool res, double[] a, double[] b)
+		[MemberData(nameof(LineIntersectorTestData.LineAndMultiPoint), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndMultiPoint(bool res, Line line, MultiPoint multiPoint)
 		{
-			//Arrange.
-			var line = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-			
-			var multiPoint = TestHelper.CreateMultiPoint(
-				new Point(b[0],b[1]),
-				new Point(b[2],b[3]),
-				new Point(b[4],b[5]));
-			
 			//Act. + Assert.
 			Assert.Equal(res,line.Intersects(multiPoint));
 		}
 		
 		// Проверка на пересечение между отрезком и мультилинией
 		[Theory]
-		[InlineData(true, new double[]{3,2,3,7})]
-		[InlineData(true, new double[]{2,8,7,8})]
-		[InlineData(false, new double[]{2,2,5,3})]
-		public void IsIntersectionLineAndMultiLine(bool res, double[] a)
+		[MemberData(nameof(LineIntersectorTestData.LineAndMultiLine), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndMultiLine(bool res, Line line, MultiPoint multiLine)
 		{
-			//Arrange.
-			var line = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-			
-			var multiLine = TestHelper.CreateMultiLine(
-				TestHelper.CreateLine(3,1,7,2),
-				TestHelper.CreateLine(2,4,7,4),
-				TestHelper.CreateLine(4,8,5,5));
-			
 			//Act. + Assert.
 			Assert.Equal(res,line.Intersects(multiLine));
 		}
 		
 		// Проверка на пересечение между отрезком и полигоном
 		[Theory]
-		[InlineData(true, new double[]{-1,4,4,4})]
-		[InlineData(true, new double[]{4,3,4,6})]
-		[InlineData(true, new double[]{4,4,5,4})]
-		[InlineData(true, new double[]{9,4,11,4})]
-		[InlineData(false, new double[]{10,3,10,6})]
-		public void IsIntersectionLineAndPolygon(bool res, double[] a)
+		[MemberData(nameof(LineIntersectorTestData.LineAndPolygon), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndPolygon(bool res, Line line, Polygon polygon)
 		{
-			//Arrange.
-			var line = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-
-			var polygon = TestHelper.CreatePolygon(
-				new List<Contour>
-				{
-					TestHelper.CreateContour(
-						new Point(3, 3), new Point(3, 6), new Point(6, 6),
-						new Point(6, 3), new Point(3, 3))
-				},
-				new Point(0, 0), new Point(0, 9), new Point(9, 9),
-				new Point(9, 0), new Point(0, 0));
-			
 			//Act. + Assert.
 			Assert.Equal(res,line.Intersects(polygon));
 		}
 		
 		// Проверка на пересечение между отрезком и мультиполигоном
 		[Theory]
-		[InlineData(true, new double[]{4,15,5,15})]
-		[InlineData(true, new double[]{15,18,15,21})]
-		[InlineData(true, new double[]{0,4,0,6})]
-		[InlineData(false, new double[]{10,15,10,16})]
-		public void IsIntersectionLineAndMultiPolygon(bool res, double[] a)
+		[MemberData(nameof(LineIntersectorTestData.LineAndMultiPolygon), MemberType = typeof(LineIntersectorTestData))]
+		public void IsIntersectionLineAndMultiPolygon(bool res, Line line, MultiPolygon multiPolygon)
 		{
-			//Arrange.
-			var line = TestHelper.CreateLine(a[0],a[1],a[2],a[3]);
-
-			var multiPolygon = TestHelper.CreateMultiPolygon(
-				TestHelper.CreatePolygon(
-					new List<Contour>
-					{
-						TestHelper.CreateContour(
-							new Point(3, 3), new Point(3, 6), new Point(6, 6),
-							new Point(6, 3), new Point(3, 3))
-					},
-					new Point(0, 0), new Point(0, 9), new Point(9, 9),
-					new Point(9, 0), new Point(0, 0)),
-				
-				TestHelper.CreatePolygon(
-					new List<Contour>
-					{
-						TestHelper.CreateContour(
-							new Point(3, 14), new Point(3, 17), new Point(6, 17),
-							new Point(6, 14), new Point(3, 14))
-					},
-					new Point(0, 11), new Point(0, 20), new Point(9, 20),
-					new Point(9, 11), new Point(0, 11)),
-				
-				TestHelper.CreatePolygon(
-					new List<Contour>
-					{
-						TestHelper.CreateContour(
-							new Point(14,14), new Point(14,17), new Point(17,17),
-							new Point(17,14), new Point(14,14))
-					},
-					new Point(11,11), new Point(11,20), new Point(20,20),
-					new Point(20,11), new Point(11,11))
-			);
-			
 			//Act. + Assert.
 			Assert.Equal(res,line.Intersects(multiPolygon));
 		}
