@@ -54,7 +54,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
+        //lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line in lines)
         {
             var curLine = LineShortestLineSearcher.GetShortestLine(line, point);
@@ -80,7 +80,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
+        //lines.Add(new Line(points[points.Count - 1], points[0]));
         foreach (Line line1 in lines)
         {
             var curLine = LineShortestLineSearcher.GetShortestLine(line1, line);
@@ -110,7 +110,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
+        //lines.Add(new Line(points[points.Count - 1], points[0]));
 
         foreach (Line line in lines)
         {
@@ -142,7 +142,7 @@ public class PolygonShortestLineSearcher : IModelShortestLineSearcher
         {
             lines.Add(new Line(points[i], points[i + 1]));
         }
-        lines.Add(new Line(points[points.Count - 1], points[0]));
+        //lines.Add(new Line(points[points.Count - 1], points[0]));
 
         foreach (Line line in lines)
         {
